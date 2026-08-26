@@ -1,0 +1,30 @@
+# Prompts utilisés par les services du module d'extraction de document
+# (agents/shared/document_processing/). Séparés du code pour pouvoir les ajuster
+# sans toucher à vlm_service.py / llm_service.py — utile si on itère beaucoup sur
+# la qualité d'extraction par essais/erreurs.
+#
+# {schema_json} et {text} dans llm_structuration.extraction sont remplacés par
+# .format() dans llm_service.py — ne pas renommer ces placeholders sans mettre à
+# jour le code appelant.
+
+document_processing:
+  vlm:
+    # Volontairement minimal : on demande une transcription fidèle, pas une
+    # interprétation — la structuration est le rôle du LLM d'après, pas du VLM.
+    transcription: >-
+      Transcris fidèlement tout le texte visible sur ces pages, dans l'ordre,
+      sans commentaire ni reformulation.
+
+  llm_structuration:
+    # "Ne déduis rien, n'invente aucune valeur" est la partie critique : sans ça,
+    # le LLM a tendance à halluciner des valeurs plausibles pour "compléter" le
+    # schéma — dangereux ici car ces valeurs finissent dans project_field_values
+    # puis potentiellement dans de vraies colonnes après validation utilisateur.
+    extraction: |
+      Extrait uniquement les informations explicitement présentes dans le texte suivant, selon le schéma JSON fourni. Ne déduis rien, n'invente aucune valeur : si une information n'est pas mentionnée, laisse le champ à null.
+
+      Schéma JSON :
+      {schema_json}
+
+      Texte :
+      {text}

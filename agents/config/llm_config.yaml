@@ -1,0 +1,32 @@
+# Configuration centralisée des modèles utilisés par tous les agents/services IA
+# générative de Wink. Un seul endroit à modifier pour changer de modèle ou de
+# fournisseur — évite d'avoir des noms de modèles codés en dur dispersés dans
+# plusieurs fichiers Python (voir agents/config/loader.py pour la lecture).
+
+document_processing:
+  # Extraction de texte brut depuis un document (PDF) — service 0.0.2/0.0.3,
+  # import de document à l'onboarding entrepreneur.
+  # Pixtral (recommandé initialement dans "Wink — Extraction de document : deux
+  # approches comparées") n'est plus disponible sur Groq — remplacé par
+  # qwen/qwen3.6-27b, seul modèle vision actuellement hébergé par Groq
+  # (vérifié le 25/08/2026 — https://console.groq.com/docs/vision).
+  vlm:
+    provider: groq
+    model: qwen/qwen3.6-27b
+    max_images_per_request: 5 # limite Groq pour ce modèle
+    # 0 = aussi déterministe que possible : c'est une transcription fidèle qui
+    # est demandée (voir prompts.yaml), pas une génération créative — sans ça,
+    # un même document peut être transcrit différemment d'un appel à l'autre.
+    temperature: 0
+
+  # Extraction structurée (texte brut → champs typés par table) — 3 appels
+  # séparés par document (projects, project_legal_profiles, project_public_profiles),
+  # voir pipelines/default_pipeline.py.
+  llm_structuration:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    # idem : extraction structurée déterministe attendue (voir "Ne déduis rien,
+    # n'invente aucune valeur" dans prompts.yaml) — sans temperature=0, un même
+    # document peut donner tantôt une valeur, tantôt null, pour le même champ.
+    temperature: 0

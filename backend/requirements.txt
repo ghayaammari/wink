@@ -1,0 +1,38 @@
+# Versions en borne minimale (>=) et non figées (==) : les paquets qui compilent
+# du code natif (pydantic-core en Rust, notamment) publient leurs wheels pour une
+# nouvelle version de Python avec un délai — figer une version exacte trop
+# ancienne force pip à recompiler depuis les sources et peut échouer (cas vécu
+# avec Python 3.14 + pydantic 2.10.4). Les bornes mini évitent de régresser vers
+# une version connue pour ne pas fonctionner avec notre code.
+
+# --- Framework API ---
+fastapi>=0.115.6
+uvicorn[standard]>=0.34.0
+
+# --- Base de données ---
+sqlalchemy>=2.0.36
+alembic>=1.14.0
+psycopg[binary]>=3.2.3          # driver PostgreSQL utilisé dans backend/shared/database.py (postgresql+psycopg://)
+
+# --- Validation / schémas ---
+pydantic>=2.10.4
+pydantic-settings>=2.7.0        # lecture typée du .env (à utiliser si on centralise la config plus tard)
+email-validator>=2.2.0          # requis par EmailStr (backend/shared/auth/schemas/auth_schemas.py)
+
+# --- Configuration ---
+python-dotenv>=1.0.1            # charge le .env pour os.environ en développement local
+
+# --- Upload de fichiers (service 0.0.2 — import de document) ---
+python-multipart>=0.0.20        # requis par FastAPI pour parser les formulaires multipart/form-data
+cloudinary>=1.41.0              # stockage documents/logos (décision actée dans Wink_context_project.md)
+
+# --- Authentification (backend/shared/auth/) ---
+bcrypt>=4.2.0                   # hash des mots de passe (signup/login email)
+pyjwt>=2.10.0                   # génération/vérification des access tokens JWT
+google-auth>=2.36.0             # vérification des id_token envoyés par le SDK Google côté frontend
+requests>=2.32.3                # dépendance de google.auth.transport.requests — pas installée automatiquement par google-auth
+
+# --- Extraction de document (agents/shared/document_processing/) ---
+groq>=0.13.0                    # appels VLM (vision) et LLM structuré, hébergés sur Groq
+pdf2image>=1.17.0                # PDF -> images de page, avant envoi au VLM. Nécessite poppler-utils (dépendance système, pas pip)
+pyyaml>=6.0.2                    # lecture de agents/config/llm_config.yaml

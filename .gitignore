@@ -1,0 +1,84 @@
+# Racine du repo Wink — non couvert par l'architecture définie, placé ici par
+# convention standard (racine = seul endroit visible par tous les dossiers).
+
+# ============================================================
+# Variables d'environnement — jamais de secret commité
+# ============================================================
+.env
+.env.*
+!.env.example
+
+# ============================================================
+# Python (backend/, agents/, scrapers/)
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+
+# Environnements virtuels — quel que soit le nom/dossier utilisé
+venv/
+.venv/
+env/
+ENV/
+*/venv/
+*/.venv/
+
+# Alembic — versions/ (les migrations) reste versionné, seul son cache ne l'est pas
+**/alembic/versions/__pycache__/
+
+# Outils de test/lint Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ============================================================
+# Frontend (frontend/ — React/Node)
+# ============================================================
+node_modules/
+frontend/dist/
+frontend/build/
+.npm/
+*.tsbuildinfo
+
+# Logs de gestionnaires de paquets
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ============================================================
+# IDE / éditeurs
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+# OS
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================================
+# Logs et fichiers temporaires génériques
+# ============================================================
+*.log
+*.tmp
+*.bak
+
+# ============================================================
+# Tests / couverture — anticipé pour quand les suites de tests
+# (pytest côté backend, vitest/jest côté frontend) arriveront
+# ============================================================
+coverage/
+.nyc_output/
+*.sqlite3
