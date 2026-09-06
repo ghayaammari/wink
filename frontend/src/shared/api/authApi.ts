@@ -22,6 +22,16 @@ export interface UserRead {
   created_at: string
 }
 
+/** Body de PATCH /auth/me — tous les champs optionnels. current_password
+ * n'est requis que si email est fourni et diffère de l'email actuel (voir
+ * auth_service.update_user côté backend). */
+export interface UserUpdateRequest {
+  first_name?: string
+  last_name?: string
+  email?: string
+  current_password?: string
+}
+
 /** Erreur HTTP normalisée — porte le status pour que l'appelant puisse réagir
  * différemment selon le code (ex: 409 = email déjà pris, 401 = mauvais mdp). */
 export class ApiError extends Error {
@@ -107,4 +117,12 @@ export function resetPassword(data: { token: string; new_password: string }): Pr
 
 export function getCurrentUser(accessToken: string): Promise<UserRead> {
   return request<UserRead>("/auth/me", { headers: { Authorization: `Bearer ${accessToken}` } })
+}
+
+export function updateCurrentUser(accessToken: string, data: UserUpdateRequest): Promise<UserRead> {
+  return request<UserRead>("/auth/me", {
+    method: "PATCH",
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify(data),
+  })
 }

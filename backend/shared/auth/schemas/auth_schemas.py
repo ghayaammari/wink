@@ -82,6 +82,22 @@ class ResetPasswordRequest(BaseModel):
     new_password: str = Field(min_length=8)
 
 
+class UserUpdateRequest(BaseModel):
+    """PATCH /auth/me — modification des informations personnelles du compte
+    (ajouté le 06/09/2026, partagé par les 3 acteurs).
+
+    Tous les champs optionnels : seuls ceux réellement envoyés sont modifiés
+    (voir auth_service.update_user). current_password n'est nécessaire que si
+    email est fourni ET diffère de l'email actuel — vérifié côté service (pas
+    ici, car ça dépend de l'état existant en base, hors de portée d'un schéma
+    Pydantic pur)."""
+
+    first_name: str | None = Field(default=None, min_length=1, max_length=120)
+    last_name: str | None = Field(default=None, min_length=1, max_length=120)
+    email: EmailStr | None = None
+    current_password: str | None = None
+
+
 class UserRead(BaseModel):
     """Réponse de GET /auth/me — volontairement sans `password_hash` ni
 
