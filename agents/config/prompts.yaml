@@ -3,9 +3,9 @@
 # sans toucher à vlm_service.py / llm_service.py — utile si on itère beaucoup sur
 # la qualité d'extraction par essais/erreurs.
 #
-# {schema_json} et {text} dans llm_structuration.extraction sont remplacés par
-# .format() dans llm_service.py — ne pas renommer ces placeholders sans mettre à
-# jour le code appelant.
+# {schema_json}, {text} et {schema_hints} dans llm_structuration.extraction sont
+# remplacés par .format() dans llm_service.py — ne pas renommer ces placeholders
+# sans mettre à jour le code appelant.
 
 document_processing:
   vlm:
@@ -20,11 +20,43 @@ document_processing:
     # le LLM a tendance à halluciner des valeurs plausibles pour "compléter" le
     # schéma — dangereux ici car ces valeurs finissent dans project_field_values
     # puis potentiellement dans de vraies colonnes après validation utilisateur.
+    # {schema_hints} est injecté par llm_service.py selon la table cible de
+    # l'appel (voir schema_hints ci-dessous) — vide si aucun hint n'existe pour
+    # cette table, le prompt reste alors identique à avant cet ajout.
     extraction: |
       Extrait uniquement les informations explicitement présentes dans le texte suivant, selon le schéma JSON fourni. Ne déduis rien, n'invente aucune valeur : si une information n'est pas mentionnée, laisse le champ à null.
+
+      {schema_hints}
 
       Schéma JSON :
       {schema_json}
 
       Texte :
       {text}
+
+    # Une entrée par table cible (voir default_pipeline.py, qui passe le nom de
+    # table comme schema_key) — instructions propres au domaine de cette table,
+    # que le prompt générique ci-dessus ne peut pas porter puisqu'il est partagé
+    # par les 3 appels.
+    schema_hints:
+      projects: |
+        Précisions pour ce schéma :
+        - `description` : SEULE EXCEPTION à la règle "n'invente rien" ci-dessus. Si aucune phrase de description explicite n'existe dans le texte, rédige toi-même un résumé de 1 à 2 phrases de l'activité du projet, à partir de l'ensemble du texte (secteur, produit, cible). Ne laisse `description` à null que si le texte ne parle vraiment pas d'un projet/d'une startup.
+        - `sector` vs `subsectors` : `sector` est le secteur d'activité principal (ex: "Fintech"), `subsectors` sont des sous-domaines plus précis à l'intérieur de ce secteur (ex: "paiement mobile", "assurance santé"). Ne mets pas la même valeur dans les deux.
+        - `customer_segments` vs `target_users` : `customer_segments` désigne qui paie/achète (ex: "PME", "banques"), `target_users` désigne qui utilise réellement le produit au quotidien (ex: "commerçants", "salariés") — ces 2 listes peuvent être différentes, ne les confonds pas.
+        - `project_type`/`stage` : n'extrait ces 2 champs que s'ils sont réellement déductibles du texte (ex: "nous avons créé la société en 2024" → project_type=created) ; en cas de doute, laisse à null plutôt que de deviner.
+
+        Exemple :
+        Texte : "Notre startup Fintech aide les PME à automatiser leur comptabilité. Nous ciblons les artisans et petites entreprises de moins de 10 salariés, basés en France."
+        JSON attendu (extrait, autres champs omis) :
+        {"sector": "Fintech", "customer_segments": ["PME"], "target_users": ["artisans", "petites entreprises de moins de 10 salariés"], "localisation": "France"}
+
+      project_legal_profiles: |
+        Précisions pour ce schéma :
+        - `siren` : exactement 9 chiffres, sans espaces ni tirets — si le texte écrit "123 456 789", renvoie "123456789".
+        - `siret` : exactement 14 chiffres (SIREN + 5 chiffres de NIC), même nettoyage des espaces/tirets.
+        - `registration_date` : toujours au format ISO `YYYY-MM-DD`, même si le texte utilise un autre format (ex: "12/03/2024" → "2024-03-12").
+
+      project_public_profiles: |
+        Précisions pour ce schéma :
+        - `public_summary` : résumé destiné à un affichage public (ex: vitrine investisseurs) — reformule si besoin pour rester concis (1 à 2 phrases), ce n'est pas nécessairement la même formulation qu'une description interne.

@@ -2,11 +2,11 @@ import { useState } from "react"
 import { ApiError } from "../../shared/api/authApi"
 import {
   ignoreFieldValue,
-  parseFieldValue,
   resolveFieldValue,
   type ProjectFieldValueRead,
   type ProjectFieldValueUpdate,
 } from "../api/projectApi"
+import { encodeEditValue, formatForDisplay, type ExtractedFieldKind } from "../utils/fieldValueFormat"
 import {
   ICON_PATH_CHECK,
   ICON_PATH_CROSS,
@@ -14,40 +14,20 @@ import {
   IconActionButton,
 } from "./IconActionButton"
 
-export type ExtractedFieldKind = "text" | "number" | "list" | "boolean"
+export type { ExtractedFieldKind }
 
 export interface ExtractedFieldSpec {
   /** Préfixé "table.colonne", ex: "projects.sector" — voir document_service.py. */
   fieldName: string
   label: string
   kind?: ExtractedFieldKind
-}
-
-function formatForDisplay(
-  raw: string | null,
-  kind: ExtractedFieldKind,
-): string {
-  const value = parseFieldValue(raw)
-  if (kind === "list") return Array.isArray(value) ? value.join(", ") : ""
-  if (kind === "boolean")
-    return value === true ? "Oui" : value === false ? "Non" : "—"
-  return String(value ?? "")
-}
-
-function encodeEditValue(raw: string, kind: ExtractedFieldKind): string {
-  if (kind === "list") {
-    const items = raw
-      .split(",")
-      .map((item) => item.trim())
-      .filter((item) => item.length > 0)
-    return JSON.stringify(items)
-  }
-  if (kind === "boolean") return JSON.stringify(raw === "Oui")
-  if (kind === "number") {
-    const trimmed = raw.trim()
-    return JSON.stringify(trimmed === "" ? null : Number(trimmed))
-  }
-  return JSON.stringify(raw)
+  /** Si fourni, "Modifier" affiche une liste déroulante (ces valeurs) au lieu
+   * d'un champ texte libre — pour un champ à choix fixes contraint par un
+   * CHECK en base (ex: funding_visibility/compliance_visibility), même
+   * raisonnement que project_type/stage dans DetectedFieldsModal.tsx, mais
+   * générique ici plutôt que codé en dur par nom de champ. Non utilisé par
+   * ExtractedFieldsReview lui-même pour l'instant (voir SimpleDetectedFieldsModal). */
+  options?: { value: string; label: string }[]
 }
 
 export interface ExtractedFieldsReviewProps {

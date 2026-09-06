@@ -24,7 +24,11 @@ def run(pdf_bytes: bytes) -> dict[str, dict]:
     text = extract_text(pdf_bytes)
 
     return {
-        "projects": extract_structured(text, ProjectExtractedFields).model_dump(),
-        "project_legal_profiles": extract_structured(text, ProjectLegalProfileExtractedFields).model_dump(),
-        "project_public_profiles": extract_structured(text, ProjectPublicProfileExtractedFields).model_dump(),
+        "projects": extract_structured(text, ProjectExtractedFields, schema_key="projects").model_dump(),
+        "project_legal_profiles": extract_structured(
+            text, ProjectLegalProfileExtractedFields, schema_key="project_legal_profiles"
+        ).model_dump(),
+        "project_public_profiles": extract_structured(
+            text, ProjectPublicProfileExtractedFields, schema_key="project_public_profiles"
+        ).model_dump(),
     }

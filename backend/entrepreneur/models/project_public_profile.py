@@ -2,7 +2,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, Text, func, text
+from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String, Text, func, text
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -11,6 +11,16 @@ from backend.shared.database import Base
 
 class ProjectPublicProfile(Base):
     __tablename__ = "project_public_profiles"
+    __table_args__ = (
+        CheckConstraint(
+            "funding_visibility IN ('private', 'public', 'investors_only')",
+            name="ck_project_public_profiles_funding_visibility",
+        ),
+        CheckConstraint(
+            "compliance_visibility IN ('private', 'public', 'investors_only')",
+            name="ck_project_public_profiles_compliance_visibility",
+        ),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, server_default=text("gen_random_uuid()")

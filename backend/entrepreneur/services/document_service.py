@@ -47,6 +47,26 @@ _TABLE_MODELS = {
     "project_public_profiles": ProjectPublicProfile,
 }
 
+# projects.project_type / projects.stage sont extraits (voir
+# entrepreneur_project.py) mais structurellement différents des autres champs :
+# toujours déjà remplis (choisis obligatoirement à l'écran 2), jamais "vides" à
+# combler. Une candidate dessus n'est donc jamais un premier remplissage, toujours
+# un désaccord potentiel avec un choix déjà fait — traité à part (voir
+# upload_and_extract et resolve_field_value) plutôt que comme les autres champs.
+_COHERENCE_FIELDS = {"projects.project_type", "projects.stage"}
+
+_ENUM_CHOICES: dict[str, set[str]] = {
+    "projects.project_type": {"not_created", "created"},
+    "projects.stage": {"ideation", "pre_seed", "seed", "serie_a"},
+    # Reflète le CheckConstraint ajouté sur project_public_profiles (voir migration
+    # 82a64157b35d) — même raisonnement que project_type/stage : resolve_field_value
+    # écrit directement sur le modèle via setattr(), sans repasser par un schéma
+    # Pydantic qui validerait la valeur, donc on la valide ici explicitement plutôt
+    # que de laisser une IntegrityError du CHECK remonter comme une 500 brute.
+    "project_public_profiles.funding_visibility": {"private", "public", "investors_only"},
+    "project_public_profiles.compliance_visibility": {"private", "public", "investors_only"},
+}
+
 
 def _get_or_create_profile_row(db: Session, model, project_id):
     """project_legal_profiles / project_public_profiles n'existent peut-être pas
@@ -123,6 +143,13 @@ def upload_and_extract(
             if value in (None, [], ""):
                 continue
             field_name = f"{table_name}.{column}"
+            if field_name in _COHERENCE_FIELDS and getattr(project, column) == value:
+                # La candidate confirme ce que l'utilisateur a déjà choisi (écran 2) —
+                # pas une vraie proposition. On ne crée pas de ligne project_field_values
+                # pour ça, sinon le badge "Mon Projet" compterait un champ qui n'a rien à
+                # résoudre (voir ProjectGeneralInfoPage.tsx : FieldConflictReview ne
+                # s'affiche que pour un vrai désaccord).
+                continue
             field_value = (
                 db.query(ProjectFieldValue)
                 .filter(ProjectFieldValue.project_id == project.id, ProjectFieldValue.field_name == field_name)
@@ -180,6 +207,17 @@ def resolve_field_value(
     # renvoie telle quelle.
     final_raw_value = data.field_value if data.field_value is not None else field_value.field_value
     final_value = json.loads(final_raw_value) if final_raw_value is not None else None
+
+    # project_type/stage (et tout futur champ à choix fixes) : on ne fait pas confiance
+    # au frontend pour n'envoyer qu'une valeur valide — setattr() plus bas écrit
+    # directement sur le modèle SQLAlchemy, sans repasser par un schéma Pydantic qui
+    # validerait l'enum.
+    allowed_values = _ENUM_CHOICES.get(field_value.field_name)
+    if allowed_values is not None and final_value not in allowed_values:
+        raise DocumentServiceError(
+            f"Valeur invalide pour {field_value.field_name!r} : {final_value!r} "
+            f"(attendu parmi {sorted(allowed_values)})."
+        )
 
     target_row = project if model is Project else _get_or_create_profile_row(db, model, project.id)
     setattr(target_row, column, final_value)

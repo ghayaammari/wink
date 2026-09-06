@@ -15,6 +15,9 @@ export type ProjectType = "not_created" | "created"
 export type ProjectStage = "ideation" | "pre_seed" | "seed" | "serie_a"
 export type ProjectSourceType = "texte_libre" | "document_importe"
 export type ProjectProfileCompletion = "incomplet" | "complet"
+// Reflète le CheckConstraint sur project_public_profiles (voir
+// projectVisibilityOptions.ts pour les libellés affichés).
+export type ProjectVisibility = "private" | "public" | "investors_only"
 
 export interface ProjectRead {
   id: string
@@ -56,7 +59,9 @@ export interface ProjectUpdate {
   stage?: ProjectStage
   description?: string
   nombre_cofondateurs?: number
-  intention_levee_fonds?: boolean
+  // null explicite = remettre à "pas encore décidé" (voir ProjectUpdate côté
+  // backend, qui accepte bool | None) ; undefined = champ non touché par ce PATCH.
+  intention_levee_fonds?: boolean | null
   localisation?: string
   sector?: string
   subsectors?: string[]
@@ -68,6 +73,23 @@ export interface ProjectUpdate {
 }
 
 export interface ProjectLegalProfileCreate {
+  is_registered?: boolean
+  legal_name?: string
+  legal_form?: string
+  registration_number?: string
+  siren?: string
+  siret?: string
+  vat_number?: string
+  naf_code?: string
+  registration_date?: string
+  registered_address?: Record<string, unknown>
+  legal_representative?: Record<string, unknown>
+}
+
+/** PATCH /projects/{id}/legal-profile (upsert, voir project_service.update_legal_profile) —
+ * tous les champs optionnels, contrairement à ProjectLegalProfileCreate qui sert au
+ * premier remplissage (écran 3 de l'onboarding). */
+export interface ProjectLegalProfileUpdate {
   is_registered?: boolean
   legal_name?: string
   legal_form?: string
@@ -97,8 +119,8 @@ export interface ProjectPublicProfileUpdate {
   technologies?: string[]
   website_url?: string
   logo_url?: string
-  funding_visibility?: string
-  compliance_visibility?: string
+  funding_visibility?: ProjectVisibility
+  compliance_visibility?: ProjectVisibility
   resolved_field_values?: FieldValueResolution[]
 }
 
@@ -221,6 +243,24 @@ export function createLegalProfile(
     `/projects/${projectId}/legal-profile`,
     {
       method: "POST",
+      body: JSON.stringify(data),
+    },
+  )
+}
+
+/** PATCH /projects/{id}/legal-profile — upsert, contrairement à createLegalProfile
+ * (POST) qui échoue si un profil existe déjà. Sert au bouton "Mettre à jour" de
+ * "Informations légales" (voir UpdateLegalProfileForm.tsx). */
+export function updateLegalProfile(
+  accessToken: string,
+  projectId: string,
+  data: ProjectLegalProfileUpdate,
+): Promise<ProjectLegalProfileRead> {
+  return request<ProjectLegalProfileRead>(
+    accessToken,
+    `/projects/${projectId}/legal-profile`,
+    {
+      method: "PATCH",
       body: JSON.stringify(data),
     },
   )

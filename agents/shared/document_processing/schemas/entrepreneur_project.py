@@ -35,12 +35,33 @@ class ProjectExtractedFields(BaseModel):
     nombre_cofondateurs: int | None = None
     intention_levee_fonds: bool | None = None
     localisation: str | None = Field(default=None, description="Ville ou région où le projet est basé.")
-    sector: str | None = None
-    subsectors: list[str] = Field(default_factory=list)
-    customer_segments: list[str] = Field(default_factory=list)
-    target_users: list[str] = Field(default_factory=list)
-    technologies: list[str] = Field(default_factory=list)
-    value_proposition: str | None = None
+    sector: str | None = Field(
+        default=None, description="Secteur d'activité principal du projet (ex: Fintech, Santé, Éducation)."
+    )
+    subsectors: list[str] = Field(
+        default_factory=list,
+        description="Sous-domaines plus précis à l'intérieur du secteur principal (ex: 'paiement mobile', 'assurance santé').",
+    )
+    customer_segments: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Types de clients qui paient/achètent le produit ou service (ex: 'PME', 'banques', 'collectivités') — "
+            "à distinguer de target_users, qui décrit les utilisateurs finaux, pas forcément les mêmes personnes."
+        ),
+    )
+    target_users: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Utilisateurs finaux qui utilisent réellement le produit au quotidien (ex: 'commerçants', 'particuliers', "
+            "'salariés') — à distinguer de customer_segments, qui décrit qui paie, pas forcément qui utilise."
+        ),
+    )
+    technologies: list[str] = Field(
+        default_factory=list, description="Technologies, frameworks ou méthodes techniques mentionnés (ex: 'IA', 'blockchain')."
+    )
+    value_proposition: str | None = Field(
+        default=None, description="Ce que le projet apporte de différenciant — la promesse faite au client/utilisateur."
+    )
 
 
 class ProjectLegalProfileExtractedFields(BaseModel):
