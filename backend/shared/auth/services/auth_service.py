@@ -377,3 +377,42 @@ def reset_password(db: Session, raw_token: str, new_password: str) -> User:
     db.commit()
     db.refresh(user)
     return user
+# ---------------------------------------------------------------------------
+# Modification du profil compte (PATCH /auth/me)
+# ---------------------------------------------------------------------------
+
+def update_user(
+    db: Session,
+    user: User,
+    first_name: str | None,
+    last_name: str | None,
+    email: str | None,
+    current_password: str | None,
+) -> User:
+    """PATCH /auth/me — met à jour les informations personnelles du compte.
+    Seuls les champs réellement envoyés (non None) sont modifiés.
+
+    Changer l'email est sensible (c'est l'identifiant de connexion) : exige
+    de reconfirmer le mot de passe actuel, et n'est permis que pour les
+    comptes auth_provider == 'email' — un compte Google a son email géré par
+    Google lui-même, le modifier ici casserait la correspondance avec le
+    compte Google réel (provider_subject resterait lié à l'ancien email)."""
+    if first_name is not None:
+        user.first_name = first_name
+    if last_name is not None:
+        user.last_name = last_name
+
+    if email is not None and email.lower() != user.email:
+        if user.auth_provider != "email":
+            raise AuthError("Impossible de changer l'email d'un compte connecté via Google.")
+        if not current_password:
+            raise AuthError("Mot de passe actuel requis pour changer d'email.")
+        if user.password_hash is None or not verify_password(current_password, user.password_hash):
+            raise AuthError("Mot de passe actuel incorrect.")
+        if db.query(User).filter(User.email == email.lower(), User.id != user.id).first() is not None:
+            raise EmailAlreadyExistsError("Un compte existe déjà avec cet email.")
+        user.email = email.lower()
+
+    db.commit()
+    db.refresh(user)
+    return user

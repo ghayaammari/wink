@@ -2,7 +2,7 @@
 
 POST /auth/signup, /auth/signup/google, /auth/login, /auth/login/google,
 /auth/refresh, /auth/logout, /auth/forgot-password, /auth/reset-password,
-GET /auth/me.
+GET /auth/me, PATCH /auth/me.
 """
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -17,6 +17,7 @@ from backend.shared.auth.schemas.auth_schemas import (
     SignupRequest,
     TokenResponse,
     UserRead,
+    UserUpdateRequest,
 )
 from backend.shared.auth.services import auth_service
 from backend.shared.auth.services.auth_service import AuthError, EmailAlreadyExistsError
@@ -121,6 +122,37 @@ def logout(body: RefreshRequest, db: Session = Depends(get_db)) -> None:
 @router.get("/me", response_model=UserRead)
 def me(current_user: User = Depends(get_current_user)) -> User:
     return current_user
+
+
+@router.patch("/me", response_model=UserRead)
+def update_me(
+    body: UserUpdateRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> User:
+    """Modification des informations personnelles du compte (prénom, nom,
+    email) — pas le profil métier (voir researcher_profile_router.py,
+    project_router.py... pour ça). Ajoutée le 06/09/2026 : jusque-là,
+    UserUpdateRequest et auth_service.update_user existaient déjà côté
+    schema/service, mais aucune route ne les exposait — d'où le 405 sur
+    PATCH /auth/me."""
+    try:
+        return auth_service.update_user(
+            db,
+            current_user,
+            body.first_name,
+            body.last_name,
+            body.email,
+            body.current_password,
+        )
+    except EmailAlreadyExistsError as exc:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(exc))
+    except AuthError as exc:
+        # Mot de passe actuel manquant/incorrect, ou tentative de changer
+        # l'email d'un compte Google — erreur côté client, pas un problème
+        # d'authentification manquante (contrairement aux 401 ailleurs dans
+        # ce fichier), donc 400.
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
 
 
 @router.post("/forgot-password", status_code=status.HTTP_202_ACCEPTED)
