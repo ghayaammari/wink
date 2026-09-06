@@ -36,3 +36,8 @@ requests>=2.32.3                # dépendance de google.auth.transport.requests 
 groq>=0.13.0                    # appels VLM (vision) et LLM structuré, hébergés sur Groq
 pdf2image>=1.17.0                # PDF -> images de page, avant envoi au VLM. Nécessite poppler-utils (dépendance système, pas pip)
 pyyaml>=6.0.2                    # lecture de agents/config/llm_config.yaml
+
+# --- Recherche / LLM ---
+openai>=1.0.0    # backend/chercheur/services/llm_client.py
+httpx>=0.28.0    # backend/chercheur/services/research_extraction_service.py
+pypdf>=5.0.0     # backend/chercheur/services/research_extraction_service.py
