@@ -10,7 +10,10 @@ from backend.entrepreneur.models.entrepreneur_profile import EntrepreneurProfile
 from backend.entrepreneur.models.project import Project
 from backend.entrepreneur.models.project_legal_profile import ProjectLegalProfile
 from backend.entrepreneur.models.project_public_profile import ProjectPublicProfile
-from backend.entrepreneur.schemas.project_legal_profile_schemas import ProjectLegalProfileCreate
+from backend.entrepreneur.schemas.project_legal_profile_schemas import (
+    ProjectLegalProfileCreate,
+    ProjectLegalProfileUpdate,
+)
 from backend.entrepreneur.schemas.project_public_profile_schemas import ProjectPublicProfileUpdate
 from backend.entrepreneur.schemas.project_schemas import ProjectUpdate
 from backend.shared.models.user import User
@@ -179,6 +182,36 @@ def create_legal_profile(
 
     legal_profile = ProjectLegalProfile(project_id=project.id, **data.model_dump())
     db.add(legal_profile)
+    persist_completion(db, project)
+    db.commit()
+    db.refresh(legal_profile)
+    return legal_profile
+
+
+def update_legal_profile(
+    db: Session, user: User, project_id, data: ProjectLegalProfileUpdate
+) -> ProjectLegalProfile:
+    """PATCH /projects/{id}/legal-profile — upsert (contrairement à create_legal_profile
+
+    ci-dessus, qui échoue si un profil existe déjà) : sert au bouton "Mettre à jour" de
+    "Informations légales", appelable autant de fois que nécessaire. Les champs
+    d'immatriculation (siren/siret/...) restent acceptés même si project_type != "created" ;
+    c'est le frontend qui ne les envoie pas depuis le formulaire tant que la section est
+    verrouillée (voir ProjectLegalInfoPage.tsx) — pas de contrôle bloquant ici, cohérent
+    avec resolve_field_value qui accepte déjà ces champs via une candidate à tout moment.
+    """
+    project = get_owned_project(db, user, project_id)
+
+    legal_profile = db.query(ProjectLegalProfile).filter(ProjectLegalProfile.project_id == project.id).first()
+    if legal_profile is None:
+        legal_profile = ProjectLegalProfile(project_id=project.id)
+        db.add(legal_profile)
+        db.flush()
+
+    updates = data.model_dump(exclude_unset=True)
+    for field, value in updates.items():
+        setattr(legal_profile, field, value)
+
     persist_completion(db, project)
     db.commit()
     db.refresh(legal_profile)

@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 from backend.entrepreneur.schemas.project_legal_profile_schemas import (
     ProjectLegalProfileCreate,
     ProjectLegalProfileRead,
+    ProjectLegalProfileUpdate,
 )
 from backend.entrepreneur.schemas.project_public_profile_schemas import (
     ProjectPublicProfileRead,
@@ -116,6 +117,23 @@ def get_legal_profile(
     # ci-dessus). Pas de 404 si absent — voir docstring project_service.get_legal_profile.
     try:
         return project_service.get_legal_profile(db, current_user, project_id)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.patch("/{project_id}/legal-profile", response_model=ProjectLegalProfileRead)
+def update_legal_profile(
+    project_id: UUID,
+    body: ProjectLegalProfileUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ProjectLegalProfileRead:
+    # Ajouté pour le bouton "Mettre à jour" de "Informations légales" (dashboard "Mon
+    # projet") : create_legal_profile ci-dessus échoue si un profil existe déjà, donc pas
+    # réutilisable pour une modification — cette route fait un upsert (voir
+    # project_service.update_legal_profile).
+    try:
+        return project_service.update_legal_profile(db, current_user, project_id, body)
     except ProjectError as exc:
         raise _handle_project_error(exc)
 

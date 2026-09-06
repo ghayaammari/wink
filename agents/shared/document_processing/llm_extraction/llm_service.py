@@ -28,19 +28,28 @@ def _get_client() -> Groq:
     return Groq(api_key=api_key)
 
 
-def extract_structured(text: str, schema: type[BaseModel]) -> BaseModel:
+def extract_structured(text: str, schema: type[BaseModel], *, schema_key: str | None = None) -> BaseModel:
     """Extrait les champs de `schema` depuis `text`.
 
     Tous les champs de `schema` doivent être optionnels (défaut None) : un
     document ne mentionne jamais tous les champs, et un champ non trouvé doit
     rester None plutôt que de forcer le LLM à halluciner une valeur pour
     satisfaire un champ requis.
+
+    `schema_key` identifie la table cible (ex: "projects") pour aller chercher
+    ses instructions spécifiques dans prompts.yaml → schema_hints — un prompt
+    générique unique ne peut pas porter de règles propres à un domaine (ex:
+    format SIREN/SIRET pour le légal, distinction sector/subsectors pour
+    projects). `None` ou une clé absente de schema_hints : pas de bloc
+    supplémentaire, comportement identique à avant cet ajout.
     """
     config = get_llm_config()["document_processing"]["llm_structuration"]
     client = _get_client()
     schema_json = schema.model_json_schema()
-    prompt_template = get_prompts()["document_processing"]["llm_structuration"]["extraction"]
-    prompt = prompt_template.format(schema_json=json.dumps(schema_json), text=text)
+    prompts = get_prompts()["document_processing"]["llm_structuration"]
+    prompt_template = prompts["extraction"]
+    schema_hints = prompts.get("schema_hints", {}).get(schema_key, "") if schema_key else ""
+    prompt = prompt_template.format(schema_json=json.dumps(schema_json), text=text, schema_hints=schema_hints)
 
     last_error: Exception | None = None
     for _ in range(config["max_retries"]):

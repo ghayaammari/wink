@@ -13,7 +13,11 @@ document_processing:
   vlm:
     provider: groq
     model: qwen/qwen3.6-27b
-    max_images_per_request: 5 # limite Groq pour ce modèle
+    # Limite réelle de l'API Groq pour ce modèle : 3 images par requête (vérifié
+    # le 30/08/2026 suite à une erreur 400 "Too many images provided" sur un
+    # document de 11 pages avec l'ancienne valeur de 5 — la doc Groq a changé
+    # cette limite depuis la vérification du 25/08/2026 ci-dessus).
+    max_images_per_request: 3
     # 0 = aussi déterministe que possible : c'est une transcription fidèle qui
     # est demandée (voir prompts.yaml), pas une génération créative — sans ça,
     # un même document peut être transcrit différemment d'un appel à l'autre.
