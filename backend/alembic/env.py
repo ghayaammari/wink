@@ -33,6 +33,7 @@ config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 # __init__.py de chaque models/ (règle 4 de l'architecture).
 from backend.shared.database import Base  # noqa: E402
 import backend.shared.models  # noqa: E402, F401
+import backend.shared.knowledge_base.models  # noqa: E402, F401
 import backend.entrepreneur.models  # noqa: E402, F401
 import backend.chercheur.models  # noqa: E402, F401
 import backend.investisseur.models  # noqa: E402, F401

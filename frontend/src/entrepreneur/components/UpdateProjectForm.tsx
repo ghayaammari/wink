@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react"
 import { ApiError } from "../../shared/api/authApi"
 import { updateProject, type ProjectRead, type ProjectUpdate } from "../api/projectApi"
+import { IMMEDIATE_OBJECTIVES } from "../utils/projectImmediateObjectives"
 import { PROJECT_TYPE_OPTIONS, isStageValidFor, stageOptionsFor } from "../utils/projectStageOptions"
 
 interface UpdateProjectFormProps {
@@ -62,9 +63,18 @@ export default function UpdateProjectForm({ project, accessToken, onSaved, onCan
   const [technologies, setTechnologies] = useState(project.technologies.join(", "))
   const [valueProposition, setValueProposition] = useState(project.value_proposition ?? "")
   const [localisation, setLocalisation] = useState(project.localisation ?? "")
+  const [objectifsImmediats, setObjectifsImmediats] = useState<string[]>(
+    project.objectifs_immediats,
+  )
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  function toggleObjectif(code: string) {
+    setObjectifsImmediats((prev) =>
+      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code],
+    )
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -103,6 +113,10 @@ export default function UpdateProjectForm({ project, accessToken, onSaved, onCan
       technologies: parseList(technologies),
       value_proposition: valueProposition,
       localisation: localisation.trim(),
+      // Liste complète (pas un diff) : une liste vide efface les objectifs posés
+      // précédemment — même sémantique que l'écran 6 de l'onboarding.
+      // (réalisé par OPENCODE)
+      objectifs_immediats: objectifsImmediats,
     }
 
     setIsSubmitting(true)
@@ -312,6 +326,26 @@ export default function UpdateProjectForm({ project, accessToken, onSaved, onCan
           onChange={(e) => setLocalisation(e.target.value)}
           className={inputClass}
         />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <p className={labelClass}>Objectifs immédiats</p>
+        <div className="flex flex-col gap-2">
+          {IMMEDIATE_OBJECTIVES.map((option) => (
+            <label
+              key={option.value}
+              className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition hover:border-gray-400"
+            >
+              <input
+                type="checkbox"
+                checked={objectifsImmediats.includes(option.value)}
+                onChange={() => toggleObjectif(option.value)}
+                className="h-4 w-4"
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
       </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}

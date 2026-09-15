@@ -22,6 +22,7 @@ const FIELDS: ExtractedFieldSpec[] = [
   { fieldName: "projects.technologies", label: "Technologies", kind: "list" },
   { fieldName: "projects.value_proposition", label: "Proposition de valeur", kind: "text" },
   { fieldName: "projects.localisation", label: "Localisation", kind: "text" },
+  { fieldName: "projects.objectifs_immediats", label: "Objectifs immédiats", kind: "list" },
 ]
 
 /** Un champ jamais renseigné ET sans candidate détectée n'a rien à afficher :

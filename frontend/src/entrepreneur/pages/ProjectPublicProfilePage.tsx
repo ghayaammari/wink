@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useOutletContext } from "react-router-dom"
 import Field from "../../shared/components/Field"
+import LoadingSpinner from "../../shared/components/LoadingSpinner"
 import Modal from "../../shared/components/Modal"
 import SectionCard from "../../shared/components/SectionCard"
 import { useAuth } from "../../shared/context/AuthContext"
@@ -103,7 +104,7 @@ export default function ProjectPublicProfilePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- ne doit tourner qu'au montage et si le projet change
   }, [accessToken, project.id])
 
-  if (isLoading) return <p className="text-sm text-gray-500">Chargement...</p>
+  if (isLoading) return <LoadingSpinner />
 
   const scopedFieldValues = fieldValues.filter((v) => v.field_name.startsWith("project_public_profiles."))
   const pendingCount = scopedFieldValues.filter((v) => v.validation_status === "en_attente").length

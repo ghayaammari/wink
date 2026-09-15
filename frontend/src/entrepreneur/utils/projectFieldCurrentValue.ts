@@ -6,6 +6,7 @@
  * que les deux gardent chacun leur propre switch/case et divergent.
  */
 import type { ProjectRead } from "../api/projectApi"
+import { immediateObjectiveLabels } from "./projectImmediateObjectives"
 import { STAGE_LABELS } from "./projectStageOptions"
 
 function listOrDash(items: string[]): string {
@@ -42,6 +43,8 @@ export function currentValueLabel(project: ProjectRead, fieldName: string): stri
       return project.value_proposition ?? "—"
     case "projects.localisation":
       return project.localisation ?? "—"
+    case "projects.objectifs_immediats":
+      return immediateObjectiveLabels(project.objectifs_immediats).join(", ") || "—"
     default:
       return "—"
   }

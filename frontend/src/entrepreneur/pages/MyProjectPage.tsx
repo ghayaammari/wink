@@ -8,11 +8,14 @@ import { countPendingByTable } from "../utils/fieldValueTable"
 import type { MyProjectOutletContext } from "./MyProjectLayout"
 
 /**
- * Landing "Mon Projet" — 3 cards vers les sections détaillées (Informations
- * générales/légales, Vitrine publique), chacune avec un badge = nombre de
- * `project_field_values` en attente pour sa table. Le bouton d'import est ici
- * (pas dans une sous-section précise) car l'extraction touche potentiellement
- * les 3 tables à la fois — voir spec Notion "Page Mon Projet".
+ * Landing "Mon Projet" — 5 cards vers les sections détaillées (Informations
+ * générales/légales, Équipe & capital, Vitrine publique, Coffre-fort documentaire),
+ * chacune avec un badge = nombre de `project_field_values` en attente pour sa table
+ * (sauf Équipe & capital — socle Groupe 5, données éditées en propre — et Coffre-fort,
+ * service 1.1.17 : pure vue sur `documents`, aucune
+ * project_field_values propre). Le bouton d'import est ici (pas dans une
+ * sous-section précise) car l'extraction touche potentiellement les 3
+ * premières tables à la fois — voir spec Notion "Page Mon Projet".
  *
  * `project`/`fieldValues` viennent de MyProjectLayout (route parente) : cette
  * page ne fait plus son propre fetch au montage — voir ce fichier pour le
@@ -78,7 +81,7 @@ export default function MyProjectPage() {
 
       {error && <p className="text-sm text-red-600">{error}</p>}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <ProjectSectionCard
           to="/entrepreneur/mon-projet/informations-generales"
           title="Informations générales"
@@ -92,10 +95,25 @@ export default function MyProjectPage() {
           pendingCount={pendingCounts["project_legal_profiles"] ?? 0}
         />
         <ProjectSectionCard
+          to="/entrepreneur/mon-projet/equipe-capital"
+          title="Équipe & capital"
+          description="Associés, répartition du capital et des droits de vote"
+          pendingCount={0}
+        />
+        <ProjectSectionCard
           to="/entrepreneur/mon-projet/vitrine-publique"
           title="Vitrine publique"
           description="Logo, site web, présentation publique"
           pendingCount={pendingCounts["project_public_profiles"] ?? 0}
+        />
+        {/* Service 1.1.17 — pas de project_field_values propre (pure vue de
+            consultation sur `documents`), donc pas de badge pendingCount ici,
+            contrairement aux 3 cartes ci-dessus. */}
+        <ProjectSectionCard
+          to="/entrepreneur/mon-projet/coffre-fort"
+          title="Coffre-fort documentaire"
+          description="Tous les documents liés à ton projet"
+          pendingCount={0}
         />
       </div>
     </div>

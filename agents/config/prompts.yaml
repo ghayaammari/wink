@@ -60,3 +60,73 @@ document_processing:
       project_public_profiles: |
         Précisions pour ce schéma :
         - `public_summary` : résumé destiné à un affichage public (ex: vitrine investisseurs) — reformule si besoin pour rester concis (1 à 2 phrases), ce n'est pas nécessairement la même formulation qu'une description interne.
+
+
+# Structuration des articles de loi collectés depuis Légifrance (service 1.1.1,
+# Groupe 2) — voir agents/ingestion/legal_text_structuring_service.py.
+# {texte_brut} et {schema_json} remplacés par .format() dans ce service — même
+# convention que document_processing.llm_structuration ci-dessus.
+legal_text_structuration:
+  relevance_filter: |
+    Voici le texte d'un article de loi français sur les sociétés/entreprises. Détermine s'il est pertinent pour un entrepreneur créant une startup — c'est-à-dire s'il correspond à un des sous-thèmes suivants : régime_social, gouvernance, fiscalité, responsabilité, capital_social. Réponds uniquement par pertinent ou non_pertinent, avec une justification courte d'une phrase.
+
+    Réponds uniquement en JSON valide respectant ce schéma :
+    {schema_json}
+
+    Texte :
+    {texte_brut}
+
+  classification: |
+    Voici le texte d'un article de loi sur les sociétés. Classe-le dans exactement une des catégories suivantes pour sous_theme : regime_social, gouvernance, fiscalite, responsabilite, capital_social. Indique enfin si les différents alinéas de cet article traitent d'un seul et même sujet cohérent, ou de sujets clairement distincts, pour chunking_suggere : réponds aucun (sujet unique) ou par_alinea (sujets distincts). Ne réponds qu'avec ces valeurs exactes, n'en invente aucune autre.
+
+    Réponds uniquement en JSON valide respectant ce schéma :
+    {schema_json}
+
+    Texte :
+    {texte_brut}
+
+
+# Classification des textes collectes pour les assurances sectorielles
+# (service 1.1.10) — voir agents/ingestion/sector_insurance_structuring_service.py.
+# {texte_brut}, {secteur} et {schema_json} remplaces par .format() dans ce service.
+sector_insurance_structuration:
+  page_relevance: |
+    Voici le titre et un extrait d'une page web. Le secteur d'activite recherche est : {secteur}.
+
+    Determine si cette page parle des assurances (obligatoires ou recommandees) pertinentes pour une entreprise de ce secteur en France. Reponds uniquement par pertinent ou non_pertinent, avec une justification courte d'une phrase.
+
+    Reponds uniquement en JSON valide respectant ce schema :
+    {schema_json}
+
+    Titre :
+    {titre}
+
+    Extrait :
+    {extrait}
+
+  classification: |
+    Voici un texte relatif aux obligations d'assurance pour les entreprises en France. Le secteur d'activite concerne est : {secteur}.
+
+    A partir de ce texte, identifie :
+    1. `type_assurance` : le type d'assurance concerne (ex: "RC Pro", "Assurance decennale", "Assurance auto obligatoire", "Garantie financiere", "RC produit", "Cyber-risques", "Multirisque pro"...).
+    2. `a_base_legale` : reponds `true` UNIQUEMENT si le texte cite explicitement une reference legale (article de loi, code, decret). Ne presume jamais — en cas de doute, reponds `false`.
+    3. `chunking_suggere` : "aucun" si le texte traite d'un seul sujet coherent, "par_alinea" si les alineas traitent de sujets clairement distincts.
+
+    Reponds uniquement en JSON valide respectant ce schema :
+    {schema_json}
+
+    Texte :
+    {texte_brut}
+
+  # Utilise par detect_chunking() — volontairement sans {secteur} : reutilisable
+  # par le volet 2 (page web) avant meme que son secteur soit determine.
+  chunking: |
+    Voici un texte relatif aux assurances pour une entreprise en France.
+
+    Determine uniquement si les differents alineas de ce texte traitent d'un seul et meme sujet coherent, ou de sujets clairement distincts, pour `chunking_suggere` : reponds `aucun` (sujet unique) ou `par_alinea` (sujets distincts). Ne reponds qu'avec ces valeurs exactes, n'en invente aucune autre.
+
+    Reponds uniquement en JSON valide respectant ce schema :
+    {schema_json}
+
+    Texte :
+    {texte_brut}

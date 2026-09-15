@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import { useOutletContext } from "react-router-dom"
 import { useAuth } from "../../shared/context/AuthContext"
 import Field from "../../shared/components/Field"
+import LoadingSpinner from "../../shared/components/LoadingSpinner"
 import Modal from "../../shared/components/Modal"
 import SectionCard from "../../shared/components/SectionCard"
 import { getLegalProfile, type ProjectFieldValueRead, type ProjectLegalProfileRead } from "../api/projectApi"
 import type { ExtractedFieldSpec } from "../components/ExtractedFieldsReview"
 import SimpleDetectedFieldsModal from "../components/SimpleDetectedFieldsModal"
 import UpdateLegalProfileForm from "../components/UpdateLegalProfileForm"
+import VerificationStatusBadge from "../components/VerificationStatusBadge"
 import type { MyProjectOutletContext } from "./MyProjectLayout"
 
 // legal_name/legal_form ne dépendent pas de l'immatriculation officielle — on peut
@@ -108,6 +110,19 @@ export default function ProjectLegalInfoPage() {
     if (accessToken) getLegalProfile(accessToken, project.id).then(setLegalProfile)
   }
 
+  // Un seul point de fermeture pour la modale "Mettre à jour" — utilisé à la
+  // fois par le "×" natif de Modal et par le bouton interne du formulaire
+  // (voir UpdateLegalProfileForm.tsx). Rafraîchit systématiquement, même si
+  // rien n'a été modifié : bug réel corrigé ici — le "×" fermait la modale
+  // sans jamais recharger le profil, donc la page affichait encore les
+  // anciennes valeurs après une mise à jour tant qu'on ne rechargeait pas la
+  // page entière à la main.
+  function closeUpdateModal() {
+    setIsUpdateModalOpen(false)
+    reloadLegalProfile()
+    refresh()
+  }
+
   useEffect(() => {
     if (!accessToken) return
     setIsLoading(true)
@@ -117,7 +132,7 @@ export default function ProjectLegalInfoPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- ne doit tourner qu'au montage et si le projet change
   }, [accessToken, project.id])
 
-  if (isLoading) return <p className="text-sm text-gray-500">Chargement...</p>
+  if (isLoading) return <LoadingSpinner />
 
   const scopedFieldValues = fieldValues.filter((v) => v.field_name.startsWith("project_legal_profiles."))
   // Champs réellement proposables dans le popup en ce moment — l'immatriculation
@@ -158,18 +173,13 @@ export default function ProjectLegalInfoPage() {
       </div>
 
       {isUpdateModalOpen && (
-        <Modal title="Mettre à jour les informations légales" onClose={() => setIsUpdateModalOpen(false)}>
+        <Modal title="Mettre à jour les informations légales" onClose={closeUpdateModal}>
           <UpdateLegalProfileForm
             projectId={project.id}
             legalProfile={legalProfile}
             isCreated={isCreated}
             accessToken={accessToken!}
-            onCancel={() => setIsUpdateModalOpen(false)}
-            onSaved={() => {
-              setIsUpdateModalOpen(false)
-              reloadLegalProfile()
-              refresh()
-            }}
+            onClose={closeUpdateModal}
           />
         </Modal>
       )}
@@ -205,6 +215,25 @@ export default function ProjectLegalInfoPage() {
       {isCreated ? (
         <SectionCard title="Immatriculation">
           <div className="flex flex-col gap-4">
+            {legalProfile?.siren && (
+              // Affichage permanent des 3 statuts — mis à jour uniquement au clic
+              // sur "Mettre à jour" (voir UpdateLegalProfileForm.tsx), jamais par
+              // un appel automatique ici : cet écran reste une simple lecture.
+              <div className="flex flex-wrap items-center gap-4 rounded-lg bg-gray-50 px-3 py-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">Dénomination</span>
+                  <VerificationStatusBadge status={legalProfile.denomination_verification_status} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">SIREN / SIRET</span>
+                  <VerificationStatusBadge status={legalProfile.immatriculation_verification_status} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-gray-500">Kbis</span>
+                  <VerificationStatusBadge status={legalProfile.kbis_verification_status} />
+                </div>
+              </div>
+            )}
             {REGISTRATION_FIELDS.map((spec) => {
               const value = displayValue(legalProfile, spec.fieldName)
               if (value === "—") return null

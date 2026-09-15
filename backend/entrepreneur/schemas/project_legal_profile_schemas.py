@@ -7,7 +7,6 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 class ProjectLegalProfileBase(BaseModel):
-    is_registered: bool = False
     legal_name: str | None = Field(default=None, max_length=255)
     legal_form: str | None = Field(default=None, max_length=120)
     registration_number: str | None = Field(default=None, max_length=120)
@@ -18,7 +17,13 @@ class ProjectLegalProfileBase(BaseModel):
     naf_code: str | None = Field(default=None, max_length=10)
     registration_date: date | None = None
     registered_address: dict[str, Any] | None = None
-    legal_representative: dict[str, Any] | None = None
+    # Le représentant légal est un associé (FK vers project_associates) — voir modèle.
+    # Non obligatoire ici : sa désignation intervient après rédaction des statuts (1.1.4),
+    # mais une société déjà immatriculée doit l'avoir renseigné (validation applicative).
+    legal_representative_associate_id: UUID | None = None
+    objet_social: str | None = None
+    duree_societe: int | None = Field(default=None, ge=1, le=99)
+    date_signature_statuts: date | None = None
 
 
 class ProjectLegalProfileCreate(ProjectLegalProfileBase):
@@ -26,7 +31,6 @@ class ProjectLegalProfileCreate(ProjectLegalProfileBase):
 
 
 class ProjectLegalProfileUpdate(BaseModel):
-    is_registered: bool | None = None
     legal_name: str | None = Field(default=None, max_length=255)
     legal_form: str | None = Field(default=None, max_length=120)
     registration_number: str | None = Field(default=None, max_length=120)
@@ -36,9 +40,17 @@ class ProjectLegalProfileUpdate(BaseModel):
     naf_code: str | None = Field(default=None, max_length=10)
     registration_date: date | None = None
     registered_address: dict[str, Any] | None = None
-    legal_representative: dict[str, Any] | None = None
-    # verification_status volontairement absent : c'est le résultat d'une vérification
-    # (service futur EPIC-01), pas un champ que l'entrepreneur édite lui-même.
+    legal_representative_associate_id: UUID | None = None
+    objet_social: str | None = None
+    duree_societe: int | None = Field(default=None, ge=1, le=99)
+    date_signature_statuts: date | None = None
+    # Volontairement absents de ce PATCH générique — tous écrits par des mécanismes
+    # dédiés, jamais par une édition libre de l'entrepreneur (voir "Schemas grp 4") :
+    # - les 3 statuts de vérification : résultat d'un appel API (Parcours B) ou d'un
+    #   job périodique (Parcours A), jamais une valeur que l'entrepreneur choisit
+    # - numero_suivi_formalite : écrit une seule fois au dépôt Guichet Unique (e13)
+    # - kbis_document_id : upload manuel, mais via un endpoint dédié à créer
+    #   (même pattern que roadmap_service.attach_proof), pas ce PATCH générique
 
 
 class ProjectLegalProfileRead(ProjectLegalProfileBase):
@@ -46,9 +58,12 @@ class ProjectLegalProfileRead(ProjectLegalProfileBase):
 
     id: UUID
     project_id: UUID
-    # str et non Literal : le schéma de données ne pose pas de CHECK sur cette colonne
-    # (contrairement aux autres champs à choix). À restreindre en Literal dès que les
-    # valeurs possibles (ex: unverified/pending/verified/rejected) seront actées.
-    verification_status: str
+    kbis_document_id: UUID | None
+    # str et non Literal : le schéma de données pose un CHECK en base (voir modèle),
+    # mais rien n'empêche une future 4e valeur sans toucher ce schéma de lecture.
+    denomination_verification_status: str
+    immatriculation_verification_status: str
+    kbis_verification_status: str
+    numero_suivi_formalite: str | None
     created_at: datetime
     updated_at: datetime

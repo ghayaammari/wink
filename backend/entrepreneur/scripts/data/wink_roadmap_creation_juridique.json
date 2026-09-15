@@ -1,0 +1,429 @@
+{
+  "schema_version": "1.0",
+  "source": "Liste exhaustive des étapes de création d'une startup en France — Wink",
+  "stage": "pre-seed",
+  "noeuds": [
+    {
+      "id": "e1_choix_forme_juridique",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Choix de la forme juridique",
+      "input": "Profil des fondateurs, présence d'investisseurs prévus, niveau de risque souhaité",
+      "description": "Choix entre SAS et SARL, qui détermine le régime social du dirigeant pour toute la vie de la société.",
+      "details_pratiques": "SAS : président assimilé salarié, cotisations ~70-75% du salaire brut, meilleure protection sociale. SARL : gérant majoritaire TNS, cotisations ~40-45%, protection moindre. Depuis avril 2025 (réforme France Travail), la SAS permet de conserver 100% de l'ARE contre 60-70% en SARL.",
+      "administration_liee": null,
+      "source_legale": null,
+      "depends_on": [],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e2_choix_denomination",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Choix de la dénomination sociale",
+      "input": "Idée de nom",
+      "description": "Choix du nom de la future société.",
+      "details_pratiques": "Aucune démarche officielle à ce stade — devient officiel une fois vérifié disponible (étape suivante) puis inscrit dans les statuts.",
+      "administration_liee": null,
+      "source_legale": null,
+      "depends_on": [],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e3_verification_disponibilite_nom",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Vérification de disponibilité du nom",
+      "input": "Nom choisi",
+      "description": "Vérification que le nom choisi est disponible.",
+      "details_pratiques": "Deux vérifications indépendantes : dénomination sociale (base Infogreffe/RCS) et marque déposée (base INPI). Un nom peut être libre sur une base et déjà pris sur l'autre.",
+      "administration_liee": "INPI (base des marques) + Infogreffe (base des dénominations sociales)",
+      "source_legale": null,
+      "depends_on": [
+        "e2_choix_denomination"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e4_pacte_fondateurs",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Rédaction du pacte de fondateurs",
+      "input": "Accord entre cofondateurs sur répartition du capital, clauses de vesting, gouvernance",
+      "description": "Rédaction d'un contrat privé entre associés fondateurs.",
+      "details_pratiques": "Aucune obligation légale, aucune forme imposée. Contient généralement les clauses de vesting, de sortie et de gouvernance. Recommandé avant la signature définitive des statuts, sans être une dépendance stricte.",
+      "administration_liee": null,
+      "source_legale": null,
+      "depends_on": [],
+      "applicable_if": {
+        "nb_cofondateurs_gte": 2
+      },
+      "bloquant": false,
+      "parallele_avec": [],
+      "recommande_avant": [
+        "e5_redaction_statuts"
+      ]
+    },
+    {
+      "id": "e5_redaction_statuts",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Rédaction des statuts (projet, non signé)",
+      "input": "Décisions sur objet social, capital, répartition des actions, modalités de direction, adresse du siège social",
+      "description": "Rédaction d'un projet de statuts, non signé, transmis à chaque associé pour accord.",
+      "details_pratiques": "Doit déjà contenir l'objet social, le capital prévu, la répartition des actions, les modalités de direction et l'adresse du siège social (mention obligatoire, Article L.210-2). Ce projet sert de base à l'ouverture du compte bancaire bloqué.",
+      "administration_liee": null,
+      "source_legale": "Articles L.210-2, L.225-14, L.225-16, L.227-5, L.227-9, R.224-2 du Code de commerce",
+      "depends_on": [
+        "e1_choix_forme_juridique",
+        "e3_verification_disponibilite_nom",
+        "e6_domiciliation"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e6_domiciliation",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Choix de la domiciliation du siège social",
+      "input": "Adresse disponible (domicile du dirigeant, société de domiciliation, coworking)",
+      "description": "Choix de l'adresse du siège social.",
+      "details_pratiques": "Mention obligatoire des statuts (Article L.210-2). Options : domicile du dirigeant (avec attestation d'hébergement), société de domiciliation, ou coworking. Le justificatif est réutilisé à la fois dans les statuts et dans le dossier final.",
+      "administration_liee": null,
+      "source_legale": null,
+      "depends_on": [],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e7a_ouverture_compte_bloque",
+      "groupe": "g1_constitution_capital",
+      "nom": "Ouverture du compte bancaire bloqué",
+      "input": "Projet de statuts (non signé), identité et justificatif de domicile de chaque associé",
+      "description": "Ouverture d'un compte bancaire bloqué au nom de la société en formation.",
+      "details_pratiques": "Nécessite le projet de statuts non signé, une pièce d'identité et un justificatif de domicile de chaque associé, et le justificatif de domiciliation. Ce compte reste provisoire jusqu'au Kbis. Délai variable selon l'établissement, de quelques jours à plusieurs semaines.",
+      "administration_liee": "Banque, notaire, ou plateforme spécialisée",
+      "source_legale": null,
+      "depends_on": [
+        "e5_redaction_statuts"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e7b_depot_capital",
+      "groupe": "g1_constitution_capital",
+      "nom": "Dépôt du capital social",
+      "input": "Compte bloqué ouvert, apports en numéraire des associés (minimum 50% libéré)",
+      "description": "Versement des apports en numéraire sur le compte bloqué.",
+      "details_pratiques": "Minimum 50% du capital doit être libéré immédiatement (le solde sous 5 ans). Délai légal de 8 jours entre la réception effective des fonds par chaque associé et leur dépôt sur le compte.",
+      "administration_liee": "Banque, notaire, ou plateforme spécialisée",
+      "source_legale": null,
+      "depends_on": [
+        "e7a_ouverture_compte_bloque"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e8_attestation_depot_fonds",
+      "groupe": "g1_constitution_capital",
+      "nom": "Obtention de l'attestation de dépôt de fonds",
+      "input": "Preuve du virement des apports",
+      "description": "Obtention du certificat prouvant le dépôt effectif des fonds.",
+      "details_pratiques": "Délivré en 12h à 48h ouvrées selon le dépositaire. Mentionne le nom de la société, le siège, le montant du capital et la répartition entre associés — repris dans les statuts définitifs.",
+      "administration_liee": "Banque/notaire dépositaire",
+      "source_legale": null,
+      "depends_on": [
+        "e7b_depot_capital"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e9_signature_definitive_statuts",
+      "groupe": "g1_constitution_capital",
+      "nom": "Signature définitive des statuts",
+      "input": "Attestation de dépôt de fonds (nom du dépositaire et montant déposé à mentionner dans les statuts)",
+      "description": "Signature définitive des statuts par tous les associés fondateurs.",
+      "details_pratiques": "Doit intervenir après l'attestation de dépôt, car les statuts doivent mentionner le dépositaire et le montant déposé. Signature en personne ou via mandataire avec pouvoir spécial, mention \"lu et approuvé\". Acte sous seing privé par défaut ; notarié uniquement en cas d'apport immobilier.",
+      "administration_liee": null,
+      "source_legale": null,
+      "depends_on": [
+        "e8_attestation_depot_fonds"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e9b_annonce_legale",
+      "groupe": "g2_formalites_prealables",
+      "nom": "Publication d'une annonce légale",
+      "input": "Statuts signés + informations sur la société (nom, capital, siège, dirigeants)",
+      "description": "Publication d'une annonce légale de constitution.",
+      "details_pratiques": "Doit être datée après la signature définitive des statuts. Coût : 144 à 193€ selon le journal et le département.",
+      "administration_liee": "Journal d'annonces légales habilité",
+      "source_legale": null,
+      "depends_on": [
+        "e9_signature_definitive_statuts"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [
+        "e11_dbe"
+      ],
+      "recommande_avant": []
+    },
+    {
+      "id": "e10_declaration_non_condamnation",
+      "groupe": "g2_formalites_prealables",
+      "nom": "Déclaration de non-condamnation du président",
+      "input": "Identité du dirigeant",
+      "description": "Déclaration sur l'honneur de non-condamnation du président.",
+      "details_pratiques": "Concerne uniquement le(s) dirigeant(s), jamais les associés simples. Contient l'identité et la filiation du déclarant, rien sur les statuts. Réalisable dès que l'identité du futur président est connue. Fondement : Article A.123-51 du Code de commerce.",
+      "administration_liee": "Auto-déclaration, jointe au dossier",
+      "source_legale": null,
+      "depends_on": [
+        "e1_choix_forme_juridique"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e11_dbe",
+      "groupe": "g2_formalites_prealables",
+      "nom": "Déclaration des Bénéficiaires Effectifs (DBE)",
+      "input": "Identité des personnes détenant plus de 25% du capital ou des droits de vote",
+      "description": "Déclaration des personnes qui contrôlent réellement la société.",
+      "details_pratiques": "Concerne toute personne détenant plus de 25% du capital ou des droits de vote (directement ou indirectement), ou exerçant un contrôle par un pacte de fondateurs. Coût : 23,62€ à la création. Réalisable jusqu'à 15 jours après le récépissé de dépôt.",
+      "administration_liee": "Greffe du Tribunal de Commerce (via le Guichet Unique)",
+      "source_legale": null,
+      "depends_on": [
+        "e9_signature_definitive_statuts"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [
+        "e9b_annonce_legale"
+      ],
+      "recommande_avant": []
+    },
+    {
+      "id": "e12_constitution_dossier",
+      "groupe": "g3_immatriculation",
+      "nom": "Constitution du dossier complet",
+      "input": "Statuts signés, attestation de dépôt, annonce légale, DBE, justificatif de domiciliation, non-condamnation, pièce d'identité",
+      "description": "Rassemblement de toutes les pièces en un seul dossier prêt à déposer.",
+      "details_pratiques": "Un dossier incomplet ou incohérent entre ses pièces est la cause n°1 des rejets par le Guichet Unique.",
+      "administration_liee": null,
+      "source_legale": null,
+      "depends_on": [
+        "e9b_annonce_legale",
+        "e10_declaration_non_condamnation",
+        "e11_dbe",
+        "e6_domiciliation"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e13_depot_guichet_unique",
+      "groupe": "g3_immatriculation",
+      "nom": "Dépôt sur le Guichet Unique",
+      "input": "Dossier complet",
+      "description": "Dépôt du dossier complet sur le Guichet Unique.",
+      "details_pratiques": "Dépôt en ligne, 15 à 30 minutes. Seule voie légale depuis le 1er janvier 2023. Récépissé valable 1 mois. Chaque changement de statut génère une notification par email le lendemain matin.",
+      "administration_liee": "INPI (procedures.inpi.fr)",
+      "source_legale": null,
+      "depends_on": [
+        "e12_constitution_dossier"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e15_verification_immatriculation",
+      "groupe": "g3_immatriculation",
+      "nom": "Vérification et immatriculation",
+      "input": "Dossier transmis",
+      "description": "Vérification du dossier et inscription au RCS et au RNE.",
+      "details_pratiques": "Transmission automatique à l'INSEE, aux services fiscaux et à l'URSSAF dès validation, sans action de l'utilisateur. Le Guichet Unique n'est pas responsable du délai final — seuls les greffes (Kbis) et l'INSEE (SIREN) le sont.",
+      "administration_liee": "Greffe du Tribunal de Commerce compétent",
+      "source_legale": null,
+      "depends_on": [
+        "e13_depot_guichet_unique"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e16_attribution_siren_siret_ape",
+      "groupe": "g3_immatriculation",
+      "nom": "Attribution du SIREN/SIRET et code APE",
+      "input": "Immatriculation validée",
+      "description": "Attribution des numéros d'identification de l'entreprise.",
+      "details_pratiques": "Délai moyen 2 à 4 semaines pour une société. SIREN et SIRET arrivent ensemble, le code APE peut arriver avec quelques jours de décalage. Correction gratuite possible auprès de l'INSEE en cas d'erreur.",
+      "administration_liee": "INSEE",
+      "source_legale": null,
+      "depends_on": [
+        "e15_verification_immatriculation"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e17_obtention_kbis",
+      "groupe": "g3_immatriculation",
+      "nom": "Obtention du Kbis",
+      "input": "Immatriculation finalisée",
+      "description": "Obtention de l'extrait Kbis, carte d'identité légale de la société.",
+      "details_pratiques": "Délivré par le Greffe du Tribunal de Commerce, pas par le Guichet Unique ni l'INPI. Délai moyen 3 à 7 jours ouvrés après un dossier complet. Téléchargeable sur monidenum.fr ou infogreffe.fr.",
+      "administration_liee": "Greffe du Tribunal de Commerce",
+      "source_legale": null,
+      "depends_on": [
+        "e16_attribution_siren_siret_ape"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e18_deblocage_fonds",
+      "groupe": "g4_obligations_post",
+      "nom": "Déblocage des fonds du capital social",
+      "input": "Kbis obtenu",
+      "description": "Déblocage des fonds vers le compte courant définitif.",
+      "details_pratiques": "Nécessite la présentation du Kbis à la banque dépositaire. Le compte définitif remplace le compte provisoire ouvert plus tôt.",
+      "administration_liee": "Banque dépositaire",
+      "source_legale": null,
+      "depends_on": [
+        "e17_obtention_kbis"
+      ],
+      "applicable_if": {},
+      "bloquant": false,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e19_registres_legaux",
+      "groupe": "g4_obligations_post",
+      "nom": "Ouverture des registres légaux obligatoires",
+      "input": "Existence légale de la société",
+      "description": "Ouverture du registre des mouvements de titres et du registre des décisions.",
+      "details_pratiques": "Obligatoire pour toute SAS (Article R.228-10), mais pas requis au moment de l'immatriculation. Son absence rend les cessions d'actions inopposables, ce qui peut bloquer une levée de fonds future.",
+      "administration_liee": "Interne à l'entreprise, non déposé",
+      "source_legale": null,
+      "depends_on": [
+        "e17_obtention_kbis"
+      ],
+      "applicable_if": {},
+      "bloquant": false,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e20_affiliation_urssaf",
+      "groupe": "g4_obligations_post",
+      "nom": "Affiliation du dirigeant aux organismes sociaux",
+      "input": "Statut du président (assimilé-salarié en SAS)",
+      "description": "Affiliation du dirigeant aux organismes sociaux.",
+      "details_pratiques": "Automatique dès la vérification du dossier. La notification d'affiliation arrive séparément de l'attribution du SIREN.",
+      "administration_liee": "URSSAF",
+      "source_legale": null,
+      "depends_on": [
+        "e17_obtention_kbis"
+      ],
+      "applicable_if": {},
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e21_immatriculation_fiscale",
+      "groupe": "g0_decisions_prealables",
+      "nom": "Choix du régime fiscal (IS par défaut, option IR)",
+      "input": "Répartition des droits de vote entre dirigeants et foyer fiscal, projet de statuts",
+      "description": "Choix du régime d'imposition de la société.",
+      "details_pratiques": "IS par défaut. Option IR possible pour 5 exercices maximum, non renouvelable, renonciation irrévocable. Coché sur le formulaire M0 au moment du dépôt, pas une démarche séparée après le Kbis. Éligibilité à l'IR : plus de 34% des droits de vote détenus par les dirigeants et leur foyer fiscal.",
+      "administration_liee": "Service des Impôts des Entreprises (SIE), via le formulaire M0 du Guichet Unique",
+      "source_legale": "Article 239 bis AB du CGI",
+      "depends_on": [
+        "e5_redaction_statuts"
+      ],
+      "applicable_if": {
+        "droits_de_vote_dirigeants_foyer_fiscal_gt": 34
+      },
+      "bloquant": true,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e22_assurances_obligatoires",
+      "groupe": "g4_obligations_post",
+      "nom": "Souscription des assurances obligatoires",
+      "input": "Activité de l'entreprise définie",
+      "description": "Souscription des assurances liées à l'activité de l'entreprise.",
+      "details_pratiques": "RC Pro obligatoire uniquement pour les professions réglementées (droit, santé, bâtiment, immobilier). Fortement recommandée mais non obligatoire pour les autres secteurs.",
+      "administration_liee": "Assureur, selon exigences sectorielles",
+      "source_legale": null,
+      "depends_on": [
+        "e17_obtention_kbis"
+      ],
+      "applicable_if": {},
+      "bloquant": false,
+      "parallele_avec": [],
+      "recommande_avant": []
+    },
+    {
+      "id": "e23_depot_marque",
+      "groupe": "g4_obligations_post",
+      "nom": "Dépôt de marque/logo (non obligatoire)",
+      "input": "Nom/logo à protéger",
+      "description": "Dépôt de marque ou de logo à l'INPI, démarche facultative.",
+      "details_pratiques": "Distincte de l'immatriculation de la société. Nécessite le choix des classes de Nice pertinentes selon l'activité (ex: classes 9 et 42 pour un SaaS).",
+      "administration_liee": "INPI (procédure distincte de l'immatriculation)",
+      "source_legale": null,
+      "depends_on": [
+        "e3_verification_disponibilite_nom"
+      ],
+      "applicable_if": {
+        "objectifs_immediats_contains": "protection_marque_code"
+      },
+      "bloquant": false,
+      "parallele_avec": [],
+      "recommande_avant": []
+    }
+  ],
+  "reperes_pratiques": {
+    "cout_total_realiste": "250 à 300 € de formalités obligatoires (hors accompagnement professionnel)",
+    "delai_moyen": "3 à 8 semaines du début de la rédaction des statuts au Kbis (dont 3 à 15 jours pour la seule immatriculation)",
+    "point_de_blocage_principal": "Rejets du Guichet Unique dus à des pièces manquantes, incohérences entre formulaire et justificatifs, ou erreurs sur la DBE"
+  }
+}

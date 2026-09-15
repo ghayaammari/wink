@@ -38,6 +38,9 @@ class ProjectUpdate(BaseModel):
     description: str | None = Field(default=None, min_length=1)
     nombre_cofondateurs: int | None = Field(default=None, ge=0)
     intention_levee_fonds: bool | None = None
+    # Objectifs immédiats (ex: ["protection_marque_code"]) — question onboarding,
+    # 1.1.11. (réalisé par OPENCODE)
+    objectifs_immediats: list[str] | None = None
     localisation: str | None = Field(default=None, max_length=120)
     sector: str | None = Field(default=None, max_length=120)
     subsectors: list[str] | None = None
@@ -65,6 +68,8 @@ class ProjectRead(BaseModel):
     imported_document_id: UUID | None
     nombre_cofondateurs: int | None
     intention_levee_fonds: bool | None
+    # Ajouté avec la migration d5e6f7a8b9c1 — question onboarding (1.1.11). (réalisé par OPENCODE)
+    objectifs_immediats: list[str]
     localisation: str | None
     sector: str | None
     subsectors: list[str]
