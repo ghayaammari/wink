@@ -2,9 +2,11 @@ import { useState, type FormEvent } from "react"
 import { ApiError } from "../../shared/api/authApi"
 import {
   updateLegalProfile,
+  verifyLegalProfile,
   type ProjectLegalProfileRead,
   type ProjectLegalProfileUpdate,
 } from "../api/projectApi"
+import VerificationStatusBadge from "./VerificationStatusBadge"
 
 interface UpdateLegalProfileFormProps {
   projectId: string
@@ -17,8 +19,16 @@ interface UpdateLegalProfileFormProps {
    * en lecture seule de ProjectLegalInfoPage.tsx). */
   isCreated: boolean
   accessToken: string
-  onSaved: () => void
-  onCancel: () => void
+  /** Appelé pour fermer la modale — au clic sur "Annuler"/"Fermer" ci-dessous,
+   * mais aussi par le "×" natif de `Modal` (voir ProjectLegalInfoPage.tsx). Un
+   * seul callback plutôt que `onSaved`/`onCancel` séparés : le parent doit de
+   * toute façon rafraîchir le profil légal à chaque fermeture, quel que soit
+   * le chemin — bug réel rencontré quand seul le bouton "Fermer" interne
+   * déclenchait ce rafraîchissement, pas le "×" de la modale (qui utilisait
+   * encore l'ancien `onCancel`, jamais rafraîchi). Rafraîchir même si rien
+   * n'a changé est sans risque (un GET de plus), donc pas besoin de
+   * distinguer les deux cas côté formulaire. */
+  onClose: () => void
 }
 
 const inputClass = "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
@@ -34,14 +44,25 @@ const labelClass = "text-xs font-medium text-gray-700"
  * `isCreated` est faux : pas de risque d'écraser une candidate en_attente
  * avec une valeur vide, et cohérent avec le verrouillage déjà en place sur
  * la page (voir hasPendingRegistrationCandidate).
+ *
+ * Après la sauvegarde (PATCH), si un SIREN est enregistré (Parcours B),
+ * déclenche la vraie vérification (POST .../legal-profile/verify) et affiche
+ * son résultat (3 badges) SOUS le formulaire, sans jamais le faire disparaître
+ * — le formulaire reste visible et modifiable, l'utilisateur peut re-corriger
+ * un champ et ré-enregistrer sans perdre le contexte. Version revue après
+ * retour utilisateur : la première version remplaçait tout le formulaire par
+ * le panneau de résultat, jugée trop brutale.
+ *
+ * La sauvegarde et la vérification sont 2 appels séparés (voir
+ * legal_verification_service.py) : un échec de vérification (API externe
+ * indisponible) ne doit jamais remettre en cause la sauvegarde, déjà réussie.
  */
 export default function UpdateLegalProfileForm({
   projectId,
   legalProfile,
   isCreated,
   accessToken,
-  onSaved,
-  onCancel,
+  onClose,
 }: UpdateLegalProfileFormProps) {
   const [legalName, setLegalName] = useState(legalProfile?.legal_name ?? "")
   const [legalForm, setLegalForm] = useState(legalProfile?.legal_form ?? "")
@@ -55,9 +76,28 @@ export default function UpdateLegalProfileForm({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // "form" = formulaire éditable ; "verifying" = sauvegardé, vérification en cours
+  // (Parcours B avec SIREN) ; "result" = panneau de badges affiché.
+  const [phase, setPhase] = useState<"form" | "verifying" | "result">("form")
+  const [verifiedProfile, setVerifiedProfile] = useState<ProjectLegalProfileRead | null>(null)
+  const [verifyError, setVerifyError] = useState<string | null>(null)
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setError(null)
+
+    // siren/siret doivent être OMIS du payload si vides, jamais envoyés comme "" :
+    // ce sont les 2 seuls champs validés côté backend par un pattern strict
+    // (`^\d{9}$`/`^\d{14}$`, voir project_legal_profile_schemas.py) qui rejette une
+    // chaîne vide avec un 422 — une chaîne vide n'est pas None, donc le champ
+    // "optionnel" n'est pas ignoré par la validation. Bug réel rencontré : SIRET
+    // laissé vide → 422 sur ce PATCH. Les autres champs (legal_name, legal_form,
+    // registration_number, vat_number, naf_code) n'ont qu'une contrainte de
+    // longueur max — une chaîne vide y est valide, envoyée telle quelle comme
+    // avant (permet de les vider volontairement). Même traitement que
+    // `registration_date` juste en dessous, qui gérait déjà ce cas pour lui seul.
+    const sirenOrOmit = siren.trim() === "" ? undefined : siren.trim()
+    const siretOrOmit = siret.trim() === "" ? undefined : siret.trim()
 
     const payload: ProjectLegalProfileUpdate = {
       legal_name: legalName.trim(),
@@ -65,8 +105,8 @@ export default function UpdateLegalProfileForm({
       ...(isCreated
         ? {
             registration_number: registrationNumber.trim(),
-            siren: siren.trim(),
-            siret: siret.trim(),
+            ...(sirenOrOmit !== undefined ? { siren: sirenOrOmit } : {}),
+            ...(siretOrOmit !== undefined ? { siret: siretOrOmit } : {}),
             vat_number: vatNumber.trim(),
             naf_code: nafCode.trim(),
             ...(registrationDate.trim() !== "" ? { registration_date: registrationDate.trim() } : {}),
@@ -76,8 +116,21 @@ export default function UpdateLegalProfileForm({
 
     setIsSubmitting(true)
     try {
-      await updateLegalProfile(accessToken, projectId, payload)
-      onSaved()
+      const saved = await updateLegalProfile(accessToken, projectId, payload)
+      if (isCreated && saved.siren) {
+        setPhase("verifying")
+        try {
+          const verified = await verifyLegalProfile(accessToken, projectId)
+          setVerifiedProfile(verified)
+        } catch (err) {
+          // La sauvegarde a réussi — seule la vérification a échoué (ex: API
+          // externe indisponible, 503). On le signale sans faire perdre la saisie.
+          setVerifyError(err instanceof ApiError ? err.message : "Vérification indisponible pour le moment.")
+        }
+        setPhase("result")
+      } else {
+        onClose()
+      }
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Une erreur est survenue.")
     } finally {
@@ -208,20 +261,71 @@ export default function UpdateLegalProfileForm({
       <div className="mt-2 flex justify-end gap-2">
         <button
           type="button"
-          onClick={onCancel}
+          onClick={onClose}
           disabled={isSubmitting}
           className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition hover:border-gray-400 disabled:opacity-50"
         >
-          Annuler
+          {phase === "form" ? "Annuler" : "Fermer"}
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
           className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500 disabled:opacity-50"
         >
-          {isSubmitting ? "Enregistrement..." : "Enregistrer"}
+          {phase === "verifying" ? "Vérification..." : isSubmitting ? "Enregistrement..." : "Enregistrer"}
         </button>
       </div>
+
+      {/* Résultat de la vérification — sous les boutons, jamais à la place du
+       * formulaire (voir docstring en haut du fichier). */}
+      {(phase === "verifying" || phase === "result") && (
+        <div className="mt-2 flex flex-col gap-3 border-t border-gray-100 pt-4">
+          <h3 className="text-sm font-medium text-gray-700">Résultat de la vérification</h3>
+
+          {phase === "verifying" && <p className="text-sm text-gray-500">Vérification en cours...</p>}
+
+          {phase === "result" &&
+            (verifiedProfile ? (
+              <>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-700">Dénomination</span>
+                    <VerificationStatusBadge status={verifiedProfile.denomination_verification_status} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-700">SIREN / SIRET</span>
+                    <VerificationStatusBadge status={verifiedProfile.immatriculation_verification_status} />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-700">Kbis</span>
+                    <VerificationStatusBadge status={verifiedProfile.kbis_verification_status} />
+                  </div>
+                </div>
+                {verifiedProfile.denomination_verification_status === "incoherent" && (
+                  // Pas de nom officiel cité ici (ex: "« WINK TECHNOLOGIES SAS »") :
+                  // verify_legal_profile ne le renvoie/stocke pas actuellement, voir
+                  // documentation-implementation.md — ajout possible si besoin.
+                  <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
+                    Le nom officiellement enregistré diffère de celui saisi. Vos informations sont enregistrées
+                    quand même — corrigez si c'est une erreur de saisie, ou ignorez si c'est normal.
+                  </p>
+                )}
+                {verifiedProfile.immatriculation_verification_status === "incoherent" && (
+                  // Le SIREN est bon (sinon on n'arriverait jamais ici, voir
+                  // verify_legal_profile) mais le SIRET saisi ne correspond pas à
+                  // celui du siège social trouvé — signalé séparément du nom.
+                  <p className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
+                    Le SIREN correspond bien à une entreprise active, mais le SIRET saisi ne correspond pas à celui
+                    de son siège social. Vos informations sont enregistrées quand même — corrigez si c'est une
+                    erreur de saisie, ou ignorez si c'est normal (ex: un établissement secondaire).
+                  </p>
+                )}
+              </>
+            ) : (
+              <p className="text-sm text-amber-700">{verifyError}</p>
+            ))}
+        </div>
+      )}
     </form>
   )
 }

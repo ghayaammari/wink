@@ -13,6 +13,7 @@ uvicorn[standard]>=0.34.0
 sqlalchemy>=2.0.36
 alembic>=1.14.0
 psycopg[binary]>=3.2.3          # driver PostgreSQL utilisé dans backend/shared/database.py (postgresql+psycopg://)
+pgvector>=0.3.6                 # type Vector SQLAlchemy pour content_embeddings (backend/shared/knowledge_base/) — nécessite l'extension Postgres `vector` activée côté Supabase
 
 # --- Validation / schémas ---
 pydantic>=2.10.4
@@ -41,3 +42,12 @@ pyyaml>=6.0.2                    # lecture de agents/config/llm_config.yaml
 openai>=1.0.0    # backend/chercheur/services/llm_client.py
 httpx>=0.28.0    # backend/chercheur/services/research_extraction_service.py
 pypdf>=5.0.0     # backend/chercheur/services/research_extraction_service.py
+
+# --- Embeddings copilot (agents/ingestion/embedding_service.py) ---
+FlagEmbedding>=1.3.4            # BGE-M3 en local (Option A) — tire torch/transformers, installation lourde (plusieurs Go)
+
+# --- Collecte web (scrapers/shared/web_fetch.py, volet non-légal service 1.1.10) ---
+trafilatura>=1.12.2             # extraction du contenu principal d'une page (titre + texte propre, sans menu/pub/footer)
+beautifulsoup4>=4.12.3          # extraction des liens <a href> pour le crawling borné (discover_links)
+lxml>=5.3.0                     # parseur utilisé par BeautifulSoup, plus rapide et plus tolérant que html.parser
+fonttools>=4.55.0                # requis par pypdf (extraction PDF, voir web_fetch.py::_extract_pdf_text) pour décoder pleinement l'encodage de certaines polices CFF Type1 embarquées — sans lui, avertissements "fontTools is required..." et extraction potentiellement dégradée en silence

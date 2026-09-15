@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
+import LegalTextsValidationPage from "./admin/pages/LegalTextsValidationPage"
+import SectorInsuranceValidationPage from "./admin/pages/SectorInsuranceValidationPage"
 import { getMyResearcherProfile, type ResearcherProfileRead } from "./chercheur/api/researcherProfileApi"
 import ResearcherOnboardingPage from "./chercheur/pages/ResearcherOnboardingPage"
 import ResearcherProfileDetailsPage from "./chercheur/pages/ResearcherProfileDetailsPage"
@@ -7,11 +9,14 @@ import ResearchWorksPage from "./chercheur/pages/ResearchWorksPage"
 import PastExpertisesPage from "./chercheur/pages/PastExpertisesPage"
 import OnboardingWizard from "./entrepreneur/components/OnboardingWizard"
 import { OnboardingWizardProvider } from "./entrepreneur/context/OnboardingWizardContext"
+import DocumentVaultPage from "./entrepreneur/pages/DocumentVaultPage"
 import MyProjectLayout from "./entrepreneur/pages/MyProjectLayout"
 import MyProjectPage from "./entrepreneur/pages/MyProjectPage"
+import PlanActionPage from "./entrepreneur/pages/PlanActionPage"
 import ProjectGeneralInfoPage from "./entrepreneur/pages/ProjectGeneralInfoPage"
 import ProjectLegalInfoPage from "./entrepreneur/pages/ProjectLegalInfoPage"
 import ProjectPublicProfilePage from "./entrepreneur/pages/ProjectPublicProfilePage"
+import TeamCapitalPage from "./entrepreneur/pages/TeamCapitalPage"
 import { getMyInvestorProfile, type InvestorProfileRead } from "./investisseur/api/investorProfileApi"
 import InvestorOnboardingPage from "./investisseur/pages/InvestorOnboardingPage"
 import InvestorProfilePage from "./investisseur/pages/InvestorProfilePage"
@@ -51,10 +56,28 @@ const ICON_BRIEFCASE = (
   />
 )
 
-// Navigation métier de l'entrepreneur — "Mon projet" se déplie en 3
+// Icône "liste à cocher" — nav "Plan d'action" côté entrepreneur (voir
+// ENTREPRENEUR_NAV_ITEMS). Distincte de ICON_PROJECT (dossier) : la roadmap
+// est une checklist d'étapes, pas un ensemble de sections à éditer.
+const ICON_CHECKLIST = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+  />
+)
+
+// Navigation métier de l'entrepreneur — "Mon projet" se déplie en 5
 // sous-sections (voir Sidebar.tsx : dépliage automatique selon l'URL, pas de
-// bouton toggle séparé). "Mon profil" et la déconnexion sont gérés par
-// Sidebar elle-même, pas listés ici.
+// bouton toggle séparé). "Plan d'action" (roadmap pré-création, service
+// formalisé dans "Wink — Plan d'action pré-création : spécification") est une
+// entrée de premier niveau distincte, pas une sous-section de "Mon projet" —
+// son contenu (24 nœuds EPIC-01) est différent des 5 profils du projet.
+// L'affichage conditionnel à project_type === "not_created" est géré DANS
+// PlanActionPage, pas ici : la nav reste statique par rôle dans ce fichier,
+// pas par état de projet (voir Sidebar.tsx, aucune autre entrée ne dépend
+// d'un état métier). "Mon profil" et la déconnexion sont gérés par Sidebar
+// elle-même, pas listés ici.
 const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
   {
     to: "/entrepreneur/mon-projet",
@@ -63,9 +86,12 @@ const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
     children: [
       { to: "/entrepreneur/mon-projet/informations-generales", label: "Informations générales" },
       { to: "/entrepreneur/mon-projet/informations-legales", label: "Informations légales" },
+      { to: "/entrepreneur/mon-projet/equipe-capital", label: "Équipe & capital" },
       { to: "/entrepreneur/mon-projet/vitrine-publique", label: "Vitrine publique" },
+      { to: "/entrepreneur/mon-projet/coffre-fort", label: "Coffre-fort documentaire" },
     ],
   },
+  { to: "/entrepreneur/plan-action", label: "Plan d'action", icon: ICON_CHECKLIST },
 ]
 
 // Navigation métier du chercheur — "Mes travaux" (service 0.0.2/0.0.3 :
@@ -138,6 +164,28 @@ function OnboardingRoute() {
       <OnboardingWizard />
     </OnboardingWizardProvider>
   )
+}
+
+/** Garde d'accès pour /admin/legal-texts — vérifie juste l'authentification,
+ * comme OnboardingRoute : pas de rôle "admin" dans le système actuel (users
+ * n'a que entrepreneur/chercheur/investisseur), donc n'importe quel compte
+ * connecté peut y accéder pour l'instant. Même dette technique assumée que
+ * côté backend (voir legal_texts_validation_router.py) — à resserrer si ce
+ * dashboard devient accessible à autre chose qu'un usage interne/dev. */
+function AdminRoute() {
+  const { isAuthenticated } = useAuth()
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+  return <LegalTextsValidationPage />
+}
+
+function AdminSectorInsuranceRoute() {
+  const { isAuthenticated } = useAuth()
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+  return <SectorInsuranceValidationPage />
 }
 
 /** Garde d'accès pour /chercheur/onboarding — même pattern que OnboardingRoute
@@ -254,20 +302,28 @@ export default function App() {
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/onboarding" element={<OnboardingRoute />} />
+      <Route path="/admin/legal-texts" element={<AdminRoute />} />
+      <Route path="/admin/sector-insurance" element={<AdminSectorInsuranceRoute />} />
       <Route path="/chercheur/onboarding" element={<ChercheurOnboardingRoute />} />
       <Route path="/investisseur/onboarding" element={<InvestisseurOnboardingRoute />} />
 
       <Route path="/entrepreneur" element={<EntrepreneurDashboardRoute />}>
         <Route index element={<Navigate to="mon-projet" replace />} />
         {/* MyProjectLayout fait le fetch project + fieldValues une seule fois pour
-            les 4 pages ci-dessous (voir ce fichier) — navigation entre elles sans
+            les 6 pages ci-dessous (voir ce fichier) — navigation entre elles sans
             refetch, au lieu d'un GET /projects/me + GET /field-values par page. */}
         <Route path="mon-projet" element={<MyProjectLayout />}>
           <Route index element={<MyProjectPage />} />
           <Route path="informations-generales" element={<ProjectGeneralInfoPage />} />
           <Route path="informations-legales" element={<ProjectLegalInfoPage />} />
+          <Route path="equipe-capital" element={<TeamCapitalPage />} />
           <Route path="vitrine-publique" element={<ProjectPublicProfilePage />} />
+          <Route path="coffre-fort" element={<DocumentVaultPage />} />
         </Route>
+        {/* Pas sous MyProjectLayout : PlanActionPage fait son propre GET
+            /projects/me (voir ce fichier) — son besoin diffère (vérifier
+            project_type, pas charger fieldValues). */}
+        <Route path="plan-action" element={<PlanActionPage />} />
         <Route path="profile" element={<ProfilePage />} />
       </Route>
 

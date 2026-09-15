@@ -12,6 +12,7 @@ import {
   initialFieldValue,
 } from "../utils/extractedFieldValue"
 import { clearDraft, readDraft } from "../utils/formDraft"
+import { IMMEDIATE_OBJECTIVES } from "../utils/projectImmediateObjectives"
 
 const FIELD_NOMBRE_COFONDATEURS = "projects.nombre_cofondateurs"
 const FIELD_INTENTION_LEVEE_FONDS = "projects.intention_levee_fonds"
@@ -25,6 +26,7 @@ const FUNDING_OPTIONS: { value: boolean | null; label: string }[] = [
 interface Draft {
   nombreCofondateurs: string
   intentionLeveeFonds: boolean | null
+  objectifsImmediats: string[]
 }
 
 /** Écran 6 — "Votre équipe et vos ambitions" (service 0.0.3). Le questionnaire
@@ -71,15 +73,24 @@ export default function TeamFundingPage() {
           project?.intention_levee_fonds ?? null,
         ),
   )
+  const [objectifsImmediats, setObjectifsImmediats] = useState<string[]>(
+    () => draft?.objectifsImmediats ?? project?.objectifs_immediats ?? [],
+  )
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useDraftSync(
     project?.id,
     "team_funding",
-    { nombreCofondateurs, intentionLeveeFonds },
+    { nombreCofondateurs, intentionLeveeFonds, objectifsImmediats },
     !isSubmitting,
   )
+
+  function toggleObjectif(code: string) {
+    setObjectifsImmediats((prev) =>
+      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code],
+    )
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -93,6 +104,9 @@ export default function TeamFundingPage() {
           ? Number(nombreCofondateurs)
           : undefined,
         intention_levee_fonds: intentionLeveeFonds ?? undefined,
+        // Liste complète (pas un diff) : une liste vide efface les objectifs posés
+        // lors d'un passage précédent. (réalisé par OPENCODE)
+        objectifs_immediats: objectifsImmediats,
         resolved_field_values: tracking.buildResolutions(),
       })
       setProject(updated)
@@ -161,6 +175,31 @@ export default function TeamFundingPage() {
           </div>
         </div>
       </ExtractedFieldFrame>
+
+      {/* Écran 6 — objectifs immédiats (question ajoutée pour le filtrage de la
+        roadmap, service 1.1.11). Sert uniquement au filtrage, ne compte pas
+        dans le pourcentage de complétion du profil. (réalisé par OPENCODE) */}
+      <div>
+        <p className="mb-2 text-sm font-medium text-gray-700">
+          Quels sont vos objectifs immédiats ?
+        </p>
+        <div className="flex flex-col gap-2">
+          {IMMEDIATE_OBJECTIVES.map((option) => (
+            <label
+              key={option.value}
+              className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition hover:border-gray-400"
+            >
+              <input
+                type="checkbox"
+                checked={objectifsImmediats.includes(option.value)}
+                onChange={() => toggleObjectif(option.value)}
+                className="h-4 w-4"
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+      </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}
 

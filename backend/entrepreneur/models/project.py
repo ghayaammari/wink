@@ -34,6 +34,11 @@ class Project(Base):
     )
     nombre_cofondateurs: Mapped[int | None] = mapped_column(Integer, nullable=True)
     intention_levee_fonds: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    # Objectifs immédiats déclarés à l'onboarding (ex: "protection_marque_code"),
+    # liste comme subsectors/technologies. Lue par le moteur de filtrage de la
+    # roadmap par projet (service 1.1.11, condition e23_depot_marque) — colonne
+    # ajoutée par migration d5e6f7a8b9c1. (réalisé par OPENCODE)
+    objectifs_immediats: Mapped[list] = mapped_column(JSONB, nullable=False, server_default=text("'[]'::jsonb"))
     localisation: Mapped[str | None] = mapped_column(String(120), nullable=True)
     sector: Mapped[str | None] = mapped_column(String(120), nullable=True)
     subsectors: Mapped[list] = mapped_column(JSONB, nullable=False, server_default=text("'[]'::jsonb"))

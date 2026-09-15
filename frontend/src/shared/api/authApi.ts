@@ -43,6 +43,28 @@ export class ApiError extends Error {
   }
 }
 
+/** `detail` d'une réponse d'erreur FastAPI : soit une chaîne (nos erreurs
+ * métier, voir _handle_error/_handle_project_error côté backend), soit un
+ * tableau d'erreurs de validation Pydantic — cas d'un 422 (ex: SIRET qui ne
+ * respecte pas le pattern `^\d{14}$`), format `[{loc, msg, type}, ...]`.
+ *
+ * Sans cette conversion, `new ApiError(status, detail)` avec `detail` = ce
+ * tableau finissait affiché "[object Object]" à l'écran (`Error` convertit un
+ * non-string via son `toString()`) — bug réel rencontré sur la mise à jour du
+ * profil légal. Exportée pour être réutilisée par les autres clients API
+ * (voir `entrepreneur/api/projectApi.ts`), plutôt que dupliquer cette
+ * conversion dans chaque fichier `*Api.ts`. */
+export function parseErrorDetail(detail: unknown, fallback: string): string {
+  if (typeof detail === "string") return detail
+  if (Array.isArray(detail)) {
+    const messages = detail
+      .map((item) => (item && typeof item === "object" && "msg" in item ? String(item.msg) : null))
+      .filter((msg): msg is string => msg !== null)
+    if (messages.length > 0) return messages.join(" / ")
+  }
+  return fallback
+}
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
@@ -56,7 +78,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     let detail = response.statusText
     try {
       const body = await response.json()
-      detail = body.detail ?? detail
+      detail = parseErrorDetail(body.detail, detail)
     } catch {
       // Réponse sans corps JSON exploitable (ex: erreur réseau brute) — on garde statusText.
     }

@@ -3,6 +3,7 @@ import { ApiError } from "../../shared/api/authApi"
 import { useAuth } from "../../shared/context/AuthContext"
 import { createLegalProfile } from "../api/projectApi"
 import { useOnboardingWizard } from "../context/OnboardingWizardContext"
+import { isValidSirenFormat } from "../utils/luhn"
 
 const LEGAL_FORM_OPTIONS = ["SAS", "SASU", "SARL", "EURL", "SA", "SNC", "Société civile", "Autre"]
 
@@ -10,7 +11,18 @@ const LEGAL_FORM_OPTIONS = ["SAS", "SASU", "SARL", "EURL", "SA", "SNC", "Sociét
  * OnboardingWizardContext). Le questionnaire d'origine ne demandait que
  * legal_name + siren ; `legal_form` ajouté à la demande, la colonne existe déjà
  * sur `project_legal_profiles` (pas de changement backend nécessaire). Le reste
- * du profil légal (siret, adresse...) sera complété dans un futur incrément. */
+ * du profil légal (siret, adresse...) sera complété dans un futur incrément.
+ *
+ * SIREN : contrôle de format (Luhn) uniquement, ici — aucun appel réseau à
+ * l'inscription. La vraie confirmation (l'entreprise existe réellement) se
+ * fait plus tard, depuis "Mon Projet", au clic sur "Mettre à jour" (voir
+ * UpdateLegalProfileForm.tsx) : l'inscription ne doit jamais dépendre du bon
+ * fonctionnement d'un service externe.
+ *
+ * Le contrôle Luhn se déclenche uniquement au clic sur "Continuer", pas à
+ * chaque caractère tapé : pas de retour visuel (bordure/texte) pendant la
+ * saisie, juste un message d'erreur si le format est invalide au moment de
+ * soumettre — moins intrusif qu'un feedback qui change à chaque frappe. */
 export default function LegalProfilePage() {
   const [legalName, setLegalName] = useState("")
   const [legalForm, setLegalForm] = useState("")
@@ -24,11 +36,18 @@ export default function LegalProfilePage() {
     event.preventDefault()
     if (!accessToken || !project) return
 
+    // Champ facultatif à cet écran : le format n'est contrôlé que si
+    // l'utilisateur a rempli quelque chose (voir aussi `siren || undefined`
+    // plus bas, qui traite un champ vide comme "pas encore de SIREN").
+    if (siren.length > 0 && !isValidSirenFormat(siren)) {
+      setError("Format de SIREN invalide.")
+      return
+    }
+
     setError(null)
     setIsSubmitting(true)
     try {
       await createLegalProfile(accessToken, project.id, {
-        is_registered: true,
         legal_name: legalName || undefined,
         legal_form: legalForm || undefined,
         siren: siren || undefined,
@@ -82,10 +101,10 @@ export default function LegalProfilePage() {
         <label className="mb-1 block text-sm font-medium text-gray-700">SIREN</label>
         <input
           type="text"
+          inputMode="numeric"
           value={siren}
-          onChange={(e) => setSiren(e.target.value)}
+          onChange={(e) => setSiren(e.target.value.replace(/\D/g, "").slice(0, 9))}
           placeholder="9 chiffres"
-          pattern="\d{9}"
           maxLength={9}
           className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
         />
