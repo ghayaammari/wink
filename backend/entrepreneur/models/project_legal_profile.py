@@ -1,12 +1,29 @@
-"""Table `project_legal_profiles` — identité légale du projet (pour les startups déjà créées)."""
+"""Table `project_legal_profiles` — identité légale du projet (pour les startups déjà créées).
+
+Vérification I1 Groupe 4 (voir "Wink — Schémas Incrément 1 v3" + page Notion
+"Schemas grp 4") : `is_registered`/`verification_status` (un seul statut global)
+retirés, remplacés par 3 statuts séparés selon l'événement qui produit la
+donnée (dénomination / immatriculation / Kbis) — voir migration 4fa5a487a845.
+
+Groupe 5 (migration e1b2c3d4e5f6) : `legal_representative` (JSONB) supprimé,
+remplacé par `legal_representative_associate_id` (FK → project_associates.id,
+NULLABLE — le représentant légal n'est désigné qu'une fois les statuts rédigés,
+voir Groupe5_doc.md). Ajout d'`objet_social`/`duree_societe`/
+`date_signature_statuts` : faits uniques par projet, nécessaires aux statuts
+(1.1.4) ET à l'annonce légale (1.1.5). (réalisé par OPENCODE)
+"""
 import uuid
 from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, DateTime, ForeignKey, String, func, text
+from sqlalchemy import CheckConstraint, Date, DateTime, ForeignKey, Integer, String, Text, func, text
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.shared.database import Base
+
+# Valeurs actées (voir "Schemas grp 4") pour les 3 statuts de vérification
+# ci-dessous — mêmes valeurs partout, pas un enum par colonne.
+_VERIFICATION_STATUTS = "('non_verifie', 'verifie', 'incoherent')"
 
 
 class ProjectLegalProfile(Base):
@@ -18,7 +35,6 @@ class ProjectLegalProfile(Base):
     project_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("projects.id", ondelete="CASCADE"), unique=True, nullable=False
     )
-    is_registered: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default=text("false"))
     legal_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     legal_form: Mapped[str | None] = mapped_column(String(120), nullable=True)
     registration_number: Mapped[str | None] = mapped_column(String(120), nullable=True)
@@ -28,9 +44,51 @@ class ProjectLegalProfile(Base):
     naf_code: Mapped[str | None] = mapped_column(String(10), nullable=True)
     registration_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     registered_address: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
-    legal_representative: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
-    verification_status: Mapped[str] = mapped_column(String(30), nullable=False, server_default="unverified")
+    # Le représentant légal est un associé précis (personne physique), pointé
+    # par FK après rédaction des statuts (1.1.4) — NULL auparavant.
+    # NOT NULL une fois la société immatriculée (contrainte applicative : la
+    # désignation intervenant au dépôt, avant immatriculation e13→e16).
+    legal_representative_associate_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("project_associates.id"), nullable=True
+    )
+    # Faits uniques par projet, produits par 1.1.4, consommés aussi par 1.1.5.
+    objet_social: Mapped[str | None] = mapped_column(Text, nullable=True)
+    duree_societe: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    date_signature_statuts: Mapped[date | None] = mapped_column(Date, nullable=True)
+    # Rempli uniquement par upload manuel de l'utilisateur (service 1.1.9/Parcours),
+    # jamais par un job automatique — voir "Schemas grp 4". Pas de ondelete ici :
+    # un document ne doit pas disparaître silencieusement de ce profil.
+    kbis_document_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("documents.id"), nullable=True
+    )
+    denomination_verification_status: Mapped[str] = mapped_column(
+        String(30), nullable=False, server_default="non_verifie"
+    )
+    immatriculation_verification_status: Mapped[str] = mapped_column(
+        String(30), nullable=False, server_default="non_verifie"
+    )
+    kbis_verification_status: Mapped[str] = mapped_column(
+        String(30), nullable=False, server_default="non_verifie"
+    )
+    # Rempli une seule fois au dépôt (e13), lu en boucle par le job Guichet Unique
+    # jusqu'à e16, puis inutile — jamais affiché à l'utilisateur (voir Parcours A).
+    numero_suivi_formalite: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now()
+    )
+
+    __table_args__ = (
+        CheckConstraint(
+            f"denomination_verification_status IN {_VERIFICATION_STATUTS}",
+            name="ck_project_legal_profiles_denomination_verification_status",
+        ),
+        CheckConstraint(
+            f"immatriculation_verification_status IN {_VERIFICATION_STATUTS}",
+            name="ck_project_legal_profiles_immatriculation_verification_status",
+        ),
+        CheckConstraint(
+            f"kbis_verification_status IN {_VERIFICATION_STATUTS}",
+            name="ck_project_legal_profiles_kbis_verification_status",
+        ),
     )

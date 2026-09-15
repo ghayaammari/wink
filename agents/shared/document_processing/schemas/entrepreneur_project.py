@@ -6,8 +6,10 @@ Champs exclus volontairement (non extractibles depuis un texte, ou gérés par l
 système plutôt que par le contenu du document) :
 - projects : id, entrepreneur_profile_id, imported_document_id, source_type,
   project_profile_completion, created_at, updated_at
-- project_legal_profiles : id, project_id, is_registered (dérivé de project_type,
-  voir la sous-étape de cohérence SIREN), verification_status, created_at, updated_at
+- project_legal_profiles : id, project_id, kbis_document_id, denomination_verification_status,
+  immatriculation_verification_status, kbis_verification_status, numero_suivi_formalite
+  (tous gérés par les services de vérification I1 Groupe 4, jamais par l'extraction de
+  document), created_at, updated_at
 - project_public_profiles : id, project_id, logo_url (image, pas du texte),
   funding_visibility, compliance_visibility, published_at, updated_at
 

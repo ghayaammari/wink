@@ -34,3 +34,59 @@ document_processing:
     # n'invente aucune valeur" dans prompts.yaml) — sans temperature=0, un même
     # document peut donner tantôt une valeur, tantôt null, pour le même champ.
     temperature: 0
+
+
+# Génération d'embeddings pour le copilot (recherche sémantique) — service
+# 1.1.x, Groupe 1/2. BGE-M3 en local (Option A, voir DECISIONS.md), mode Dense
+# uniquement — dimension figée à 1024, voir EMBEDDING_DIMENSION dans
+# backend/shared/knowledge_base/models/content_embeddings.py (les deux doivent
+# rester cohérents si le modèle change un jour).
+embedding:
+  provider: local
+  model: BAAI/bge-m3
+  dimension: 1024
+  mode: dense
+
+
+# Structuration des articles de loi collectés depuis Légifrance (service 1.1.1,
+# Groupe 2) — 2 appels distincts par article, voir
+# agents/ingestion/legal_text_structuring_service.py. Modèle repris de
+# document_processing.llm_structuration ci-dessus par défaut (même besoin :
+# extraction structurée déterministe) — à ajuster séparément si la qualité sur
+# du texte juridique s'avère différente en pratique.
+legal_text_structuration:
+  relevance_filter:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+  classification:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+
+
+# Classification des textes d'assurance sectoriels (service 1.1.10) — voir
+# agents/ingestion/sector_insurance_structuring_service.py. Meme modele que
+# legal_text_structuration (meme besoin : extraction structuree deterministe).
+sector_insurance_structuration:
+  page_relevance:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+  classification:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+  # Detection de chunking_suggere a partir du seul texte brut (pas de secteur
+  # ni type_assurance en entree) — partagee par les 2 volets du service
+  # 1.1.10 : volet 1 (Legifrance) et volet 2 (pages web, secteur pas encore
+  # connu a ce stade du pipeline).
+  chunking:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0

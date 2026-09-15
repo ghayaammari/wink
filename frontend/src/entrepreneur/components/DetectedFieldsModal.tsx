@@ -24,7 +24,7 @@ interface Choice {
 
 interface DetectedFieldsModalProps {
   project: ProjectRead
-  /** Les 10 champs "texte" de la page (hors project_type/stage). */
+  /** Les champs de la page (hors project_type/stage). */
   fields: ExtractedFieldSpec[]
   fieldValues: ProjectFieldValueRead[]
   accessToken: string
@@ -35,7 +35,7 @@ interface DetectedFieldsModalProps {
 
 /**
  * Popup unique "Consulter les informations détectées" — remplace les usages
- * inline d'ExtractedFieldsReview (10 champs texte) ET de FieldConflictReview
+ * inline d'ExtractedFieldsReview (les champs texte) ET de FieldConflictReview
  * (project_type/stage) sur "Informations générales" : un seul endroit pour
  * voir toutes les candidates en attente et choisir Accepter/Modifier/Ignorer
  * par champ, MAIS rien n'est envoyé au backend avant "Enregistrer" (contraste

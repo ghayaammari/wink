@@ -108,7 +108,7 @@ def upload_and_extract(
         db.flush()
         next_version_number = 1
 
-    cloudinary_result = cloudinary_service.upload_raw_file(file_bytes, folder="wink/documents")
+    cloudinary_result = cloudinary_service.upload_raw_file(file_bytes, folder="wink/documents", filename=filename)
 
     version = DocumentVersion(
         document_id=document.id,

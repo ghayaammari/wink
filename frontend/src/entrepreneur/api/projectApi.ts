@@ -7,7 +7,7 @@
  * chaque fonction ici prend l'access token en premier paramètre — même convention
  * que `getCurrentUser` dans `shared/api/authApi.ts`.
  */
-import { ApiError } from "../../shared/api/authApi"
+import { ApiError, parseErrorDetail } from "../../shared/api/authApi"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -29,6 +29,9 @@ export interface ProjectRead {
   imported_document_id: string | null
   nombre_cofondateurs: number | null
   intention_levee_fonds: boolean | null
+  // Objectifs immédiats (ex: ["protection_marque_code"]) — question onboarding
+  // Écran 6, sert au filtrage de la roadmap (1.1.11). (réalisé par OPENCODE)
+  objectifs_immediats: string[]
   localisation: string | null
   sector: string | null
   subsectors: string[]
@@ -62,6 +65,8 @@ export interface ProjectUpdate {
   // null explicite = remettre à "pas encore décidé" (voir ProjectUpdate côté
   // backend, qui accepte bool | None) ; undefined = champ non touché par ce PATCH.
   intention_levee_fonds?: boolean | null
+  // Liste complète (pas un diff) — ex: ["protection_marque_code"]. (réalisé par OPENCODE)
+  objectifs_immediats?: string[]
   localisation?: string
   sector?: string
   subsectors?: string[]
@@ -73,7 +78,6 @@ export interface ProjectUpdate {
 }
 
 export interface ProjectLegalProfileCreate {
-  is_registered?: boolean
   legal_name?: string
   legal_form?: string
   registration_number?: string
@@ -83,14 +87,18 @@ export interface ProjectLegalProfileCreate {
   naf_code?: string
   registration_date?: string
   registered_address?: Record<string, unknown>
-  legal_representative?: Record<string, unknown>
+  // Depuis la migration e1b2c3d4e5f6, le représentant légal est un ASSOCIÉ (FK →
+  // project_associates), plus un objet JSON libre. Voir ProjectAssociateRead.
+  legal_representative_associate_id?: string
+  objet_social?: string
+  duree_societe?: number
+  date_signature_statuts?: string
 }
 
 /** PATCH /projects/{id}/legal-profile (upsert, voir project_service.update_legal_profile) —
  * tous les champs optionnels, contrairement à ProjectLegalProfileCreate qui sert au
  * premier remplissage (écran 3 de l'onboarding). */
 export interface ProjectLegalProfileUpdate {
-  is_registered?: boolean
   legal_name?: string
   legal_form?: string
   registration_number?: string
@@ -100,14 +108,20 @@ export interface ProjectLegalProfileUpdate {
   naf_code?: string
   registration_date?: string
   registered_address?: Record<string, unknown>
-  legal_representative?: Record<string, unknown>
+  legal_representative_associate_id?: string
+  objet_social?: string
+  duree_societe?: number
+  date_signature_statuts?: string
 }
 
 export interface ProjectLegalProfileRead extends ProjectLegalProfileCreate {
   id: string
   project_id: string
-  is_registered: boolean
-  verification_status: string
+  kbis_document_id: string | null
+  denomination_verification_status: string
+  immatriculation_verification_status: string
+  kbis_verification_status: string
+  numero_suivi_formalite: string | null
   created_at: string
   updated_at: string
 }
@@ -129,6 +143,61 @@ export interface ProjectPublicProfileRead extends ProjectPublicProfileUpdate {
   project_id: string
   published_at: string | null
   updated_at: string
+}
+
+// ---------------------------------------------------------------------------
+// Équipe & capital — `project_associates` (socle Groupe 5, 1.1.4/1.1.6/1.1.13)
+// ---------------------------------------------------------------------------
+
+export type AssociateTypePersonne = "personne_physique" | "personne_morale"
+export type AssociateTypeApport = "numeraire" | "nature" | "industrie"
+
+/** Un associé du projet (capital + droits de vote). Reflète ProjectAssociateRead
+ * côté backend — voir associate_service.py pour les règles bloquantes :
+ * somme des parts = 100 %, ≥1 dirigeant, apport en industrie exclu du capital.
+ * `linked_user_id` n'est PAS éditable côté frontend (associé = propriétaire,
+ * auto-rempli par le backend). (réalisé par OPENCODE) */
+export interface ProjectAssociateRead {
+  id: string
+  project_id: string
+  nom_complet: string
+  type_personne: AssociateTypePersonne
+  date_naissance: string | null
+  lieu_naissance: string | null
+  nationalite: string | null
+  adresse: string | null
+  pourcentage_capital: string
+  pourcentage_droits_vote: string | null
+  type_apport: AssociateTypeApport
+  est_dirigeant: boolean
+  fonction_dirigeant: string | null
+  foyer_fiscal_dirigeant_associate_id: string | null
+  est_partie_au_pacte_fondateurs: boolean
+  linked_user_id: string | null
+  created_at: string
+  updated_at: string
+}
+
+/** Élément du PUT /projects/{id}/associates (Enregistrer globant) — la liste
+ * COMPLÈTE est envoyée au clic "Enregistrer". `id` présent = mise à jour d'une
+ * ligne existante, absent = création. Le backend valide l'état cible avant
+ * d'écrire : somme des parts = 100 %, ≥1 dirigeant, foyer fiscal (rattachement
+ * d'un associé au foyer fiscal d'un dirigeant, art. 239 bis AB CGI). */
+export interface ProjectAssociateBatchItem {
+  id?: string | null
+  nom_complet: string
+  type_personne: AssociateTypePersonne
+  date_naissance?: string | null
+  lieu_naissance?: string | null
+  nationalite?: string | null
+  adresse?: string | null
+  pourcentage_capital: string
+  pourcentage_droits_vote?: string | null
+  type_apport: AssociateTypeApport
+  est_dirigeant: boolean
+  fonction_dirigeant?: string | null
+  foyer_fiscal_dirigeant_associate_id?: string | null
+  est_partie_au_pacte_fondateurs: boolean
 }
 
 export type ExtractionSource = "extrait_automatique" | "saisi_par_utilisateur"
@@ -186,7 +255,7 @@ async function request<T>(
     let detail = response.statusText
     try {
       const body = await response.json()
-      detail = body.detail ?? detail
+      detail = parseErrorDetail(body.detail, detail)
     } catch {
       // Réponse sans corps JSON exploitable — on garde statusText.
     }
@@ -266,6 +335,22 @@ export function updateLegalProfile(
   )
 }
 
+/** POST /projects/{id}/legal-profile/verify — déclenche la vraie vérification
+ * (appel à l'API Recherche d'Entreprises), séparée de updateLegalProfile (PATCH) :
+ * sauvegarder ne doit jamais dépendre d'un service externe qui peut échouer ou
+ * être lent. Appelée par UpdateLegalProfileForm.tsx juste après la sauvegarde,
+ * uniquement pour Parcours B (project_type === "created"). */
+export function verifyLegalProfile(
+  accessToken: string,
+  projectId: string,
+): Promise<ProjectLegalProfileRead> {
+  return request<ProjectLegalProfileRead>(
+    accessToken,
+    `/projects/${projectId}/legal-profile/verify`,
+    { method: "POST" },
+  )
+}
+
 /** Upload multipart — pas de Content-Type JSON ici, le navigateur pose lui-même
  * le boundary multipart/form-data quand le body est un FormData. */
 export async function uploadProjectLogo(
@@ -289,7 +374,7 @@ export async function uploadProjectLogo(
     let detail = response.statusText
     try {
       const body = await response.json()
-      detail = body.detail ?? detail
+      detail = parseErrorDetail(body.detail, detail)
     } catch {
       // idem
     }
@@ -362,7 +447,7 @@ export async function uploadDocument(
     let detail = response.statusText
     try {
       const body = await response.json()
-      detail = body.detail ?? detail
+      detail = parseErrorDetail(body.detail, detail)
     } catch {
       // idem
     }
@@ -406,5 +491,37 @@ export function ignoreFieldValue(
     accessToken,
     `/projects/${projectId}/field-values/${fieldValueId}`,
     { method: "DELETE" },
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Équipe & capital
+// ---------------------------------------------------------------------------
+
+/** GET /projects/{id}/associates — le backend matérialise la ligne du fondateur
+ * (associé = propriétaire, 100 % solo, dirigeant) si la page n'a jamais été ouverte. */
+export function getAssociates(
+  accessToken: string,
+  projectId: string,
+): Promise<ProjectAssociateRead[]> {
+  return request<ProjectAssociateRead[]>(
+    accessToken,
+    `/projects/${projectId}/associates`,
+  )
+}
+
+/** PUT /projects/{id}/associates — enregistrement GLOBAL de la page. La liste
+ * complète (brouillon) est envoyée au clic "Enregistrer" ; `id` null = création,
+ * présent = mise à jour. Règle bloquante (somme = 100 %, ≥1 dirigeant) validée
+ * par le backend avant écriture. Renvoie l'état persisté à recharger. */
+export function replaceAssociates(
+  accessToken: string,
+  projectId: string,
+  items: ProjectAssociateBatchItem[],
+): Promise<ProjectAssociateRead[]> {
+  return request<ProjectAssociateRead[]>(
+    accessToken,
+    `/projects/${projectId}/associates`,
+    { method: "PUT", body: JSON.stringify(items) },
   )
 }

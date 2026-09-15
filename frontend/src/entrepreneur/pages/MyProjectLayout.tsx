@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import { ApiError } from "../../shared/api/authApi"
+import LoadingSpinner from "../../shared/components/LoadingSpinner"
 import { useAuth } from "../../shared/context/AuthContext"
 import { getFieldValues, getMyProject, type ProjectFieldValueRead, type ProjectRead } from "../api/projectApi"
 
@@ -15,8 +16,8 @@ export interface MyProjectOutletContext {
 }
 
 /**
- * Route parent des 4 pages "Mon Projet" (landing + Informations générales/
- * légales, Vitrine publique) — voir App.tsx. Fait le fetch de `project` et
+ * Route parent des 5 pages "Mon Projet" (landing + Informations générales/
+ * légales, Équipe & capital, Vitrine publique) — voir App.tsx. Fait le fetch de `project` et
  * `fieldValues` UNE SEULE FOIS pour tout le sous-arbre, exposé aux pages
  * enfants via `useOutletContext<MyProjectOutletContext>()`.
  *
@@ -50,7 +51,7 @@ export default function MyProjectLayout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- ne doit tourner qu'au montage
   }, [accessToken])
 
-  if (isLoading) return <p className="text-sm text-gray-500">Chargement...</p>
+  if (isLoading) return <LoadingSpinner />
   if (error) return <p className="text-sm text-red-600">{error}</p>
   // Cas limite : accès direct à une URL "mon-projet/..." avant d'avoir terminé
   // l'écran 2 de l'onboarding (pas encore de projet).

@@ -9,6 +9,12 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
+from backend.entrepreneur.schemas.project_associate_schemas import (
+    ProjectAssociateBatchItem,
+    ProjectAssociateCreate,
+    ProjectAssociateRead,
+    ProjectAssociateUpdate,
+)
 from backend.entrepreneur.schemas.project_legal_profile_schemas import (
     ProjectLegalProfileCreate,
     ProjectLegalProfileRead,
@@ -19,7 +25,11 @@ from backend.entrepreneur.schemas.project_public_profile_schemas import (
     ProjectPublicProfileUpdate,
 )
 from backend.entrepreneur.schemas.project_schemas import ProjectCreate, ProjectRead, ProjectUpdate
-from backend.entrepreneur.services import project_service
+from backend.entrepreneur.services import associate_service, legal_verification_service, project_service
+from backend.entrepreneur.services.legal_verification_service import (
+    LegalVerificationError,
+    LegalVerificationUpstreamError,
+)
 from backend.entrepreneur.services.project_service import ForbiddenError, ProjectError, ProjectNotFoundError
 from backend.shared.auth.routes.auth_router import get_current_user
 from backend.shared.database import get_db
@@ -28,15 +38,21 @@ from backend.shared.models.user import User
 router = APIRouter(prefix="/projects", tags=["entrepreneur-projects"])
 
 
-def _handle_project_error(exc: ProjectError) -> HTTPException:
+def _handle_project_error(exc: ProjectError | LegalVerificationError) -> HTTPException:
     """Traduit les erreurs métier en codes HTTP — un seul point de mapping,
 
-    plutôt que de répéter les try/except dans chaque route.
+    plutôt que de répéter les try/except dans chaque route. Élargi à
+    LegalVerificationError pour verify_legal_profile ci-dessous — même
+    principe que _handle_error dans name_availability_router.py.
     """
     if isinstance(exc, ProjectNotFoundError):
         return HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
     if isinstance(exc, ForbiddenError):
         return HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(exc))
+    if isinstance(exc, LegalVerificationUpstreamError):
+        # 503, pas 400 : l'échec vient de l'API Recherche d'Entreprises, pas
+        # d'une erreur de saisie de l'utilisateur.
+        return HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(exc))
     return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
 
 
@@ -138,6 +154,23 @@ def update_legal_profile(
         raise _handle_project_error(exc)
 
 
+@router.post("/{project_id}/legal-profile/verify", response_model=ProjectLegalProfileRead)
+def verify_legal_profile(
+    project_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ProjectLegalProfileRead:
+    # Route séparée du PATCH ci-dessus, volontairement : sauvegarder ne doit
+    # jamais dépendre d'un appel externe qui peut échouer ou être lent (voir
+    # legal_verification_service). Appelée par UpdateLegalProfileForm.tsx juste
+    # après la sauvegarde, uniquement pour Parcours B (project_type="created").
+    # Cœur réutilisé tel quel par le futur job périodique de 1.1.9 (Parcours A).
+    try:
+        return legal_verification_service.verify_legal_profile(db, current_user, project_id)
+    except (ProjectError, LegalVerificationError) as exc:
+        raise _handle_project_error(exc)
+
+
 @router.post("/{project_id}/upload-logo")
 async def upload_project_logo(
     project_id: UUID,
@@ -178,5 +211,83 @@ def get_public_profile(
     # Même ajout que get_legal_profile ci-dessus, pour le dashboard "Mon projet".
     try:
         return project_service.get_public_profile(db, current_user, project_id)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+# ---------------------------------------------------------------------------
+# Équipe & capital — `project_associates` (socle Groupe 5, partagé 1.1.4/1.1.6/1.1.13)
+# ---------------------------------------------------------------------------
+
+@router.get("/{project_id}/associates", response_model=list[ProjectAssociateRead])
+def list_associates(
+    project_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> list[ProjectAssociateRead]:
+    # La ligne du fondateur est matérialisée ici si absente (associé = propriétaire,
+    # 100 % solo, dirigeant) — voir ensure_founder_associate dans associate_service.
+    try:
+        return associate_service.list_associates(db, current_user, project_id)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.post("/{project_id}/associates", response_model=ProjectAssociateRead, status_code=status.HTTP_201_CREATED)
+def create_associate(
+    project_id: UUID,
+    body: ProjectAssociateCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ProjectAssociateRead:
+    try:
+        return associate_service.create_associate(db, current_user, project_id, body)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.put("/{project_id}/associates", response_model=list[ProjectAssociateRead])
+def replace_associates(
+    project_id: UUID,
+    body: list[ProjectAssociateBatchItem],
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> list[ProjectAssociateRead]:
+    # Enregistrement GLOBAL de la page "Équipe & capital" : la liste complète est
+    # envoyée au clic "Enregistrer", et la règle bloquante "somme = 100 %" +
+    # "≥ 1 dirigeant" est validée sur l'état cible par replace_associates.
+    # (réalisé par OPENCODE)
+    try:
+        return associate_service.replace_associates(db, current_user, project_id, body)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.patch("/{project_id}/associates/{associate_id}", response_model=ProjectAssociateRead)
+def update_associate(
+    project_id: UUID,
+    associate_id: UUID,
+    body: ProjectAssociateUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ProjectAssociateRead:
+    try:
+        return associate_service.update_associate(db, current_user, project_id, associate_id, body)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.delete(
+    "/{project_id}/associates/{associate_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+def delete_associate(
+    project_id: UUID,
+    associate_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> None:
+    try:
+        associate_service.delete_associate(db, current_user, project_id, associate_id)
     except ProjectError as exc:
         raise _handle_project_error(exc)
