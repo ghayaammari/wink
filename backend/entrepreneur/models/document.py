@@ -42,7 +42,14 @@ class Document(Base):
     )
 
     __table_args__ = (
-        CheckConstraint("document_type IN ('entrepreneur_idea', 'other')", name="ck_documents_document_type"),
+        # Valeurs étendues par le Groupe 5 (migration d2e3f4a5b6c7) : les documents générés
+        # par 1.1.13 (pacte de fondateurs) et 1.1.4 (statuts) sont stockés ici comme les
+        # imports I0. D'autres valeurs de service suivront aux incréments concernés
+        # (annonce légale 1.1.5, DBE 1.1.6, etc.) — chaque extension passe par une migration.
+        CheckConstraint(
+            "document_type IN ('entrepreneur_idea', 'other', 'pacte_fondateurs', 'statuts')",
+            name="ck_documents_document_type",
+        ),
         CheckConstraint("visibility IN ('private', 'project_members')", name="ck_documents_visibility"),
         CheckConstraint(
             "processing_status IN ('uploaded', 'queued', 'processing', 'ready', 'failed')",
