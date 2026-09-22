@@ -22,6 +22,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.entrepreneur.routes.document_generation_router import router as document_generation_router
 from backend.entrepreneur.routes.document_router import router as document_router
 from backend.entrepreneur.routes.document_vault_router import router as document_vault_router
 from backend.entrepreneur.routes.name_availability_router import router as name_availability_router
@@ -71,6 +72,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(project_router)
 app.include_router(document_router)
+app.include_router(document_generation_router)
 app.include_router(document_vault_router)
 app.include_router(roadmap_router)
 app.include_router(name_availability_router)

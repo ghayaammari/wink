@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useOutletContext } from "react-router-dom"
+import { Link, useOutletContext } from "react-router-dom"
 import { ApiError } from "../../shared/api/authApi"
 import LoadingSpinner from "../../shared/components/LoadingSpinner"
 import { useAuth } from "../../shared/context/AuthContext"
@@ -24,6 +24,24 @@ import type { MyProjectOutletContext } from "./MyProjectLayout"
 const DOCUMENT_TYPE_LABEL: Record<DocumentType, string> = {
   entrepreneur_idea: "Présentation du projet",
   other: "Autre",
+}
+
+// Raccourci vers le service 1.1.13 (rédaction interactive du pacte de
+// fondateurs) — le coffre-fort est l'endroit où l'entrepreneur regarde ses
+// documents et remarque qu'il en manque un ; la sidebar ("Mon projet" >
+// "Pacte de fondateurs") reste l'entrée principale pour y revenir, ce
+// bouton n'est qu'un raccourci contextuel en plus, pas un remplacement.
+const PACTE_FONDATEURS_ROUTE = "/entrepreneur/mon-projet/pacte-fondateurs-v2"
+
+function PacteFondateursCTA() {
+  return (
+    <Link
+      to={PACTE_FONDATEURS_ROUTE}
+      className="shrink-0 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-indigo-700"
+    >
+      Rédiger le pacte de fondateurs
+    </Link>
+  )
 }
 
 function formatFileSize(bytes: number | null): string {
@@ -184,8 +202,11 @@ export default function DocumentVaultPage() {
 
   if (documents.length === 0) {
     return (
-      <div className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+          <PacteFondateursCTA />
+        </div>
         <p className="text-sm text-gray-500">Aucun document pour l'instant.</p>
       </div>
     )
@@ -195,7 +216,10 @@ export default function DocumentVaultPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+        <PacteFondateursCTA />
+      </div>
       {error && <p className="text-sm text-red-600">{error}</p>}
 
       {groupes.map((documentType) => (

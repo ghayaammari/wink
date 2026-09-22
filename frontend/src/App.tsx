@@ -12,6 +12,7 @@ import { OnboardingWizardProvider } from "./entrepreneur/context/OnboardingWizar
 import DocumentVaultPage from "./entrepreneur/pages/DocumentVaultPage"
 import MyProjectLayout from "./entrepreneur/pages/MyProjectLayout"
 import MyProjectPage from "./entrepreneur/pages/MyProjectPage"
+import PacteFondateursV2Page from "./entrepreneur/pages/PacteFondateursV2Page"
 import PlanActionPage from "./entrepreneur/pages/PlanActionPage"
 import ProjectGeneralInfoPage from "./entrepreneur/pages/ProjectGeneralInfoPage"
 import ProjectLegalInfoPage from "./entrepreneur/pages/ProjectLegalInfoPage"
@@ -89,6 +90,10 @@ const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
       { to: "/entrepreneur/mon-projet/equipe-capital", label: "Équipe & capital" },
       { to: "/entrepreneur/mon-projet/vitrine-publique", label: "Vitrine publique" },
       { to: "/entrepreneur/mon-projet/coffre-fort", label: "Coffre-fort documentaire" },
+      // NETTOYAGE v1 (26/09/2026) : le lien vers "pacte-fondateurs" (v1) a ete retire, page supprimee.
+      // Route/label encore "-v2" volontairement -- renommer l'URL est une decision UX distincte
+      // (impact bookmarks/liens existants), pas faite ici sans validation explicite.
+      { to: "/entrepreneur/mon-projet/pacte-fondateurs-v2", label: "Pacte de fondateurs" },
     ],
   },
   { to: "/entrepreneur/plan-action", label: "Plan d'action", icon: ICON_CHECKLIST },
@@ -310,7 +315,7 @@ export default function App() {
       <Route path="/entrepreneur" element={<EntrepreneurDashboardRoute />}>
         <Route index element={<Navigate to="mon-projet" replace />} />
         {/* MyProjectLayout fait le fetch project + fieldValues une seule fois pour
-            les 6 pages ci-dessous (voir ce fichier) — navigation entre elles sans
+            les 7 pages ci-dessous (voir ce fichier) — navigation entre elles sans
             refetch, au lieu d'un GET /projects/me + GET /field-values par page. */}
         <Route path="mon-projet" element={<MyProjectLayout />}>
           <Route index element={<MyProjectPage />} />
@@ -319,6 +324,11 @@ export default function App() {
           <Route path="equipe-capital" element={<TeamCapitalPage />} />
           <Route path="vitrine-publique" element={<ProjectPublicProfilePage />} />
           <Route path="coffre-fort" element={<DocumentVaultPage />} />
+          {/* Service 1.1.13 — moteur de session réutilisé par 1.1.4/statuts avec un
+              autre document_type ; project vient du contexte MyProjectLayout, même
+              convention que coffre-fort ci-dessus. Route v1 ("pacte-fondateurs") retirée
+              (26/09/2026) : v1 supprimé (code + données), une seule version existe. */}
+          <Route path="pacte-fondateurs-v2" element={<PacteFondateursV2Page />} />
         </Route>
         {/* Pas sous MyProjectLayout : PlanActionPage fait son propre GET
             /projects/me (voir ce fichier) — son besoin diffère (vérifier
