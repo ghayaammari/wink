@@ -33,7 +33,19 @@ class LegalText(Base):
     )
     domaine_reglementaire: Mapped[str] = mapped_column(String(50), nullable=False)
     code_source: Mapped[str] = mapped_column(String(150), nullable=False)
+    # article_loi (defaut) | guide_pratique | faq | pdf — voir migration d3a9f21c6b48.
+    # Un article_numero n'a de sens que pour "article_loi" ; les autres valeurs
+    # laissent article_numero a NULL (deja nullable).
+    type_source: Mapped[str] = mapped_column(String(20), nullable=False, server_default="article_loi")
     article_numero: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    # Colonne libre reutilisee entre domaines avec un sens different selon
+    # domaine_reglementaire : sous-theme RGPD (voir SousThemeRGPD dans
+    # legal_text_structuring_service_rgpd.py, ex: "aipd", "dpo") ou categorie
+    # de risque AI Act (voir CategorieRisqueAIAct dans
+    # legal_text_structuring_service_ai_act.py, ex: "haut_risque", "interdit")
+    # — reutilisation deliberee de la colonne plutot qu'une migration, ce
+    # champ sert uniquement a indexer/filtrer la recherche, jamais affiche
+    # tel quel a l'utilisateur.
     sous_theme: Mapped[str | None] = mapped_column(String(50), nullable=True)
     forme_juridique_concernee: Mapped[list[str]] = mapped_column(
         ARRAY(String), nullable=False, server_default=text("'{}'")
@@ -51,4 +63,8 @@ class LegalText(Base):
         UniqueConstraint("code_source", "article_numero", name="uq_legal_texts_code_article"),
         CheckConstraint("statut_contenu IN ('extrait_automatique', 'valide_humain')", name="ck_legal_texts_statut_contenu"),
         CheckConstraint("chunking_suggere IN ('aucun', 'par_alinea')", name="ck_legal_texts_chunking_suggere"),
+        CheckConstraint(
+            "type_source IN ('article_loi', 'guide_pratique', 'faq', 'pdf')",
+            name="ck_legal_texts_type_source",
+        ),
     )

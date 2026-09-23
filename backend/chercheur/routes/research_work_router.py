@@ -167,6 +167,24 @@ def validate_field(
         raise _handle_work_error(exc)
     
     
+@router.patch("/{work_id}/valider-tout", response_model=ResearchWorkRead)
+def confirm_all_pending_fields(
+    work_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ResearchWorkRead:
+    """Bouton "Tout valider" du mode révision -- confirme en un appel tous
+    les champs encore en attente de ce travail (voir
+    research_work_service.confirm_all_pending_fields). Le travail passe
+    automatiquement à validation_status="confirmed" une fois qu'il n'en
+    reste plus aucun."""
+    _require_chercheur_role(current_user)
+    try:
+        return research_work_service.confirm_all_pending_fields(db, current_user, work_id)
+    except ResearchWorkError as exc:
+        raise _handle_work_error(exc)
+
+
 @router.delete("/{work_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_work(
     work_id: UUID,

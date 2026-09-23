@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>EPIC-03 — Schéma des roadmaps</title>
+<style>
+  :root{
+    --bg:#faf8f4; --ink:#1c2a2e; --navy:#1f3a4d; --teal:#2f7d6b; --teal-soft:#e4f0ec;
+    --amber:#c07a2b; --amber-soft:#f7ecdd; --line:#d8d2c6; --card:#ffffff; --muted:#6b6f6b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:40px 24px; background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Sans', Arial, sans-serif;
+  }
+  h1{
+    font-family:'Fraunces', Georgia, serif; font-weight:600; font-size:28px;
+    margin:0 0 4px 0; color:var(--navy);
+  }
+  .sub{color:var(--muted); font-size:14px; margin-bottom:28px;}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:24px; font-size:12.5px; color:var(--muted);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:10px; height:10px; border-radius:2px; display:inline-block;}
+  .branch{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:16px 18px; margin-bottom:14px;
+  }
+  .branch h2{
+    font-family:'Fraunces', serif; font-size:16px; margin:0 0 10px 0; color:var(--navy);
+    display:flex; align-items:center; gap:8px;
+  }
+  .badge{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; background:var(--teal-soft);
+    color:var(--teal); padding:2px 7px; border-radius:20px; font-weight:600;
+  }
+  .steps{display:flex; align-items:stretch; flex-wrap:wrap; gap:0;}
+  .step{
+    display:flex; align-items:center; gap:8px;
+  }
+  .box{
+    border:1.5px solid var(--line); border-radius:8px; padding:9px 12px; background:#fff;
+    font-size:12.5px; min-width:150px; max-width:190px;
+  }
+  .box .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--muted); display:block; margin-bottom:2px;
+  }
+  .box.collecte{border-color:#b8b2a3; background:#fbf9f5;}
+  .box.moteur{border-color:var(--teal); background:var(--teal-soft);}
+  .box.start{border-color:var(--amber); background:var(--amber-soft); box-shadow:0 0 0 2px var(--amber-soft);}
+  .box.suite{border-color:#9fb8c9; background:#eef4f8;}
+  .arrow{color:var(--line); font-size:18px; padding:0 4px; align-self:center;}
+  .note{font-size:11.5px; color:var(--muted); margin-top:8px; font-style:italic;}
+  .transverse{
+    background:#f4f1ea; border:1px dashed var(--line); border-radius:10px; padding:14px 18px; margin-top:20px;
+  }
+  .transverse h2{font-family:'Fraunces', serif; font-size:15px; margin:0 0 8px 0; color:var(--muted);}
+  .start-flag{
+    background:var(--amber); color:#fff; font-size:10.5px; font-weight:600; padding:2px 8px;
+    border-radius:20px; margin-left:6px;
+  }
+  .tables{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-top:26px;
+  }
+  .tables h2{font-family:'Fraunces', serif; font-size:16px; margin:0 0 10px 0; color:var(--navy);}
+  table{border-collapse:collapse; width:100%; font-size:12.5px;}
+  th,td{border-bottom:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top;}
+  th{color:var(--muted); font-weight:600; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em;}
+  code{font-family:'IBM Plex Mono', monospace; background:#f2efe8; padding:1px 4px; border-radius:3px; font-size:11.5px;}
+</style>
+</head>
+<body>
+
+<h1>EPIC-03 — Compliance : 6 roadmaps + 2 services transverses</h1>
+<div class="sub">Point de départ recommandé marqué en orange. Chaque roadmap est indépendante des autres, sauf DPO qui réutilise la donnée du profil RGPD.</div>
+
+<div class="legend">
+  <span><span class="dot" style="background:#fbf9f5;border:1px solid #b8b2a3;"></span>Collecte de données</span>
+  <span><span class="dot" style="background:var(--teal-soft);border:1px solid var(--teal);"></span>Moteur / diagnostic</span>
+  <span><span class="dot" style="background:#eef4f8;border:1px solid #9fb8c9;"></span>Suite du pipeline</span>
+  <span><span class="dot" style="background:var(--amber-soft);border:1px solid var(--amber);"></span>Point de départ</span>
+</div>
+
+<div class="branch">
+  <h2>Roadmap 1 — RGPD + AIPD <span class="badge">universelle · 100% des projets</span><span class="start-flag">DÉPART</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box collecte"><span class="tag">collecte</span>Profil traitement de données<br><code>compliance_data_profile</code></div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box collecte"><span class="tag">contenu réf.</span>Textes RGPD/AIPD<br><code>legal_texts</code> (domaine=rgpd)</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box start"><span class="tag">3.3.1</span>Moteur RGPD</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box moteur"><span class="tag">3.3.4</span>Moteur AIPD (déclenché depuis 3.3.1)</div>
+    </div>
+  </div>
+  <div class="note">AIPD n'est pas un écran séparé : c'est un résultat conditionnel du diagnostic RGPD, sur le même profil de données.</div>
+</div>
+
+<div class="branch">
+  <h2>Roadmap 2 — DPO <span class="badge">réutilise le profil de Roadmap 1</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box collecte"><span class="tag">réutilisé</span>compliance_data_profile (déjà rempli)</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box collecte"><span class="tag">contenu réf.</span>Critères art. 37 RGPD<br><code>legal_texts</code></div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box moteur"><span class="tag">3.3.3</span>Moteur DPO (verdict + annuaire partenaires)</div>
+    </div>
+  </div>
+  <div class="note">Lien avec Roadmap 1 = donnée partagée, pas une dépendance de roadmap : peut démarrer même si le diagnostic RGPD n'est pas terminé (le profil suffit).</div>
+</div>
+
+<div class="branch">
+  <h2>Roadmap 3 — Privacy by Design <span class="badge">indépendante</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box collecte"><span class="tag">contenu statique</span>Bonnes pratiques Privacy by Design</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box moteur"><span class="tag">3.3.2</span>Checklist par projet (project_id, item_id, statut)</div>
+    </div>
+  </div>
+  <div class="note">Pas de lien avec compliance_data_profile — confirmé : contenu pédagogique + suivi de checklist, rien d'autre.</div>
+</div>
+
+<div class="branch">
+  <h2>Roadmap 4 — Classification sectorielle <span class="badge">le plus gros chantier</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box collecte"><span class="tag">collecte</span>Profil produit / secteur</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box collecte"><span class="tag">contenu réf.</span>Textes MDR / Code monétaire / RED-RoHS-DEEE</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box moteur"><span class="tag">3.3.5</span>Moteur classification → produit une <b>classe</b></div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box suite"><span class="tag">3.3.6</span>Gap analysis</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box suite"><span class="tag">3.3.7</span>Recommandations d'architecture</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box suite"><span class="tag">3.3.8</span>Génération dossier technique</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box suite"><span class="tag">3.3.9</span>Feuille de route chiffrée</div>
+    </div>
+  </div>
+  <div class="note">3.3.6 à 3.3.9 sont strictement séquentiels et dépendent tous de la classe produite par 3.3.5 — 3.3.9 a été recorrigé ici (il dépendait à tort du Groupe "indépendants" dans une version précédente).</div>
+</div>
+
+<div class="branch">
+  <h2>Roadmap 5 — Certifications de sécurité <span class="badge">indépendante</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box collecte"><span class="tag">catalogue</span>Certifications (ISO 27001, SOC 2, SecNumCloud)</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box moteur"><span class="tag">3.3.11</span>Suivi de parcours par projet</div>
+    </div>
+  </div>
+  <div class="note">Réutilise le pattern catalogue + instance (déjà posé sur roadmap_nodes/startup_roadmap_items) — à coder après la Roadmap 4, où ce pattern sert une 2e fois sur 3.3.6/3.3.7.</div>
+</div>
+
+<div class="branch">
+  <h2>Roadmap 6 — AI Act <span class="badge">indépendante</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box collecte"><span class="tag">collecte</span>Profil usage IA</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box collecte"><span class="tag">contenu réf.</span>Textes AI Act<br><code>legal_texts</code> (domaine=ai_act)</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box moteur"><span class="tag">3.3.12</span>Moteur AI Act (arbre de décision par catégorie de risque)</div>
+    </div>
+  </div>
+</div>
+
+<div class="transverse">
+  <h2>Hors-roadmap — transverses (pas de statut / pas d'ordre)</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="box"><span class="tag">3.3.10</span>Veille réglementaire → écrit dans <code>notifications</code> (réutilisée telle quelle)</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="step">
+      <div class="box">Copilot libre → lit <code>legal_texts</code> filtré par <code>domaine_reglementaire</code>, branché sur les 6 roadmaps sans leur appartenir</div>
+    </div>
+  </div>
+</div>
+
+<div class="tables">
+  <h2>Tables à développer en premier (pour démarrer Roadmap 1)</h2>
+  <table>
+    <tr><th>Table</th><th>Champ</th><th>Type</th><th>Rôle</th></tr>
+    <tr><td rowspan="8"><code>compliance_data_profile</code><br><span style="color:var(--muted);font-size:11px;">nouvelle table</span></td>
+        <td>id</td><td>UUID (PK)</td><td>—</td></tr>
+    <tr><td>project_id</td><td>UUID (FK projects, UNIQUE)</td><td>un profil par projet</td></tr>
+    <tr><td>volume_utilisateurs</td><td>ENUM (&lt;100 / 100-10k / &gt;10k)</td><td>seuils utilisés par plusieurs moteurs (RGPD, DPO)</td></tr>
+    <tr><td>categories_donnees</td><td>TEXT[] ou JSONB</td><td>ex: identifiantes, santé, biométrie, financières, mineurs</td></tr>
+    <tr><td>profilage</td><td>BOOLEAN</td><td>déclenche des critères RGPD/AIPD spécifiques</td></tr>
+    <tr><td>transfert_hors_ue</td><td>BOOLEAN</td><td>critère RGPD (clauses contractuelles types, etc.)</td></tr>
+    <tr><td>secteur_activite</td><td>TEXT</td><td>partagé avec la Roadmap 4 (classification) — évite une 2e question</td></tr>
+    <tr><td>updated_at</td><td>TIMESTAMP</td><td>le profil est modifiable, pas figé après remplissage</td></tr>
+    <tr><td rowspan="6"><code>compliance_diagnostic_results</code><br><span style="color:var(--muted);font-size:11px;">nouvelle table</span></td>
+        <td>id</td><td>UUID (PK)</td><td>—</td></tr>
+    <tr><td>project_id</td><td>UUID (FK projects)</td><td>—</td></tr>
+    <tr><td>moteur</td><td>ENUM (rgpd, aipd, dpo, classification, ai_act)</td><td>un moteur peut tourner plusieurs fois (profil modifié)</td></tr>
+    <tr><td>verdict</td><td>ENUM (conforme, action_requise, aipd_requise, dpo_obligatoire...)</td><td>résultat affiché à l'utilisateur</td></tr>
+    <tr><td>details</td><td>JSONB</td><td>critères déclenchés — nécessaire pour justifier le verdict, pas pour le recalculer</td></tr>
+    <tr><td>version_moteur</td><td>TEXT</td><td>trace quelles règles ont produit ce verdict, si les critères CNIL changent plus tard</td></tr>
+  </table>
+</div>
+
+</body>
+</html>

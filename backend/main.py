@@ -27,6 +27,15 @@ from backend.entrepreneur.routes.document_vault_router import router as document
 from backend.entrepreneur.routes.name_availability_router import router as name_availability_router
 from backend.entrepreneur.routes.project_router import router as project_router
 from backend.entrepreneur.routes.roadmap_router import router as roadmap_router
+from backend.entrepreneur.routes.rgpd_router import router as rgpd_router
+from backend.entrepreneur.routes.aipd_router import router as aipd_router
+from backend.entrepreneur.routes.ai_act_router import router as ai_act_router
+from backend.entrepreneur.routes.sector_router import router as sector_router
+from backend.entrepreneur.routes.copilot_router import router as copilot_router
+from backend.entrepreneur.routes.pitch_router import router as pitch_router
+from backend.entrepreneur.routes.certification_router import router as certification_router
+from backend.matching.routes.research_need_router import router as research_need_router
+from backend.matching.routes.chercheur_matching_router import router as chercheur_matching_router
 from backend.shared.auth.routes.auth_router import router as auth_router
 from backend.chercheur.routes.researcher_profile_router import router as researcher_profile_router
 from backend.chercheur.routes.research_work_router import router as research_work_router
@@ -73,6 +82,15 @@ app.include_router(project_router)
 app.include_router(document_router)
 app.include_router(document_vault_router)
 app.include_router(roadmap_router)
+app.include_router(rgpd_router)
+app.include_router(aipd_router)
+app.include_router(ai_act_router)
+app.include_router(sector_router)
+app.include_router(copilot_router)
+app.include_router(pitch_router)
+app.include_router(certification_router)
+app.include_router(research_need_router)
+app.include_router(chercheur_matching_router)
 app.include_router(name_availability_router)
 
 

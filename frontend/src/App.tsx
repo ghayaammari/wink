@@ -12,11 +12,22 @@ import { OnboardingWizardProvider } from "./entrepreneur/context/OnboardingWizar
 import DocumentVaultPage from "./entrepreneur/pages/DocumentVaultPage"
 import MyProjectLayout from "./entrepreneur/pages/MyProjectLayout"
 import MyProjectPage from "./entrepreneur/pages/MyProjectPage"
+import CompliancePlanPage from "./entrepreneur/pages/CompliancePlanPage"
+import CertificationSecnumcloudPage from "./entrepreneur/pages/CertificationSecnumcloudPage"
+import CopilotPage from "./entrepreneur/pages/CopilotPage"
+import PitchDeckPage from "./entrepreneur/pages/PitchDeckPage"
+import CopilotSidebarConversations from "./entrepreneur/components/copilot/CopilotSidebarConversations"
+import RgpdDiagnosticPage from "./entrepreneur/pages/RgpdDiagnosticPage"
+import AipdAnalysisPage from "./entrepreneur/pages/AipdAnalysisPage"
+import AiActDiagnosticPage from "./entrepreneur/pages/AiActDiagnosticPage"
+import SectorDiagnosticPage from "./entrepreneur/pages/SectorDiagnosticPage"
 import PlanActionPage from "./entrepreneur/pages/PlanActionPage"
 import ProjectGeneralInfoPage from "./entrepreneur/pages/ProjectGeneralInfoPage"
 import ProjectLegalInfoPage from "./entrepreneur/pages/ProjectLegalInfoPage"
 import ProjectPublicProfilePage from "./entrepreneur/pages/ProjectPublicProfilePage"
 import TeamCapitalPage from "./entrepreneur/pages/TeamCapitalPage"
+import ResearchNeedsPage from "./entrepreneur/pages/ResearchNeedsPage"
+import RecommandationsInteressantesPage from "./entrepreneur/pages/RecommandationsInteressantesPage"
 import { getMyInvestorProfile, type InvestorProfileRead } from "./investisseur/api/investorProfileApi"
 import InvestorOnboardingPage from "./investisseur/pages/InvestorOnboardingPage"
 import InvestorProfilePage from "./investisseur/pages/InvestorProfilePage"
@@ -78,6 +89,50 @@ const ICON_CHECKLIST = (
 // pas par état de projet (voir Sidebar.tsx, aucune autre entrée ne dépend
 // d'un état métier). "Mon profil" et la déconnexion sont gérés par Sidebar
 // elle-même, pas listés ici.
+// Icone "bouclier" -- nav "Conformite" cote entrepreneur (2e plan d'action,
+// EPIC-03). Distincte de ICON_CHECKLIST (roadmap EPIC-01) : conformite
+// reglementaire, pas une checklist de creation.
+const ICON_SHIELD = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M9 12.75 11.25 15 15 9.75M12 3c-2.755 0-5.455.232-8.083.678-.795.134-1.417.79-1.417 1.615V9.75c0 5.19 3.045 9.673 7.5 11.75 4.455-2.077 7.5-6.56 7.5-11.75V5.293c0-.825-.622-1.48-1.417-1.615A48.09 48.09 0 0 0 12 3Z"
+  />
+)
+
+// Icone "bulle de chat" -- nav "Copilot" cote entrepreneur (entree de
+// premier niveau comme Plan d'action/Conformite, pas un widget flottant a
+// part, voir CopilotPage.tsx).
+const ICON_CHAT = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.5-1.185A8.959 8.959 0 0 1 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
+  />
+)
+
+// Icone "graphique de presentation" -- nav "Pitch deck" cote entrepreneur
+// (service 6.6.2, EPIC-06/I5).
+const ICON_PITCH = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M3.75 5.25h16.5M3.75 5.25v10.5a1.5 1.5 0 0 0 1.5 1.5h4.5m-6-12h16.5m0 0v10.5a1.5 1.5 0 0 1-1.5 1.5h-4.5m-6 0-1.5 3.75m7.5-3.75 1.5 3.75m-9 0h10.5M9 12.75l2.25-2.25 2.25 1.5 3-3"
+  />
+)
+
+// Icone "loupe" -- nav "Recherche" cote entrepreneur (service 7.7.1, depot de
+// besoin scientifique / expertise, base du matching Startup <-> Chercheur,
+// EPIC-07). Distincte de ICON_CHECKLIST/ICON_SHIELD : espace de matching, pas
+// une checklist ni de la conformite.
+const ICON_SEARCH = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+  />
+)
+
 const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
   {
     to: "/entrepreneur/mon-projet",
@@ -92,6 +147,23 @@ const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
     ],
   },
   { to: "/entrepreneur/plan-action", label: "Plan d'action", icon: ICON_CHECKLIST },
+  { to: "/entrepreneur/conformite", label: "Conformite", icon: ICON_SHIELD },
+  {
+    to: "/entrepreneur/recherche",
+    label: "Recherche",
+    icon: ICON_SEARCH,
+    children: [
+      { to: "/entrepreneur/recherche", label: "Mes besoins" },
+      { to: "/entrepreneur/recherche/interessantes", label: "Recommandations intéressantes" },
+    ],
+  },
+  {
+    to: "/entrepreneur/copilot",
+    label: "Copilot",
+    icon: ICON_CHAT,
+    renderChildren: () => <CopilotSidebarConversations />,
+  },
+  { to: "/entrepreneur/pitch-deck", label: "Pitch deck", icon: ICON_PITCH },
 ]
 
 // Navigation métier du chercheur — "Mes travaux" (service 0.0.2/0.0.3 :
@@ -221,6 +293,7 @@ function EntrepreneurDashboardRoute() {
       roleLabel="Entrepreneur"
       navItems={ENTREPRENEUR_NAV_ITEMS}
       profileTo="/entrepreneur/profile"
+      showCopilot
     />
   )
 }
@@ -324,6 +397,16 @@ export default function App() {
             /projects/me (voir ce fichier) — son besoin diffère (vérifier
             project_type, pas charger fieldValues). */}
         <Route path="plan-action" element={<PlanActionPage />} />
+        <Route path="conformite" element={<CompliancePlanPage />} />
+        <Route path="recherche" element={<ResearchNeedsPage />} />
+        <Route path="recherche/interessantes" element={<RecommandationsInteressantesPage />} />
+        <Route path="conformite/rgpd" element={<RgpdDiagnosticPage />} />
+        <Route path="conformite/aipd" element={<AipdAnalysisPage />} />
+        <Route path="conformite/ai-act" element={<AiActDiagnosticPage />} />
+        <Route path="conformite/secteur" element={<SectorDiagnosticPage />} />
+        <Route path="conformite/certification-secnumcloud" element={<CertificationSecnumcloudPage />} />
+        <Route path="copilot" element={<CopilotPage />} />
+        <Route path="pitch-deck" element={<PitchDeckPage />} />
         <Route path="profile" element={<ProfilePage />} />
       </Route>
 

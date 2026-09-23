@@ -9,6 +9,8 @@ Ce module ne commit jamais la session : à l'appelant de décider quand committe
 (ex: `seed_roadmap_nodes.py` commit une seule fois après avoir upserté tous les
 nœuds, transaction atomique — voir docstring du script).
 """
+from uuid import UUID
+
 from sqlalchemy.orm import Session
 
 from backend.shared.knowledge_base.models.content_embeddings import ContentEmbeddings
@@ -87,3 +89,45 @@ def upsert_embedding(
     db.add(row)
     db.flush()
     return row
+
+
+def resolve_legal_text_id(db: Session, *, source_id: str) -> UUID | None:
+    """Resout un `source_id` vu par le compliance_agent (via son tool
+
+    rechercher_corpus_reglementaire, deja verifie comme reellement vu
+    pendant le run par l'appelant -- voir seen_source_ids dans
+    compliance_agent_tools_service.py) en `legal_text_id` reel, uniquement
+    s'il correspond a une ligne source_type='legal_texts'. Protege les
+    tables d'obligations (AI Act, RGPD) contre un identifiant qui pointerait
+    en fait vers un autre source_type (roadmap_node, contract_clauses_
+    library...) -- retourne None si le source_id est absent ou d'un autre
+    source_type, jamais une erreur bloquante (meme convention que
+    l'ancienne resolution par index hors limites qu'elle remplace).
+    """
+    row = (
+        db.query(ContentEmbeddings.source_id)
+        .filter(ContentEmbeddings.source_id == source_id, ContentEmbeddings.source_type == "legal_texts")
+        .first()
+    )
+    return UUID(source_id) if row is not None else None
+
+
+def search_similar_chunks(
+    db: Session, *, domaine: str, query_embedding: list[float], top_k: int = 8
+) -> list[ContentEmbeddings]:
+    """Recherche par similarite cosinus, restreinte a un `domaine` (voir
+
+    colonne du modele) — jamais une recherche tous domaines confondus : un
+    diagnostic RGPD n'a rien a faire d'un chunk 'assurance_sectorielle'.
+    Premiere utilisatrice reelle : agents/compliance_agent/rgpd_service.py,
+    via l'orchestration du service compliance (cette fonction reste ici,
+    DB uniquement — l'agent ne recoit que les ContentEmbeddings deja
+    recuperes, jamais une Session, voir separation agents/ vs backend/).
+    """
+    return (
+        db.query(ContentEmbeddings)
+        .filter(ContentEmbeddings.domaine == domaine)
+        .order_by(ContentEmbeddings.embedding.cosine_distance(query_embedding))
+        .limit(top_k)
+        .all()
+    )

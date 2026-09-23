@@ -1,4 +1,4 @@
-"""Client LLM partagé (Qwen via Groq).
+"""Client LLM partagé (Groq).
 
 Extrait de paper_llm_service.py : tant qu'un seul fichier appelait le LLM,
 garder le client et le parsing JSON dedans était le choix le plus simple.
@@ -6,14 +6,22 @@ Avec researcher_profile_llm_service.py comme deuxième vrai consommateur
 (résumés de profil, pas juste d'analyse de papiers), la duplication du
 client/gestion d'erreur/nettoyage JSON ne se justifiait plus — extrait ici,
 les deux fichiers appelants n'ont plus à connaître Groq/OpenAI directement.
-"""
+
+Modèle et température lus depuis agents/config/llm_config.yaml
+(chercheur_llm.analysis), plus jamais en dur ici — corrigé le 22/09/2026 :
+le modèle était codé en dur (qwen/qwen3.6-27b), retiré depuis du catalogue
+Groq (404 model_not_found constaté en extraction réelle), sans que
+llm_config.yaml — pourtant "un seul endroit à modifier pour changer de
+modèle" selon son propre docstring — ne soit consulté. Voir ce fichier pour
+le choix de remplacement (openai/gpt-oss-120b, déjà utilisé partout ailleurs
+dans le projet)."""
 import json
 import logging
 import os
 
 from openai import OpenAI
 
-MODEL = "qwen/qwen3.6-27b"
+from agents.config.loader import get_llm_config
 
 _client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
@@ -31,14 +39,19 @@ class LLMExtractionError(Exception):
 
 
 def call_and_parse(prompt: str, max_tokens: int) -> dict:
+    config = get_llm_config()["chercheur_llm"]["analysis"]
     text = None
     try:
         response = _client.chat.completions.create(
-            model=MODEL,
+            model=config["model"],
             max_tokens=max_tokens,
-            reasoning_effort="none",  # coupe le thinking Qwen — sinon il consomme
-                                       # tout max_tokens en raisonnement interne,
-                                       # ne laissant rien pour la réponse JSON
+            temperature=config["temperature"],
+            # "low" et non "none" (valeur qwen3 uniquement, incompatible avec
+            # gpt-oss) : les modèles openai/gpt-oss-* de Groq supportent
+            # low/medium/high — "low" laisse un minimum de raisonnement tout
+            # en réservant l'essentiel de max_tokens à la réponse JSON, même
+            # intention que "none" avec Qwen (voir git blame).
+            reasoning_effort="low",
             response_format={"type": "json_object"},  # force un JSON syntaxiquement
                                                         # valide côté API plutôt que de
                                                         # compter uniquement sur la
@@ -58,8 +71,8 @@ def call_and_parse(prompt: str, max_tokens: int) -> dict:
 
 
 def _strip_json_fences(text: str) -> str:
-    """Deux nettoyages nécessaires avec Qwen :
-    1. Le mode 'thinking' peut préfixer la réponse d'un raisonnement entre
+    """Deux nettoyages nécessaires avec les réponses de modèles Groq :
+    1. Un mode 'thinking' peut préfixer la réponse d'un raisonnement entre
        balises <think>...</think> — à retirer avant de parser.
     2. Comme la plupart des modèles, il enrobe parfois le JSON de ```json```
        malgré la consigne de ne pas le faire."""
