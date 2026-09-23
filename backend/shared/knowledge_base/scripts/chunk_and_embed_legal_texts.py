@@ -2,8 +2,15 @@
 le chunking (Étape 2.2) ne persiste rien à part, un chunk n'existe qu'au
 moment de son insertion dans `content_embeddings` (Étape 3.2). Même
 convention que `backend/entrepreneur/scripts/seed_roadmap_nodes.py` (Groupe 1) :
-un seul appel groupé à `embed_texts()`, une seule transaction, commit unique
-à la fin.
+un seul appel groupé à `embed_texts()`.
+
+Depuis le CORRECTIF du 22/09/2026 (voir `run()`) : DEUX sessions DB courtes
+(lecture, puis ecriture), pas une seule tenue ouverte pendant tout le script
+-- une session unique qui traverse le calcul d'embeddings (CPU, lent) se
+faisait couper par le pooler Supabase (mode transaction, port 6543). La
+transaction d'ECRITURE reste atomique (un seul commit a la fin de la
+phase 2) ; c'est seulement la lecture qui est desormais une transaction
+distincte, fermee avant le calcul.
 
 Lancement : `python -m backend.shared.knowledge_base.scripts.chunk_and_embed_legal_texts`
 depuis `wink/`. Préalable obligatoire : migration 6f1a2c9d3e5b appliquée
@@ -56,9 +63,14 @@ le domaine écrit dans `content_embeddings` est ramené au générique
 """
 import sys
 
+# CORRECTIF du 16/09/2026 — chunk_texte_brut() produisait 1 seul chunk geant
+# par page CNIL (jusqu'a 111 656 caracteres, voir chunk_texte_guide() pour le
+# detail) : les guides/PDF (type_source != 'article_loi') passent desormais
+# par chunk_texte_guide() (decoupage par paragraphes groupes), les articles de
+# loi restent inchanges sur chunk_texte_brut(). Voir la boucle dans run().
 from agents.config.loader import get_llm_config
 from agents.ingestion.embedding_service import embed_texts
-from agents.ingestion.legal_text_chunking_service import chunk_texte_brut
+from agents.ingestion.legal_text_chunking_service import chunk_si_trop_long, chunk_texte_brut, chunk_texte_guide
 from backend.shared.database import SessionLocal
 from backend.shared.knowledge_base.services.content_embeddings_service import (
     get_embedded_chunks,
@@ -92,9 +104,22 @@ def _domaine_embedding(domaine_reglementaire: str) -> str:
 def run() -> None:
     modele_utilise = get_llm_config()["embedding"]["model"]
 
-    db = SessionLocal()
+    # CORRECTIF du 22/09/2026 — session unique tenue ouverte pendant tout le
+    # calcul d'embeddings (chargement du modele CPU + calcul de N chunks,
+    # potentiellement plusieurs dizaines de secondes) : sur le pooler Supabase
+    # en mode transaction (port 6543, voir database.py), une connexion tenue
+    # "idle in transaction" aussi longtemps se fait couper par le pooler
+    # (`psycopg.OperationalError: server closed the connection unexpectedly`),
+    # constate en pratique des le premier vrai run avec plusieurs domaines en
+    # attente. `pool_pre_ping=True` ne protege pas ce cas : il revalide une
+    # connexion recuperee DEPUIS le pool, jamais une connexion deja en cours
+    # d'utilisation. Fix : lecture (phase 1, sa propre session, fermee avant
+    # le calcul) puis calcul (aucune activite DB) puis ecriture (phase 2, une
+    # session neuve, ouverte seulement une fois les vecteurs deja en main) --
+    # la session d'ecriture n'est jamais idle plus que le temps des upserts.
+    db_lecture = SessionLocal()
     try:
-        rows = list_valide_humain(db)
+        rows = list_valide_humain(db_lecture)
         if not rows:
             print("Aucune ligne 'valide_humain' à traiter — rien à faire (voir dashboard Phase 1.5).")
             return
@@ -107,11 +132,43 @@ def run() -> None:
         # Skip (voir CORRECTIF du 11/09/2026 ci-dessus) : chunk_texte_brut est
         # une fonction pure (aucun coût), donc on peut toujours recalculer les
         # chunks pour comparaison — seul embed_texts() (API payante) est evite.
-        plan: list[tuple] = []  # (row, chunk_index, chunk_texte)
+        # Chaque entree du plan ne garde que des valeurs primitives (pas l'objet
+        # `row` ORM) : `db_lecture` est fermee avant le calcul des embeddings,
+        # un objet ORM detache exposerait ses attributs deja charges mais autant
+        # eviter toute ambiguite ici.
+        plan: list[tuple] = []  # (row_id, domaine_reglementaire, chunking_suggere, chunk_index, chunk_texte)
         skipped = 0
         for row in rows:
-            chunks = chunk_texte_brut(row.texte_brut, row.chunking_suggere)
-            existants = get_embedded_chunks(db, source_type="legal_texts", source_id=str(row.id))
+            # type_source='article_loi' (defaut) : decoupage existant, inchange
+            # (fonctionne bien sur un article de loi court). Tout le reste
+            # (guide_pratique, pdf, faq) : chunk_texte_guide, voir sa docstring
+            # — correctif du 16/09/2026, chunk_texte_brut produisait 1 seul
+            # chunk geant par page CNIL, inutilisable pour la recherche
+            # vectorielle (jusqu'a 111 656 caracteres dans un seul vecteur).
+            if row.type_source == "article_loi":
+                chunks_bruts = chunk_texte_brut(row.texte_brut, row.chunking_suggere)
+                # Garde-fou (decision du 19/09/2026, voir docstring de
+                # chunk_si_trop_long) : un article dont chunking_suggere n'a
+                # rien pu decouper (texte source aplati sans saut de ligne,
+                # constate sur l'AI Act) resterait sinon un chunk geant -
+                # meme risque que les guides CNIL corriges le 16/09/2026,
+                # ici rattrape au niveau article plutot qu'au niveau type_source.
+                chunks = [c2 for c in chunks_bruts for c2 in chunk_si_trop_long(c)]
+            else:
+                # CORRECTIF du 22/09/2026 -- chunk_si_trop_long() manquait ici
+                # (present seulement sur la branche article_loi ci-dessus,
+                # meme garde-fou pourtant deja construit le 19/09/2026 contre
+                # ce risque precis). chunk_texte_guide() decoupe sur `\n`, mais
+                # un PDF extrait via pypdf (ex: referentiel SecNumCloud, voir
+                # scrapers/anssi/) a souvent tres peu de vrais retours a la
+                # ligne -- son garde-fou interne ("un paragraphe seul plus
+                # long que max_chars reste un chunk entier") laissait alors
+                # passer des chunks de plusieurs milliers de caracteres,
+                # cause du 413 "Request too large" (Groq, 8000 TPM) du
+                # sous-agent SecNumCloud des le premier appel a l'agent.
+                chunks_bruts = chunk_texte_guide(row.texte_brut)
+                chunks = [c2 for c in chunks_bruts for c2 in chunk_si_trop_long(c)]
+            existants = get_embedded_chunks(db_lecture, source_type="legal_texts", source_id=str(row.id))
             deja_a_jour = (
                 len(existants) == len(chunks)
                 and all(e.chunk_texte == c for e, c in zip(existants, chunks))
@@ -121,49 +178,57 @@ def run() -> None:
                 skipped += 1
                 continue
             for index, chunk_texte in enumerate(chunks):
-                plan.append((row, index, chunk_texte))
+                plan.append((row.id, row.domaine_reglementaire, row.chunking_suggere, index, chunk_texte))
+    finally:
+        db_lecture.close()
 
-        if not plan:
-            print(f"Rien à réembedder — {skipped} article(s) déjà à jour.")
-            return
-        print(
-            f"{len(plan)} chunk(s) à (ré)embedder ({skipped} article(s) déjà à jour ignoré(s)) — "
-            "démarrage du calcul des embeddings (voir logs du modèle ci-dessous)..."
-        )
+    if not plan:
+        print(f"Rien à réembedder — {skipped} article(s) déjà à jour.")
+        return
+    print(
+        f"{len(plan)} chunk(s) à (ré)embedder ({skipped} article(s) déjà à jour ignoré(s)) — "
+        "démarrage du calcul des embeddings (voir logs du modèle ci-dessous)..."
+    )
 
-        textes = [chunk_texte for _, _, chunk_texte in plan]
-        vecteurs = embed_texts(textes)
+    # Aucune activite DB pendant ce calcul (voir CORRECTIF ci-dessus) : c'est
+    # precisement le segment qui faisait expirer la connexion avant.
+    textes = [chunk_texte for _, _, _, _, chunk_texte in plan]
+    vecteurs = embed_texts(textes)
 
-        for (row, chunk_index, chunk_texte), vecteur in zip(plan, vecteurs):
+    db_ecriture = SessionLocal()
+    try:
+        for (row_id, domaine_reglementaire, chunking_suggere, chunk_index, chunk_texte), vecteur in zip(
+            plan, vecteurs
+        ):
             upsert_embedding(
-                db,
+                db_ecriture,
                 source_type="legal_texts",
-                source_id=str(row.id),
+                source_id=str(row_id),
                 chunk_index=chunk_index,
                 chunk_texte=chunk_texte,
-                chunk_method=row.chunking_suggere,
+                chunk_method=chunking_suggere,
                 embedding=vecteur,
                 modele_utilise=modele_utilise,
                 champ_source=_CHAMP_SOURCE,
-                domaine=_domaine_embedding(row.domaine_reglementaire),
+                domaine=_domaine_embedding(domaine_reglementaire),
             )
 
-        db.commit()
-        nb_articles_traites = len({row.id for row, _, _ in plan})
+        db_ecriture.commit()
+        nb_articles_traites = len({row_id for row_id, _, _, _, _ in plan})
         print(
             f"OK — {nb_articles_traites} article(s) réembeddé(s) "
             f"({len(plan)} chunks), {skipped} déjà à jour ignoré(s)."
         )
     except Exception:
-        db.rollback()
+        db_ecriture.rollback()
         raise
     finally:
-        db.close()
+        db_ecriture.close()
 
 
 if __name__ == "__main__":
     try:
         run()
     except Exception as exc:
-        print(f"Erreur — rien n'a été écrit en base (transaction unique, voir docstring) : {exc}", file=sys.stderr)
+        print(f"Erreur — rien n'a été écrit en base (transaction d'écriture atomique, voir docstring) : {exc}", file=sys.stderr)
         sys.exit(1)

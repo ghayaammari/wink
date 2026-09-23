@@ -97,6 +97,14 @@ export default function PlanActionPage() {
     await refresh()
   }
 
+  function handleSelectNode(nodeId: string) {
+    // Toggle : recliquer sur le nœud déjà sélectionné referme le popup, au
+    // lieu de le rouvrir sur le même item — comportement attendu pour les
+    // trois vues (Graphe, Sentier, Parcours), qui partagent toutes ce même
+    // handler plutôt que de dupliquer la logique dans StepNode/PathStepCard.
+    setSelectedNodeId((current) => (current === nodeId ? null : nodeId))
+  }
+
   async function handleCheckNameAvailability(nomTeste: string) {
     if (!accessToken || !project) return
     // Même logique que handleToggleDone/handleUploadProof : on recharge tout
@@ -132,7 +140,7 @@ export default function PlanActionPage() {
       </div>
 
       {viewMode === "parcours" ? (
-        <RoadmapPathView items={items} selectedNodeId={selectedNodeId} onSelectNode={setSelectedNodeId} />
+        <RoadmapPathView items={items} selectedNodeId={selectedNodeId} onSelectNode={handleSelectNode} />
       ) : (
         <div className="flex flex-col gap-3">
           {groupes.map((groupe, index) => (
@@ -142,7 +150,7 @@ export default function PlanActionPage() {
               items={items.filter((item) => item.groupe === groupe)}
               viewMode={viewMode}
               selectedNodeId={selectedNodeId}
-              onSelectNode={setSelectedNodeId}
+              onSelectNode={handleSelectNode}
               defaultOpen={index === 0}
             />
           ))}

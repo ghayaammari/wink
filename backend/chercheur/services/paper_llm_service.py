@@ -95,7 +95,7 @@ Réponds UNIQUEMENT en JSON valide avec les clés methodology, key_findings, app
 Texte du papier :
 {excerpt}"""
 
-    result = call_and_parse(prompt, max_tokens=1400)
+    result = call_and_parse(prompt, max_tokens=1000)
     if result.get("application_domains") is None:
         result["application_domains"] = []
     return result

@@ -90,3 +90,140 @@ sector_insurance_structuration:
     model: openai/gpt-oss-120b
     max_retries: 3
     temperature: 0
+
+rgpd_text_structuration:
+  relevance_filter:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+  classification:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+secnumcloud_text_structuration:
+  relevance_filter:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+  classification:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+compliance_agent_rgpd:
+  diagnostic:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+  aipd:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+ai_act_text_structuration:
+  batch_classification:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+compliance_agent_ai_act:
+  diagnostic:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+compliance_agent_sector:
+  detection:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+compliance_agent_healthtech_gap:
+  diagnostic:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+compliance_agent_fintech_gap:
+  diagnostic:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+compliance_agent_secnumcloud:
+  parcours:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+
+copilot_orchestrator:
+  conversation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    # Pas 0 ici (contrairement aux sous-agents de diagnostic) : une reponse
+    # conversationnelle libre, pas une extraction structuree deterministe --
+    # une temperature basse mais non nulle garde des reponses naturelles
+    # sans dériver dans la creativite (les regles anti-hallucination restent
+    # portees par le system prompt, pas par temperature=0).
+    temperature: 0.2
+  # Second appel, independant du premier -- juge si la reponse ci-dessus est
+  # soutenue par les chunks recuperes (voir grounding_verification_service.py).
+  # temperature=0 : tache de classification, une reponse deterministe est
+  # attendue (le meme couple reponse/chunks doit toujours donner le meme
+  # verdict), pas une generation creative.
+  grounding_verification:
+    provider: groq
+    model: openai/gpt-oss-120b
+    temperature: 0
+
+chercheur_llm:
+  # paper_llm_service.py + researcher_profile_llm_service.py, via
+  # llm_client.py (client Groq partage cote chercheur). qwen/qwen3.6-27b
+  # (choix initial, motive par la doc vision de document_processing.vlm
+  # ci-dessus) a ete retire du catalogue Groq -- verifie le 22/09/2026, 404
+  # model_not_found constate en extraction reelle sur un compte de test.
+  # Ces appels sont d'ailleurs purement textuels (analyse d'abstract), la
+  # contrainte vision ne s'appliquait pas ici. Remplace par
+  # openai/gpt-oss-120b, comme tous les autres agents/services de ce fichier
+  # -- coherent, evite un modele "preview" isole avec son propre risque de
+  # retrait (voir qwen/qwen3.8-27b, marque preview chez Groq au 22/09/2026).
+  analysis:
+    provider: groq
+    model: openai/gpt-oss-120b
+    # Pas 0 : resumes/reformulations (paper_summary, expertise_summary...),
+    # pas une extraction de champs factuels deterministe -- meme raisonnement
+    # que copilot_orchestrator.conversation ci-dessus.
+    temperature: 0.2
+
+pitch_deck_agent:
+  # Service 6.6.2 -- generation du contenu des 11 diapositives (pas de
+  # tools/RAG, voir pitch_deck_content_service.py). temperature moderee :
+  # texte de vente redige a partir des donnees du formulaire, pas une
+  # extraction deterministe (comme document_processing.llm_structuration),
+  # mais pas non plus une conversation libre (comme copilot_orchestrator) --
+  # valeur alignee sur copilot_orchestrator.conversation pour la meme raison
+  # (contenu naturel sans derive creative).
+  generation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    temperature: 0.2
+
+
+matching_agent_chercheur:
+  # Service 7.7.2 -- matching Recherche-Startup (EPIC-07),
+  # agents/matching_agent/chercheur_matching_service.py. Meme modele que le
+  # reste du projet (openai/gpt-oss-120b) -- pas de raison de s'en ecarter,
+  # meme raisonnement que chercheur_llm ci-dessus.
+  matching:
+    provider: groq
+    model: openai/gpt-oss-120b
+    # Pas 0 : classement de chercheurs + redaction d'explications, pas une
+    # extraction deterministe de champs factuels -- meme raisonnement que
+    # copilot_orchestrator.conversation.
+    temperature: 0.2

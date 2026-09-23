@@ -1,0 +1,399 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{booktabs}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds}
+\usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{seqsplit}
+
+\tcbuselibrary{skins, breakable}
+
+% --- Palette ---
+\definecolor{winkblue}{RGB}{37,60,110}
+\definecolor{winkblue2}{RGB}{74,105,170}
+\definecolor{codebg}{RGB}{244,245,248}
+\definecolor{codeframe}{RGB}{210,214,222}
+\definecolor{toolgreen}{RGB}{40,110,80}
+\definecolor{warnred}{RGB}{150,40,40}
+
+% --- Code inline : seqsplit permet la coupure a n'importe quel caractere,
+% indispensable pour les chemins de fichiers longs sans espace (sinon
+% "overfull hbox" garanti dans les tableaux/tikz a largeur fixe). ---
+\newcommand{\code}[1]{{\small\ttfamily\color{winkblue}\seqsplit{#1}}}
+
+% --- Titres de section ---
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{winkblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{winkblue2}}
+  {\thesubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.6em}{0.8em}
+
+% --- En-tête / pied de page ---
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\textcolor{winkblue}{Wink --- Agent conformité}}
+\fancyhead[R]{\small\textcolor{winkblue}{\texttt{compliance\_agent}}}
+\fancyfoot[C]{\small\thepage}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=winkblue2,
+    urlcolor=winkblue2,
+    citecolor=winkblue2,
+    pdftitle={Wink -- Agent conformite (compliance\_agent) -- recapitulatif},
+    pdfauthor={Wink}
+}
+
+% --- Boîte "tool" ---
+\newtcolorbox{toolbox}[2]{
+  enhanced, breakable,
+  colback=white, colframe=toolgreen,
+  colbacktitle=toolgreen, coltitle=white,
+  fonttitle=\bfseries,
+  title={#1},
+  arc=2pt, boxrule=0.8pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=10pt, after skip=10pt,
+  #2
+}
+
+% --- Boîte "règle stricte" ---
+\newtcolorbox{rulebox}[1][]{
+  enhanced, breakable,
+  colback=red!4!white, colframe=warnred,
+  arc=2pt, boxrule=0.8pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=10pt, after skip=10pt,
+  title={Garde-fous d'exécution}, fonttitle=\bfseries, coltitle=white,
+  colbacktitle=warnred,
+  #1
+}
+
+% --- Boîte "état actuel / à construire" ---
+\newtcolorbox{statebox}[2]{
+  enhanced, breakable,
+  colback=blue!3!white, colframe=winkblue2,
+  arc=2pt, boxrule=0.8pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt,
+  title={#1}, fonttitle=\bfseries, coltitle=white, colbacktitle=winkblue2,
+  #2
+}
+
+\title{\textcolor{winkblue}{\Huge Wink --- Agent conformité}\\[0.4em]
+\Large\textcolor{winkblue2}{\texttt{compliance\_agent} --- Récapitulatif technique}}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries\textcolor{winkblue}{Wink}}\\[0.5cm]
+{\LARGE\textcolor{winkblue2}{Agent conformité --- \texttt{compliance\_agent}}}\\[0.3cm]
+{\large\textcolor{gray}{EPIC-03 --- Conformité \& Normes réglementaires}}\\[2cm]
+
+\begin{tcolorbox}[enhanced, colback=blue!3!white, colframe=winkblue2, arc=3pt,
+  boxrule=1pt, width=0.8\textwidth, left=12pt, right=12pt, top=10pt, bottom=10pt]
+\centering
+\textbf{Objet du document}\\[0.3em]
+\small
+Rôle actuel de l'agent, ses 3 tools, son mode de raisonnement,
+et son point d'intégration prévu avec le futur copilot.\\
+À donner tel quel à une nouvelle session pour reprendre ce chantier
+sans perdre le contexte.
+\end{tcolorbox}
+
+\vfill
+{\large\today}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Contexte et périmètre}
+
+Wink prévoit 3 agents à terme, un par grand domaine métier (décision actée en conversation produit, pas encore reportée dans \code{Wink\_architecture\_fichiers.md}) :
+
+\begin{itemize}[leftmargin=1.2em]
+    \item \textbf{\code{administrative\_agent}} (EPIC-01, I1) --- pas encore créé, pas de code.
+    \item \textbf{\code{compliance\_agent}} (EPIC-03) --- celui documenté ici, renommé depuis \code{regulatory\_agent}.
+    \item \textbf{\code{contract\_agent}} (EPIC-04) --- dossier réservé (\code{agents/contract\_agent/}), vide.
+\end{itemize}
+
+\code{compliance\_agent} couvre aujourd'hui 5 tâches~:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Service} & \textbf{Tâche} \\
+\midrule
+3.3.5 (étape 0) & Détection de secteur \\
+3.3.1 & Diagnostic RGPD \\
+3.3.12 & Classification AI Act \\
+3.3.6 & Diagnostic d'écart HealthTech \\
+3.3.6 & Diagnostic d'écart FinTech \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[enhanced, colback=yellow!8!white, colframe=orange!70!black,
+  arc=2pt, boxrule=0.8pt, left=6pt, right=6pt, top=4pt, bottom=4pt]
+\textbf{Seule la tâche HealthTech gap-analysis a été convertie} en agent à raisonnement autonome (tool-calling) --- c'est le \textbf{pilote}. RGPD, AI Act, FinTech gap-analysis et détection de secteur restent sur l'ancien pattern (un seul appel LLM, RAG pré-effectué par le code appelant, pas de tools). Conversion prévue service par service, jamais en une fois.
+\end{tcolorbox}
+
+\section{Ce que fait l'agent (pilote HealthTech, service 3.3.6)}
+
+\subsection{Avant / Maintenant}
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.9cm and 1.4cm,
+  box/.style={rectangle, rounded corners, draw=winkblue2, fill=blue!4!white,
+              text width=4.6cm, align=center, minimum height=1.1cm, font=\small},
+  lbl/.style={font=\bfseries\small\color{winkblue}}
+]
+  \node[lbl] (avantlbl) {Avant (ancien pattern)};
+  \node[box, below=of avantlbl] (a1) {Code Python calcule l'embedding};
+  \node[box, below=of a1] (a2) {Code Python cherche les chunks};
+  \node[box, below=of a2] (a3) {Code Python récupère la classification};
+  \node[box, below=of a3, fill=orange!10, draw=orange!70!black] (a4) {LLM : un seul appel, rédige le JSON};
+
+  \node[lbl, right=2.6cm of avantlbl] (maintlbl) {Maintenant (pilote HealthTech)};
+  \node[box, below=of maintlbl, fill=green!8, draw=toolgreen] (m1) {Agent reçoit la tâche};
+  \node[box, below=of m1, fill=green!8, draw=toolgreen] (m2) {Agent décide : appeler un tool ?};
+  \node[box, below=of m2, fill=green!8, draw=toolgreen] (m3) {Agent recherche / relit si besoin};
+  \node[box, below=of m3, fill=green!8, draw=toolgreen] (m4) {Agent produit la réponse finale};
+
+  \draw[-{Latex[length=2mm]}, winkblue2] (a1) -- (a2);
+  \draw[-{Latex[length=2mm]}, winkblue2] (a2) -- (a3);
+  \draw[-{Latex[length=2mm]}, winkblue2] (a3) -- (a4);
+
+  \draw[-{Latex[length=2mm]}, toolgreen] (m1) -- (m2);
+  \draw[-{Latex[length=2mm]}, toolgreen] (m2) -- (m3);
+  \draw[-{Latex[length=2mm]}, toolgreen] (m3) -- (m4);
+  \draw[-{Latex[length=2mm]}, toolgreen, dashed] (m3.east) to[out=0,in=0,looseness=2.2] (m2.east);
+\end{tikzpicture}
+\end{center}
+
+Le code Python ne décide plus rien à l'avance~: il donne à l'agent le chapitre à traiter et une requête de recherche suggérée, puis le laisse \textbf{décider lui-même} s'il doit consulter le profil du projet, rechercher dans le corpus légal, combien de fois, avec quelle formulation.
+
+\subsection{Un run typique}
+
+\begin{enumerate}[leftmargin=1.4em]
+    \item L'agent reçoit la tâche (chapitre à traiter + requête suggérée).
+    \item Il appelle \code{lire\_profil\_projet} pour connaître la classe de risque MDR du projet.
+    \item Il appelle \code{rechercher\_corpus\_reglementaire} avec la requête suggérée (ou une reformulation).
+    \item Si les résultats lui semblent insuffisants, il peut rechercher à nouveau avec une autre requête.
+    \item Il produit la liste d'obligations, chacune citant le \code{source\_id} réel d'un chunk qu'il a vu.
+\end{enumerate}
+
+\section{Les 3 tools}
+\label{sec:tools}
+
+Tous en \textbf{lecture seule} --- l'agent ne persiste jamais rien lui-même, ça reste le rôle du service backend appelant (\code{upsert\_result}). Définis dans \code{backend/entrepreneur/services/compliance\_agent\_tools\_service.py} (pas dans \code{agents/compliance\_agent/}, voir section~\ref{sec:separation}).
+
+\begin{toolbox}{1. \texttt{rechercher\_corpus\_reglementaire(domaine, requete)}}{}
+Recherche sémantique dans le corpus légal interne déjà ingéré (\code{content\_embeddings}), filtrée par domaine (\code{secteur\_healthtech}, \code{secteur\_fintech}, \code{rgpd}, \code{ai\_act}\ldots).
+
+\textbf{Renvoie} : une liste de chunks \texttt{\{source\_id, texte\}}.
+
+\textbf{En interne} : \code{embed\_texts} (embedding de la requête) puis \code{search\_similar\_chunks} (recherche cosinus, top~8).
+\end{toolbox}
+
+\begin{toolbox}{2. \texttt{lire\_profil\_projet()}}{}
+Contexte réglementaire ET business déjà connu du projet : secteur détecté, classification (classe de risque MDR ou type d'agrément FinTech) si elle existe, réponses au questionnaire sectoriel, et champs business du projet (stage, description, technologies, customer\_segments, target\_users, value\_proposition).
+
+\textbf{Sert à} : contextualiser une génération.
+\end{toolbox}
+
+\begin{toolbox}{3. \texttt{lire\_diagnostics\_existants()}}{}
+Résultats déjà persistés pour ce projet (obligations RGPD, classification AI Act, chapitres de gap-analysis HealthTech/FinTech avec leurs obligations et le statut manuel « accompli »).
+
+\textbf{Sert à} : répondre sans régénérer --- pensé pour le copilot (section~\ref{sec:copilot}), pas encore utilisé par le pilote actuel qui ne fait que générer.
+\end{toolbox}
+
+\begin{tcolorbox}[enhanced, colback=red!4!white, colframe=warnred, arc=2pt,
+  boxrule=0.8pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  title={Explicitement exclus}, fonttitle=\bfseries, coltitle=white, colbacktitle=warnred]
+\begin{itemize}[leftmargin=1.2em]
+  \item Un \textbf{tool d'écriture} --- l'agent ne modifie jamais la DB (frontière de sécurité, pas une limite technique).
+  \item Un \textbf{tool de recherche web} --- casserait la garantie de source vérifiable (voir section~\ref{sec:raisonnement}).
+\end{itemize}
+\end{tcolorbox}
+
+\section{Comment il raisonne, et garde-fous}
+\label{sec:raisonnement}
+
+Implémenté avec \textbf{pydantic-ai} (\code{agents/compliance\_agent/healthtech\_gap\_analysis\_service.py}) : un \code{pydantic\_ai.Agent} construit avec un modèle Groq (\code{openai/gpt-oss-120b}), un system prompt, les 3~tools, et un schéma de sortie structuré (\code{GapAnalysisResult}).
+
+\subsection{Règles imposées par le system prompt}
+
+\begin{itemize}[leftmargin=1.2em]
+    \item Jamais d'obligation inventée sans chunk réellement vu pendant la tâche en cours.
+    \item Les obligations doivent tenir compte de la classe de risque trouvée via \code{lire\_profil\_projet}.
+    \item Liste vide acceptée et correcte si le corpus ne couvre pas le sujet --- \textbf{jamais de recherche web de secours}. Un trou dans le corpus doit remonter pour un enrichissement contrôlé, pas être patché silencieusement à chaque appel.
+    \item Peut suggérer textuellement qu'une obligation semble déjà couverte par un fait du profil, mais ne coche jamais lui-même une case « accompli » --- action manuelle de l'entrepreneur.
+    \item \code{source\_id} doit être un identifiant réel vu via le tool de recherche, jamais inventé.
+\end{itemize}
+
+\begin{rulebox}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{UsageLimits(request\_limit=10, tool\_calls\_limit=6)} --- borne le nombre d'appels pour éviter qu'un agent jamais satisfait de ses recherches ne boucle indéfiniment (chaque tour coûte un appel LLM réel).
+  \item \textbf{Vérification a posteriori} (\code{\_obligations\_to\_dict}, côté backend) : chaque \code{source\_id} renvoyé par l'agent est comparé à l'ensemble des \code{source\_id} réellement vus pendant ce run. Un \code{source\_id} absent (hallucination) devient \code{None}, pas une erreur bloquante.
+\end{itemize}
+\end{rulebox}
+
+\subsection{Comment il choisit quel tool appeler}
+
+C'est le LLM lui-même, pas du code. Le system prompt décrit ce que fait chaque tool (via sa signature et sa docstring, exposées automatiquement par pydantic-ai comme schéma de function-calling) ; à chaque étape, le modèle Groq décide s'il a besoin d'un tool, lequel, avec quels arguments, en se basant sur la tâche reçue et les résultats des appels précédents --- le mécanisme de function-calling natif de Groq (API compatible OpenAI).
+
+\section{Pourquoi les tools ne sont pas dans \texorpdfstring{\texttt{agents/}}{agents/}}
+\label{sec:separation}
+
+Règle déjà actée avant ce chantier : \textbf{\code{agents/} ne touche jamais la DB directement} (\code{backend/} possède SQLAlchemy et les \code{Session}).
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=1.4cm,
+  box/.style={rectangle, rounded corners, draw=winkblue2, fill=blue!4!white,
+              text width=4.4cm, align=center, minimum height=1.3cm, font=\small}
+]
+  \node[box, fill=green!8, draw=toolgreen] (backend) {\textbf{backend/}\\possède SQLAlchemy, les \texttt{Session}, la persistance};
+  \node[box, right=of backend] (agents) {\textbf{agents/}\\prompts, schémas Pydantic, appels LLM --- jamais de DB};
+
+  \draw[-{Latex[length=3mm]}, winkblue, thick] (backend) -- node[above, font=\small]{importe} (agents);
+  \draw[-{Latex[length=3mm]}, warnred, thick, dashed] ([yshift=-0.5cm]agents.south) to[out=-90,in=-90, looseness=1.3]
+    node[below, font=\small\color{warnred}]{jamais l'inverse} ([yshift=-0.5cm]backend.south);
+\end{tikzpicture}
+\end{center}
+
+Deux des trois tools ont besoin d'une \code{Session} pour lire la DB --- donc leur implémentation vit dans \code{backend/entrepreneur/services/compliance\_agent\_tools\_service.py}, fermée par closure sur \texttt{(db, user, project\_id)}, puis \textbf{injectée} à l'agent au moment de l'appel :
+
+\begin{center}
+\texttt{generate\_gap\_analysis(chapitre\_titre, requete, tools)}
+\end{center}
+
+Cela respecte le sens de dépendance déjà en place sans dépendance circulaire. Le fichier \code{agents/compliance\_agent/healthtech\_gap\_analysis\_service.py} ne sait pas que ces fonctions touchent une DB --- il reçoit juste une liste de fonctions Python à enregistrer sur l'\code{Agent}. L'endroit où vit le code d'un tool ne change rien au fait que c'est bien le LLM qui décide de l'appeler : c'est une question d'organisation de dépôt, pas de définition d'un agent.
+
+\section{Rôle prévu dans le futur copilot --- pas encore construit}
+\label{sec:copilot}
+
+\begin{statebox}{État actuel --- ce qui existe réellement}{}
+\code{compliance\_agent} n'est appelé QUE depuis la chaîne suivante :
+\end{statebox}
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.55cm,
+  box/.style={rectangle, rounded corners, draw=winkblue2, fill=blue!4!white,
+              text width=8.6cm, align=left, minimum height=0.95cm, font=\small, inner sep=6pt}
+]
+  \node[box] (c1) {\textbf{Clic} « Générer »/« Régénérer » --- \code{SectorDiagnosticPage.tsx}};
+  \node[box, below=of c1] (c2) {\textbf{Route} \texttt{\seqsplit{POST /projects/\{id\}/sector/healthtech/gap-analysis/\{chapitre\}}} --- \code{sector\_router.py}};
+  \node[box, below=of c2] (c3) {\textbf{Service} \code{run\_chapter\_diagnostic} --- \code{healthtech\_gap\_analysis\_diagnostic\_service.py}};
+  \node[box, below=of c3, fill=green!8, draw=toolgreen] (c4) {\textbf{Agent} \code{compliance\_agent} (boucle de raisonnement à tools)};
+
+  \draw[-{Latex[length=2.5mm]}, winkblue, thick] (c1) -- (c2);
+  \draw[-{Latex[length=2.5mm]}, winkblue, thick] (c2) -- (c3);
+  \draw[-{Latex[length=2.5mm]}, winkblue, thick] (c3) -- (c4);
+\end{tikzpicture}
+\end{center}
+
+Aucun copilot n'existe encore --- \code{agents/orchestrator/} est un dossier vide (juste un \code{.gitkeep}), aucune route de conversation libre n'est câblée.
+
+\begin{statebox}{Ce qui est prévu --- décision produit, pas encore implémenté}{}
+Le futur copilot entrepreneur posera des questions libres (« est-ce que je dois faire une AIPD~? », « où en est mon dossier MDR~? »).
+\end{statebox}
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.55cm,
+  box/.style={rectangle, rounded corners, draw=gray, fill=gray!6,
+              text width=8.6cm, align=left, minimum height=0.95cm, font=\small, inner sep=6pt, dashed}
+]
+  \node[box] (f1) {\textbf{Question libre} de l'entrepreneur (copilot --- pas encore construit)};
+  \node[box, below=of f1] (f2) {\textbf{Orchestrateur} \code{agents/orchestrator/} (à construire) --- route vers le bon agent};
+  \node[box, below=of f2, draw=toolgreen] (f3) {\textbf{Agent} \code{compliance\_agent} --- utilise \code{lire\_diagnostics\_existants} pour répondre sans régénérer};
+
+  \draw[-{Latex[length=2.5mm]}, gray, thick, dashed] (f1) -- (f2);
+  \draw[-{Latex[length=2.5mm]}, gray, thick, dashed] (f2) -- (f3);
+\end{tikzpicture}
+\end{center}
+
+C'est précisément pour cet usage que \code{lire\_diagnostics\_existants} a été conçu dès maintenant, même si le pilote actuel (génération pure) ne s'en sert pas encore. Reste à construire : la route de conversation libre, l'orchestrateur qui décide vers quel agent router, et la conversion des 4 autres tâches (RGPD, AI Act, FinTech gap, détection secteur) au même pattern à tools que le pilote HealthTech.
+
+\section{Fichiers touchés}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{6.7cm}>{\raggedright\arraybackslash}p{8cm}}
+\toprule
+\textbf{Fichier} & \textbf{Changement} \\
+\midrule
+\endhead
+\code{agents/compliance\_agent/} & Renommé depuis \code{regulatory\_agent/} (5 fichiers : \texttt{ai\_act\_service.py}, \texttt{fintech\_gap\_analysis\_service.py}, \texttt{healthtech\_gap\_analysis\_service.py} [converti en agent], \texttt{rgpd\_service.py}, \texttt{sector\_detection\_service.py}) \\[4pt]
+\code{compliance\_agent\_tools\_service.py} & Nouveau fichier (\code{backend/entrepreneur/services/}) --- les 3 tools, accès DB \\[4pt]
+\code{healthtech\_gap\_analysis\_diagnostic\_service.py} & Réécrit pour construire les tools et appeler l'agent au lieu de faire le RAG lui-même \\[4pt]
+\code{llm\_config.yaml} / \code{prompts.yaml} & Clés renommées \texttt{regulatory\_agent\_*} $\rightarrow$ \texttt{compliance\_agent\_*} ; nouvelle clé \texttt{system} (remplace \texttt{diagnostic}) pour \texttt{compliance\_agent\_healthtech\_gap} \\[4pt]
+\code{backend/requirements.txt} & Ajout \texttt{pydantic-ai-slim[groq]>=2.46.0}, bump \texttt{pydantic>=2.12.0} et \texttt{groq>=0.25.0} \\[4pt]
+\texttt{RegulatoryAgentError} & Renommé \texttt{RgpdAgentError} (cohérence avec les autres exceptions du dossier) \\
+\bottomrule
+\end{longtable}
+
+\begin{tcolorbox}[enhanced, colback=yellow!8!white, colframe=orange!70!black,
+  arc=2pt, boxrule=0.8pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  title={Non testé de bout en bout}, fonttitle=\bfseries, coltitle=black, colbacktitle=orange!30!white]
+\code{GROQ\_API\_KEY} existe déjà dans \code{backend/.env} (ajoutée pour l'extraction de documents, \code{agents/shared/document\_processing/}) et sera réutilisée telle quelle par \code{GroqProvider} --- mais aucun vrai appel Groq avec la boucle de tool-calling n'a encore été exécuté sur ce chantier : seule la syntaxe et la résolution des imports ont été vérifiées (\code{py\_compile}).
+\end{tcolorbox}
+
+\section{Marche à suivre pour tester}
+
+\subsection{Préparation}
+\begin{enumerate}[leftmargin=1.4em]
+  \item \code{GROQ\_API\_KEY} est déjà présente dans \code{backend/.env} --- rien à faire.
+  \item Installer les nouvelles dépendances dans le \textbf{vrai} environnement du projet (\code{.venv} Windows) : \texttt{pip install -r backend/requirements.txt}.
+\end{enumerate}
+
+\subsection{Test technique --- ça tourne sans erreur ?}
+Le plus rapide : lancer le backend (\code{uvicorn}), ouvrir un projet HealthTech au questionnaire complet, cliquer « Générer » sur le premier chapitre, regarder les logs serveur.
+
+Pour un test isolé sans passer par l'UI :
+\begin{tcolorbox}[enhanced, breakable, colback=codebg, colframe=codeframe,
+  arc=2pt, boxrule=0.6pt, left=6pt, right=6pt, top=4pt, bottom=4pt]
+\small\ttfamily
+from backend.shared.database import SessionLocal\\
+from backend.entrepreneur.services.compliance\_agent\_tools\_service import build\_compliance\_agent\_tools\\
+from agents.compliance\_agent.healthtech\_gap\_analysis\_service import generate\_gap\_analysis\\[4pt]
+db = SessionLocal()\\
+seen = []\\
+tools = build\_compliance\_agent\_tools(db, user, project\_id, seen)\\
+result = generate\_gap\_analysis("Obligations du fabricant", "obligations du fabricant avant mise sur le marché MDR", tools)\\
+print(result.model\_dump\_json(indent=2))\\
+print("Chunks vus :", seen)
+\end{tcolorbox}
+
+\subsection{Validation de fond --- est-ce correct sur le plan réglementaire ?}
+
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{Traçabilité} : logue systématiquement les \code{seen\_source\_ids} à côté du résultat --- vérifie que le contenu cité est pertinent, pas juste que l'ID existe.
+  \item \textbf{Relecture humaine} : pour chaque \code{source\_id} cité, relire le chunk réel (ou l'article MDR correspondant sur EUR-Lex) et vérifier que l'obligation générée en est une interprétation fidèle. Aucun test automatisé ne remplace ça pour les premiers runs de chaque chapitre.
+  \item \textbf{Sensibilité à la classe de risque} : générer le même chapitre pour deux projets de classes différentes (I vs III) --- les obligations doivent différer en conséquence.
+  \item \textbf{Cas limites} : classe de risque non déterminée (ne doit rien halluciner), domaine sans chunk pertinent (doit renvoyer une liste vide justifiée), rejouer deux fois le même chapitre à température~0 (résultats globalement stables).
+  \item \textbf{Consommation} : \code{result.usage()} donne le nombre de requêtes/tool-calls réellement utilisés --- doit rester loin des limites (6 tool-calls, 10 requêtes) ; sinon, l'agent cherche trop ou le corpus est mal indexé pour ce chapitre.
+\end{itemize}
+
+\end{document}

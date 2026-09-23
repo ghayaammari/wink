@@ -120,6 +120,20 @@ DIRECT_FIELD_NAMES = ("title", "abstract", "venue", "doi", "publication_type")
 # coup dans un autre appel — même cause racine : trop de tokens/minute).
 LLM_CALL_PAUSE_SECONDS = 2
 
+# ⚠️ DETTE TECHNIQUE TEMPORAIRE (demandée le 22/09/2026, pour avancer plus
+# vite sur le développement du matching sans attendre qu'une extraction
+# complète traite les dizaines de publications réelles de chaque chercheur
+# de test -- chaque travail = 1 appel LLM + LLM_CALL_PAUSE_SECONDS de pause,
+# une extraction complète peut prendre plusieurs minutes). Coupe les travaux
+# renvoyés par HAL/OpenAlex aux _MAX_WORKS_PER_EXTRACTION premiers avant
+# traitement, pour TOUS les chercheurs, pas seulement les comptes de test --
+# aucun moyen de cibler "juste ces 3 comptes" sans complexifier inutilement
+# ce fichier pour un réglage temporaire. À RETIRER (ou remonter) une fois le
+# développement du matching avancé : un chercheur avec plus de
+# _MAX_WORKS_PER_EXTRACTION publications perd silencieusement le reste de
+# son corpus de matching tant que cette limite reste active.
+_MAX_WORKS_PER_EXTRACTION = 4
+
 
 def run_extraction(researcher_profile_id: uuid.UUID, orcid_id: str) -> None:
     """HAL/OpenAlex — voir _fetch_from_hal_openalex.
@@ -148,7 +162,7 @@ def run_extraction(researcher_profile_id: uuid.UUID, orcid_id: str) -> None:
         profile.sync_status = "in_progress"
         db.commit()
 
-        works_data = _fetch_from_hal_openalex(orcid_id)
+        works_data = _fetch_from_hal_openalex(orcid_id)[:_MAX_WORKS_PER_EXTRACTION]
 
         for work_data in works_data:
             try:

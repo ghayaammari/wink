@@ -45,6 +45,7 @@ def upsert_legal_text(
     sous_theme: str | None = None,
     forme_juridique_concernee: list[str] | None = None,
     chunking_suggere: str = "aucun",
+    type_source: str = "article_loi",
     source_url: str | None = None,
     date_effet=None,
     date_derniere_modification=None,
@@ -68,6 +69,7 @@ def upsert_legal_text(
         sous_theme=sous_theme,
         forme_juridique_concernee=forme_juridique_concernee or [],
         chunking_suggere=chunking_suggere,
+        type_source=type_source,
         source_url=source_url,
         date_effet=date_effet,
         date_derniere_modification=date_derniere_modification,
@@ -128,6 +130,19 @@ def update_texte_brut(
     row.statut_contenu = "extrait_automatique"
     db.flush()
     return row, True
+
+
+def list_article_numeros(db: Session, *, code_source: str) -> set[str]:
+    """Retourne l'ensemble des article_numero deja presents pour cette source
+    (tout statut_contenu confondu) — utilise par un script de collecte pour
+    reprendre une collecte interrompue (ex: quota LLM epuise en cours de
+    route, voir collect_ai_act_articles.py) sans re-classifier par LLM des
+    articles deja upsertes lors d'un run precedent. Ne filtre pas par statut :
+    un article deja en 'extrait_automatique' (pas encore valide humainement)
+    compte deja comme traite, la validation humaine est une etape separee
+    qui ne necessite pas de rappel LLM."""
+    rows = db.query(LegalText.article_numero).filter(LegalText.code_source == code_source).all()
+    return {numero for (numero,) in rows if numero is not None}
 
 
 def list_valide_humain(db: Session) -> list[LegalText]:
