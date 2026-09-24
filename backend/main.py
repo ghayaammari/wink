@@ -36,16 +36,23 @@ from backend.entrepreneur.routes.pitch_router import router as pitch_router
 from backend.entrepreneur.routes.certification_router import router as certification_router
 from backend.matching.routes.research_need_router import router as research_need_router
 from backend.matching.routes.chercheur_matching_router import router as chercheur_matching_router
+from backend.entrepreneur.routes.startup_offer_matching_router import router as startup_offer_matching_router
+from backend.entrepreneur.routes.investment_offer_catalogue_router import router as investment_offer_catalogue_router
 from backend.shared.auth.routes.auth_router import router as auth_router
 from backend.chercheur.routes.researcher_profile_router import router as researcher_profile_router
 from backend.chercheur.routes.research_work_router import router as research_work_router
 from backend.chercheur.routes.researcher_past_expertise_router import router as researcher_past_expertise_router
+from backend.investisseur.routes.investment_offer_router import router as investment_offer_router
+from backend.investisseur.routes.investisseur_matching_router import router as investisseur_matching_router
 from backend.investisseur.routes.investor_router import router as investor_router
 from backend.shared.knowledge_base.routes.legal_texts_validation_router import (
     router as legal_texts_validation_router,
 )
 from backend.shared.knowledge_base.routes.sector_insurance_validation_router import (
     router as sector_insurance_validation_router,
+)
+from backend.shared.knowledge_base.routes.administrative_guides_validation_router import (
+    router as administrative_guides_validation_router,
 )
 
 
@@ -54,8 +61,17 @@ app.include_router(researcher_profile_router)
 app.include_router(research_work_router)
 app.include_router(researcher_past_expertise_router)
 app.include_router(investor_router)
+# investisseur_matching_router AVANT investment_offer_router : les deux
+# partagent le prefix "/investisseur/offres", et FastAPI teste les routes
+# dans l'ordre d'inclusion -- la route statique GET /interessantes doit
+# être vue avant la route dynamique GET /{offer_id} d'investment_offer_router,
+# sinon "interessantes" est capturé comme offer_id et échoue la validation
+# UUID (422 "Input should be a valid UUID").
+app.include_router(investisseur_matching_router)
+app.include_router(investment_offer_router)
 app.include_router(legal_texts_validation_router)
 app.include_router(sector_insurance_validation_router)
+app.include_router(administrative_guides_validation_router)
 
 # CORS : nécessaire dès que le frontend (React, autre origine) appelle l'API
 # depuis un navigateur. Liste lue depuis l'env, avec un défaut de dev
@@ -91,6 +107,8 @@ app.include_router(pitch_router)
 app.include_router(certification_router)
 app.include_router(research_need_router)
 app.include_router(chercheur_matching_router)
+app.include_router(startup_offer_matching_router)
+app.include_router(investment_offer_catalogue_router)
 app.include_router(name_availability_router)
 
 

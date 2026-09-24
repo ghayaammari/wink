@@ -14,6 +14,7 @@ etc.), jamais de l'agent -- voir conversation produit sur les limites
 volontaires de cet agent (pas de web search, pas d'ecriture en base, pas de
 cochage automatique d'une obligation comme accomplie).
 """
+import logging
 from typing import Callable
 from uuid import UUID
 
@@ -78,6 +79,8 @@ from backend.shared.models.user import User
 # complementaire a la troncature plutot qu'un remplacement. Meme compromis
 # assume qu'en v2 : un peu moins de contexte par recherche, pour tenir dans
 # le tier gratuit.
+logger = logging.getLogger(__name__)
+
 _TOP_K_CHUNKS = 3
 
 # CORRECTIF du 22/09/2026 (v2) -- meme apres la baisse ci-dessus (alors a 5),
@@ -154,6 +157,7 @@ def _build_rechercher_corpus_reglementaire(
         ou une liste vide si rien de pertinent n'est trouve (dans ce cas, ne
         pas inventer d'obligation).
         """
+        logger.info("compliance_agent -- tool rechercher_corpus_reglementaire(domaine=%r, requete=%r)", domaine, requete)
         embedding = embed_texts([requete])[0]
         chunks = search_similar_chunks(db, domaine=domaine, query_embedding=embedding, top_k=_TOP_K_CHUNKS)
         seen_source_ids.extend(chunk.source_id for chunk in chunks)
@@ -203,6 +207,7 @@ def _build_lire_profil_projet(
         sauf si le sous-agent appelant n'en a explicitement pas besoin (voir
         inclure_questionnaires_generaux).
         """
+        logger.info("compliance_agent -- tool lire_profil_projet()")
         project = get_owned_project(db, user, project_id)
         detection = get_or_create_detection(db, user, project_id)
 
@@ -295,6 +300,7 @@ def _build_lire_diagnostics_existants(db: Session, user: User, project_id: UUID)
         "healthtech_gap_analysis.score" pour la conformite HealthTech,
         jamais "statut_generation".
         """
+        logger.info("compliance_agent -- tool lire_diagnostics_existants()")
         rgpd_obligations = list_obligations(db, user, project_id)
         ai_act_obligations = list_ai_act_obligations(db, user, project_id)
         ai_act_classification = get_or_create_ai_act_classification(db, user, project_id)
