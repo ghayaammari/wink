@@ -4,6 +4,8 @@ Manipule `projects`, `project_legal_profiles`, `project_public_profiles` — voi
 Wink_architecture_fichiers.md pour la justification du nom (par table/domaine,
 pas par écran/flow).
 """
+from decimal import Decimal
+
 from sqlalchemy.orm import Session
 
 from backend.entrepreneur.models.entrepreneur_profile import EntrepreneurProfile
@@ -188,6 +190,26 @@ def create_legal_profile(
     return legal_profile
 
 
+def _verifier_coherence_capital(legal_profile: ProjectLegalProfile) -> None:
+    """Capital = nombre d'actions × valeur nominale, contrôlé APRÈS fusion
+    avec l'existant (un PATCH peut n'envoyer qu'un des 3 champs). Contrôle
+    seulement si les 3 sont renseignés — un profil partiel reste accepté.
+    Sans ce contrôle, les statuts (Art. 6/7) imprimeraient des montants
+    contradictoires."""
+    capital, actions, nominale = (
+        legal_profile.capital_social,
+        legal_profile.nombre_actions,
+        legal_profile.valeur_nominale,
+    )
+    if capital is None or actions is None or nominale is None:
+        return
+    if Decimal(actions) * Decimal(nominale) != Decimal(capital):
+        raise ProjectError(
+            f"Incohérence : {actions} actions × {nominale} € = {Decimal(actions) * Decimal(nominale)} €, "
+            f"différent du capital social ({capital} €)."
+        )
+
+
 def update_legal_profile(
     db: Session, user: User, project_id, data: ProjectLegalProfileUpdate
 ) -> ProjectLegalProfile:
@@ -211,6 +233,7 @@ def update_legal_profile(
     updates = data.model_dump(exclude_unset=True)
     for field, value in updates.items():
         setattr(legal_profile, field, value)
+    _verifier_coherence_capital(legal_profile)
 
     persist_completion(db, project)
     db.commit()

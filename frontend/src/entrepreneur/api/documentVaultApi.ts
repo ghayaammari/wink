@@ -7,7 +7,19 @@ import { ApiError } from "../../shared/api/authApi"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-export type DocumentType = "entrepreneur_idea" | "other"
+// Élargi (25/09/2026, service 1.1.4 statuts) — `documents.document_type` a
+// déjà les 4 valeurs en base depuis la migration d2e3f4a5b6c7 (voir Document
+// côté backend), mais ce type ici n'avait jamais été mis à jour en même
+// temps que "pacte_fondateurs" (service 1.1.13) : un pacte déjà généré
+// s'affichait dans le coffre-fort avec son nom technique brut au lieu d'un
+// libellé (voir DOCUMENT_TYPE_LABEL dans DocumentVaultPage.tsx, même bug).
+export type DocumentType =
+  | "entrepreneur_idea"
+  | "other"
+  | "pacte_fondateurs"
+  | "statuts"
+  // Service 1.1.5 : attestation de parution déposée par l'entrepreneur.
+  | "attestation_annonce_legale"
 
 export interface DocumentVaultItemRead {
   id: string

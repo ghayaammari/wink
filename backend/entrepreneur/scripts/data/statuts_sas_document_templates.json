@@ -1,0 +1,1752 @@
+[
+  {
+    "code_section": "titre_article_1",
+    "article": 1,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 1,
+    "titre_affiche": "Forme",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "forme",
+    "article": 1,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 2,
+    "titre_affiche": "Forme",
+    "explication": null,
+    "reference_code_clause": "forme",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_2",
+    "article": 2,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 3,
+    "titre_affiche": "Objet",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "objet_social",
+    "article": 2,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 4,
+    "titre_affiche": "Objet",
+    "explication": null,
+    "reference_code_clause": "objet_social",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "raison_d_etre",
+    "article": 2,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 5,
+    "titre_affiche": "Raison d'être",
+    "explication": "La loi Pacte (art. 1835 du Code civil) permet à la Société de se doter d'une raison d'être : une déclaration des principes qui guident l'action de la Société.",
+    "reference_code_clause": "raison_d_etre",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "economie_sociale_solidaire",
+    "article": 2,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 6,
+    "titre_affiche": "Entreprise de l'économie sociale et solidaire (ESS)",
+    "explication": "Si la Société est constituée en tant qu'entreprise de l'économie sociale et solidaire et poursuit une utilité sociale, cette qualité peut être inscrite dans les statuts.",
+    "reference_code_clause": "economie_sociale_solidaire",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_3",
+    "article": 3,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 7,
+    "titre_affiche": "Dénomination sociale",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "denomination_sociale",
+    "article": 3,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 8,
+    "titre_affiche": "Dénomination sociale",
+    "explication": null,
+    "reference_code_clause": "denomination_sociale",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "sigle",
+    "article": 3,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 9,
+    "titre_affiche": "Sigle",
+    "explication": "La dénomination sociale peut être résumée par un sigle.",
+    "reference_code_clause": "sigle",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_4",
+    "article": 4,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 10,
+    "titre_affiche": "Siège social",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "siege_social",
+    "article": 4,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 11,
+    "titre_affiche": "Siège social",
+    "explication": null,
+    "reference_code_clause": "siege_social",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "transfert_siege",
+    "article": 4,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 12,
+    "titre_affiche": "4.1 Transfert du siège social",
+    "explication": "Choisir le mode de transfert du siège social le mieux adapté : par le Président seul, avec ou sans ratification par les associés, limité ou non à une zone géographique, ou exclusivement par décision collective des associés.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "transfert_siege_president_sans_ratification",
+      "transfert_siege_president_avec_ratification",
+      "transfert_siege_president_zone_geographique",
+      "transfert_siege_decision_associes"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_5",
+    "article": 5,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 13,
+    "titre_affiche": "Durée",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "duree",
+    "article": 5,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 14,
+    "titre_affiche": "Durée",
+    "explication": null,
+    "reference_code_clause": "duree",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_6",
+    "article": 6,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 15,
+    "titre_affiche": "Apports",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "apports",
+    "article": 6,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 16,
+    "titre_affiche": "Apports",
+    "explication": null,
+    "reference_code_clause": "apports",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "apport_nature_identite",
+    "article": 6,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 17,
+    "titre_affiche": "6.2 Apports en nature",
+    "explication": null,
+    "reference_code_clause": "apport_nature_identite",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "apports_numeraire_liberation",
+    "article": 6,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 18,
+    "titre_affiche": "6.1 Apports en numéraire",
+    "explication": "Choisir entre des apports en numéraire entièrement libérés à la souscription, ou partiellement libérés (avec la fraction minimum légale de libération).",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "apport_numeraire_liberes",
+      "apport_numeraire_non_liberes"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "depot_fonds_numeraire",
+    "article": 6,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 19,
+    "titre_affiche": "Dépôt des fonds",
+    "explication": "Indique les modalités de dépôt des fonds versés par les apporteurs en numéraire (notaire, banque ou Caisse des dépôts).",
+    "reference_code_clause": "depot_fonds_numeraire",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "apports_numeraire_liberation",
+    "depend_de_variantes": [
+      "apport_numeraire_liberes",
+      "apport_numeraire_non_liberes"
+    ]
+  },
+  {
+    "code_section": "depot_fonds_surplus",
+    "article": 6,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 20,
+    "titre_affiche": "Dépôt des fonds et libération du surplus",
+    "explication": "Complète la clause de dépôt dans le cas où les actions ne sont pas intégralement libérées à la souscription.",
+    "reference_code_clause": "depot_fonds_surplus",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "apports_numeraire_liberation",
+    "depend_de_variantes": [
+      "apport_numeraire_non_liberes"
+    ]
+  },
+  {
+    "code_section": "evaluation_apports_nature",
+    "article": 6,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 21,
+    "titre_affiche": "6.2 Évaluation des apports en nature",
+    "explication": "Choisir comment l'évaluation des apports en nature est effectuée : commissaire aux apports (unanimité ou ordonnance), ou dispense de commissaire (L.227-1 ou L.225-8-1).",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "commissaire_apports_unanimite",
+      "commissaire_apports_ordonnance",
+      "dispense_commissaire_apports_l227_1",
+      "dispense_commissaire_apports_l225_8_1"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "apports_industrie",
+    "article": 6,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 22,
+    "titre_affiche": "6.2 bis Apports en industrie",
+    "explication": "Les apports en industrie ne concourent pas au capital social mais ouvrent droit au partage des bénéfices et de l'actif net, et à la contribution aux pertes.",
+    "reference_code_clause": "apports_industrie",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "recapitulation_apports",
+    "article": 6,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 23,
+    "titre_affiche": "6.3 Récapitulation des apports formant le capital social",
+    "explication": null,
+    "reference_code_clause": "recapitulation_apports",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_7",
+    "article": 7,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 24,
+    "titre_affiche": "Capital social",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "capital_actions_ordinaires",
+    "article": 7,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 25,
+    "titre_affiche": "Capital social",
+    "explication": null,
+    "reference_code_clause": "capital_actions_ordinaires",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_8",
+    "article": 8,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 26,
+    "titre_affiche": "Avantages particuliers",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "avantages_particuliers",
+    "article": 8,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 27,
+    "titre_affiche": "8.1 Avantages particuliers",
+    "explication": "Indiquer s'il existe des avantages particuliers stipulés aux statuts.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "absence_avantages_particuliers",
+      "avantages_particuliers_stipules"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_11",
+    "article": 11,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 28,
+    "titre_affiche": "Forme des actions",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "forme_actions",
+    "article": 11,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 29,
+    "titre_affiche": "Forme des actions",
+    "explication": null,
+    "reference_code_clause": "forme_actions",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_14",
+    "article": 14,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 30,
+    "titre_affiche": "Transmission des actions",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "transmission_actions",
+    "article": 14,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 31,
+    "titre_affiche": "14.1 Régime de cession",
+    "explication": "Choisir si la cession des actions est libre ou soumise à des restrictions (inaliénabilité, préemption, agrément).",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "cession_actions_libre",
+      "cession_actions_restrictions"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "definitions_transfert_titre",
+    "article": 14,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 32,
+    "titre_affiche": "Définitions : transfert et titre",
+    "explication": "Définitions données pour les besoins des statuts lorsque la cession est soumise à des restrictions.",
+    "reference_code_clause": "definitions_transfert_titre",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "transmission_actions",
+    "depend_de_variantes": [
+      "cession_actions_restrictions"
+    ]
+  },
+  {
+    "code_section": "titre_article_15",
+    "article": 15,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 33,
+    "titre_affiche": "Inaliénabilité",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "inalienabilite",
+    "article": 15,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 34,
+    "titre_affiche": "Inaliénabilité",
+    "explication": null,
+    "reference_code_clause": "inalienabilite",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "inalienabilite_exception_exclusion_controle",
+    "article": 15,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 35,
+    "titre_affiche": "Exception en cas d'exclusion ou de changement de contrôle",
+    "explication": "Si les statuts prévoient une clause d'exclusion ou de changement de contrôle, l'inaliénabilité ne s'applique pas dans ces hypothèses.",
+    "reference_code_clause": "inalienabilite_exception_exclusion_controle",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "inalienabilite_exceptions",
+    "article": 15,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 36,
+    "titre_affiche": "Exceptions à l'inaliénabilité",
+    "explication": "Prévoir des exceptions supplémentaires à l'inaliénabilité.",
+    "reference_code_clause": "inalienabilite_exceptions",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "inalienabilite",
+    "depend_de_variantes": [
+      "inalienabilite"
+    ]
+  },
+  {
+    "code_section": "inalienabilite_fin_periode",
+    "article": 15,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 37,
+    "titre_affiche": "Fin de la période d'inaliénabilité",
+    "explication": "Si les statuts prévoient une clause de préemption et/ou d'agrément, précision du sort des titres à l'issue de la période d'inaliénabilité.",
+    "reference_code_clause": "inalienabilite_fin_periode",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_16",
+    "article": 16,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 38,
+    "titre_affiche": "Droit de préemption",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "droit_preemption",
+    "article": 16,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 39,
+    "titre_affiche": "Droit de préemption",
+    "explication": null,
+    "reference_code_clause": "droit_preemption",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "demande_agrement_tiers",
+    "article": 16,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 40,
+    "titre_affiche": "Demande expresse d'agrément du tiers envisagé",
+    "explication": "Si une clause d'agrément est prévue, la notification de transfert doit comporter la demande d'agrément du tiers et constituer une offre irrévocable.",
+    "reference_code_clause": "demande_agrement_tiers",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "preemption_procedure_agrement",
+    "article": 16,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 41,
+    "titre_affiche": "Articulation avec la procédure d'agrément",
+    "explication": "Si une clause d'agrément est prévue, l'associé cédant doit suivre la procédure d'agrément en sus de la préemption.",
+    "reference_code_clause": "preemption_procedure_agrement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "preemption_realisation_transfert",
+    "article": 16,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 42,
+    "titre_affiche": "Réalisation du transfert et nullité",
+    "explication": "Si une clause d'agrément est prévue : réalisation du transfert en cas d'exercice de la préemption et nullité des transferts effectués en violation.",
+    "reference_code_clause": "preemption_realisation_transfert",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "preemption_exceptions",
+    "article": 16,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 43,
+    "titre_affiche": "Exceptions au droit de préemption",
+    "explication": "Prévoir des transferts non soumis au droit de préemption.",
+    "reference_code_clause": "preemption_exceptions",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "droit_preemption",
+    "depend_de_variantes": [
+      "droit_preemption"
+    ]
+  },
+  {
+    "code_section": "titre_article_17",
+    "article": 17,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 44,
+    "titre_affiche": "Agrément",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "agrement",
+    "article": 17,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 45,
+    "titre_affiche": "Agrément",
+    "explication": "Soumettre toute cession d'actions à l'accord préalable des associés (agrément). Facultatif en SAS (art. L.227-14 C. com.) ; si retenu, la clause doit figurer dans l'annonce légale.",
+    "reference_code_clause": "agrement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "transmission_actions",
+    "depend_de_variantes": [
+      "cession_actions_restrictions"
+    ]
+  },
+  {
+    "code_section": "agrement_notification_preemption",
+    "article": 17,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 46,
+    "titre_affiche": "Articulation avec la préemption",
+    "explication": null,
+    "reference_code_clause": "agrement_notification_preemption",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "droit_preemption",
+    "depend_de_variantes": [
+      "droit_preemption"
+    ]
+  },
+  {
+    "code_section": "agrement_decision",
+    "article": 17,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 47,
+    "titre_affiche": "Décision d'agrément",
+    "explication": null,
+    "reference_code_clause": "agrement_decision",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "agrement_suite",
+    "article": 17,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": true,
+    "ordre": 48,
+    "titre_affiche": "17.2 Suite (paragraphe 3)",
+    "explication": "Paragraphe 3, déduit automatiquement selon que les statuts comportent ou non une clause de préemption (Art. 16).",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "agrement_suite_sans_preemption",
+      "agrement_suite_avec_preemption"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "agrement_refus_sanction_nantissement",
+    "article": 17,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 49,
+    "titre_affiche": "Refus d'agrément, sanction et nantissement",
+    "explication": null,
+    "reference_code_clause": "agrement_refus_sanction_nantissement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "agrement_exceptions",
+    "article": 17,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 50,
+    "titre_affiche": "Exceptions à l'agrément",
+    "explication": "Prévoir des transferts non soumis à agrément.",
+    "reference_code_clause": "agrement_exceptions",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "titre_article_18",
+    "article": 18,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 51,
+    "titre_affiche": "Location d’actions",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "regime_location_actions",
+    "article": 18,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 52,
+    "titre_affiche": "18.1 Régime de la location d'actions",
+    "explication": "Choisir si la location d'actions est interdite ou autorisée.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "location_actions_interdite",
+      "location_actions_autorisee"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "location_actions_agrement",
+    "article": 18,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 53,
+    "titre_affiche": "Location soumise à agrément",
+    "explication": "Si une clause d'agrément est prévue, toute location d'actions y est soumise.",
+    "reference_code_clause": "location_actions_agrement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "titre_article_19",
+    "article": 19,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 54,
+    "titre_affiche": "Modification dans le contrôle d’une société associée",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "changement_controle",
+    "article": 19,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 55,
+    "titre_affiche": "Modification dans le contrôle d'une société associée",
+    "explication": null,
+    "reference_code_clause": "changement_controle",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_20",
+    "article": 20,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 56,
+    "titre_affiche": "Exclusion",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "exclusion",
+    "article": 20,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 57,
+    "titre_affiche": "Exclusion",
+    "explication": null,
+    "reference_code_clause": "exclusion",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "exclusion_sans_preemption",
+    "article": 20,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 58,
+    "titre_affiche": "Cession des actions exclue de la préemption",
+    "explication": "Si une clause de préemption est prévue, la cession réalisée en cas d'exclusion n'y est pas soumise.",
+    "reference_code_clause": "exclusion_sans_preemption",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "droit_preemption",
+    "depend_de_variantes": [
+      "droit_preemption"
+    ]
+  },
+  {
+    "code_section": "exclusion_sans_agrement",
+    "article": 20,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 59,
+    "titre_affiche": "Cession des actions exclue de l'agrément",
+    "explication": "Si une clause d'agrément est prévue, la cession réalisée en cas d'exclusion n'y est pas soumise.",
+    "reference_code_clause": "exclusion_sans_agrement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "exclusion_preemption_et_agrement",
+    "article": 20,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 60,
+    "titre_affiche": "Cession des actions : prix de rachat et suspension des droits",
+    "explication": "En présence de clauses de préemption et d'agrément, détermination du prix de rachat et sort des droits non pécuniaires.",
+    "reference_code_clause": "exclusion_preemption_et_agrement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_21",
+    "article": 21,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 61,
+    "titre_affiche": "Comptes courants",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "comptes_courants",
+    "article": 21,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 62,
+    "titre_affiche": "Comptes courants",
+    "explication": null,
+    "reference_code_clause": "comptes_courants",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_22",
+    "article": 22,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 63,
+    "titre_affiche": "Président",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "president",
+    "article": 22,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 64,
+    "titre_affiche": "Président",
+    "explication": null,
+    "reference_code_clause": "president",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "remuneration_et_pouvoirs_president",
+    "article": 22,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 65,
+    "titre_affiche": "Rémunération et pouvoirs du Président",
+    "explication": null,
+    "reference_code_clause": "remuneration_et_pouvoirs_president",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "motifs_revocation_president",
+    "article": 22,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 66,
+    "titre_affiche": "Révocation du Président pour justes motifs",
+    "explication": "Facultatif : limiter la révocation du Président à de justes motifs (non précisés, ou listés). Passez cette étape si le Président peut être révoqué à tout moment.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "motifs_revocation_non_precises",
+      "motifs_revocation_precises"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "revocation_president_justes_motifs",
+    "depend_de_variantes": [
+      "revocation_president_justes_motifs"
+    ]
+  },
+  {
+    "code_section": "preavis_revocation_president",
+    "article": 22,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 67,
+    "titre_affiche": "Délai de préavis de révocation",
+    "explication": null,
+    "reference_code_clause": "preavis_revocation_president",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "limitation_pouvoirs_president",
+    "article": 22,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 68,
+    "titre_affiche": "Limitation de pouvoirs du Président",
+    "explication": "Soumettre certaines décisions du Président à une autorisation préalable de la collectivité des associés ou du Comité de Direction.",
+    "reference_code_clause": "limitation_pouvoirs_president",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_23",
+    "article": 23,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 69,
+    "titre_affiche": "Directeurs Généraux - Directeurs Généraux Délégués",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "directeurs_generaux",
+    "article": 23,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 70,
+    "titre_affiche": "Directeurs Généraux - Directeurs Généraux Délégués",
+    "explication": null,
+    "reference_code_clause": "directeurs_generaux",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_24",
+    "article": 24,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 71,
+    "titre_affiche": "Comité de direction",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "comite_direction",
+    "article": 24,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 72,
+    "titre_affiche": "Comité de Direction",
+    "explication": "Ajouter un Comité de Direction en complément du Président. Marqueur du segment 098.",
+    "reference_code_clause": "comite_direction",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "comite_direction_voix_preponderante",
+    "article": 24,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 73,
+    "titre_affiche": "Voix prépondérante et délibérations à distance",
+    "explication": "Prévoir la voix prépondérante du Président au Comité de Direction et les modalités de décisions à distance.",
+    "reference_code_clause": "comite_direction_voix_preponderante",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "comite_direction",
+    "depend_de_variantes": [
+      "comite_direction"
+    ]
+  },
+  {
+    "code_section": "titre_article_27",
+    "article": 27,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 74,
+    "titre_affiche": "Domaine réservé à la collectivité des associés",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "domaine_reserve",
+    "article": 27,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 75,
+    "titre_affiche": "Domaine réservé à la collectivité des associés",
+    "explication": null,
+    "reference_code_clause": "domaine_reserve",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "domaine_reserve_agrement",
+    "article": 27,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 76,
+    "titre_affiche": "Agrément des transferts de titres",
+    "explication": null,
+    "reference_code_clause": "domaine_reserve_agrement",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "agrement",
+    "depend_de_variantes": [
+      "agrement"
+    ]
+  },
+  {
+    "code_section": "domaine_reserve_exclusion",
+    "article": 27,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 77,
+    "titre_affiche": "Exclusion d'un associé et suspension des droits de vote",
+    "explication": null,
+    "reference_code_clause": "domaine_reserve_exclusion",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "exclusion",
+    "depend_de_variantes": [
+      "exclusion"
+    ]
+  },
+  {
+    "code_section": "domaine_reserve_comite_direction",
+    "article": 27,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 78,
+    "titre_affiche": "Nomination et révocation des membres du Comité de Direction",
+    "explication": null,
+    "reference_code_clause": "domaine_reserve_comite_direction",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": "comite_direction",
+    "depend_de_variantes": [
+      "comite_direction"
+    ]
+  },
+  {
+    "code_section": "domaine_reserve_autres_operations",
+    "article": 27,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 79,
+    "titre_affiche": "Autres opérations soumises à l'approbation des associés",
+    "explication": "Ajouter d'autres opérations que les associés souhaitent soumettre à leur approbation.",
+    "reference_code_clause": "domaine_reserve_autres_operations",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "domaine_reserve_seuils",
+    "article": 27,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 80,
+    "titre_affiche": "Seuils financiers soumis à l'approbation des associés",
+    "explication": "Fixer des montants au-delà desquels une acquisition/cession d'actif ou une dépense exige l'accord des associés.",
+    "reference_code_clause": "domaine_reserve_seuils",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "domaine_reserve_cloture",
+    "article": 27,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 81,
+    "titre_affiche": "Décisions requérant l'unanimité et compétence du Président",
+    "explication": null,
+    "reference_code_clause": "domaine_reserve_cloture",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_28",
+    "article": 28,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 82,
+    "titre_affiche": "Modalités des décisions collectives des associés",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "modalites_decisions_collectives",
+    "article": 28,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 83,
+    "titre_affiche": "Modalités des décisions collectives des associés",
+    "explication": null,
+    "reference_code_clause": "modalites_decisions_collectives",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_30",
+    "article": 30,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 84,
+    "titre_affiche": "Exercice social",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "exercice_social",
+    "article": 30,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": true,
+    "ordre": 85,
+    "titre_affiche": "29.1 Période de l'exercice social",
+    "explication": "Choisir si l'exercice social coïncide avec l'année civile ou non.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "exercice_annee_civile",
+      "exercice_hors_annee_civile"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_32",
+    "article": 32,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 86,
+    "titre_affiche": "Affectation et répartition des bénéfices",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "affectation_benefices",
+    "article": 32,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 87,
+    "titre_affiche": "Affectation et répartition des bénéfices",
+    "explication": null,
+    "reference_code_clause": "affectation_benefices",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "premier_dividende",
+    "article": 32,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 88,
+    "titre_affiche": "Premier dividende",
+    "explication": "Prévoir la distribution d'un premier dividende non cumulatif aux associés.",
+    "reference_code_clause": "premier_dividende",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "dividende_majore",
+    "article": 32,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 89,
+    "titre_affiche": "Dividende majoré",
+    "explication": "Prévoir une majoration de dividende pour les associés détenant leurs actions au nominatif depuis deux ans.",
+    "reference_code_clause": "dividende_majore",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_39",
+    "article": 39,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 90,
+    "titre_affiche": "Nomination du premier président",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "nomination_premier_president",
+    "article": 39,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 91,
+    "titre_affiche": "38.1 Identité du premier président",
+    "explication": "Choisir si le premier Président est une personne physique ou une personne morale.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "premier_president_personne_physique",
+      "premier_president_personne_morale"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_40",
+    "article": 40,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 92,
+    "titre_affiche": "Nomination du premier Directeur Général",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "nomination_premier_directeur_general",
+    "article": 40,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 93,
+    "titre_affiche": "39.1 Identité du premier Directeur Général",
+    "explication": "Choisir si le premier Directeur Général est une personne physique ou une personne morale.",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "premier_directeur_general_personne_physique",
+      "premier_directeur_general_personne_morale"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_41",
+    "article": 41,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 94,
+    "titre_affiche": "Nomination des premiers membres du Comité de Direction",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "nomination_premiers_membres_comite",
+    "article": 41,
+    "comportement_section": "variante_obligatoire",
+    "obligatoire": false,
+    "ordre": 95,
+    "titre_affiche": "40.1 Identité des premiers membres du Comité de Direction",
+    "explication": "Choisir la forme de chacun des membres du Comité de Direction (répéter la variante pour chaque membre).",
+    "reference_code_clause": null,
+    "variantes_candidates": [
+      "membre_comite_personne_physique",
+      "membre_comite_personne_morale"
+    ],
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_43",
+    "article": 43,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 96,
+    "titre_affiche": "Reprise des engagements accomplis pour le compte de la Société",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "reprise_engagements",
+    "article": 43,
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 97,
+    "titre_affiche": "Reprise des engagements accomplis pour le compte de la Société",
+    "explication": null,
+    "reference_code_clause": "reprise_engagements",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "titre_article_44",
+    "article": 44,
+    "comportement_section": "texte_statique",
+    "obligatoire": true,
+    "ordre": 98,
+    "titre_affiche": "Mandat pour accomplir des actes pour le compte de la Société après la signature des statuts et avant l’immatriculation de la Société au Registre du commerce et des sociétés",
+    "explication": null,
+    "texte_statique": null,
+    "formes_juridiques_concernees": null,
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "mandat_actes_societe_en_formation",
+    "article": 44,
+    "comportement_section": "clause_optionnelle",
+    "obligatoire": false,
+    "ordre": 99,
+    "titre_affiche": "Mandat pour accomplir des actes pour le compte de la Société avant immatriculation",
+    "explication": null,
+    "reference_code_clause": "mandat_actes_societe_en_formation",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "cloture_fait_a_signature",
+    "article": "cloture",
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 100,
+    "titre_affiche": "Fait à - Signature - Annexes I et II",
+    "explication": null,
+    "reference_code_clause": "cloture_fait_a_signature",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  },
+  {
+    "code_section": "cloture_annexe_mandat",
+    "article": "cloture",
+    "comportement_section": "mention_obligatoire",
+    "obligatoire": true,
+    "ordre": 101,
+    "titre_affiche": "Annexe III - Mandat pour les actes avant immatriculation",
+    "explication": null,
+    "reference_code_clause": "cloture_annexe_mandat",
+    "formes_juridiques_concernees": [
+      "SAS"
+    ],
+    "necessite_investisseurs": false,
+    "necessite_absence_investisseurs": false,
+    "depend_de_section": null,
+    "depend_de_variantes": null
+  }
+]

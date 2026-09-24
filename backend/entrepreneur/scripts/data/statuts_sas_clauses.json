@@ -1,0 +1,1883 @@
+[
+  {
+    "code_clause": "forme",
+    "article": 1,
+    "titre_clause": "Forme",
+    "description_clause": "Constitue la Société sous la forme d'une société par actions simplifiée, pouvant être uni- ou pluripersonnelle.",
+    "texte_clause": "La Société est une société par actions simplifiée.\nElle est régie par les dispositions législatives et réglementaires en vigueur ainsi que par les présents statuts.\nElle fonctionne indifféremment sous la même forme avec un ou plusieurs associés. A tout moment, la Société pourra devenir unipersonnelle ou redevenir pluripersonnelle sans que la forme sociale n'en soit modifiée.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "objet_social",
+    "article": 2,
+    "titre_clause": "Objet",
+    "description_clause": "Définit l'objet social : l'activité propre du projet, complétée par une clause standard de portée large.",
+    "texte_clause": "La Société a pour objet, directement ou indirectement, en France ou à l'étranger :\n• (activites_societe) ;\n• la participation directe ou indirecte de la Société à toutes activités ou opérations industrielles, commerciales ou financières, mobilières ou immobilières, en France ou à l'étranger, sous quelque forme que ce soit, dès lors que ces activités ou opérations peuvent se rattacher directement ou indirectement à l'objet social ou à tous objets similaires, connexes ou complémentaires ;\n• et plus généralement toutes opérations de quelque nature qu'elles soient, économiques ou juridiques, financières, civiles ou commerciales, pouvant se rattacher, directement ou indirectement, à cet objet social ou à tous objets similaires, connexes ou complémentaires.",
+    "variables_requises": [
+      {
+        "nom": "activites_societe",
+        "type": "auto_profil_juridique",
+        "libelle": "activité envisagée par la Société",
+        "champ": "objet_social"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "raison_d_etre",
+    "article": 2,
+    "titre_clause": "Raison d'être",
+    "description_clause": "Ajoute une raison d'être à la Société (option prévue par la loi Pacte).",
+    "texte_clause": "La Société a pour raison d'être (raison_d_etre).",
+    "variables_requises": [
+      {
+        "nom": "raison_d_etre",
+        "type": "auto_profil_juridique",
+        "libelle": "raison d'être de la Société",
+        "champ": "raison_d_etre"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "economie_sociale_solidaire",
+    "article": 2,
+    "titre_clause": "Entreprise de l'économie sociale et solidaire (ESS)",
+    "description_clause": "Ajoute la mention d'une utilité sociale (qualité d'entreprise de l'ESS) et ses objectifs.",
+    "texte_clause": "La recherche d'une utilité sociale, par la réalisation des objectifs suivants : (objectifs_ess).",
+    "variables_requises": [
+      {
+        "nom": "objectifs_ess",
+        "type": "auto_profil_juridique",
+        "libelle": "objectifs de la Société",
+        "champ": "objectifs_ess"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "denomination_sociale",
+    "article": 3,
+    "titre_clause": "Dénomination sociale",
+    "description_clause": "Fixe la dénomination sociale de la Société.",
+    "texte_clause": "La Société a pour dénomination sociale : (denomination_sociale).",
+    "variables_requises": [
+      {
+        "nom": "denomination_sociale",
+        "type": "auto_nom_societe",
+        "libelle": "dénomination sociale"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sigle",
+    "article": 3,
+    "titre_clause": "Sigle",
+    "description_clause": "Ajoute un sigle résumant la dénomination sociale.",
+    "texte_clause": "Cette dénomination sociale peut être résumée par le sigle (sigle).",
+    "variables_requises": [
+      {
+        "nom": "sigle",
+        "type": "auto_profil_juridique",
+        "libelle": "sigle",
+        "champ": "sigle"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "siege_social",
+    "article": 4,
+    "titre_clause": "Siège social",
+    "description_clause": "Fixe le siège social de la Société.",
+    "texte_clause": "Le siège social est fixé à : (siege_social).",
+    "variables_requises": [
+      {
+        "nom": "siege_social",
+        "type": "auto_siege_social",
+        "libelle": "adresse du siège social"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "transfert_siege_president_sans_ratification",
+    "article": 4,
+    "titre_clause": "Transfert par le Président sans ratification",
+    "description_clause": "Permet au Président seul de transférer le siège social.",
+    "texte_clause": "Il peut être transféré en tout autre endroit du territoire français par décision du Président, qui est habilité à modifier les statuts en conséquence.\nLa création, le déplacement, la fermeture des succursales, agences et dépôts situés en tous lieux ou à l'étranger, interviennent également sur décision du Président.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "transfert_siege_president_avec_ratification",
+    "article": 4,
+    "titre_clause": "Transfert par le Président avec ratification",
+    "description_clause": "Permet au Président de transférer le siège social sous réserve de ratification par les associés.",
+    "texte_clause": "Il peut être transféré en tout autre endroit du territoire français par décision du Président, qui est habilité à modifier les statuts en conséquence. Toutefois, cette décision devra être ratifiée par la plus proche décision collective des associés.\nLa création, le déplacement, la fermeture des succursales, agences et dépôts situés en tous lieux ou à l'étranger, interviennent également sur décision du Président qui devra être ratifiée par la plus proche décision collective des associés.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "transfert_siege_president_zone_geographique",
+    "article": 4,
+    "titre_clause": "Transfert du siège limité à une zone géographique",
+    "description_clause": "Limite le transfert du siège au département ou à ses départements limitrophes sans décision collective.",
+    "texte_clause": "Il peut être transféré en tout autre endroit du même département ou d'un département limitrophe par décision du Président, qui est habilité à modifier les statuts en conséquence. Cette décision devra être ratifiée par la plus proche décision collective des associés.\nLa création, le déplacement, la fermeture des succursales, agences et dépôts situés dans le département de situation du siège ou dans un département limitrophe interviennent également sur décision du Président qui devra être ratifiée par la plus proche décision collective des associés.\nLe transfert du siège social en tout autre lieu que le département de situation du siège ou dans un département limitrophe doit résulter d'une décision collective des associés.\nLa création, le déplacement, la fermeture des succursales, agences et dépôts situés en tout autre lieu que le département de situation du siège ou dans un département limitrophe interviennent sur décision collective des associés.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "transfert_siege_decision_associes",
+    "article": 4,
+    "titre_clause": "Transfert exclusif par décision des associés",
+    "description_clause": "Réserve le transfert du siège social à une décision collective des associés.",
+    "texte_clause": "Il peut être transféré en tout autre endroit du territoire français par décision collective des associés.\nLa création, le déplacement, la fermeture des succursales, agences et dépôts situés en tous lieux ou à l'étranger, interviennent également sur décision collective des associés.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "duree",
+    "article": 5,
+    "titre_clause": "Durée",
+    "description_clause": "Fixe la durée de la Société (max 99 ans) à compter de son immatriculation.",
+    "texte_clause": "La durée de la Société est de (duree_societe) ans à compter de la date de son immatriculation au Registre du commerce et des sociétés, sauf prorogation ou dissolution anticipée.",
+    "variables_requises": [
+      {
+        "nom": "duree_societe",
+        "type": "auto_profil_juridique",
+        "libelle": "durée de la Société",
+        "champ": "duree_societe"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "apports",
+    "article": 6,
+    "titre_clause": "Apports",
+    "description_clause": "Décrit les apports en numéraire et en nature formant le capital social.",
+    "texte_clause": "§ Apports en numéraire",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "apport_nature_identite",
+    "article": 6,
+    "titre_clause": "6.2 Apports en nature",
+    "description_clause": "Identifie l'apporteur en nature et désigne le bien apporté, répété pour chaque associé concerné.",
+    "texte_clause": "§ Apports en nature\n(identite_apporteur_nature) apporte à la Société sous les garanties ordinaires et de droit en pareille matière :\nDésignation : (designation_bien_apporte).",
+    "variables_requises": [
+      {
+        "nom": "identite_apporteur_nature",
+        "type": "auto_identite_associe",
+        "libelle": "identité de l'apporteur en nature",
+        "selection": "type_apport == 'nature'"
+      },
+      {
+        "nom": "designation_bien_apporte",
+        "type": "auto_apport_par_associe",
+        "libelle": "désignation du bien apporté"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "apport_numeraire_liberes",
+    "article": 6,
+    "titre_clause": "Actions entièrement libérées",
+    "description_clause": "Mentionne l'apport en numéraire entièrement libéré de chaque apporteur concerné.",
+    "texte_clause": "(identite_apporteur_numeraire) apporte à la Société une somme totale de (somme) euros correspondant à (nombre_actions) actions de (valeur_nominale) euros de valeur nominale chacune, entièrement souscrites et intégralement libérées.",
+    "variables_requises": [
+      {
+        "nom": "identite_apporteur_numeraire",
+        "type": "auto_identite_associe",
+        "libelle": "identité de l'apporteur en numéraire",
+        "selection": "type_apport == 'numeraire'"
+      },
+      {
+        "nom": "somme",
+        "type": "auto_apport_par_associe",
+        "libelle": "somme"
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "auto_apport_par_associe",
+        "libelle": "nombre"
+      },
+      {
+        "nom": "valeur_nominale",
+        "type": "auto_apport_par_associe",
+        "libelle": "montant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "apport_numeraire_non_liberes",
+    "article": 6,
+    "titre_clause": "Actions partiellement libérées",
+    "description_clause": "Mentionne l'apport en numéraire partiellement libéré, avec la fraction de libération.",
+    "texte_clause": "(identite_apporteur_numeraire) apporte à la Société une somme totale de (somme_total) euros.\nLa somme effectivement libérée au titre dudit apport en numéraire s'élève à (somme_libérée) euros, correspondant à (nombre_actions) actions de (valeur_nominale) euros de valeur nominale chacune, souscrites en totalité et libérées chacune à concurrence de (fraction_libérée) % de leur valeur nominale, ainsi que l'atteste le certificat du dépositaire établi le (date_certificat) par la banque (denomination_banque).",
+    "variables_requises": [
+      {
+        "nom": "identite_apporteur_numeraire",
+        "type": "auto_identite_associe",
+        "libelle": "identité de l'apporteur en numéraire",
+        "selection": "type_apport == 'numeraire'"
+      },
+      {
+        "nom": "somme_total",
+        "type": "auto_apport_par_associe",
+        "libelle": "somme"
+      },
+      {
+        "nom": "somme_libérée",
+        "type": "auto_apport_par_associe",
+        "libelle": "somme"
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "auto_apport_par_associe",
+        "libelle": "nombre"
+      },
+      {
+        "nom": "valeur_nominale",
+        "type": "auto_apport_par_associe",
+        "libelle": "montant"
+      },
+      {
+        "nom": "fraction_libérée",
+        "type": "nombre",
+        "libelle": "fraction du capital libéré"
+      },
+      {
+        "nom": "date_certificat",
+        "type": "date",
+        "libelle": "date du certificat du dépositaire des fonds"
+      },
+      {
+        "nom": "denomination_banque",
+        "type": "texte",
+        "libelle": "banque dépositaire des fonds (dénomination)"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "depot_fonds_numeraire",
+    "article": 6,
+    "titre_clause": "Dépôt des fonds",
+    "description_clause": "Précise le dépôt de la somme versée auprès d'un dépositaire habilité.",
+    "texte_clause": "Laquelle somme de (somme_depot) euros a été régulièrement déposée à un compte ouvert au nom de la Société en formation, le (date_depot), auprès de Me (identite_depositaire), Notaire, ou Banque ou à la Caisse des dépôts et consignations (adresse_depositaire) sous le numéro de compte no (numero_compte).",
+    "variables_requises": [
+      {
+        "nom": "somme_depot",
+        "type": "montant",
+        "libelle": "somme déposée (euros)"
+      },
+      {
+        "nom": "date_depot",
+        "type": "date",
+        "libelle": "date du dépôt des fonds"
+      },
+      {
+        "nom": "identite_depositaire",
+        "type": "texte",
+        "libelle": "dépositaire des fonds (banque ou notaire)"
+      },
+      {
+        "nom": "adresse_depositaire",
+        "type": "texte",
+        "libelle": "adresse du dépositaire des fonds"
+      },
+      {
+        "nom": "numero_compte",
+        "type": "texte",
+        "libelle": "numéro du compte de dépôt"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "depot_fonds_surplus",
+    "article": 6,
+    "titre_clause": "Dépôt des fonds et libération du surplus",
+    "description_clause": "Précise le dépôt des fonds et la libération différée du surplus.",
+    "texte_clause": "Laquelle somme de (somme_depot) euros a été régulièrement déposée à un compte ouvert au nom de la Société en formation, le (date_depot), auprès de Me (identite_depositaire), Notaire, ou Banque ou à la Caisse des dépôts et consignations (adresse_depositaire) sous le numéro de compte no (numero_compte).\nLa libération du surplus, soit la somme de (somme_surplus) euros, devra intervenir dans les conditions fixées par la loi.\nLe certificat du dépositaire, avec la liste des souscripteurs et l'indication, pour chacun d'eux, des sommes versées est annexé aux présents statuts.",
+    "variables_requises": [
+      {
+        "nom": "somme_depot",
+        "type": "montant",
+        "libelle": "somme déposée (euros)"
+      },
+      {
+        "nom": "date_depot",
+        "type": "date",
+        "libelle": "date du dépôt des fonds"
+      },
+      {
+        "nom": "identite_depositaire",
+        "type": "texte",
+        "libelle": "dépositaire des fonds (banque ou notaire)"
+      },
+      {
+        "nom": "adresse_depositaire",
+        "type": "texte",
+        "libelle": "adresse du dépositaire des fonds"
+      },
+      {
+        "nom": "numero_compte",
+        "type": "texte",
+        "libelle": "numéro du compte de dépôt"
+      },
+      {
+        "nom": "somme_surplus",
+        "type": "montant",
+        "libelle": "somme restant à libérer (euros)"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "commissaire_apports_unanimite",
+    "article": 6,
+    "titre_clause": "Commissaire aux apports désigné à l'unanimité",
+    "description_clause": "Fait référence au rapport du commissaire aux apports désigné à l'unanimité.",
+    "texte_clause": "Évaluation : l'évaluation des biens ci-avant désignés a été faite au vu du rapport de (commissaire_apports), commissaire aux apports, établi sous sa responsabilité le (date_rapport), ledit commissaire ayant été désigné par décision unanime des fondateurs en date du (date_designation).",
+    "variables_requises": [
+      {
+        "nom": "commissaire_apports",
+        "type": "texte",
+        "libelle": "identité et adresse ou dénomination sociale et siège social du commissaire aux apports"
+      },
+      {
+        "nom": "date_rapport",
+        "type": "date",
+        "libelle": "date du rapport du commissaire aux apports"
+      },
+      {
+        "nom": "date_designation",
+        "type": "date",
+        "libelle": "date de désignation du commissaire aux apports"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "commissaire_apports_ordonnance",
+    "article": 6,
+    "titre_clause": "Commissaire aux apports désigné par ordonnance",
+    "description_clause": "Fait référence au rapport du commissaire aux apports désigné par ordonnance du président du tribunal de commerce.",
+    "texte_clause": "Évaluation : l'évaluation des biens ci-avant désignés a été faite au vu du rapport de (commissaire_apports), commissaire aux apports, établi sous sa responsabilité le (date_rapport), ledit commissaire ayant été désigné par ordonnance de Monsieur le président du Tribunal de commerce de (lieu_tribunal), le (date_ordonnance), sur requête de (identite_requerant), agissant en qualité de fondateur.",
+    "variables_requises": [
+      {
+        "nom": "commissaire_apports",
+        "type": "texte",
+        "libelle": "identité et adresse ou dénomination sociale et siège social du commissaire aux apports"
+      },
+      {
+        "nom": "date_rapport",
+        "type": "date",
+        "libelle": "date du rapport du commissaire aux apports"
+      },
+      {
+        "nom": "lieu_tribunal",
+        "type": "texte",
+        "libelle": "ville du tribunal de commerce"
+      },
+      {
+        "nom": "date_ordonnance",
+        "type": "date",
+        "libelle": "date de l'ordonnance de désignation"
+      },
+      {
+        "nom": "identite_requerant",
+        "type": "texte",
+        "libelle": "identité du requérant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "dispense_commissaire_apports_l227_1",
+    "article": 6,
+    "titre_clause": "Dispense de commissaire aux apports (L.227-1)",
+    "description_clause": "Dispense de recourir à un commissaire aux apports sur le fondement de l'article L.227-1.",
+    "texte_clause": "Évaluation : l'évaluation des biens ci-avant désignés a été réalisée sous la seule responsabilité des associés fondateurs, qui décident à l'unanimité de ne pas recourir à un commissaire aux apports, conformément à la faculté offerte par l'article L.227-1 du Code de commerce et aux conditions posées par ce même article ainsi que par l'article D.227-3 du Code de commerce.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "dispense_commissaire_apports_l225_8_1",
+    "article": 6,
+    "titre_clause": "Dispense de commissaire aux apports (L.225-8-1)",
+    "description_clause": "Dispense de commissaire aux apports (L.225-8-1) et rémunération de l'apporteur en actions.",
+    "texte_clause": "Au regard de la nature des biens objets de l'apport, à savoir (nature_biens), il a été décidé de ne pas faire application des dispositions de l'article L.225-8 du Code de commerce et ainsi de ne pas désigner de commissaire aux apports.\nRémunération de l'apport : en rémunération de l'apport en nature ci-dessus désigné et évalué à la somme totale de (somme_apport_nature) euros, (identite_apporteur_nature) s'est vu attribuer (nombre_actions) actions de (valeur_nominale) euros de valeur nominale chacune, dont la valeur correspond au montant de l'évaluation de son apport.",
+    "variables_requises": [
+      {
+        "nom": "nature_biens",
+        "type": "auto_apport_par_associe",
+        "libelle": "nature des biens apportés",
+        "commentaire": "Libellé original 'à compléter' (segment 025) : renommé pour la lisibilité -- même classification, reste une saisie."
+      },
+      {
+        "nom": "somme_apport_nature",
+        "type": "auto_apport_par_associe",
+        "libelle": "somme"
+      },
+      {
+        "nom": "identite_apporteur_nature",
+        "type": "auto_identite_associe",
+        "libelle": "identité de l'apporteur en nature",
+        "selection": "type_apport == 'nature'"
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "auto_apport_par_associe",
+        "libelle": "nombre"
+      },
+      {
+        "nom": "valeur_nominale",
+        "type": "auto_apport_par_associe",
+        "libelle": "montant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "apports_industrie",
+    "article": 6,
+    "titre_clause": "6.2 bis Apports en industrie",
+    "description_clause": "Ajoute les apports en industrie (non concourants au capital) avec leurs droits associés.",
+    "texte_clause": "§ Apports en industrie\n(identite_apporteur_industrie), soussigné, apporte à la Société son industrie selon les modalités suivantes (prestations_industrie). Il reçoit en contrepartie (nombre_actions) actions ouvrant droit au partage des bénéfices et de l'actif net à hauteur de (pourcentage_benefices) %, à charge de contribuer aux pertes à hauteur de (pourcentage_pertes) %.",
+    "variables_requises": [
+      {
+        "nom": "identite_apporteur_industrie",
+        "type": "auto_identite_associe",
+        "libelle": "identité de l'apporteur",
+        "selection": "type_apport == 'industrie'"
+      },
+      {
+        "nom": "prestations_industrie",
+        "type": "texte_par_associe",
+        "libelle": "prestations de l'apporteur et leur durée",
+        "selection": "type_apport == 'industrie'",
+        "controle_juridique": true
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "nombre_par_associe",
+        "libelle": "nombre d'actions reçues en contrepartie",
+        "selection": "type_apport == 'industrie'"
+      },
+      {
+        "nom": "pourcentage_benefices",
+        "type": "nombre_par_associe",
+        "libelle": "part des bénéfices (%)",
+        "selection": "type_apport == 'industrie'"
+      },
+      {
+        "nom": "pourcentage_pertes",
+        "type": "nombre_par_associe",
+        "libelle": "part des pertes (%)",
+        "selection": "type_apport == 'industrie'"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "recapitulation_apports",
+    "article": 6,
+    "titre_clause": "6.3 Récapitulation des apports formant le capital social",
+    "description_clause": "Récapitule les apports formant le capital social (numéraire + nature).",
+    "texte_clause": "§ Récapitulation des apports formant le capital social\nL'ensemble des apports effectués à la Société qui forment le capital social s'élève à la somme de (total_capital) euros représentant :\n1° Les apports en numéraire pour un montant total de : (total_apports_numeraire) euros\n2° Les apports en nature évalués pour un montant total de : (total_apports_nature) euros\nTotal égal au montant du capital social (total_capital) euros",
+    "variables_requises": [
+      {
+        "nom": "total_capital",
+        "type": "auto_profil_juridique",
+        "libelle": "capital social",
+        "champ": "capital_social",
+        "occurrences_attendues": 2
+      },
+      {
+        "nom": "total_apports_numeraire",
+        "type": "auto_montant_apports_numeraire",
+        "libelle": "montant total des apports en numéraire"
+      },
+      {
+        "nom": "total_apports_nature",
+        "type": "auto_montant_apports_nature",
+        "libelle": "montant total des apports en nature"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "capital_actions_ordinaires",
+    "article": 7,
+    "titre_clause": "Capital social",
+    "description_clause": "Précise que le capital est composé exclusivement d'actions ordinaires.",
+    "texte_clause": "Le capital social est fixé à la somme de (capital_social) euros.\nIl est divisé en (nombre_actions) actions de (valeur_nominale) euros de valeur nominale chacune, (liberation_actions) libérées et de même catégorie.",
+    "variables_requises": [
+      {
+        "nom": "capital_social",
+        "type": "auto_profil_juridique",
+        "libelle": "montant du capital social",
+        "champ": "capital_social",
+        "commentaire": "Montant unique : le moteur affiche lettres + chiffres."
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "auto_profil_juridique",
+        "libelle": "nombre d'actions",
+        "champ": "nombre_actions",
+        "commentaire": "Correction #8 (audit 23/09/2026) : passé en auto le 23/09/2026 -- redemandé à la main auparavant alors que project_legal_profiles.nombre_actions existe déjà et est déjà utilisé par le résolveur de l'Article 6 pour la répartition par associé. Une saisie manuelle divergente ici aurait contredit ce calcul dans le même document."
+      },
+      {
+        "nom": "valeur_nominale",
+        "type": "auto_profil_juridique",
+        "libelle": "valeur nominale",
+        "champ": "valeur_nominale"
+      },
+      {
+        "nom": "liberation_actions",
+        "type": "reference_croisee",
+        "libelle": "actions intégralement ou partiellement libérées",
+        "depend_de_section": "apports_numeraire_liberation",
+        "valeurs_par_clause": {
+          "apport_numeraire_liberes": "intégralement",
+          "apport_numeraire_non_liberes": "partiellement"
+        },
+        "valeur_par_defaut": "intégralement"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "absence_avantages_particuliers",
+    "article": 8,
+    "titre_clause": "Aucun avantage particulier",
+    "description_clause": "Constate l'absence d'avantages particuliers.",
+    "texte_clause": "Les présents statuts ne stipulent aucun avantage particulier.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "avantages_particuliers_stipules",
+    "article": 8,
+    "titre_clause": "Avantages particuliers stipulés",
+    "description_clause": "Stipule des avantages particuliers au profit d'un associé fondateur.",
+    "texte_clause": "En considération du rôle joué par (fondateur_avantage) dans (role_fondateur), celui-ci bénéficiera (qualification_avantage), (description_avantage).",
+    "variables_requises": [
+      {
+        "nom": "fondateur_avantage",
+        "type": "auto_identite_associe",
+        "libelle": "identité ou dénomination sociale du fondateur concerné",
+        "selection": "est_fondateur == true",
+        "commentaire": "A_CONFIRMER : résolu depuis project_associates (choix d'un associé fondateur)."
+      },
+      {
+        "nom": "role_fondateur",
+        "type": "texte",
+        "libelle": "rôle joué qui justifie l'octroi de l'avantage",
+        "controle_juridique": true
+      },
+      {
+        "nom": "qualification_avantage",
+        "type": "texte",
+        "libelle": "qualification de l'avantage",
+        "controle_juridique": true
+      },
+      {
+        "nom": "description_avantage",
+        "type": "texte",
+        "libelle": "description de l'avantage",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "forme_actions",
+    "article": 11,
+    "titre_clause": "Forme des actions",
+    "description_clause": "Impose la forme obligatoirement nominative des actions et leur inscription en compte.",
+    "texte_clause": "Les actions de la Société doivent obligatoirement être nominatives. Elles donnent lieu à une inscription à un compte ouvert par la Société au nom de chaque associé dans les conditions et selon les modalités prévues par les dispositions législatives et réglementaires applicables.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_actions_libre",
+    "article": 14,
+    "titre_clause": "Cessions libres",
+    "description_clause": "Les actions sont librement négociables.",
+    "texte_clause": "Les actions sont librement négociables, sauf dispositions législatives ou réglementaires contraires.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_actions_restrictions",
+    "article": 14,
+    "titre_clause": "Cessions soumises à restrictions",
+    "description_clause": "Les actions sont négociables sous réserve des restrictions statutaires, avec formalité de virement de compte à compte.",
+    "texte_clause": "Les actions sont librement négociables, sauf dispositions législatives ou réglementaires contraires et sous réserve des restrictions prévues par les présents statuts.\nLa propriété des actions résulte de leur inscription en compte individuel au nom du ou des titulaires dans les conditions et selon les modalités prévues par les lois et règlements en vigueur. La cession ou transmission de ces actions s'opère, à l'égard de la Société et des tiers, par un virement de compte à compte effectué sur la production d'un ordre de mouvement signé du cédant ou de son mandataire. L'ordre de mouvement est enregistré le jour même de sa réception sur un registre coté et paraphé, tenu chronologiquement, dit « registre des mouvements ».",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "definitions_transfert_titre",
+    "article": 14,
+    "titre_clause": "Définitions : transfert et titre",
+    "description_clause": "Définit les termes 'transfert' et 'titre' pour l'application des restrictions statutaires.",
+    "texte_clause": "Pour les besoins des présents statuts :\n(i) le terme « transfert » désigne toute opération, à titre onéreux ou gratuit, entraînant le transfert, immédiat ou à terme, de la pleine propriété, de la nue-propriété, de l'usufruit ou de la jouissance de titres, sous quelque forme que ce soit et notamment, sans que cette énumération soit limitative, toute vente, cession, adjudication, nantissement, apport en société, apport partiel d'actif, fusion, scission, prêt, prêt de consommation, échange, portage, démembrement de propriété, transmission universelle de patrimoine, transmission par suite de dissolution de communauté entre époux, donation, échange ou partage, transmission à cause de mort, par constitution fiduciaire et toute cession ou renonciation individuelle à, ou suppression d'un, droit préférentiel de souscription ou d'attribution d'un titre et la constitution de toute sûreté, privilège, gage, nantissement, servitudes, hypothèque, promesse de vente ou d'achat, option ou droit de préemption ; le terme transférer étant interprété en conséquence ;\n(ii) le terme « titre » désigne (i) toute action de la Société ou tout autre titre donnant ou pouvant donner accès, directement ou indirectement, immédiatement ou à terme, à une quotité du capital social et/ou des droits de vote de la Société ; (ii) tout droit d'attribution, de souscription à une augmentation du capital de la Société ; et (iii) tout démembrement des actions de la Société et tous autres titres qui se substitueraient auxdites actions à la suite de toute opération de fusion, scission, apport, transformation de la Société en une société d'une autre forme, changement de la valeur nominale des titres, échange, regroupement ou division de titres.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite",
+    "article": 15,
+    "titre_clause": "Inaliénabilité",
+    "description_clause": "Les titres sont inaliénables pendant une durée déterminée, sauf société unipersonnelle.",
+    "texte_clause": "Sauf lorsque la Société ne comporte qu'un seul associé, les titres sont inaliénables pendant une durée de (duree_inalienabilite) ans à compter de la date de (date_reference_inalienabilite).",
+    "variables_requises": [
+      {
+        "nom": "duree_inalienabilite",
+        "type": "nombre",
+        "libelle": "durée d'inaliénabilité (en années, 10 ans maximum)"
+      },
+      {
+        "nom": "date_reference_inalienabilite",
+        "type": "choix",
+        "libelle": "date de référence pour le point de départ de l'inaliénabilité",
+        "options": [
+          "leur acquisition",
+          "leur souscription",
+          "l'immatriculation de la Société"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_exception_exclusion_controle",
+    "article": 15,
+    "titre_clause": "Exception en cas d'exclusion ou de changement de contrôle",
+    "description_clause": "L'inaliénabilité ne s'applique pas en cas d'exclusion d'un associé ou de changement de contrôle d'une société associée.",
+    "texte_clause": "Par exception, l'inaliénabilité temporaire visée ci-dessus ne s'appliquera pas en cas (exception_inalienabilite_exclusion_controle).",
+    "variables_requises": [
+      {
+        "nom": "exception_inalienabilite_exclusion_controle",
+        "type": "choix",
+        "libelle": "cas de non-application de l'inaliénabilité",
+        "options": [
+          "d'exclusion d'un associé",
+          "de modification du contrôle d'une société associée dont il résulterait l'exclusion de cette dernière"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_exceptions",
+    "article": 15,
+    "titre_clause": "Exceptions à l'inaliénabilité",
+    "description_clause": "Liste les titres exclus du champ de l'inaliénabilité.",
+    "texte_clause": "Par exception à ce qui précède, ne seront pas soumis à inaliénabilité : (exceptions_inalienabilite).",
+    "variables_requises": [
+      {
+        "nom": "exceptions_inalienabilite",
+        "type": "texte",
+        "libelle": "exceptions à l'inaliénabilité",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_fin_periode",
+    "article": 15,
+    "titre_clause": "Fin de la période d'inaliénabilité",
+    "description_clause": "A l'issue de la période d'inaliénabilité, les titres sont librement transmissibles sous réserve des stipulations statutaires.",
+    "texte_clause": "A l'expiration de la période d'inaliénabilité, les titres seront librement transmissibles sous réserve du respect des stipulations ci-après.\nTout transfert effectué en violation de la clause d'inaliénabilité est nul.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "droit_preemption",
+    "article": 16,
+    "titre_clause": "Droit de préemption",
+    "description_clause": "Instaure un droit de préemption au profit des associés et la procédure de notification de transfert.",
+    "texte_clause": "1. Sauf lorsque la Société ne comporte qu'un seul associé, tout transfert de titres est soumis au respect du droit de préemption conféré aux associés dans les conditions définies au présent article.\n2. En cas de projet de transfert de tout ou partie de ses titres, l'associé cédant devra adresser à la Société et à chacun des associés, par lettre recommandée avec demande d'avis de réception, une notification de transfert indiquant :\n• le nombre de titres dont le transfert est envisagé ;\n• l'identité de l'acquéreur :\no s'il s'agit d'une personne physique : prénom, nom et adresse ; ou\no s'il s'agit d'une personne morale : dénomination sociale, forme, siège social, numéro RCS, identité des dirigeants, identité de la ou des personnes ou entités la contrôlant directement et de façon ultime ;\n• la nature du transfert envisagé ;\n• le prix (ainsi que les conditions de paiement y afférant) ou, dans l'hypothèse où le transfert envisagé ne serait pas une vente, une estimation de bonne foi du prix offert dans le cadre du transfert envisagé ;\n(ajout_demande_agrement)",
+    "variables_requises": [
+      {
+        "nom": "ajout_demande_agrement",
+        "type": "reference_croisee",
+        "libelle": "demande expresse d'agrément du tiers envisagé (si clause d'agrément)",
+        "commentaire": "Placeholder de liaison : la puce '• une demande expresse d'agrément du tiers envisagé' est apportée par l'ajout conditionnel demande_agrement_tiers lorsque la clause d'agrément existe (segment 067). Le moteur pourra soit fusionner l'ajout à la suite des puces, soit résoudre ce placeholder.",
+        "resout_depuis_section": "demande_agrement_tiers",
+        "si_article_absent": {
+          "mode": "liaison",
+          "note": "Placeholder de liaison : la puce vient de la section demande_agrement_tiers (exclue sans agrément). Rendu vide dans tous les cas -- avant le 25/09/2026 il affichait le numéro de l'article (bug)."
+        },
+        "article_cible": 16
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "demande_agrement_tiers",
+    "article": 16,
+    "titre_clause": "Demande expresse d'agrément du tiers envisagé",
+    "description_clause": "Ajoute la demande d'agrément du tiers et caractérise la notification comme offre irrévocable.",
+    "texte_clause": "• une demande expresse d'agrément du tiers envisagé.\nLa notification de transfert constituera une offre irrévocable et inconditionnelle de l'associé cédant aux associés non cédants de leur vendre la totalité, et la totalité seulement, des titres transférés aux conditions figurant dans la notification de transfert. La date de réception de cette notification fait courir un délai de quatre (4) mois, à l'expiration duquel, si les droits de préemption n'ont pas été exercés en totalité sur les titres dont le transfert est envisagé, l'associé cédant pourra réaliser librement ledit transfert aux conditions indiquées dans la notification de transfert.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_procedure_agrement",
+    "article": 16,
+    "titre_clause": "Articulation avec la procédure d'agrément",
+    "description_clause": "Articule la préemption avec la procédure d'agrément et détaille l'exercice du droit de préemption (paragraphes 3 et 4).",
+    "texte_clause": "L'associé cédant devra, toutefois, suivre la procédure d'agrément prévue à l'article (reference_article_agrement) des statuts.\n3. Chaque associé non cédant bénéficie d'un droit de préemption exerçable par notification adressée au Président au plus tard dans le délai de trois (3) mois de la date de réception de la notification de transfert visée au paragraphe 2 ci-dessus. Cette notification est effectuée par lettre recommandée avec demande d'accusé de réception indiquant le nombre de titres de l'associé cédant que l'associé non cédant concerné souhaite acquérir. A défaut pour un associé non cédant d'avoir valablement exercé son droit de préemption avant l'expiration du délai de trois (3) mois susvisé, cet associé non cédant sera réputé avoir irrévocablement renoncé à l'exercice de son droit de préemption en relation avec le transfert concerné.\n4. A l'expiration du délai de trois (3) mois visé au paragraphe 3 ci-dessus et avant celle du délai visé au 2 ci-dessus, le Président notifie à l'associé cédant par lettre recommandée avec demande d'accusé de réception, les résultats de la procédure de préemption. Lorsque les droits de préemption sont supérieurs au nombre de titres dont le transfert est projeté, lesdits titres sont répartis par le Président entre les associés qui ont notifié leur demande de préemption au prorata de leur participation au capital de la Société et dans la limite de leurs demandes. Lorsque les droits de préemption exercés sont inférieurs au nombre de titres dont le transfert est projeté, les droits de préemption sont réputés n'avoir jamais été exercés et l'associé cédant est libre de réaliser l'opération au profit du cessionnaire mentionné dans sa notification de transfert et aux conditions ainsi notifiées.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_agrement",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause d'agrément",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue par le moteur vers l'article 'Agrément' (17) au numéro final. Même variable réutilisée partout où le modèle écrit 'numéro de l'article des statuts prévoyant la clause d'agrément'. Cette déclaration duplique nominalement la variable de l'article 9 (même nom) -- le moteur doit fusionner les fiches de même nom (une seule saisie).",
+        "resout_depuis_section": "agrement",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Exclue sans agrément (_exclure_si_non_choisi). Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 17
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_realisation_transfert",
+    "article": 16,
+    "titre_clause": "Réalisation du transfert et nullité",
+    "description_clause": "Prévoit la réalisation du transfert dans le délai d'un mois et la nullité des transferts contraires à la clause de préemption.",
+    "texte_clause": "L'associé cédant devra, toutefois, suivre la procédure d'agrément prévue à l'article (reference_article_agrement) des statuts.\n5. En cas d'exercice valable par un ou plusieurs associés de leur droit de préemption, le transfert doit intervenir dans le délai d'un (1) mois à compter de la date d'expiration du délai de trois (3) mois visé au paragraphe 3 ci-dessus contre paiement du prix mentionné dans la notification de transfert de l'associé cédant.\n6. Tout transfert effectué en violation de la clause de préemption est nul.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_agrement",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause d'agrément",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue par le moteur vers l'article 'Agrément' (17) au numéro final. Triple occurrence dans le fichier (art. 9, art. 16) -- le moteur doit fusionner les fiches de même nom.",
+        "resout_depuis_section": "agrement",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Idem preemption_procedure_agrement. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 17
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_exceptions",
+    "article": 16,
+    "titre_clause": "Exceptions au droit de préemption",
+    "description_clause": "Liste les transferts exclus du champ de la préemption.",
+    "texte_clause": "7. Par exception à ce qui précède, ne seront pas soumis à préemption : (exceptions_preemption).",
+    "variables_requises": [
+      {
+        "nom": "exceptions_preemption",
+        "type": "texte",
+        "libelle": "exceptions au droit de préemption",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement",
+    "article": 17,
+    "titre_clause": "Agrément",
+    "description_clause": "Soumet tout transfert de titres à l'agrément de la collectivité des associés et organise la procédure.",
+    "texte_clause": "§ Principe\nSauf lorsque la Société ne comporte qu'un seul associé, tout transfert de titres sera soumis à l'agrément de la collectivité des associés.\n§ Procédure\n1. L'associé cédant doit notifier le transfert projeté à la Société, par lettre recommandée avec demande d'accusé de réception, en indiquant l'identité du bénéficiaire du transfert (prénom et nom et domicile ou dénomination sociale et siège social), le nombre des titres dont le transfert est envisagé et le prix offert ou, dans l'hypothèse où le transfert envisagé ne serait pas une vente pure et simple, une estimation de bonne foi du prix offert pour les titres transmis.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_notification_preemption",
+    "article": 17,
+    "titre_clause": "Articulation avec la préemption",
+    "description_clause": "Articule la demande d'agrément avec la notification de transfert prévue par la clause de préemption.",
+    "texte_clause": "Si le projet de transfert est soumis au droit de préemption visé à l'article (reference_article_preemption), cette notification devra être réalisée dans le cadre de la notification de transfert visée au paragraphe 2 dudit article.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_preemption",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause de préemption",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue par le moteur vers l'article 'Droit de préemption' (16) au numéro final. Réutilisée aux segments 073, 075, 085 et 087.",
+        "resout_depuis_section": "droit_preemption",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Déduite : seulement si préemption ET agrément. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 16
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_decision",
+    "article": 17,
+    "titre_clause": "Décision d'agrément",
+    "description_clause": "Prévoit que la collectivité des associés statue sur l'agrément dans un délai de deux mois, le silence valant refus.",
+    "texte_clause": "2. La décision d'acceptation ou de refus d'agrément est prise par la collectivité des associés. Cette décision doit être notifiée à l'associé cédant par la Société, par lettre recommandée avec demande d'accusé de réception, dans un délai de deux (2) mois à compter de la date de la notification de demande d'agrément, étant précisé qu'à défaut de réponse dans ce délai, l'agrément sera réputé refusé.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_suite_sans_preemption",
+    "article": 17,
+    "titre_clause": "Sans clause de préemption",
+    "description_clause": "En l'absence de préemption, le transfert au cessionnaire initial s'effectue selon la notification.",
+    "texte_clause": "3. En cas d'agrément du transfert, les titres de l'associé cédant pourront être transférés au cessionnaire initial selon les conditions et modalités indiquées dans la notification visée au paragraphe 1 ci-dessus.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_suite_avec_preemption",
+    "article": 17,
+    "titre_clause": "Avec clause de préemption",
+    "description_clause": "En présence d'une clause de préemption, le transfert agréé intervient sous réserve du non-exercice de la préemption, dans le mois de la décision.",
+    "texte_clause": "3. En cas d'agrément du transfert, les titres de l'associé cédant pourront être transférés au cessionnaire initial selon les conditions et modalités indiquées dans la notification visée au paragraphe 1 ci-dessus, sous réserve du non-exercice du droit de préemption prévu à l'article (reference_article_preemption). Ce transfert devra intervenir dans un délai d'un (1) mois à compter de la date de la décision d'agrément. A défaut, un nouvel agrément sera nécessaire.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_preemption",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause de préemption",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue par le moteur vers l'article 'Droit de préemption' (16) au numéro final. Déclaration dupliquée (même nom que art. 17) -- fusion obligatoire côté moteur.",
+        "resout_depuis_section": "droit_preemption",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Déduite : variante « avec préemption » seulement si l'Art. 16 est inclus. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 16
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_refus_sanction_nantissement",
+    "article": 17,
+    "titre_clause": "Refus d'agrément, sanction et nantissement",
+    "description_clause": "Organise la suite d'un refus d'agrément (renonciation, rachat des titres, prix), la nullité des transferts irréguliers et l'effet d'un nantissement agréé.",
+    "texte_clause": "4. En cas de refus d'agrément, l'associé cédant disposera de (delai_renonciation_transfert) jours à compter de la date de la notification de la décision de refus d'agrément pour faire connaître à la Société, par lettre recommandée avec demande d'accusé de réception, sa décision de renoncer ou non au transfert envisagé. Dans l'hypothèse où l'associé cédant n'aurait pas expressément renoncé au transfert envisagé dans le délai de (delai_renonciation_transfert) jours susvisé, le Président sera tenu, dans le délai de trois (3) mois à compter de la date de la notification de la décision de refus d'agrément, de faire acquérir les titres par un ou plusieurs associés. A cette fin, la Société devra notifier aux autres associés, individuellement et par lettre recommandée avec demande d'accusé de réception, le nombre de titres de l'associé cédant dont le transfert est envisagé. Les associés disposeront alors d'un délai de (delai_acquisition_associes) jours pour se porter acquéreurs desdits titres. En cas de demandes excédant le nombre de titres offerts, il sera procédé par le Président à une répartition des titres entre lesdits demandeurs proportionnellement à leur part dans le capital social et dans la limite de leurs demandes. Dans l'hypothèse où, à l'expiration du délai de (delai_acquisition_associes) jours susvisé, les titres de l'associé cédant n'auraient pas été cédés en intégralité aux autres associés, le Président pourra proposer les titres de l'associé cédant à un ou plusieurs acquéreurs de son choix. Le Président pourra également décider, avec le consentement de l'associé cédant, de faire racheter ses titres par la Société en vue d'une réduction du capital. L'identité du ou des acquéreurs, associés ou tiers, ou l'offre d'achat par la Société ainsi que le prix offert seront notifiés à l'associé cédant. A défaut d'accord sur le prix de rachat, celui-ci sera fixé conformément aux dispositions de l'article 1843-4 du Code civil. Dans l'hypothèse où, à l'expiration du délai de trois (3) mois précité, les titres de l'associé cédant ne seraient pas transférés, selon le cas, à un ou plusieurs associés, tiers ou à la Société, l'agrément sera considéré comme donné et lesdits titres pourront être transférés par l'associé cédant selon les conditions et modalités indiquées dans la notification de l'associé cédant visée au paragraphe 1 ci-dessus. Toutefois, à la demande de la Société, ce délai pourra être prolongé par voie de décision de justice, l'associé cédant et le cessionnaire dûment appelés. L'associé cédant peut à tout moment renoncer au transfert de ses titres.\n§ Sanction\nTout transfert effectué en violation de la clause d'agrément est nul.\n§ Nantissement\nSi la collectivité des associés a donné son consentement à un projet de nantissement de titres dans les conditions prévues ci-dessus, ce consentement emportera agrément du cessionnaire en cas de réalisation forcée des actions nanties, à moins que la Société ne préfère, après la cession, racheter sans délai les actions en vue de réduire son capital.",
+    "variables_requises": [
+      {
+        "nom": "delai_renonciation_transfert",
+        "type": "nombre",
+        "libelle": "délai de renonciation au transfert en cas de refus d'agrément (jours)",
+        "occurrences_attendues": 2
+      },
+      {
+        "nom": "delai_acquisition_associes",
+        "type": "nombre",
+        "libelle": "délai laissé aux associés pour se porter acquéreurs des titres (jours)",
+        "occurrences_attendues": 2
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_exceptions",
+    "article": 17,
+    "titre_clause": "Exceptions à l'agrément",
+    "description_clause": "Liste les transferts exclus du champ de l'agrément.",
+    "texte_clause": "§ Exceptions\nPar exception à ce qui précède, ne seront pas soumis à agrément : (exceptions_agrement).",
+    "variables_requises": [
+      {
+        "nom": "exceptions_agrement",
+        "type": "texte",
+        "libelle": "exceptions à l'agrément",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "location_actions_interdite",
+    "article": 18,
+    "titre_clause": "Location interdite",
+    "description_clause": "Interdit la location d'actions.",
+    "texte_clause": "La location d'actions est interdite.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "location_actions_autorisee",
+    "article": 18,
+    "titre_clause": "Location autorisée",
+    "description_clause": "Autorise la location d'actions au profit d'une personne physique, dans les conditions légales.",
+    "texte_clause": "Les actions de la Société peuvent être données à bail, au sens des dispositions de l'article 1709 du Code civil, au profit d'une personne physique dans les conditions prévues par les articles L239-1 et suivants du Code de commerce.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "location_actions_agrement",
+    "article": 18,
+    "titre_clause": "Location soumise à agrément",
+    "description_clause": "Soumet toute location d'actions à la procédure d'agrément.",
+    "texte_clause": "Toute location d'actions doit être soumise à l'agrément des associés dans les conditions prévues à l'article (reference_article_agrement) ci-avant.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_agrement",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause d'agrément",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue par le moteur vers l'article 'Agrément' (17). Fusion des fiches de même nom obligatoire côté moteur (4e déclaration).",
+        "resout_depuis_section": "agrement",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "depend_de_section agrement. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 17
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "changement_controle",
+    "article": 19,
+    "titre_clause": "Modification dans le contrôle d'une société associée",
+    "description_clause": "Organise la déclaration des changements de contrôle des sociétés associées et l'engagement de la procédure d'exclusion.",
+    "texte_clause": "1. En cas de modification du contrôle, au sens de l'article L233-3 du Code de commerce, d'une société associée, celle-ci doit en informer le Président de la Société par lettre recommandée avec demande d'accusé de réception dans un délai de (delai_notification_controle) jours à compter de la date de survenance du changement du contrôle. Cette notification doit indiquer la date du changement du contrôle et l'identité de la ou des nouvelle(s) personne(s) exerçant ce contrôle. A défaut pour la société associée concernée de procéder à cette notification, celle-ci pourra faire l'objet d'une mesure d'exclusion dans les conditions et selon les modalités prévues à l'article (reference_article_exclusion) des présents statuts.\n2. Dans un délai de (delai_mise_en_oeuvre_exclusion) jours à compter de la date de réception de la notification de changement de contrôle visée au paragraphe 1 ci-dessus, la Société peut mettre en œuvre la procédure d'exclusion et de suspension des droits non pécuniaires de la société associée ayant fait l'objet du changement de contrôle considéré, telle que prévue à l'article (reference_article_exclusion) ci-après. Si cette procédure n'est pas engagée dans le délai susvisé, la Société sera réputée avoir agréé le changement de contrôle considéré.\n3. Les dispositions du présent article s'appliquent à la société associée qui a acquis cette qualité à la suite d'une fusion, d'une scission ou d'une dissolution.",
+    "variables_requises": [
+      {
+        "nom": "delai_notification_controle",
+        "type": "nombre",
+        "libelle": "délai de notification du changement de contrôle (jours)"
+      },
+      {
+        "nom": "reference_article_exclusion",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article prévoyant la clause d'exclusion",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue par le moteur vers l'article 'Exclusion' (20). Deux occurrences dans cet article ; variable partagée avec les ajouts de l'article 20 (segments 085-087).",
+        "resout_depuis_section": "exclusion",
+        "occurrences_attendues": 2,
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Pas de texte de remplacement : l'article n'a pas de sens sans l'exclusion (sa seule sanction). Le tool de vérification finale laisse le texte tel quel (décision utilisateur 25/09/2026 : aucune clause ni article supprimé)."
+        },
+        "article_cible": 20
+      },
+      {
+        "nom": "delai_mise_en_oeuvre_exclusion",
+        "type": "nombre",
+        "libelle": "délai de mise en œuvre de la procédure d'exclusion (jours)"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exclusion",
+    "article": 20,
+    "titre_clause": "Exclusion",
+    "description_clause": "Prévoit les cas et la procédure d'exclusion d'un associé ainsi que la cession de ses actions.",
+    "texte_clause": "1. Est exclu de plein droit tout associé faisant l'objet d'une procédure de dissolution, de redressement ou de liquidation judiciaire. Par ailleurs, l'exclusion d'un associé peut être prononcée dans les cas suivants :\n• changement de contrôle d'une société associée ;\n• violation des statuts ;\n• faits ou actes de nature à porter une atteinte grave aux intérêts ou à l'image de marque de la Société ;\n• exercice d'une activité concurrente de celle de la Société ;\n• révocation d'un associé de ses fonctions de mandataire social ;\n• (autres_motifs_exclusion).\n2. L'exclusion d'un associé est décidée par l'assemblée générale des associés statuant dans les conditions prévues à l'article (reference_article_modalites_decisions) des statuts. L'associé dont l'exclusion est envisagée participe au vote et ses actions sont prises en compte pour le calcul du quorum et de la majorité. La décision est prise à la majorité de (majorite_requise_exclusion) des membres présents ou représentés.\n3. La décision d'exclusion ne peut intervenir que sous réserve du respect des formalités préalables suivantes :\n• notification adressée par le Président à l'associé concerné et aux autres associés informant ces derniers de la mesure d'exclusion envisagée ; cette notification doit être adressée par lettre recommandée avec demande d'avis de réception, au plus tard dans un délai de quinze (15) jours avant la date prévue pour la réunion de l'assemblée générale des associés appelée à se prononcer sur ladite mesure d'exclusion. Elle doit contenir les motifs de l'exclusion envisagée et être accompagnée de toutes pièces justificatives utiles ;\n• lors de l'assemblée générale appelée à statuer sur la mesure d'exclusion, l'associé dont l'exclusion est demandée peut être assisté de son conseil et requérir, à ses frais, la présence d'un (huissier_ou_commissaire) de justice.\n4. En cas d'exclusion, l'associé exclu doit, dans un délai de (delai_cession_actions_exclusion) jours à compter de la date du prononcé de son exclusion, céder la totalité de ses actions aux autres associés au prorata de leur participation au capital.",
+    "variables_requises": [
+      {
+        "nom": "autres_motifs_exclusion",
+        "type": "texte",
+        "libelle": "autres motifs d'exclusion",
+        "controle_juridique": true
+      },
+      {
+        "nom": "reference_article_modalites_decisions",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article relatif aux modalités des décisions collectives",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026). Le modèle source écrit 'à l'article .....(27.5/27.6) des statuts' : renvoi aux paragraphes 5 et 6 du chapitre des décisions collectives (article 28 réel, imprimé 27). Résolu par le moteur vers la section 'modalites_decisions_collectives'.",
+        "resout_depuis_section": "modalites_decisions_collectives",
+        "si_article_absent": {
+          "mode": "cible_obligatoire",
+          "note": "Art. 28 obligatoire."
+        },
+        "article_cible": 28
+      },
+      {
+        "nom": "majorite_requise_exclusion",
+        "type": "texte",
+        "libelle": "majorité requise pour la décision d'exclusion (par exemple : des deux tiers)",
+        "controle_juridique": true
+      },
+      {
+        "nom": "huissier_ou_commissaire",
+        "type": "choix",
+        "libelle": "professionnel de justice requis par l'associé menacé d'exclusion",
+        "options": [
+          "huissier",
+          "commissaire"
+        ]
+      },
+      {
+        "nom": "delai_cession_actions_exclusion",
+        "type": "nombre",
+        "libelle": "délai de cession des actions de l'associé exclu (jours)"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exclusion_sans_preemption",
+    "article": 20,
+    "titre_clause": "Cession des actions exclue de la préemption",
+    "description_clause": "Exclut la cession consécutive à l'exclusion du champ de la préemption.",
+    "texte_clause": "La cession susvisée ne sera pas soumise à la procédure de préemption prévue à l'article (reference_article_preemption).",
+    "variables_requises": [
+      {
+        "nom": "reference_article_preemption",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause de préemption",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue vers l'article 'Droit de préemption' (16). Fusion des fiches de même nom obligatoire côté moteur.",
+        "resout_depuis_section": "droit_preemption",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Déduite : seulement avec préemption. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 16
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exclusion_sans_agrement",
+    "article": 20,
+    "titre_clause": "Cession des actions exclue de l'agrément",
+    "description_clause": "Exclut la cession consécutive à l'exclusion du champ de l'agrément.",
+    "texte_clause": "La cession susvisée ne sera pas soumise à la procédure d'agrément prévue à l'article (reference_article_agrement).",
+    "variables_requises": [
+      {
+        "nom": "reference_article_agrement",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause d'agrément",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue vers l'article 'Agrément' (17). Fusion des fiches de même nom obligatoire côté moteur (5e déclaration).",
+        "resout_depuis_section": "agrement",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Déduite : seulement avec agrément. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 17
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exclusion_preemption_et_agrement",
+    "article": 20,
+    "titre_clause": "Cession des actions : prix de rachat et suspension des droits",
+    "description_clause": "Organise le prix de rachat des actions et la suspension des droits non pécuniaires de l'associé exclu.",
+    "texte_clause": "La cession susvisée ne sera pas soumise à la procédure de préemption prévue à l'article (reference_article_preemption) et à la procédure d'agrément prévue à l'article (reference_article_agrement).\nLe prix de rachat des actions est ainsi déterminé : (modalites_prix_rachat_exclusion). A défaut d'accord sur le prix de rachat, celui-ci est fixé par un expert désigné conformément aux dispositions de l'article 1843-4 du Code civil. Cet expert est tenu de respecter les règles de détermination du prix de rachat énoncées ci-dessus.\nLa cession doit faire l'objet d'une mention sur le registre des mouvements de titres de la Société.\nA compter du prononcé de la décision d'exclusion, les droits non pécuniaires attachés aux titres de l'associé exclu seront automatiquement suspendus.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_preemption",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause de préemption",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue vers l'article 'Droit de préemption' (16).",
+        "resout_depuis_section": "droit_preemption",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Déduite : préemption ET agrément. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 16
+      },
+      {
+        "nom": "reference_article_agrement",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article des statuts prévoyant la clause d'agrément",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026) : résolue vers l'article 'Agrément' (17).",
+        "resout_depuis_section": "agrement",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Idem. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 17
+      },
+      {
+        "nom": "modalites_prix_rachat_exclusion",
+        "type": "texte",
+        "libelle": "règles de détermination du prix de rachat des actions en cas d'exclusion",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "comptes_courants",
+    "article": 21,
+    "titre_clause": "Comptes courants",
+    "description_clause": "Organise les avances en compte courant consenties par les associés à la Société.",
+    "texte_clause": "Outre les apports, les associés pourront verser ou laisser à disposition de la Société toutes sommes dont cette dernière pourrait avoir besoin. Ces sommes sont inscrites au crédit d'un compte ouvert au nom de l'associé concerné. Les comptes courants ne doivent jamais être débiteurs. La Société a la faculté d'en rembourser tout ou partie, après avis donné par écrit un mois à l'avance, sauf stipulation contraire. Les modalités de ces prêts sont arrêtées par accord entre le Président et l'associé intéressé.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "president",
+    "article": 22,
+    "titre_clause": "Président",
+    "description_clause": "Désigne le Président, fixe la durée et la fin de ses fonctions ainsi que sa révocation.",
+    "texte_clause": "1. La Société est dirigée par un Président, personne physique ou morale, associé ou non de la Société. Lorsqu'une personne morale exerce les fonctions de Président, ses dirigeants sont soumis aux mêmes conditions et obligations et encourent les mêmes responsabilités civiles et pénales que s'ils étaient Président en leur nom propre, sans préjudice de la responsabilité solidaire de la personne morale qu'ils dirigent. En cours de vie sociale, le Président est désigné par la collectivité des associés.\n2. La durée des fonctions de Président est (duree_fonctions_president). Le mandat du Président est (renouvelabilite_mandat_president). En cas de décès, de démission ou de révocation du Président de la Société, il est pourvu à son remplacement dans les plus brefs délais. Le Président remplaçant est nommé par la collectivité des associés. Les fonctions de Président prennent fin par l'arrivée du terme prévu lors de sa nomination, par la démission, par la révocation, ou par l'ouverture à son encontre d'une procédure de redressement judiciaire ou de liquidation judiciaire. La révocation du Président peut être prononcée à tout moment par la collectivité des associés.",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_president",
+        "type": "choix",
+        "libelle": "durée des fonctions du Président",
+        "options": [
+          "indéterminée",
+          "déterminée"
+        ]
+      },
+      {
+        "nom": "renouvelabilite_mandat_president",
+        "type": "choix",
+        "libelle": "renouvelabilité du mandat du Président",
+        "options": [
+          "renouvelable sans limitation",
+          "non renouvelable"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "remuneration_et_pouvoirs_president",
+    "article": 22,
+    "titre_clause": "Rémunération et pouvoirs du Président",
+    "description_clause": "Organise la rémunération du Président et l'étendue de ses pouvoirs de représentation.",
+    "texte_clause": "3. La rémunération du Président est fixée par la collectivité des associés. Elle peut être (nature_remuneration_president). Le Président pourra obtenir le remboursement, sur justificatif, des dépenses effectuées dans le cadre de sa mission pour le compte de la Société.\n4. Le Président représente la Société à l'égard des tiers. Il est investi des pouvoirs les plus étendus pour agir en toutes circonstances au nom de la Société dans les limites de l'objet social, sous réserve des pouvoirs expressément attribués par la loi et les statuts à (assemble_competente_limites_pouvoirs). Dans ses rapports avec les tiers, la Société est engagée même par les décisions et actes du Président qui ne relèvent pas de l'objet social, à moins qu'elle ne prouve que le tiers savait que l'acte dépassait cet objet ou qu'il ne pouvait l'ignorer compte tenu des circonstances, étant exclu que la seule publication des statuts suffise à constituer cette preuve. Dans les rapports avec les associés, le Président peut faire tous actes de gestion dans l'intérêt de la Société.",
+    "variables_requises": [
+      {
+        "nom": "nature_remuneration_president",
+        "type": "choix",
+        "libelle": "nature de la rémunération du Président",
+        "options": [
+          "fixe",
+          "proportionnelle",
+          "fixe et proportionnelle"
+        ]
+      },
+      {
+        "nom": "assemble_competente_limites_pouvoirs",
+        "type": "choix",
+        "libelle": "organe détenteur des pouvoirs réservés par la loi et les statuts",
+        "options": [
+          "la collectivité des associés",
+          "la collectivité des associés et au Comité de Direction"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "motifs_revocation_non_precises",
+    "article": 22,
+    "titre_clause": "Motifs non précisés",
+    "description_clause": "La révocation doit être prononcée pour de justes motifs sans énumération.",
+    "texte_clause": "La révocation doit être prononcée pour de justes motifs.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "motifs_revocation_precises",
+    "article": 22,
+    "titre_clause": "Motifs précisés",
+    "description_clause": "La révocation ne peut être prononcée que pour les motifs limitativement énumérés.",
+    "texte_clause": "La révocation ne peut être prononcée que pour les motifs suivants : (motifs_revocation_president).",
+    "variables_requises": [
+      {
+        "nom": "motifs_revocation_president",
+        "type": "texte",
+        "libelle": "motifs de révocation du Président",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preavis_revocation_president",
+    "article": 22,
+    "titre_clause": "Délai de préavis de révocation",
+    "description_clause": "Assortit la révocation du Président d'un délai de préavis.",
+    "texte_clause": "La révocation est assortie d'un délai de préavis de (delai_preavis_revocation) jours, qui commence à courir lors de la première présentation de la lettre recommandée avec accusé de réception notifiant la révocation.",
+    "variables_requises": [
+      {
+        "nom": "delai_preavis_revocation",
+        "type": "nombre",
+        "libelle": "délai de préavis de révocation du Président (jours)"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "limitation_pouvoirs_president",
+    "article": 22,
+    "titre_clause": "Limitation de pouvoirs du Président",
+    "description_clause": "Soumet certaines décisions du Président à une autorisation préalable et autorise les subdélégations de pouvoirs.",
+    "texte_clause": "Toutefois, le Président ne peut prendre les décisions suivantes sans avoir obtenu au préalable l'autorisation (organe_autorisation_president) : (decisions_soumises_autorisation).\nLe Président est autorisé à consentir des subdélégations ou substitutions de pouvoirs pour une ou plusieurs opérations ou catégories d'opérations déterminées. Ces délégations subsistent lorsqu'il vient à cesser ses fonctions à moins que son successeur ne les révoque.",
+    "variables_requises": [
+      {
+        "nom": "organe_autorisation_president",
+        "type": "choix",
+        "libelle": "organe dont l'autorisation préalable est requise pour certaines décisions du Président",
+        "options": [
+          "de la collectivité des associés",
+          "du Comité de Direction"
+        ]
+      },
+      {
+        "nom": "decisions_soumises_autorisation",
+        "type": "texte",
+        "libelle": "décisions relevant de la compétence du Président mais soumises à autorisation préalable",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "directeurs_generaux",
+    "article": 23,
+    "titre_clause": "Directeurs Généraux - Directeurs Généraux Délégués",
+    "description_clause": "Organise la nomination, la durée, la rémunération et les pouvoirs des Directeurs Généraux et Délégués.",
+    "texte_clause": "1. Les associés peuvent nommer, dans les mêmes conditions que le Président, un ou plusieurs Directeurs Généraux et/ou Directeurs Généraux Délégués, personnes physiques ou morales, ayant à titre habituel le pouvoir d'engager la Société. Le Directeur Général ou le Directeur Général Délégué peut ou non être associé ou, s'il s'agit d'une personne physique, salarié de la Société. Lorsqu'une personne morale est nommée Directeur Général ou Directeur Général Délégué, son ou ses représentants permanents sont soumis aux mêmes conditions et obligations et encourent les mêmes responsabilités civiles ou pénales que s'ils étaient Directeur Général ou Directeur Général Délégué en leur nom propre, sans préjudice de la responsabilité solidaire de la personne morale représentée.\n2. La durée des fonctions de Directeur Général ou de Directeur Général Délégué est fixée par la décision qui les nomme.\n3. La rémunération du Directeur Général ou du Directeur Général Délégué est fixée par la collectivité des associés. Le Directeur Général ou le Directeur Général Délégué pourra obtenir le remboursement, sur justificatif, des dépenses effectuées dans le cadre de sa mission pour le compte de la Société.\n4. Les fonctions de Directeur Général ou de Directeur Général Délégué prennent fin dans les mêmes conditions que celles du Président. En cas de décès, démission ou empêchement du Président, le Directeur Général ou le Directeur Général Délégué en fonction conserve ses fonctions et attributions.\n5. Le Directeur Général ou le Directeur Général Délégué dispose, à l'égard des tiers, des mêmes pouvoirs que le Président et est soumis aux mêmes limitations de pouvoirs que ce dernier.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "comite_direction",
+    "article": 24,
+    "titre_clause": "Comité de Direction",
+    "description_clause": "Instaure un Comité de Direction et organise sa composition, sa convocation et ses délibérations.",
+    "texte_clause": "1. La Société comprend un Comité de Direction composé d'au minimum (nombre_membres_comite) membres, associés ou non, dont le Président. Lorsqu'une personne morale est désignée membre du Comité de Direction, elle doit désigner un représentant au sein du Comité de Direction. Les membres du Comité de Direction sont désignés par la collectivité des associés. La désignation, comme la révocation d'un membre du Comité de Direction, interviennent dans les mêmes conditions que celles prévues pour le Président. Les membres du Comité de Direction sont nommés pour une durée (duree_mandat_comite), (renouvelabilite_comite) et leurs fonctions prennent fin dans les mêmes conditions que celles fixées pour le Président.\n2. Le Comité de Direction se réunit sur convocation du Président ou de (nombre_membres_convocation_comite) de ses membres. Les convocations, faites à l'initiative du Président, ont lieu par tous moyens, même verbalement. Les convocations faites à l'initiative des membres du Comité de Direction sont obligatoirement faites par lettre recommandée avec demande d'avis de réception, quinze (15) jours au moins à l'avance. Le Comité de Direction est convoqué et tient séance au siège social ou à tout autre endroit que désigne la convocation. Il est présidé par le Président et, si ce dernier n'est pas présent, par l'un des membres du Comité de Direction désigné à la majorité simple des membres du Comité de Direction présents. La présence de la moitié au moins des membres du Comité de Direction est nécessaire pour la validité des délibérations. Le vote par procuration est admis. Les délibérations sont prises à la majorité des membres du Comité de Direction présents ou représentés.",
+    "variables_requises": [
+      {
+        "nom": "nombre_membres_comite",
+        "type": "nombre",
+        "libelle": "nombre minimum de membres du Comité de Direction"
+      },
+      {
+        "nom": "duree_mandat_comite",
+        "type": "choix",
+        "libelle": "durée du mandat des membres du Comité de Direction",
+        "options": [
+          "indéterminée",
+          "déterminée"
+        ]
+      },
+      {
+        "nom": "renouvelabilite_comite",
+        "type": "choix",
+        "libelle": "renouvelabilité du mandat des membres du Comité de Direction",
+        "options": [
+          "renouvelable",
+          "non renouvelable"
+        ]
+      },
+      {
+        "nom": "nombre_membres_convocation_comite",
+        "type": "nombre",
+        "libelle": "nombre de membres pouvant demander la convocation du Comité de Direction"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "comite_direction_voix_preponderante",
+    "article": 24,
+    "titre_clause": "Voix prépondérante et délibérations à distance",
+    "description_clause": "Prévoit la voix prépondérante du Président et les modalités de décisions du Comité de Direction.",
+    "texte_clause": "La voix du Président est prépondérante. Le Directeur Général ou le Directeur Général Délégué peut assister aux réunions du Comité de Direction et participer aux débats mais, s'il n'est pas membre du Comité de Direction, sans voix délibérative.\nLes décisions du Comité de Direction pourront être adoptées au moyen de la signature d'un acte sous seing privé si tous les membres du Comité de Direction ou leurs mandataires signent l'acte. Les décisions du Comité de Direction peuvent également être prises par conférence téléphonique, visioconférence ou tout autre moyen de communication à distance. Les décisions du Comité de Direction seront ensuite matérialisées par un procès-verbal. La signature par télécopie ou par tout procédé électronique de ce procès-verbal sera autorisée et devra être suivie d'une signature en original de tous les membres du Comité de Direction dans les deux (2) mois qui suivent les prises de décision. Sont réputés présents, pour le calcul du quorum et de la majorité, les membres du Comité de Direction qui participent à la réunion par des moyens de conférence téléphonique ou de visioconférence ou tout autre moyen de communication à distance.\n3. Les fonctions des membres du Comité de Direction ne sont pas rémunérées. Toutefois, toutes les dépenses encourues par un membre du Comité de Direction dans l'exercice de ses fonctions seront remboursées par la Société au vu de justificatifs.\n4. Le Président et, le cas échéant, les autres dirigeants de la Société doivent obtenir l'autorisation expresse et préalable du Comité de Direction pour prendre les décisions énumérées à l'article (reference_article_limitation_pouvoirs) ci-dessus.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_limitation_pouvoirs",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article relatif à la limitation de pouvoirs du Président",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026). Le modèle source écrit 'à l'article 21-4 ci-dessus' : renvoi au paragraphe 4 de l'article Président réel (22), section limitation_pouvoirs_president. Corrigé en reference_croisee (pas de numéro en dur).",
+        "resout_depuis_section": "limitation_pouvoirs_president",
+        "si_article_absent": {
+          "mode": "aucune",
+          "note": "Déduite : seulement si l'Art. 22 est inclus. Aucune adaptation de texte possible : laissé tel quel."
+        },
+        "article_cible": 22
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve",
+    "article": 27,
+    "titre_clause": "Domaine réservé à la collectivité des associés",
+    "description_clause": "Énumère les décisions obligatoirement réservées à la collectivité des associés.",
+    "texte_clause": "Les décisions suivantes sont obligatoirement prises collectivement par la collectivité des associés :\n• nomination, révocation du Président, modification et ratification de la rémunération attachée à l'exercice de son mandat ;\n• nomination, renouvellement ou révocation des commissaires aux comptes le cas échéant ;\n• approbation des comptes, affectation des résultats, distribution, en cours d'exercice, de réserves ou d'acomptes sur dividendes ;\n• augmentation, réduction ou amortissement du capital social sous quelques formes que ce soit ;\n• émission de toute valeur mobilière, pouvant donner accès immédiatement ou à terme au capital ou aux droits de vote de la Société ;\n• fusion, scission, apport partiel d'actif soumis au régime des scissions, confusion de patrimoine et, d'une manière générale, toutes opérations emportant la transmission universelle du patrimoine de la Société ;\n• adhésion à tout groupement ou autre entité, pouvant entraîner la responsabilité solidaire et indéfinie de la Société ;\n• transformation de la Société en une société d'une autre forme ;\n• prorogation de la durée de la Société ;\n• dissolution de la Société, nomination du liquidateur, détermination de ses pouvoirs et de sa rémunération ;\n• toute modification statutaire, étant précisé que la décision de transfert du siège social peut, si l'article (reference_article_transfert_siege) des présents statuts le prévoit, être prise par le Président.",
+    "variables_requises": [
+      {
+        "nom": "reference_article_transfert_siege",
+        "type": "reference_croisee",
+        "libelle": "numéro de l'article relatif au transfert du siège social",
+        "commentaire": "Référence croisée dynamique (décision 22/09/2026). Le modèle source écrit 'si l'article 4 des présents statuts le prévoit' : renvoi au chapitre 'Siège social' dont le mode de transfert par le Président seul est une variante (article 4 réel, groupe 'transfert_siege'). Résolu par le moteur vers la section 'transfert_siege'.",
+        "resout_depuis_section": "transfert_siege",
+        "si_article_absent": {
+          "mode": "texte",
+          "remplace": ", étant précisé que la décision de transfert du siège social peut, si l'article (reference_article_transfert_siege) des présents statuts le prévoit, être prise par le Président.",
+          "par": ".",
+          "note": "Sans article sur le transfert du siège (Art. 4 passé), aucune délégation au Président : le transfert est une modification statutaire comme les autres -- la précision est retirée (texte relu le 25/09/2026)."
+        },
+        "article_cible": 4
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve_agrement",
+    "article": 27,
+    "titre_clause": "Agrément des transferts de titres",
+    "description_clause": "Soumet les transferts de titres à l'agrément de la collectivité des associés.",
+    "texte_clause": "• agrément des transferts de titres ;",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve_exclusion",
+    "article": 27,
+    "titre_clause": "Exclusion d'un associé et suspension des droits de vote",
+    "description_clause": "Soumet l'exclusion d'un associé et la suspension de ses droits de vote à une décision collective.",
+    "texte_clause": "• exclusion d'un associé et suspension de ses droits de vote ;",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve_comite_direction",
+    "article": 27,
+    "titre_clause": "Nomination et révocation des membres du Comité de Direction",
+    "description_clause": "Soumet la nomination et la révocation des membres du Comité de Direction à une décision collective.",
+    "texte_clause": "• nomination et révocation des membres du Comité de Direction ;",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve_autres_operations",
+    "article": 27,
+    "titre_clause": "Autres opérations soumises à l'approbation des associés",
+    "description_clause": "Soumet d'autres opérations, librement définies, à l'approbation des associés.",
+    "texte_clause": "• (autres_operations_approbation_associes) ;",
+    "variables_requises": [
+      {
+        "nom": "autres_operations_approbation_associes",
+        "type": "texte",
+        "libelle": "autres opérations soumises à l'approbation des associés",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve_seuils",
+    "article": 27,
+    "titre_clause": "Seuils financiers soumis à l'approbation des associés",
+    "description_clause": "Soumet à l'approbation des associés les opérations sur actifs et les dépenses dépassant des seuils fixés.",
+    "texte_clause": "• transfert ou acquisition de tout actif de plus de (montant_cession_actifs) Euros appartenant à la Société ;\n• tout investissement ou dépense de plus de (montant_investissement_depense) Euros pour un même projet ;",
+    "variables_requises": [
+      {
+        "nom": "montant_cession_actifs",
+        "type": "montant",
+        "libelle": "montant au-delà duquel le transfert ou l'acquisition d'actifs requiert l'approbation des associés"
+      },
+      {
+        "nom": "montant_investissement_depense",
+        "type": "montant",
+        "libelle": "montant au-delà duquel un investissement ou une dépense requiert l'approbation des associés"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "domaine_reserve_cloture",
+    "article": 27,
+    "titre_clause": "Décisions requérant l'unanimité et compétence du Président",
+    "description_clause": "Rappelle que les décisions requérant l'unanimité légale sont collectives et que toutes les autres relèvent du Président.",
+    "texte_clause": "• toute décision requérant l'unanimité des associés en application de la loi.\nSauf stipulations spécifiques contraires et expresses des présents statuts, toutes les décisions autres que celles énumérées par le présent article relèvent de la compétence du Président.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "modalites_decisions_collectives",
+    "article": 28,
+    "titre_clause": "Modalités des décisions collectives des associés",
+    "description_clause": "Définit les modalités des décisions collectives : assemblée, consultation écrite, quorum, majorités.",
+    "texte_clause": "1. Les décisions collectives des associés seront adoptées, au choix du Président, en assemblée générale ou par correspondance. Sous réserve des dispositions légales, les décisions collectives des associés peuvent également résulter du consentement unanime de tous les associés exprimé dans un acte écrit. Lorsque la décision est exprimée dans un acte en dehors de toute assemblée, l'acte devra être signé par l'ensemble des associés et il en sera fait mention dans le registre des procès-verbaux des décisions des associés. Tous moyens de communication, en ce compris la télécopie, la conférence téléphonique ou la visioconférence, peuvent être utilisés pour l'expression des décisions.\n2. L'assemblée est convoquée par le Président agissant (i) sur sa propre initiative ou (ii) à la demande d'un associé représentant au moins (pourcentage_minimum_convocation) % du capital et des droits de vote de la Société (auquel cas le Président sera tenu de déférer à une telle demande). L'assemblée est réunie en France ou à l'étranger si l'intérêt de la Société l'exige, à l'endroit indiqué dans la convocation. La convocation est faite par tous moyens (delai_convocation) jours avant la date de réunion. Elle comporte l'indication de l'ordre du jour, de l'heure et du lieu de la réunion. La convocation est accompagnée de tous documents nécessaires à l'information des associés. Nonobstant les dispositions qui précèdent, au cas où tous les associés sont présents ou représentés, l'assemblée est valablement tenue même en cas de convocation orale et sans délai. Dans ce cas, les associés peuvent convenir de recevoir l'intégralité des documents relatifs à l'ordre du jour au plus tard le jour de ladite assemblée. L'assemblée ne délibère valablement sur première convocation que si les associés présents ou représentés possèdent au moins la moitié des actions ayant le droit de vote (y compris par correspondance, conférence téléphonique ou visioconférence). Sur seconde convocation sur le même ordre du jour, l'assemblée délibère valablement sans condition de quorum. Chaque associé a le droit de participer à toute décision soit directement, soit par l'intermédiaire d'un mandataire désigné à cet effet. L'assemblée est présidée par le Président de la Société. A défaut, elle élit son Président. L'assemblée désigne un secrétaire qui peut être choisi en dehors des associés. A chaque assemblée est tenue une feuille de présence et il est dressé un procès-verbal de la réunion qui est signé par le Président de séance et le secrétaire.\n3. En cas de consultation écrite, le texte des résolutions ainsi que les documents nécessaires à l'information des associés sont adressés à chacun par tous moyens. Les associés disposent d'un délai minimal de (delai_reponse_consultation_ecrite) jours à compter de la réception des projets de résolutions pour émettre leur vote par tous moyens. L'associé n'ayant pas répondu dans le délai de (delai_silence_consultation_ecrite) jours à compter de la réception des projets de résolutions est considéré comme ayant (choix_silence_associe) ces résolutions. Le résultat de la consultation écrite est consigné dans un procès-verbal établi et signé par le Président. Ce procès-verbal mentionne la réponse de chaque associé.\n4. Les procès-verbaux des décisions collectives sont établis et signés sur des registres tenus conformément aux dispositions légales en vigueur. Les copies ou extraits des délibérations des associés sont valablement certifiés conformes par le Président. Au cours de la liquidation de la Société, leur certification est valablement faite par le liquidateur.\n5. Les décisions collectives des associés sont prises à la majorité des voix dont disposent les associés présents ou représentés hormis celles soumises à l'accord unanime des associés en vertu de dispositions légales particulières et celles visées au paragraphe 6 ci-dessous. Il est précisé, en tant que de besoin, que les décisions devant être adoptées à l'unanimité du fait de la loi, mais dont la loi prévoit la possibilité pour les statuts d'y déroger, seront également adoptées valablement à la majorité des voix dont disposent les associés présents ou représentés.\n6. Par exception aux stipulations du paragraphe 5 ci-dessus, les décisions collectives énumérées ci-après doivent être adoptées à (majorite_decisions_exceptionnelles) des voix dont disposent les associés présents ou représentés :\n• (operations_majorite_renforcee) ;\nSi la Société vient à ne comporter qu'un associé, ce dernier exercera les pouvoirs dévolus aux associés lorsque les présents statuts prévoient une prise de décision collective. Les décisions de l'associé unique sont constatées par un procès-verbal établi par l'associé unique. Elles sont consignées dans un registre coté et paraphé.",
+    "variables_requises": [
+      {
+        "nom": "pourcentage_minimum_convocation",
+        "type": "nombre",
+        "libelle": "pourcentage minimum du capital (et des droits de vote) requis pour demander la convocation"
+      },
+      {
+        "nom": "delai_convocation",
+        "type": "nombre",
+        "libelle": "délai de convocation de l'assemblée (en jours)"
+      },
+      {
+        "nom": "delai_reponse_consultation_ecrite",
+        "type": "nombre",
+        "libelle": "délai minimal laissé aux associés pour répondre à la consultation écrite (jours)"
+      },
+      {
+        "nom": "delai_silence_consultation_ecrite",
+        "type": "nombre",
+        "libelle": "délai au-delà duquel l'absence de réponse à la consultation écrite vaut choix par défaut (jours)"
+      },
+      {
+        "nom": "choix_silence_associe",
+        "type": "choix",
+        "libelle": "sort de l'associé n'ayant pas répondu à la consultation écrite",
+        "options": [
+          "rejeté",
+          "approuvé"
+        ]
+      },
+      {
+        "nom": "majorite_decisions_exceptionnelles",
+        "type": "choix",
+        "libelle": "majorité requise pour les décisions collectives exceptionnelles",
+        "valeurs_par_choix": {
+          "la majorité renforcée": "la majorité renforcée des {majorite_renforcee} %"
+        },
+        "commentaire": "Correction #10 (audit 23/09/2026) : la valeur imbriquée était écrite avec la syntaxe brute (majorite_renforcee) directement dans choix_possibles, non reconnue par le moteur -- convertie au mécanisme valeurs_par_choix ({nom_variable}), déjà utilisé côté pacte (art. 7.5, regle_distribution/seuil_pourcentage).",
+        "options": [
+          "l'unanimité",
+          "la majorité renforcée"
+        ]
+      },
+      {
+        "nom": "majorite_renforcee",
+        "type": "nombre",
+        "libelle": "pourcentage de la majorité renforcée (requis uniquement si 'la majorité renforcée' est retenue)",
+        "depend_de_variable": "majorite_decisions_exceptionnelles",
+        "depend_de_valeurs": [
+          "la majorité renforcée des (majorite_renforcee) %"
+        ]
+      },
+      {
+        "nom": "operations_majorite_renforcee",
+        "type": "texte",
+        "libelle": "opérations soumises à la majorité renforcée",
+        "controle_juridique": true
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exercice_annee_civile",
+    "article": 30,
+    "titre_clause": "Exercice social coïncidant avec l'année civile",
+    "description_clause": "L'exercice social coïncide avec l'année civile.",
+    "texte_clause": "L'exercice social commence le 1er janvier et se termine le 31 décembre de chaque année.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exercice_hors_annee_civile",
+    "article": 30,
+    "titre_clause": "Exercice social ne coïncidant pas avec l'année civile",
+    "description_clause": "L'exercice social ne coïncide pas avec l'année civile.",
+    "texte_clause": "L'exercice social commence le (jour_ouverture_exercice) (mois_ouverture_exercice) de chaque année et se termine le (fin_exercice) de l'année suivante.\nPar exception, le premier exercice social sera clos au (date_cloture_premier_exercice).",
+    "variables_requises": [
+      {
+        "nom": "jour_ouverture_exercice",
+        "type": "nombre",
+        "libelle": "jour d'ouverture de l'exercice social (1 à 31)"
+      },
+      {
+        "nom": "mois_ouverture_exercice",
+        "type": "choix",
+        "libelle": "mois d'ouverture de l'exercice social",
+        "options": [
+          "janvier",
+          "février",
+          "mars",
+          "avril",
+          "mai",
+          "juin",
+          "juillet",
+          "août",
+          "septembre",
+          "octobre",
+          "novembre",
+          "décembre"
+        ]
+      },
+      {
+        "nom": "fin_exercice",
+        "type": "auto_fin_exercice",
+        "libelle": "jour de clôture de l'exercice social",
+        "jour_de": "jour_ouverture_exercice",
+        "mois_de": "mois_ouverture_exercice"
+      },
+      {
+        "nom": "date_cloture_premier_exercice",
+        "type": "date",
+        "libelle": "date de clôture du premier exercice social"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "affectation_benefices",
+    "article": 32,
+    "titre_clause": "Affectation et répartition des bénéfices",
+    "description_clause": "Organise l'affectation du bénéfice distribuable par la collectivité des associés.",
+    "texte_clause": "Si les comptes de l'exercice approuvés par la collectivité des associés font apparaître un bénéfice distribuable, tel qu'il est défini par la loi, la collectivité des associés décide de l'inscrire à un ou plusieurs postes de réserves dont elle règle l'affectation ou l'emploi, de le reporter à nouveau ou de le distribuer.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "premier_dividende",
+    "article": 32,
+    "titre_clause": "Premier dividende",
+    "description_clause": "Prévoit un premier dividende non cumulatif en cas de bénéfice distribuable.",
+    "texte_clause": "Nonobstant les stipulations qui précèdent et en cas de bénéfice distribuable, il sera prélevé sur ce bénéfice les sommes nécessaires pour distribuer aux associés un premier dividende non cumulatif égal à (pourcentage_premier_dividende) % du montant libéré et non remboursé des actions, conformément aux dispositions de l'article L232-16 du Code de commerce.\nLes réserves (regime_reserves_premier_dividende) prises en compte pour le calcul de ce premier dividende.",
+    "variables_requises": [
+      {
+        "nom": "pourcentage_premier_dividende",
+        "type": "nombre",
+        "libelle": "pourcentage du premier dividende"
+      },
+      {
+        "nom": "regime_reserves_premier_dividende",
+        "type": "choix",
+        "libelle": "prise en compte des réserves dans le calcul du premier dividende",
+        "options": [
+          "ne seront pas",
+          "seront"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "dividende_majore",
+    "article": 32,
+    "titre_clause": "Dividende majoré",
+    "description_clause": "Prévoit un dividende majoré pour les associés inscrits au nominatif depuis deux ans.",
+    "texte_clause": "Nonobstant les stipulations qui précèdent et conformément aux dispositions de l'article L232-14 du Code de commerce, tout associé justifiant, à la clôture de l'exercice, d'une inscription nominative depuis deux (2) ans au moins et du maintien de celle-ci à la date de mise en paiement du dividende pourra bénéficier d'une majoration du dividende dans la limite de dix pour cent (10 %). Son taux est fixé par la collectivité des associés. La même majoration peut être attribuée, dans les mêmes conditions, en cas de distribution d'actions gratuites.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "premier_president_personne_physique",
+    "article": 39,
+    "titre_clause": "Président personne physique",
+    "description_clause": "Le premier Président est une personne physique.",
+    "texte_clause": "Est désigné comme premier Président de la Société pour une durée de (duree_fonctions_premier_president) :\n(nom_complet_premier_president), demeurant (adresse_premier_president).",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_premier_president",
+        "type": "auto_duree_fonctions_officier",
+        "libelle": "durée des fonctions du premier Président"
+      },
+      {
+        "nom": "nom_complet_premier_president",
+        "type": "auto_nom_complet_associe",
+        "libelle": "prénom et nom du premier Président"
+      },
+      {
+        "nom": "adresse_premier_president",
+        "type": "auto_adresse_associe",
+        "libelle": "adresse du premier Président"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "premier_president_personne_morale",
+    "article": 39,
+    "titre_clause": "Président personne morale",
+    "description_clause": "Le premier Président est une personne morale avec son représentant permanent.",
+    "texte_clause": "Est désigné comme premier Président de la Société pour une durée de (duree_fonctions_premier_president) :\n(denomination_sociale_premier_president), (forme_juridique_premier_president) au capital de (capital_premier_president) euros, ayant son siège social (siege_social_premier_president), immatriculée au Registre du commerce et des sociétés de (rcs_premier_president) sous le numéro (numero_siren_premier_president), ayant pour représentant permanent (nom_complet_representant_premier_president), demeurant (adresse_representant_premier_president).\nLe Président ainsi nommé intervenant aux présentes déclare, en ce qui le concerne, qu'il accepte sa nomination et qu'il n'existe aucune incompatibilité ni interdiction l'empêchant d'accepter et d'exercer la mission qui vient de lui être confiée.",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_premier_president",
+        "type": "auto_duree_fonctions_officier",
+        "libelle": "durée des fonctions du premier Président"
+      },
+      {
+        "nom": "denomination_sociale_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "dénomination sociale du premier Président"
+      },
+      {
+        "nom": "forme_juridique_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "forme juridique du premier Président"
+      },
+      {
+        "nom": "capital_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "capital du premier Président"
+      },
+      {
+        "nom": "siege_social_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "siège social du premier Président"
+      },
+      {
+        "nom": "rcs_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "Registre du commerce et des sociétés d'immatriculation du premier Président"
+      },
+      {
+        "nom": "numero_siren_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "numéro SIREN du premier Président"
+      },
+      {
+        "nom": "nom_complet_representant_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "prénom et nom du représentant permanent du premier Président"
+      },
+      {
+        "nom": "adresse_representant_premier_president",
+        "type": "auto_officier_pm",
+        "libelle": "adresse du représentant permanent du premier Président"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "premier_directeur_general_personne_physique",
+    "article": 40,
+    "titre_clause": "Directeur Général personne physique",
+    "description_clause": "Le premier Directeur Général est une personne physique.",
+    "texte_clause": "Est désigné comme premier Directeur Général de la Société pour une durée de (duree_fonctions_premier_directeur_general) :\n(nom_complet_premier_directeur_general), demeurant (adresse_premier_directeur_general) ;",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_premier_directeur_general",
+        "type": "auto_duree_fonctions_officier",
+        "libelle": "durée des fonctions du premier Directeur Général"
+      },
+      {
+        "nom": "nom_complet_premier_directeur_general",
+        "type": "auto_nom_complet_associe",
+        "libelle": "prénom et nom du premier Directeur Général"
+      },
+      {
+        "nom": "adresse_premier_directeur_general",
+        "type": "auto_adresse_associe",
+        "libelle": "adresse du premier Directeur Général"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "premier_directeur_general_personne_morale",
+    "article": 40,
+    "titre_clause": "Directeur Général personne morale",
+    "description_clause": "Le premier Directeur Général est une personne morale avec son représentant permanent.",
+    "texte_clause": "Est désigné comme premier Directeur Général de la Société pour une durée de (duree_fonctions_premier_directeur_general) :\n(denomination_sociale_premier_directeur_general), (forme_juridique_premier_directeur_general) au capital de (capital_premier_directeur_general) euros, ayant son siège social (siege_social_premier_directeur_general), immatriculée au Registre du commerce et des sociétés de (rcs_premier_directeur_general) sous le numéro (numero_siren_premier_directeur_general), ayant pour représentant permanent (nom_complet_representant_premier_directeur_general), demeurant (adresse_representant_premier_directeur_general).\nLe Directeur Général ainsi nommé intervenant aux présentes déclare, en ce qui le concerne, qu'il accepte sa nomination et qu'il n'existe aucune incompatibilité ni interdiction l'empêchant d'accepter et d'exercer la mission qui vient de lui être confiée.",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_premier_directeur_general",
+        "type": "auto_duree_fonctions_officier",
+        "libelle": "durée des fonctions du premier Directeur Général"
+      },
+      {
+        "nom": "denomination_sociale_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "dénomination sociale du premier Directeur Général"
+      },
+      {
+        "nom": "forme_juridique_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "forme juridique du premier Directeur Général"
+      },
+      {
+        "nom": "capital_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "capital du premier Directeur Général"
+      },
+      {
+        "nom": "siege_social_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "siège social du premier Directeur Général"
+      },
+      {
+        "nom": "rcs_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "Registre du commerce et des sociétés d'immatriculation du premier Directeur Général"
+      },
+      {
+        "nom": "numero_siren_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "numéro SIREN du premier Directeur Général"
+      },
+      {
+        "nom": "nom_complet_representant_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "prénom et nom du représentant permanent du premier Directeur Général"
+      },
+      {
+        "nom": "adresse_representant_premier_directeur_general",
+        "type": "auto_officier_pm",
+        "libelle": "adresse du représentant permanent du premier Directeur Général"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "membre_comite_personne_physique",
+    "article": 41,
+    "titre_clause": "Membre du Comité personne physique",
+    "description_clause": "Un premier membre du Comité de Direction est une personne physique.",
+    "texte_clause": "Sont désignés comme premiers membres du Comité de Direction pour une durée de (duree_fonctions_membres_comite) :\n(nom_complet_membre_comite), demeurant (adresse_membre_comite) ;",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_membres_comite",
+        "type": "auto_duree_fonctions_officier",
+        "libelle": "durée des fonctions des premiers membres du Comité de Direction"
+      },
+      {
+        "nom": "nom_complet_membre_comite",
+        "type": "auto_nom_complet_associe",
+        "libelle": "prénom et nom d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "adresse_membre_comite",
+        "type": "auto_adresse_associe",
+        "libelle": "adresse d'un premier membre du Comité de Direction"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "membre_comite_personne_morale",
+    "article": 41,
+    "titre_clause": "Membre du Comité personne morale",
+    "description_clause": "Un premier membre du Comité de Direction est une personne morale avec son représentant permanent.",
+    "texte_clause": "Sont désignés comme premiers membres du Comité de Direction pour une durée de (duree_fonctions_membres_comite) :\n(denomination_sociale_membre_comite), (forme_juridique_membre_comite) au capital de (capital_membre_comite) euros, ayant son siège social (siege_social_membre_comite), immatriculée au Registre du commerce et des sociétés de (rcs_membre_comite) sous le numéro (numero_siren_membre_comite), ayant pour représentant permanent (nom_complet_representant_membre_comite), demeurant (adresse_representant_membre_comite).\nChacun des membres du Comité de Direction ainsi nommés intervenant aux présentes déclare, en ce qui le concerne, qu'il accepte sa nomination et qu'il n'existe aucune incompatibilité ni interdiction l'empêchant d'accepter et d'exercer la mission qui vient de lui être confiée.",
+    "variables_requises": [
+      {
+        "nom": "duree_fonctions_membres_comite",
+        "type": "auto_duree_fonctions_officier",
+        "libelle": "durée des fonctions des premiers membres du Comité de Direction"
+      },
+      {
+        "nom": "denomination_sociale_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "dénomination sociale d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "forme_juridique_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "forme juridique d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "capital_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "capital d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "siege_social_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "siège social d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "rcs_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "Registre du commerce et des sociétés d'immatriculation d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "numero_siren_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "numéro SIREN d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "nom_complet_representant_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "prénom et nom du représentant permanent d'un premier membre du Comité de Direction"
+      },
+      {
+        "nom": "adresse_representant_membre_comite",
+        "type": "auto_officier_pm",
+        "libelle": "adresse du représentant permanent d'un premier membre du Comité de Direction"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "reprise_engagements",
+    "article": 43,
+    "titre_clause": "Reprise des engagements accomplis pour le compte de la Société",
+    "description_clause": "Prévoit la reprise par la Société des engagements pris pour son compte avant son immatriculation.",
+    "texte_clause": "Conformément à la loi, la Société ne jouira de la personnalité morale qu'à compter du jour de son immatriculation au Registre du commerce et des sociétés. Cependant, il a été accompli dès avant la signature des présents statuts, pour le compte de la Société en formation, des actes énoncés dans un état annexé aux présents statuts, indiquant pour chacun d'eux l'engagement qui en résulterait pour la Société.\nLa signature des présents statuts vaudra reprise par la Société de ces engagements qui seront réputés avoir été souscrits par elle dès l'origine, et ce, dès qu'elle aura été immatriculée au Registre du commerce et des sociétés.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "mandat_actes_societe_en_formation",
+    "article": 44,
+    "titre_clause": "Mandat pour accomplir des actes pour le compte de la Société avant immatriculation",
+    "description_clause": "Donne mandat à un associé de passer des actes pour le compte de la Société avant son immatriculation.",
+    "texte_clause": "En attendant l'accomplissement de la formalité d'immatriculation de la Société au Registre du commerce et des sociétés, la collectivité des associés donne mandat à (identite_associe_mandataire) ou à toute personne qui s'y substituera, à l'effet de passer et conclure au nom et pour le compte de la Société, les engagements qui sont décrits et dont les modalités sont précisées dans un état annexé aux présents statuts.\nDu seul fait de l'immatriculation de la Société au Registre du commerce et des sociétés, les engagements pris en application de ce mandat et résultant de ces actes seront repris, rétroactivement, dès leur naissance et de plein droit, par la Société.\nToutefois, les engagements pris en vertu d'un mandat trop imprécis devront être ratifiés postérieurement à l'immatriculation de la Société par la collectivité des associés.",
+    "variables_requises": [
+      {
+        "nom": "identite_associe_mandataire",
+        "type": "auto_identite_associe",
+        "libelle": "identité ou dénomination sociale de l'associé mandataire"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cloture_fait_a_signature",
+    "article": "cloture",
+    "titre_clause": "Fait à - Signature - Annexes I et II",
+    "description_clause": "Lieu, date et nombre d'exemplaires des statuts ; signatures des associés ; annexes obligatoires (certificat du dépositaire, actes accomplis avant la signature).",
+    "texte_clause": "Fait à (lieu_signature), le (date_signature), en (nombre_exemplaires) exemplaires.\n\nSignature\nLe Président (et, le cas échéant, le Directeur Général), devra faire précéder sa signature de la mention manuscrite « Bon pour acceptation des fonctions de Président (ou, le cas échéant, de Directeur Général) ».\n\n(signatures_associes)\n\nAnnexe I - Certificat du dépositaire des fonds\nCertificat du dépositaire des fonds joint en annexe.\n\nAnnexe II - État des actes accomplis pour le compte de la Société avant la signature des statuts\n• ouverture d'un compte bancaire pour le dépôt des fonds constituant le capital social ;\n• toutes opérations entrant dans le cadre de la gestion courante de la Société jusqu'à la signature des statuts.\nConformément à la loi, le présent état a été porté à la connaissance des associés préalablement à la signature des statuts auxquels il est annexé et permettra la reprise automatique des actes susmentionnés par la Société au moment de son immatriculation au Registre du commerce et des sociétés.",
+    "variables_requises": [
+      {
+        "nom": "lieu_signature",
+        "type": "texte",
+        "libelle": "lieu de signature des statuts"
+      },
+      {
+        "nom": "date_signature",
+        "type": "date",
+        "libelle": "date de signature des statuts"
+      },
+      {
+        "nom": "nombre_exemplaires",
+        "type": "nombre",
+        "libelle": "nombre d'exemplaires des statuts"
+      },
+      {
+        "nom": "signatures_associes",
+        "type": "auto_signatures_associes",
+        "libelle": "signatures des associés"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cloture_annexe_mandat",
+    "article": "cloture",
+    "titre_clause": "Annexe III - Mandat pour les actes avant immatriculation",
+    "description_clause": "Mandat donné à un associé pour prendre des engagements au nom de la Société entre la signature des statuts et son immatriculation.",
+    "texte_clause": "Annexe III - État des actes accomplis pour le compte de la Société entre la signature des statuts et l'immatriculation\nMandat est expressément donné à (identite_associe_mandataire_annexe_3), avec faculté de délégation et de substitution, à l'effet de prendre pour le compte de la Société jusqu'à son immatriculation au Registre du commerce et des sociétés les engagements suivants :\n• entreprendre, poursuivre et accomplir entièrement toute démarche nécessaire à la poursuite et à l'accomplissement des formalités d'inscription de la Société au Registre du commerce et des sociétés et à la déclaration d'existence de la Société auprès des diverses administrations ;\n• toutes opérations entrant dans le cadre de la gestion courante de la Société jusqu'à son immatriculation ;\n• signer tout contrat entrant dans l'objet social de la Société ou nécessaire au démarrage et au bon fonctionnement de la Société.\nLe présent état constitue un mandat donné par les associés de la Société à (identite_associe_mandataire_annexe_3) de procéder à la signature des actes et à la réalisation des opérations susvisées, dans les conditions prévues par l'article R210-6, alinéa 3 du Code de commerce.",
+    "variables_requises": [
+      {
+        "nom": "identite_associe_mandataire_annexe_3",
+        "type": "auto_identite_associe",
+        "libelle": "identité ou dénomination sociale de l'associé mandataire (Annexe III)",
+        "occurrences_attendues": 2
+      }
+    ],
+    "sous_variantes_candidates": null
+  }
+]

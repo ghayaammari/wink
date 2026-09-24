@@ -53,6 +53,16 @@ type Phase = "welcome" | "loading" | "founders_selection" | "in_progress" | "fin
  * que de renvoyer l'utilisateur éditer `est_fondateur` associé par associé
  * dans "Équipe & capital" — remplace l'ancienne bannière passive qui se
  * contentait de signaler le préremplissage sans donner de prise dessus.
+ *
+ * CONSOLIDATION (27/09/2026, service 1.1.15) : cette page a porté 3
+ * mécanismes d'explication IA construits successivement (icône par titre de
+ * clause, historique des sections déjà rédigées, copilot) — retour "jury"
+ * de l'utilisateur : trop de chemins concurrents pour une même action,
+ * panneau gauche surchargé. Les 2 premiers sont retirés ; le copilot
+ * (déjà existant, plus riche) reste l'unique point d'entrée, à la fois pour
+ * les questions libres ET pour l'explication automatique poussée à chaque
+ * nouvelle section (voir `copilotClauseContexte` et
+ * PacteFondateurCopilotWidget.tsx).
  */
 export default function PacteFondateursV2Page() {
   const { accessToken } = useAuth()
@@ -224,6 +234,13 @@ export default function PacteFondateursV2Page() {
         variables: clauseEnCours.variables_requises
           .filter((v) => v.type !== "reference_croisee" && !v.type.startsWith("auto_"))
           .map((v) => ({ nom: v.nom, libelle: v.libelle })),
+        // AJOUT (27/09/2026, service 1.1.15) — nécessaires pour que le
+        // widget puisse pousser automatiquement une explication de CETTE
+        // clause (POST .../auto-explication, voir sa docstring). documentType
+        // constant ici, mais gardé explicite plutôt que codé en dur dans le
+        // widget : celui-ci n'a pas à connaître DOCUMENT_TYPE de cette page.
+        documentType: DOCUMENT_TYPE,
+        codeSection: currentSection?.code_section ?? "",
       }
     : null
 

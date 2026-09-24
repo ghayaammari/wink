@@ -97,6 +97,26 @@ function hasPendingRegistrationCandidate(fieldValues: ProjectFieldValueRead[]): 
  * `legalProfile` reste propre à cette page : ce n'est pas une donnée partagée
  * par les 3 sections, pas de raison de la faire porter par le layout commun.
  */
+/** Même mise en forme que `_formater_siege_social` (backend) : ligne1,
+ * ligne2, « code_postal ville », champs absents ignorés. */
+function formatSiege(adresse: Record<string, unknown> | undefined): string {
+  if (!adresse) return ""
+  const texte = (cle: string) => (typeof adresse[cle] === "string" ? (adresse[cle] as string).trim() : "")
+  const ville = [texte("code_postal"), texte("ville")].filter(Boolean).join(" ")
+  return [texte("ligne1"), texte("ligne2"), ville].filter(Boolean).join(", ")
+}
+
+/** Affichage français des valeurs de la carte « Pour la rédaction des
+ * statuts » : "20000.00" -> "20 000 €".
+ * Local à cette page (seul usage d'affichage aujourd'hui) -- à déplacer dans
+ * un utilitaire partagé si un 2e écran en a besoin. */
+function formatEurosFr(montant: string): string {
+  const n = Number(montant)
+  return Number.isNaN(n)
+    ? `${montant} €`
+    : n.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + " €"
+}
+
 export default function ProjectLegalInfoPage() {
   const { accessToken } = useAuth()
   const { project, fieldValues, refresh } = useOutletContext<MyProjectOutletContext>()
@@ -209,6 +229,46 @@ export default function ProjectLegalInfoPage() {
             if (value === "—") return null
             return <Field key={spec.fieldName} label={spec.label} value={value} />
           })}
+        </div>
+      </SectionCard>
+
+      {/* Service 1.1.4 : lus automatiquement par les statuts -- toujours
+       * affichés, avec un rappel pour les champs OBLIGATOIRES manquants
+       * (sigle, raison d'être et objectifs ESS restent facultatifs). Saisie
+       * dans StatutsRedactionFields.tsx (bouton « Mettre à jour »). */}
+      <SectionCard title="Pour la rédaction des statuts">
+        <div className="flex flex-col gap-4">
+          <Field label="Objet social" value={legalProfile?.objet_social || "—"} />
+          <Field
+            label="Durée de la société"
+            value={legalProfile?.duree_societe != null ? `${legalProfile.duree_societe} ans` : "—"}
+          />
+          <Field label="Capital social" value={legalProfile?.capital_social ? formatEurosFr(legalProfile.capital_social) : "—"} />
+          <Field
+            label="Actions"
+            value={
+              legalProfile?.nombre_actions != null && legalProfile?.valeur_nominale
+                ? `${legalProfile.nombre_actions.toLocaleString("fr-FR")} actions de ${formatEurosFr(legalProfile.valeur_nominale)}`
+                : "—"
+            }
+          />
+          <Field label="Siège social" value={formatSiege(legalProfile?.registered_address) || "—"} />
+          <Field label="Ville du greffe (RCS)" value={legalProfile?.lieu_immatriculation || "—"} />
+          {legalProfile?.sigle && <Field label="Sigle" value={legalProfile.sigle} />}
+          {legalProfile?.raison_d_etre && <Field label="Raison d'être" value={legalProfile.raison_d_etre} />}
+          {legalProfile?.objectifs_ess && <Field label="Objectifs d'utilité sociale (ESS)" value={legalProfile.objectifs_ess} />}
+          {(!legalProfile?.objet_social ||
+            legalProfile?.duree_societe == null ||
+            !legalProfile?.capital_social ||
+            legalProfile?.nombre_actions == null ||
+            !legalProfile?.valeur_nominale ||
+            !legalProfile?.lieu_immatriculation ||
+            !formatSiege(legalProfile?.registered_address)) && (
+            <p className="text-xs text-amber-700">
+              À compléter via « Mettre à jour » avant de rédiger vos statuts : ces informations y sont reprises
+              automatiquement.
+            </p>
+          )}
         </div>
       </SectionCard>
 

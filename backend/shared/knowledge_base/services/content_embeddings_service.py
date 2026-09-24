@@ -33,6 +33,18 @@ def get_embedded_chunks(db: Session, *, source_type: str, source_id: str) -> lis
     )
 
 
+def delete_for_source(db: Session, *, source_type: str, source_id: str) -> int:
+    """Supprime tous les chunks d'une source (ex. clause retirée du clausier) —
+    sinon la recherche sémantique pourrait remonter un texte qui n'existe plus."""
+    nb = (
+        db.query(ContentEmbeddings)
+        .filter(ContentEmbeddings.source_type == source_type, ContentEmbeddings.source_id == source_id)
+        .delete(synchronize_session=False)
+    )
+    db.flush()
+    return nb
+
+
 def upsert_embedding(
     db: Session,
     *,

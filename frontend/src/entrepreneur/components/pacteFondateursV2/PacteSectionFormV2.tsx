@@ -1,9 +1,5 @@
 import { useState } from "react"
-import type {
-  ClauseCandidateRead,
-  SectionAnswerSubmit,
-  SectionStateRead,
-} from "../../api/documentGenerationApi"
+import type { ClauseCandidateRead, SectionAnswerSubmit, SectionStateRead } from "../../api/documentGenerationApi"
 import PacteVariableInputV2 from "./PacteVariableInputV2"
 import { Icon, ICON_CHECK, ICON_CHEVRON_LEFT, ICON_DOCUMENT, ICON_INFO, ICON_SKIP, ICON_TAG } from "./pacteIcons"
 
@@ -136,7 +132,12 @@ function ExplanationBox({ text }: { text: string }) {
   )
 }
 
-export default function PacteSectionFormV2({ section, isSubmitting, onSubmit, onBack }: PacteSectionFormV2Props) {
+export default function PacteSectionFormV2({
+  section,
+  isSubmitting,
+  onSubmit,
+  onBack,
+}: PacteSectionFormV2Props) {
   const precedente = section.reponse_precedente as
     | { inclus?: boolean; variante?: string; code_clause?: string; valeurs?: Record<string, string> }
     | null

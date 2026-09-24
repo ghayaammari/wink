@@ -51,3 +51,8 @@ trafilatura>=1.12.2             # extraction du contenu principal d'une page (ti
 beautifulsoup4>=4.12.3          # extraction des liens <a href> pour le crawling borné (discover_links)
 lxml>=5.3.0                     # parseur utilisé par BeautifulSoup, plus rapide et plus tolérant que html.parser
 fonttools>=4.55.0                # requis par pypdf (extraction PDF, voir web_fetch.py::_extract_pdf_text) pour décoder pleinement l'encodage de certaines polices CFF Type1 embarquées — sans lui, avertissements "fontTools is required..." et extraction potentiellement dégradée en silence
+# --- Extraction de documents source (backend/shared/knowledge_base/scripts/extract_pacte_fondateurs_raw.py) ---
+python-docx>=1.1.2              # lecture .docx (paragraphes + tableaux), service 1.1.13 (pacte de fondateurs)
+
+# --- Génération PDF de documents finaux (backend/entrepreneur/services/pdf_rendering_service.py) ---
+reportlab>=4.2.5                # rendu texte -> PDF, service 1.1.13 (pacte de fondateurs) -- pur Python, sans dépendance système (contrairement à weasyprint/wkhtmltopdf), réutilisable par 1.1.4 (statuts)

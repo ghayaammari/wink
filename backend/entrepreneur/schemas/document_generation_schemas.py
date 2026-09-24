@@ -40,10 +40,43 @@ class ClauseCandidateRead(BaseModel):
     # Le frontend les affiche en lecture seule au lieu d'un champ éditable.
     # Absent (dict vide) pour une clause sans variable `auto_*`.
     valeurs_auto_resolues: dict[str, str] = Field(default_factory=dict)
+    # AJOUT (25/09/2026, service 1.1.4 statuts) — BUG CORRIGÉ : ce champ est
+    # calculé et placé dans le payload par `_clause_payload` depuis le tout
+    # début de `_selections_requises` (23/09/2026), mais absent de CE schéma
+    # jusqu'ici. Un `response_model` Pydantic ignore silencieusement toute
+    # clé qui n'est pas déclarée dans le modèle : le champ était donc calculé
+    # côté service puis jeté à la sérialisation, sans jamais atteindre le
+    # frontend, sans erreur ni log. Découvert en préparant le frontend
+    # statuts (le dropdown `auto_identite_associe` et les champs par-associé
+    # `texte_par_associe`/`nombre_par_associe` en dépendent entièrement) —
+    # même mécanisme pour le pacte (Article 8 `fondateur_avantage`), donc
+    # déjà silencieusement cassé là aussi avant ce correctif.
+    # Forme : {nom_variable: [{"id": <uuid associé>, "libelle": <identité affichable>}]}
+    # — voir la docstring de `_selections_requises` côté service pour les 2
+    # cas couverts (choix réel vs. saisie répétée par associé).
+    selections_requises: dict[str, list[dict[str, str]]] = Field(default_factory=dict)
     # Rempli seulement si cette clause a elle-même un second niveau de choix
     # (cas Article 3 uniquement, voir contract_clause_library.py) — la clause
     # RÉELLEMENT appliquée est alors la sous-variante choisie, pas celle-ci.
     sous_candidats: list["ClauseCandidateRead"] | None = None
+
+
+class FacultatifRead(BaseModel):
+    """Un article facultatif proposé sur l'écran de choix (audit #19, statuts)."""
+
+    code: str
+    titre: str
+    articles: list[str]
+    explication: str
+    # Pré-rempli avec le choix précédent si l'utilisateur revient sur l'écran.
+    choisi: bool = False
+
+
+class FacultatifsChoixSubmit(BaseModel):
+    """POST .../facultatifs — codes des articles facultatifs cochés (liste vide
+    = aucun). Les codes inconnus sont refusés par le service."""
+
+    codes_choisis: list[str] = Field(default_factory=list)
 
 
 class SectionStateRead(BaseModel):
@@ -80,6 +113,21 @@ class SectionStateRead(BaseModel):
     # (état normal en_cours), pas None : évite un 3e état à gérer côté
     # frontend pour un champ qui n'est de toute façon lu que dans ce cas.
     document_deja_genere: bool = False
+    # Correction d'une section lancée depuis la vérification finale (statuts,
+    # 24/09/2026) : bandeau « Revenir à la vérification », « Section
+    # précédente » masqué.
+    correction_en_cours: bool = False
+    # AJOUT 24/09/2026 (audit #19, statuts) — écran de choix des facultatifs :
+    # `choix_facultatifs_requis` vrai = pause avant l'Art. 8, `facultatifs` donne
+    # la liste à cocher (code_section vaut alors "__choix_facultatifs__").
+    choix_facultatifs_requis: bool = False
+    facultatifs: list[FacultatifRead] | None = None
+    # Vrai si la section courante appartient à un article facultatif coché :
+    # le frontend ne redemande pas "l'inclure ?" et propose "Ne plus inclure".
+    article_facultatif_choisi: bool = False
+    # Vrai seulement pour la section de base de cet article : incluse d'office,
+    # pas de question oui/non (ses options internes restent posées).
+    section_de_base_facultatif: bool = False
     # Rempli seulement pour mention_obligatoire/clause_optionnelle (une seule clause).
     clause: ClauseCandidateRead | None = None
     # Rempli seulement pour variante_obligatoire (plusieurs candidats au choix).
@@ -105,6 +153,15 @@ class SectionAnswerSubmit(BaseModel):
     variante: str | None = None
     sous_variante: str | None = None
     valeurs: dict[str, Any] = Field(default_factory=dict)
+    # Règles de validité (statuts, 24/09/2026) : `True` quand l'utilisateur a
+    # vu les AVERTISSEMENTS (jamais les blocages) et choisit de continuer.
+    confirmer_avertissements: bool = False
+
+
+# RETIRÉ (27/09/2026, service 1.1.15) : ClauseExplanationRequest/Read et
+# SectionAnsweredRead — l'explication de clause (à la demande ou
+# automatique) est désormais portée par pacte_fondateur_copilot_schemas.py,
+# voir document_generation_router.py pour la décision de consolidation.
 
 
 class DocumentGenerationSessionRead(BaseModel):
@@ -136,3 +193,67 @@ class GeneratedDocumentRead(BaseModel):
 # sur elle-même (sous_candidats: list["ClauseCandidateRead"]) — sans ça, le
 # schéma OpenAPI généré par FastAPI resterait cassé sur ce champ précis.
 ClauseCandidateRead.model_rebuild()
+
+
+class PrevalidationProblemeRead(BaseModel):
+    """Un problème bloquant de la pré-validation (statuts, 24/09/2026).
+    `page` : où le corriger (`informations_legales`, `equipe_capital`,
+    `dirigeants`) -- le frontend en fait un lien direct."""
+
+    code: str
+    message: str
+    page: str
+
+
+class ProblemeValidationRead(BaseModel):
+    """Un problème de la vérification finale (agents/document_generation_validation).
+    `cible_type` = "section" (rouvrir `cible`) ou "page" (page du projet), ou None."""
+
+    code: str
+    message_court: str
+    message: str
+    gravite: Literal["bloquant", "avertissement"]
+    cible_type: Literal["section", "page"] | None = None
+    cible: str | None = None
+    cible_libelle: str | None = None
+    base_legale: str | None = None
+    reformulation_proposee: str | None = None
+    champ: str | None = None
+    valeur_actuelle: str | None = None
+    correction_proposee: str | None = None
+    # {"variable", "valeur"} : correction certaine, bouton « Appliquer ».
+    valeur_a_appliquer: dict[str, str] | None = None
+
+
+class CorrectionAppliqueeSubmit(BaseModel):
+    """POST …/validation-finale/appliquer : enregistre la valeur proposée par
+    la vérification finale dans une section déjà répondue."""
+
+    code_section: str
+    variable: str
+    valeur: str
+
+
+class EtapeValidationRead(BaseModel):
+    tool: str
+    libelle: str
+    statut: Literal["ok", "problemes", "erreur"]
+    duree_ms: int
+    nb_problemes: int
+
+
+class ValidationFinaleRead(BaseModel):
+    """GET …/document-generation/{type}/validation-finale. `pret` = aucun
+    problème bloquant (des avertissements seuls n'empêchent pas de générer)."""
+
+    pret: bool
+    etapes: list[EtapeValidationRead]
+    problemes: list[ProblemeValidationRead]
+
+
+class PrevalidationRead(BaseModel):
+    """GET …/document-generation/{type}/prevalidation. `pret=False` : la
+    rédaction ne peut pas commencer tant que `problemes` n'est pas vide."""
+
+    pret: bool
+    problemes: list[PrevalidationProblemeRead]

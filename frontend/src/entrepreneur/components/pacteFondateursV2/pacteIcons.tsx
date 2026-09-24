@@ -14,6 +14,9 @@ export const ICON_DOCUMENT = "M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-
 export const ICON_INFO = "M11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
 export const ICON_MINUS = "M5 12h14"
 export const ICON_PLUS = "M12 4.5v15m7.5-7.5h-15"
+// RETIRÉ (27/09/2026, service 1.1.15) : ICON_SPARKLE/ICON_CLOSE —
+// n'existaient que pour ClauseTitleExplainV2.tsx, supprimé lors de la
+// consolidation de l'explication IA dans le copilot.
 
 export function Icon({ path, className = "h-4 w-4" }: { path: string; className?: string }) {
   return (

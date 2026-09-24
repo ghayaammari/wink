@@ -17,7 +17,10 @@ import PlanActionPage from "./entrepreneur/pages/PlanActionPage"
 import ProjectGeneralInfoPage from "./entrepreneur/pages/ProjectGeneralInfoPage"
 import ProjectLegalInfoPage from "./entrepreneur/pages/ProjectLegalInfoPage"
 import ProjectPublicProfilePage from "./entrepreneur/pages/ProjectPublicProfilePage"
+import StatutsSasPage from "./entrepreneur/pages/StatutsSasPage"
 import TeamCapitalPage from "./entrepreneur/pages/TeamCapitalPage"
+import DirigeantsPage from "./entrepreneur/pages/DirigeantsPage"
+import LegalAnnouncementPage from "./entrepreneur/pages/LegalAnnouncementPage"
 import { getMyInvestorProfile, type InvestorProfileRead } from "./investisseur/api/investorProfileApi"
 import InvestorOnboardingPage from "./investisseur/pages/InvestorOnboardingPage"
 import InvestorProfilePage from "./investisseur/pages/InvestorProfilePage"
@@ -88,12 +91,20 @@ const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
       { to: "/entrepreneur/mon-projet/informations-generales", label: "Informations générales" },
       { to: "/entrepreneur/mon-projet/informations-legales", label: "Informations légales" },
       { to: "/entrepreneur/mon-projet/equipe-capital", label: "Équipe & capital" },
+      // AJOUT (24/09/2026, service 1.1.4 lot 5) — qui DIRIGE la société
+      // (`company_officers`), page à part d'Équipe & capital (qui la POSSÈDE).
+      { to: "/entrepreneur/mon-projet/dirigeants", label: "Dirigeants" },
       { to: "/entrepreneur/mon-projet/vitrine-publique", label: "Vitrine publique" },
       { to: "/entrepreneur/mon-projet/coffre-fort", label: "Coffre-fort documentaire" },
       // NETTOYAGE v1 (26/09/2026) : le lien vers "pacte-fondateurs" (v1) a ete retire, page supprimee.
       // Route/label encore "-v2" volontairement -- renommer l'URL est une decision UX distincte
       // (impact bookmarks/liens existants), pas faite ici sans validation explicite.
       { to: "/entrepreneur/mon-projet/pacte-fondateurs-v2", label: "Pacte de fondateurs" },
+      // AJOUT (25/09/2026, service 1.1.4) — même moteur de session que le
+      // pacte ci-dessus, document_type="statuts" (voir StatutsSasPage.tsx).
+      { to: "/entrepreneur/mon-projet/statuts", label: "Statuts" },
+      // AJOUT (25/09/2026, service 1.1.5) — après les statuts, qu'elle résume.
+      { to: "/entrepreneur/mon-projet/annonce-legale", label: "Annonce légale" },
     ],
   },
   { to: "/entrepreneur/plan-action", label: "Plan d'action", icon: ICON_CHECKLIST },
@@ -322,6 +333,7 @@ export default function App() {
           <Route path="informations-generales" element={<ProjectGeneralInfoPage />} />
           <Route path="informations-legales" element={<ProjectLegalInfoPage />} />
           <Route path="equipe-capital" element={<TeamCapitalPage />} />
+          <Route path="dirigeants" element={<DirigeantsPage />} />
           <Route path="vitrine-publique" element={<ProjectPublicProfilePage />} />
           <Route path="coffre-fort" element={<DocumentVaultPage />} />
           {/* Service 1.1.13 — moteur de session réutilisé par 1.1.4/statuts avec un
@@ -329,6 +341,9 @@ export default function App() {
               convention que coffre-fort ci-dessus. Route v1 ("pacte-fondateurs") retirée
               (26/09/2026) : v1 supprimé (code + données), une seule version existe. */}
           <Route path="pacte-fondateurs-v2" element={<PacteFondateursV2Page />} />
+          {/* Service 1.1.4 — même moteur de session, document_type="statuts". */}
+          <Route path="statuts" element={<StatutsSasPage />} />
+          <Route path="annonce-legale" element={<LegalAnnouncementPage />} />
         </Route>
         {/* Pas sous MyProjectLayout : PlanActionPage fait son propre GET
             /projects/me (voir ce fichier) — son besoin diffère (vérifier

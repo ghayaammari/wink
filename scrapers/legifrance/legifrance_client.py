@@ -34,11 +34,22 @@ Ce qui N'EST TOUJOURS PAS vérifié :
 - l'identifiant LEGITEXT de la Loi n°78-763 du 19/07/1978 (SCOP) et le
   traitement des articles CGI non contigus (micro-entreprise) — voir
   blocs_formes_juridiques.py, ces 2 blocs sont volontairement laissés vides.
+- 25/09/2026 (service 1.1.13, categorie 3 -- agent conversationnel pacte de
+  fondateurs) : `fetch_single_article_by_id()` ci-dessous appelle
+  `consult/getArticle {"id": ...}`, endpoint documente publiquement (voir
+  module docstring plus haut) mais JAMAIS appele reellement depuis ce repo --
+  seul `consult/legiPart` (fetch_articles_in_block) l'a ete. La forme exacte
+  de la reponse (champ "texte" vs "content", presence ou non d'un wrapper
+  "article": {...}) est donc une hypothese, pas un fait verifie. La fonction
+  cherche plusieurs noms de champs possibles et LEVE UNE ERREUR EXPLICITE
+  listant les cles reellement recues si aucun ne correspond, plutot que de
+  deviner silencieusement -- a corriger au vu de la vraie reponse au premier
+  lancement reel (voir collect_legal_texts_pacte_fondateurs.py).
 """
 import os
 import re
 import time
-from datetime import date as date_type, datetime, timezone
+from datetime import date as date_type, datetime, timedelta, timezone
 from html import unescape
 
 import requests
@@ -139,14 +150,27 @@ def _parse_legifrance_date(value) -> date_type | None:
     = 969494400000), pas en texte lisible — vu en pratique sur un vrai appel
     (erreur `cannot cast type bigint to date` avant cette conversion). Gère
     aussi une chaîne ISO par prudence, au cas où un autre champ l'utilise.
+
+    BUG REEL corrige le 25/09/2026 (service 1.1.13, categorie 3 -- constate
+    sur un vrai run Windows, `OSError: [Errno 22] Invalid argument`) :
+    `datetime.fromtimestamp()` s'appuie sur les fonctions C de la libc/CRT de
+    l'OS pour convertir un timestamp -- sous Windows, cette conversion ECHOUE
+    pour un timestamp NEGATIF (date avant le 01/01/1970), alors qu'elle
+    fonctionne sous Linux. Des articles anciens (ex: art. 1591 et 1843-4 du
+    Code civil, Code Napoleon 1804) ont un `dateDebut` largement anterieur a
+    1970 -- jamais rencontre par le pipeline forme_juridique (Code de
+    commerce, articles plus recents), donc bug latent jamais declenche avant.
+    Corrige en calculant la date par ARITHMETIQUE PURE (timedelta depuis
+    l'epoque), qui n'appelle aucune fonction C dependante de l'OS -- comporte-
+    ment identique sur toutes les plateformes.
     """
     if value is None or value == "":
         return None
+    if isinstance(value, str) and value.isdigit():
+        value = int(value)
     if isinstance(value, (int, float)):
-        return datetime.fromtimestamp(value / 1000, tz=timezone.utc).date()
+        return (datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(milliseconds=value)).date()
     if isinstance(value, str):
-        if value.isdigit():
-            return datetime.fromtimestamp(int(value) / 1000, tz=timezone.utc).date()
         try:
             return date_type.fromisoformat(value[:10])
         except ValueError:
@@ -237,3 +261,45 @@ def fetch_articles_in_block(
             f"Section '{legifrance_section_id}' introuvable dans le texte '{legifrance_source_id}'."
         )
     return _collect_articles(section)
+
+
+def fetch_single_article_by_id(legifrance_article_id: str, *, date: str | None = None) -> dict:
+    """Recupere UN article precis par son identifiant LEGIARTI, via
+    `consult/getArticle` -- endpoint DIFFERENT de `fetch_articles_in_block()`
+    (qui exige de connaitre une section LEGISCTA entiere). Utile quand on
+    connait deja l'article exact vise (ex: un article de loi cite dans
+    `clause_validity_criteria`) et qu'on ne veut pas parcourir toute une
+    section pour l'y retrouver.
+
+    Voir docstring du module : endpoint documente mais PAS ENCORE VERIFIE par
+    un vrai appel -- la forme de la reponse est une hypothese. `date` n'est
+    pas documente comme parametre de getArticle (contrairement a legiPart) ;
+    laisse en option ici par coherence d'API avec fetch_articles_in_block,
+    mais non envoye dans le corps de la requete tant que non confirme utile.
+    """
+    payload = _post("consult/getArticle", {"id": legifrance_article_id})
+
+    article = payload.get("article", payload)  # wrapper "article" hypothetique -- voir docstring module
+
+    texte_html = article.get("texte") or article.get("content")
+    if texte_html is None:
+        raise LegifranceApiError(
+            "Reponse de consult/getArticle sans champ 'texte' ni 'content' -- "
+            f"forme de reponse non anticipee (cles recues : {sorted(payload.keys())}, "
+            f"cles de 'article' : {sorted(article.keys()) if isinstance(article, dict) else 'N/A'}). "
+            "Voir docstring du module : cet endpoint n'a jamais ete verifie par un vrai appel, "
+            "ajuster ce parsing au vu de la vraie reponse plutot que de deviner."
+        )
+
+    etat = article.get("etat")
+    if etat is not None and etat != "VIGUEUR":
+        raise LegifranceApiError(
+            f"Article '{legifrance_article_id}' n'est pas en vigueur (etat={etat!r}) -- "
+            "non collecte (meme regle que fetch_articles_in_block, voir _collect_articles)."
+        )
+
+    return {
+        "article_numero": article.get("num"),
+        "texte_brut": strip_html(texte_html),
+        "date_effet": _parse_legifrance_date(article.get("dateDebut")),
+    }

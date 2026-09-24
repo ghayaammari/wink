@@ -130,3 +130,100 @@ sector_insurance_structuration:
 
     Texte :
     {texte_brut}
+
+
+# Garde-fou légal sur le pacte de fondateurs (service 1.1.13) — voir
+# agents/contract_agent/legal_clause_guardrail_service.py.
+# {texte_libre}, {contexte}, {criteres} et {schema_json} remplacés par .format().
+contract_agent:
+  legal_clause_guardrail: |
+    Tu vérifies un texte qu'un utilisateur (non-juriste) souhaite insérer dans un pacte d'associés français, dans la section "{contexte}".
+
+    Critères de validité connus pour cette section (peut être vide — dans ce cas, base-toi uniquement sur le droit français général applicable aux pactes d'associés) :
+    {criteres}
+
+    Détermine :
+    1. `autorise` : `false` si le texte viole un des critères ci-dessus, contredit une règle d'ordre public du droit français des sociétés, ou est manifestement illégal/discriminatoire. `true` sinon — en cas de doute raisonnable, autorise (ce n'est pas un contrôle de qualité rédactionnelle, seulement de légalité).
+    2. `motif` : une phrase expliquant la décision.
+    3. `article_cite` : la référence légale sur laquelle repose le blocage (null si autorise=true).
+    4. `reformulation_proposee` : une reformulation conforme du texte, la plus proche possible de l'intention de l'utilisateur (null si autorise=true).
+
+    Réponds uniquement en JSON valide respectant ce schéma :
+    {schema_json}
+
+    Texte à vérifier :
+    {texte_libre}
+
+  # Garde-fou juridique des statuts SAS (service 1.1.4, niveau B) — voir
+  # statuts_clause_guardrail_service.py. {titre_clause}, {texte_clause},
+  # {champs}, {autres_valeurs}, {criteres}, {schema_json} remplacés par .format().
+  statuts_clause_guardrail: |
+    Tu es juriste en droit français des sociétés. Un entrepreneur non-juriste rédige les statuts de sa société par actions simplifiée (SAS). Il a rempli les champs ci-dessous, qui seront insérés dans la clause « {titre_clause} ».
+
+    Texte de la clause (les noms entre parenthèses sont remplacés par les valeurs saisies) :
+    {texte_clause}
+
+    Champs à vérifier (nom technique, libellé, valeur saisie) :
+    {champs}
+
+    Autres valeurs de la même clause (contexte seulement, déjà vérifiées, ne les juge pas) :
+    {autres_valeurs}
+
+    Critères de validité connus pour cette clause :
+    {criteres}
+
+    Pour CHAQUE champ à vérifier, décide :
+    1. `autorise` : `false` UNIQUEMENT si la valeur, une fois insérée dans la clause, la rend contraire à la loi (Code de commerce, Code civil, règle d'ordre public), viole un critère ci-dessus, est discriminatoire, ou contredit la clause elle-même. Sinon `true`.
+       - Ne juge PAS le style, l'orthographe, la précision ni le caractère incomplet : ce n'est pas un contrôle de qualité.
+       - En cas de doute, `true`.
+       - Une SAS a une grande liberté statutaire (article L. 227-1 et suivants du Code de commerce) : ce qui n'est pas interdit est permis.
+    2. `motif` : une phrase simple, compréhensible par un non-juriste, sans jargon.
+       `motif_court` : le même problème en 8 mots maximum (ex. « Critère discriminatoire interdit »).
+    3. `article_cite` : l'article de loi sur lequel repose le blocage, UNIQUEMENT si tu en es certain ; sinon null. Toujours null si autorise=true.
+    4. `reformulation_proposee` : si autorise=false, une nouvelle valeur conforme pour CE CHAMP seulement (pas la clause entière), la plus proche possible de l'intention de l'entrepreneur ; null sinon.
+    Le champ `variable` reprend exactement le nom technique entre accents graves.
+
+    Réponds uniquement en JSON valide respectant ce schéma :
+    {schema_json}
+
+  # Explication en langage clair d'une clause, contextualisée aux valeurs
+  # saisies (service 1.1.15) — voir clause_explanation_service.py.
+  # {texte_clause} et {valeurs_saisies} remplacés par .format().
+  clause_explanation: |
+    Tu expliques à un entrepreneur non-juriste, en français simple et sans jargon, ce que signifie concrètement la clause suivante d'un pacte de fondateurs.
+
+    Texte de la clause (figé, ne le reformule pas et ne le recopie pas — explique-le) :
+    {texte_clause}
+
+    Valeurs déjà saisies par l'utilisateur pour cette clause :
+    {valeurs_saisies}
+
+    Consignes :
+    - N'invente aucune information absente du texte de la clause ou des valeurs saisies.
+    - Si des valeurs sont saisies, personnalise l'explication autour d'elles (ex. "avec ce que tu as rempli, concrètement, cela signifie que...").
+    - Si aucune valeur n'est saisie, explique le rôle général de la clause et ce qu'elle protège, sans inventer de valeur.
+    - 3 à 5 phrases maximum, langage clair, pas de citation mot pour mot du texte juridique.
+    - N'écris jamais de nouvelle clause ni de formulation juridique — explique seulement, tu ne rédiges rien.
+
+  # Explication d'un article facultatif entier, affichée sur l'écran de choix
+  # des facultatifs (service 1.1.4/1.1.15, 24/09/2026) — voir
+  # article_explanation_service.py. {type_document}, {titre_article} et
+  # {texte_article} remplacés par .format().
+  article_explanation: |
+    Tu aides un entrepreneur non-juriste à décider s'il ajoute un article FACULTATIF à ses {type_document} (société par actions simplifiée, droit français).
+
+    Article proposé : {titre_article}
+
+    Texte de l'article (figé — ne le recopie pas, explique-le) :
+    {texte_article}
+
+    Écris une explication en français simple, sans jargon, qui répond dans cet ordre à :
+    1. À quoi sert cet article, concrètement.
+    2. Dans quels cas il est utile (exemple concret d'une jeune société).
+    3. Ce qui se passe si on ne le met pas.
+
+    Consignes :
+    - 3 à 5 phrases au total, tutoiement interdit (vouvoiement), pas de titre ni de liste.
+    - N'invente aucune règle absente du texte ; ne cite pas d'article de loi.
+    - Ne recommande pas de le prendre ou non : explique, la décision appartient à l'utilisateur.
+    - N'écris jamais de clause ni de formulation juridique.

@@ -22,6 +22,7 @@ from backend.entrepreneur.models.document_version import DocumentVersion
 from backend.entrepreneur.schemas.document_vault_schemas import DocumentVaultItemRead, DocumentVersionRead
 from backend.entrepreneur.services.project_service import get_owned_project
 from backend.shared.models.user import User
+from backend.shared.services import cloudinary_service
 
 
 class DocumentVaultError(Exception):
@@ -112,9 +113,16 @@ def _fetch_version_bytes(version: DocumentVersion) -> tuple[bytes, str, str]:
     get_document_version_download() (version historique) : même logique réseau +
     gestion d'erreur, seul le DocumentVersion en entrée change — éviter de dupliquer
     le try/except requests ici aurait été le seul vrai risque de divergence.
+
+    Utilise une URL signée régénérée depuis `cloudinary_public_id`, pas
+    `version.secure_url` stockée en base : cette dernière est une URL non
+    signée, bloquée en 401 par la restriction Cloudinary "Restricted media
+    types" (raw/PDF publics interdits par défaut depuis avril 2024) — voir
+    cloudinary_service.build_signed_raw_url().
     """
+    url = cloudinary_service.build_signed_raw_url(version.cloudinary_public_id)
     try:
-        response = requests.get(version.secure_url, timeout=10)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
     except requests.RequestException as exc:
         raise DocumentDownloadError(f"Échec de récupération du document depuis Cloudinary : {exc}") from exc
@@ -128,10 +136,10 @@ def get_document_download(db: Session, user: User, project_id: UUID, document_id
     """Retourne (contenu, nom de fichier, type MIME) pour la version COURANTE d'un
     document.
 
-    Le backend récupère lui-même les octets depuis `version.secure_url`
+    Le backend récupère lui-même les octets depuis une URL signée régénérée
     (`requests.get`, sans transformation Cloudinary) puis les sert avec son
     propre header `Content-Disposition` (voir document_vault_router.py) —
-    plutôt que d'exposer `secure_url` au frontend et laisser le navigateur
+    plutôt que d'exposer une URL Cloudinary au frontend et laisser le navigateur
     naviguer dessus directement. Deux raisons : (1) le flag Cloudinary
     `fl_attachment`, testé en premier pour forcer nom+extension au
     téléchargement, échoue en HTTP 400 sur ce compte (restriction Cloudinary

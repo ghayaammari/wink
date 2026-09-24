@@ -9,6 +9,7 @@ import uuid
 
 import cloudinary
 import cloudinary.uploader
+import cloudinary.utils
 
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
@@ -76,3 +77,28 @@ def upload_raw_file(file_bytes: bytes, *, folder: str = "wink", filename: str | 
         raise CloudinaryError(f"Échec de l'upload du document vers Cloudinary : {exc}") from exc
 
     return {"public_id": result["public_id"], "secure_url": result["secure_url"]}
+
+
+def build_signed_raw_url(public_id: str) -> str:
+    """URL de téléchargement pour un fichier `raw` (PDF...) déjà uploadé via
+    `upload_raw_file`.
+
+    Depuis avril 2024, Cloudinary bloque par défaut la livraison publique
+    (`res.cloudinary.com/.../raw/upload/...`) des ressources `raw`/PDF pour
+    les comptes ("Restricted media types", Settings > Security) -- `secure_url`
+    stockée en base renvoie donc 401 au téléchargement. **Un simple
+    `cloudinary_url(sign_url=True)` ne suffit pas** : la restriction bloque le
+    delivery type `upload` (dossier public du CDN) que la requête soit signée
+    ou non -- seul le delivery type `authenticated` y échappe, et y passer
+    demanderait de ré-uploader chaque fichier existant avec `type="authenticated"`.
+
+    On utilise donc `private_download_url`, qui ne construit pas une URL CDN
+    mais un lien vers l'API Cloudinary (`/raw/download`), authentifié par
+    signature HMAC (api_key/api_secret, comme un appel Admin API) --
+    indépendant du réglage "Restricted media types", qui ne s'applique qu'à
+    la livraison CDN directe.
+    """
+    if not cloudinary.config().cloud_name:
+        raise CloudinaryError("Cloudinary non configuré (CLOUDINARY_CLOUD_NAME manquant dans .env).")
+
+    return cloudinary.utils.private_download_url(public_id, None, resource_type="raw", type="upload")

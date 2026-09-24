@@ -24,13 +24,42 @@ class ProjectAssociateBase(BaseModel):
     lieu_naissance: str | None = Field(default=None, max_length=120)
     nationalite: str | None = Field(default=None, max_length=60)
     adresse: str | None = None
+    # AJOUT (migration —, service 1.1.4 statuts) — situation et régime
+    # matrimonial des fondateurs, utilisée par le patron personne physique de
+    # l'en-tête du clausier SAS. NULLABLE (saisie lors de la génération),
+    # pertinent seulement si type_personne='personne_physique'.
+    situation_et_regime_matrimonial: str | None = Field(default=None, max_length=255)
     pourcentage_capital: Decimal = Field(ge=Decimal("0"), le=Decimal("100"))
     pourcentage_droits_vote: Decimal | None = Field(default=None, ge=Decimal("0"), le=Decimal("100"))
     type_apport: Literal["numeraire", "nature", "industrie"] = "numeraire"
+    # AJOUT (lot 2, 24/09/2026, service 1.1.4) — colonne en base depuis la
+    # migration d3f7a1c9e5b4 mais jamais exposée : c'est la désignation du bien
+    # apporté, lue automatiquement par les statuts (Art. 6.1 et 6.2). Pertinente
+    # seulement si type_apport == "nature" (vidée sinon, voir validateur).
+    description_apport_nature: str | None = None
     est_dirigeant: bool = False
     fonction_dirigeant: str | None = Field(default=None, max_length=120)
     foyer_fiscal_dirigeant_associate_id: UUID | None = None
     est_partie_au_pacte_fondateurs: bool = False
+    # AJOUT (migration c8f4d1a6b2e9, service 1.1.13) — voir docstring de la migration.
+    est_fondateur: bool = False
+    # AJOUT (migration b2c4d6e8f0a2, service 1.1.13) — infos personne morale.
+    # Colonnes présentes en base depuis cette migration mais JAMAIS exposées ici
+    # jusqu'à ce correctif (24/09/2026) : le formulaire "Équipe & capital" ne
+    # pouvait ni lire ni écrire ces champs, alors même que le rendu du pacte
+    # (`_render_patron_associe_v2`) les attend et affiche des placeholders
+    # "(non renseigné)" à leur place. Tous nullable, pertinents seulement si
+    # `type_personne == "personne_morale"` (pas de CHECK inter-champs, cohérent
+    # avec le reste de la table).
+    denomination_sociale: str | None = Field(default=None, max_length=255)
+    type_societe: str | None = Field(default=None, max_length=60)
+    capital_social: Decimal | None = Field(default=None, ge=Decimal("0"))
+    siege_social: str | None = None
+    lieu_immatriculation: str | None = Field(default=None, max_length=120)
+    numero_siren: str | None = Field(default=None, max_length=9)
+    representant_nom: str | None = Field(default=None, max_length=120)
+    representant_prenom: str | None = Field(default=None, max_length=120)
+    representant_qualite: str | None = Field(default=None, max_length=120)
 
     @field_validator("pourcentage_capital", "pourcentage_droits_vote")
     @classmethod
@@ -45,6 +74,11 @@ class ProjectAssociateBase(BaseModel):
         # Même règle que le CHECK en base — retour d'erreur 422 propre avant la DB.
         if self.type_apport == "industrie" and self.pourcentage_capital != 0:
             raise ValueError("un apport en industrie ne concourt jamais au capital (art. 1843-2)")
+        # Une désignation d'apport en nature n'a pas de sens pour un autre type
+        # d'apport : vidée plutôt que refusée (l'utilisateur a pu changer le type
+        # après l'avoir saisie) -- évite qu'une ancienne valeur ressorte un jour.
+        if self.type_apport != "nature":
+            self.description_apport_nature = None
         if self.est_dirigeant and not self.fonction_dirigeant:
             raise ValueError("un dirigeant doit avoir une fonction renseignée")
         return self
@@ -74,13 +108,25 @@ class ProjectAssociateUpdate(BaseModel):
     lieu_naissance: str | None = Field(default=None, max_length=120)
     nationalite: str | None = Field(default=None, max_length=60)
     adresse: str | None = None
+    situation_et_regime_matrimonial: str | None = Field(default=None, max_length=255)
     pourcentage_capital: Decimal | None = Field(default=None, ge=Decimal("0"), le=Decimal("100"))
     pourcentage_droits_vote: Decimal | None = Field(default=None, ge=Decimal("0"), le=Decimal("100"))
     type_apport: Literal["numeraire", "nature", "industrie"] | None = None
+    description_apport_nature: str | None = None
     est_dirigeant: bool | None = None
     fonction_dirigeant: str | None = Field(default=None, max_length=120)
     foyer_fiscal_dirigeant_associate_id: UUID | None = None
     est_partie_au_pacte_fondateurs: bool | None = None
+    est_fondateur: bool | None = None
+    denomination_sociale: str | None = Field(default=None, max_length=255)
+    type_societe: str | None = Field(default=None, max_length=60)
+    capital_social: Decimal | None = Field(default=None, ge=Decimal("0"))
+    siege_social: str | None = None
+    lieu_immatriculation: str | None = Field(default=None, max_length=120)
+    numero_siren: str | None = Field(default=None, max_length=9)
+    representant_nom: str | None = Field(default=None, max_length=120)
+    representant_prenom: str | None = Field(default=None, max_length=120)
+    representant_qualite: str | None = Field(default=None, max_length=120)
 
 
 class ProjectAssociateRead(ProjectAssociateBase):

@@ -4,6 +4,7 @@ from backend.entrepreneur.models.document_generation_session import DocumentGene
 from backend.entrepreneur.models.document_generation_variable_value import DocumentGenerationVariableValue
 from backend.entrepreneur.models.document_version import DocumentVersion
 from backend.entrepreneur.models.entrepreneur_profile import EntrepreneurProfile
+from backend.entrepreneur.models.legal_announcement import LegalAnnouncement
 from backend.entrepreneur.models.name_availability_check import NameAvailabilityCheck
 from backend.entrepreneur.models.notification import Notification
 from backend.entrepreneur.models.project import Project
@@ -14,6 +15,7 @@ from backend.entrepreneur.models.project_public_profile import ProjectPublicProf
 from backend.entrepreneur.models.roadmap_node import RoadmapNode
 from backend.entrepreneur.models.roadmap_node_dependency import RoadmapNodeDependency
 from backend.entrepreneur.models.startup_roadmap_item import StartupRoadmapItem
+from backend.entrepreneur.models.company_officer import CompanyOfficer
 
 __all__ = [
     "Document",
@@ -21,6 +23,7 @@ __all__ = [
     "DocumentGenerationVariableValue",
     "DocumentVersion",
     "EntrepreneurProfile",
+    "LegalAnnouncement",
     "NameAvailabilityCheck",
     "Notification",
     "Project",
@@ -31,4 +34,5 @@ __all__ = [
     "RoadmapNode",
     "RoadmapNodeDependency",
     "StartupRoadmapItem",
+    "CompanyOfficer",
 ]

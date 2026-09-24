@@ -85,6 +85,17 @@ def ensure_founder_associate(db: Session, user: User, project_id) -> ProjectAsso
         est_dirigeant=True,
         fonction_dirigeant="Président",
         est_partie_au_pacte_fondateurs=False,
+        # La ligne auto-créée ici EST celle du fondateur du projet (voir
+        # docstring de cette fonction) — `est_fondateur=True` par défaut pour
+        # que si l'utilisateur coche ensuite "Membre du pacte de fondateurs",
+        # il apparaisse dans les Associés Fondateurs et pas dans les
+        # Associés Investisseurs (incohérence trouvée le 24/09/2026 : le nom
+        # de la fonction et ces autres valeurs par défaut le traitent déjà
+        # comme le fondateur, mais ce booléen restait à False). Reste
+        # modifiable ensuite (Équipe & capital ou l'écran de sélection du
+        # pacte v2), au cas où l'entrepreneur ne se considère pas fondateur
+        # pour ce pacte précis.
+        est_fondateur=True,
         linked_user_id=user.id,
     )
     db.add(founder)

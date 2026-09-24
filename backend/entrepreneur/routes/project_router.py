@@ -2,13 +2,19 @@
 
 POST /projects, GET /projects/me, GET /projects/{id}, PATCH /projects/{id},
 POST /projects/{id}/legal-profile, POST /projects/{id}/upload-logo,
-POST /projects/{id}/public-profile.
+POST /projects/{id}/public-profile, GET/POST /projects/{id}/officers,
+PATCH/DELETE /projects/{id}/officers/{officer_id}.
 """
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
+from backend.entrepreneur.schemas.company_officer_schemas import (
+    CompanyOfficerCreate,
+    CompanyOfficerRead,
+    CompanyOfficerUpdate,
+)
 from backend.entrepreneur.schemas.project_associate_schemas import (
     ProjectAssociateBatchItem,
     ProjectAssociateCreate,
@@ -25,7 +31,12 @@ from backend.entrepreneur.schemas.project_public_profile_schemas import (
     ProjectPublicProfileUpdate,
 )
 from backend.entrepreneur.schemas.project_schemas import ProjectCreate, ProjectRead, ProjectUpdate
-from backend.entrepreneur.services import associate_service, legal_verification_service, project_service
+from backend.entrepreneur.services import (
+    associate_service,
+    company_officer_service,
+    legal_verification_service,
+    project_service,
+)
 from backend.entrepreneur.services.legal_verification_service import (
     LegalVerificationError,
     LegalVerificationUpstreamError,
@@ -289,5 +300,65 @@ def delete_associate(
 ) -> None:
     try:
         associate_service.delete_associate(db, current_user, project_id, associate_id)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+# ---------------------------------------------------------------------------
+# Dirigeants — `company_officers` (service 1.1.4, lot 5 du 24/09/2026) :
+# Président, Directeur Général, membres du comité, mandataire (art. 39-41, 44).
+# Ici plutôt qu'un router dédié : sous-ressource du projet, même famille que
+# /legal-profile et /associates.
+# ---------------------------------------------------------------------------
+
+@router.get("/{project_id}/officers", response_model=list[CompanyOfficerRead])
+def list_officers(
+    project_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> list[CompanyOfficerRead]:
+    try:
+        return company_officer_service.list_officers(db, current_user, project_id)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.post("/{project_id}/officers", response_model=CompanyOfficerRead, status_code=status.HTTP_201_CREATED)
+def create_officer(
+    project_id: UUID,
+    body: CompanyOfficerCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> CompanyOfficerRead:
+    # Une action = un enregistrement (bouton « Ajouter » de la page Dirigeants).
+    try:
+        return company_officer_service.create_officer(db, current_user, project_id, body)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.patch("/{project_id}/officers/{officer_id}", response_model=CompanyOfficerRead)
+def update_officer(
+    project_id: UUID,
+    officer_id: UUID,
+    body: CompanyOfficerUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> CompanyOfficerRead:
+    try:
+        return company_officer_service.update_officer(db, current_user, project_id, officer_id, body)
+    except ProjectError as exc:
+        raise _handle_project_error(exc)
+
+
+@router.delete("/{project_id}/officers/{officer_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_officer(
+    project_id: UUID,
+    officer_id: UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> None:
+    try:
+        company_officer_service.delete_officer(db, current_user, project_id, officer_id)
     except ProjectError as exc:
         raise _handle_project_error(exc)

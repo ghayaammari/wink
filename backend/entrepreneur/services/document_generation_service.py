@@ -35,8 +35,8 @@ par cohérence, pour éviter de garder l'ancien nom dans les sessions déjà en
 cours de développement alors que la colonne source est renommée partout
 ailleurs.
 """
-import re
-import uuid
+from datetime import date
+from decimal import Decimal
 from typing import Any
 
 from sqlalchemy.orm import Session
@@ -47,8 +47,12 @@ from backend.entrepreneur.models.document_generation_variable_value import Docum
 from backend.entrepreneur.models.document_version import DocumentVersion
 from backend.entrepreneur.models.project_associate import ProjectAssociate
 from backend.entrepreneur.models.project_legal_profile import ProjectLegalProfile
+from backend.entrepreneur.services.document_renderer_base import _lit, _val, formater_montant
+from backend.shared.utils.formatting import formater_siege_social as _formater_siege_social
+from backend.entrepreneur.services.pacte_fondateurs_renderer import pacte_clause_renderer
 from backend.entrepreneur.services.pdf_rendering_service import render_document_as_pdf
 from backend.entrepreneur.services.project_service import get_owned_project
+from backend.entrepreneur.services.statuts_sas_renderer import DOCUMENT_TYPE_STATUTS, statuts_clause_renderer
 from backend.shared.knowledge_base.models.contract_clause_library import ContractClauseLibrary
 from backend.shared.knowledge_base.models.document_template import DocumentTemplate
 from backend.shared.models.user import User
@@ -70,6 +74,16 @@ class InvalidAnswerError(DocumentGenerationError):
 
 class SessionAlreadyCompleteError(DocumentGenerationError):
     """La session est déjà `statut='complete'` — un document a déjà été généré."""
+
+
+class ValidationFinaleError(DocumentGenerationError):
+    """Génération refusée : la validation globale a trouvé au moins un
+    problème bloquant. Porte le résultat complet pour le renvoyer au
+    frontend (même format que la route …/validation-finale)."""
+
+    def __init__(self, resultat: dict):
+        super().__init__("Des points bloquants empêchent de générer le document.")
+        self.resultat = resultat
 
 
 class NoPreviousSectionError(DocumentGenerationError):
@@ -170,7 +184,54 @@ def _applicable(
         reponse_dependance = reponses.get(section.depend_de_section) or {}
         if reponse_dependance.get("code_clause") not in (section.depend_de_variantes or []):
             return False
+    # Correction #9 (Art. 24 `comite_direction_voix_preponderante` sans
+    # Art. 22 `limitation_pouvoirs_president`) : exception migrée le
+    # 24/09/2026 vers le référentiel SECTIONS_DERIVEES
+    # (statuts_sas_resolvers.py, audit #19), appliqué dans
+    # `_advance_to_next_section` -- plus de cas particulier par code_section ici.
     return True
+
+
+def _reponse_auto_si_rien_a_saisir(
+    db: Session, session: DocumentGenerationSession, section: DocumentTemplate
+) -> dict | None:
+    """Étape 3 de la refonte (24/09/2026) — une `mention_obligatoire` qui n'a
+    STRICTEMENT rien à demander à l'utilisateur est générée directement, sans
+    être affichée ni exiger un clic "Valider" (ex. `agrement_decision`,
+    `domaine_reserve_cloture`, texte fixe d'un article, ou article dont toutes
+    les variables sont résolues automatiquement).
+
+    "Rien à demander" est décidé par le MÊME code que la validation d'une
+    soumission (`_validate_variables` avec `valeurs={}`) : les deux ne peuvent
+    pas diverger. Seul garde-fou : un choix d'associé parmi plusieurs
+    candidats (`selections_requises`) reste une question.
+
+    Décision utilisateur (24/09/2026) : AUCUN contrôle ici sur les données
+    automatiques manquantes (objet social vide, dirigeant non désigné…) —
+    elles seront vérifiées par une PRÉ-VALIDATION au démarrage et une
+    VALIDATION GLOBALE avant génération (à construire), qui bloquent
+    l'utilisateur. Tant que ces 2 validations n'existent pas, une donnée
+    manquante part dans le PDF sous forme de placeholder "(… non renseigné)"
+    sans que la section soit affichée — dette assumée, transitoire.
+
+    Renvoie la réponse à enregistrer, ou None si la section doit être posée.
+    Limité aux `mention_obligatoire` : une `clause_optionnelle` ou un groupe de
+    variantes demande toujours une décision (inclure / laquelle).
+    """
+    from backend.entrepreneur.services.statuts_sas_resolvers import _selections_requises
+
+    if section.comportement_section != "mention_obligatoire":
+        return None
+    clause = db.query(ContractClauseLibrary).filter(ContractClauseLibrary.id == section.reference_id).first()
+    if clause is None:
+        return None
+    try:
+        _validate_variables(clause, {}, db, session.project_id)
+    except InvalidAnswerError:
+        return None
+    if _selections_requises(db, clause.variables_requises, session.project_id, clause.code_clause):
+        return None
+    return {"inclus": True, "code_clause": clause.code_clause, "valeurs": {}, "auto_genere": True}
 
 
 def _advance_to_next_section(db: Session, session: DocumentGenerationSession) -> None:
@@ -202,21 +263,96 @@ def _advance_to_next_section(db: Session, session: DocumentGenerationSession) ->
         is not None
     )
 
-    for section in _sections(db, session.document_type):
+    sections = _sections(db, session.document_type)
+    # AJOUT (24/09/2026, audit #19) : écran de choix des articles facultatifs
+    # (statuts uniquement) -- voir "Écran de choix des articles facultatifs"
+    # dans statuts_sas_resolvers.py.
+    est_statuts = session.document_type == DOCUMENT_TYPE_STATUTS
+    if est_statuts:
+        from backend.entrepreneur.services.statuts_sas_resolvers import (
+            SECTION_PAUSE_FACULTATIFS,
+            articles_par_section,
+            doit_faire_pause_facultatifs,
+            reponse_facultatif_non_choisi,
+        )
+
+        article_de = articles_par_section(sections)
+        from backend.entrepreneur.services.statuts_sas_resolvers import (
+            reponse_selon_dirigeants,
+            reponse_selon_types_apport,
+            types_dirigeants,
+        )
+
+        # Calculé une fois par avancement (comme `a_des_investisseurs`) : les
+        # associés ne changent pas pendant la rédaction.
+        types_apport = {
+            t for (t,) in db.query(ProjectAssociate.type_apport).filter(ProjectAssociate.project_id == session.project_id)
+        }
+        types_par_role = types_dirigeants(db, session.project_id)
+
+    for section in sections:
         if section.code_section in session.reponses:
             continue
+        if est_statuts:
+            # Pause juste avant l'Art. 8 : le parcours s'arrête sur l'écran de
+            # choix. `submit_facultatifs` marque ensuite le titre de l'Art. 8
+            # comme traité, ce qui lève la pause.
+            if doit_faire_pause_facultatifs(section.code_section):
+                session.section_courante = SECTION_PAUSE_FACULTATIFS
+                db.flush()
+                return
+            exclu = reponse_facultatif_non_choisi(article_de.get(section.code_section), session.reponses)
+            if exclu is not None and section.comportement_section in _SECTIONS_INTERACTIVES:
+                _set_reponse(session, section.code_section, exclu)
+                continue
         if not _applicable(section, forme_juridique, a_des_investisseurs, session.reponses):
             _set_reponse(session, section.code_section, {"applicable": False})
             continue
+        # AJOUT (24/09/2026, audit #19) : sections dont la réponse se DÉDUIT
+        # des réponses déjà données (statuts uniquement) -- jamais posées à
+        # l'utilisateur. Voir SECTIONS_DERIVEES dans statuts_sas_resolvers.py.
+        if session.document_type == DOCUMENT_TYPE_STATUTS:
+            from backend.entrepreneur.services.statuts_sas_resolvers import reponse_derivee
+
+            derivee = reponse_derivee(section.code_section, session.reponses)
+            if derivee is not None:
+                _set_reponse(session, section.code_section, derivee)
+                continue
+            # Lot 4 (24/09/2026) : sections d'apport selon les types d'apport
+            # RÉELS des associés (numéraire / nature / industrie) -- ex. pas de
+            # question "Évaluation des apports en nature" sans apport en nature.
+            derivee = reponse_selon_types_apport(section.code_section, types_apport)
+            if derivee is not None:
+                _set_reponse(session, section.code_section, derivee)
+                continue
+            # Lot 5 : variante PP/PM des nominations (Art. 39-41) déduite du
+            # dirigeant désigné dans « Informations légales ».
+            derivee = reponse_selon_dirigeants(section.code_section, types_par_role)
+            if derivee is not None:
+                _set_reponse(session, section.code_section, derivee)
+                continue
         if section.comportement_section in ("texte_statique", "donnee_projet"):
             _set_reponse(session, section.code_section, {"traite_automatiquement": True})
             continue
+        # Étape 3 de la refonte (24/09/2026) : statuts uniquement pour l'instant
+        # -- le pacte garde son comportement (clic "Valider" sur chaque
+        # section), aucun changement non demandé sur un service déjà livré.
+        # Pour l'étendre au pacte : retirer cette condition, rien d'autre.
+        if est_statuts:
+            auto = _reponse_auto_si_rien_a_saisir(db, session, section)
+            if auto is not None:
+                _set_reponse(session, section.code_section, auto)
+                continue
         session.section_courante = section.code_section
         db.flush()
         return
 
     session.section_courante = None
     session.statut = "complete"
+    # Correction depuis la vérification finale terminée : on revient à l'écran
+    # de vérification, la sauvegarde d'annulation n'a plus lieu d'être.
+    if CLE_CORRECTION_EN_COURS in session.reponses:
+        session.reponses = {k: v for k, v in session.reponses.items() if k != CLE_CORRECTION_EN_COURS}
     db.flush()
 
 
@@ -234,6 +370,15 @@ def _clause_payload(db: Session, clause: ContractClauseLibrary, project_id, lega
     résolvait, l'étape du formulaire ne recevait que leur définition, jamais
     leur valeur. Champ absent des types non-`auto_*` (dict vide), le frontend
     n'a besoin de le lire que pour ceux-là."""
+    # Import local (pas en tête de fichier), conservé tel quel après le
+    # correctif du 23/09/2026 (extraction de `_lit`/`_render_clause_texte`
+    # vers `document_renderer_base.py`/`statuts_sas_renderer.py`) : la
+    # dépendance n'est plus circulaire (statuts_sas_resolvers n'importe plus
+    # rien d'ici), mais le style local-import est gardé par cohérence avec
+    # les autres appels de ce module vers `statuts_sas_resolvers` ci-dessous
+    # -- voir la docstring de module de `statuts_sas_resolvers.py`.
+    from backend.entrepreneur.services.statuts_sas_resolvers import _selections_requises
+
     payload = {
         "code_clause": clause.code_clause,
         "titre_clause": clause.titre_clause,
@@ -244,6 +389,14 @@ def _clause_payload(db: Session, clause: ContractClauseLibrary, project_id, lega
             **_resoudre_variables_auto(clause.variables_requises, legal_profile),
             **_resoudre_variables_associes(db, clause.variables_requises, project_id),
         },
+        # AJOUT (23/09/2026, service 1.1.4 statuts, Cas B/C) -- pour chaque
+        # variable `auto_identite_associe` dont le filtre `selection` retient
+        # PLUSIEURS associés (ex. Article 8 `fondateur_avantage`, plusieurs
+        # fondateurs), le frontend doit proposer un choix -- voir
+        # `_selections_requises`. Dict vide si aucune variable de la clause
+        # n'a besoin d'un choix (cas normal, résolution automatique -- voir
+        # `_resoudre_variables_selection_associe`).
+        "selections_requises": _selections_requises(db, clause.variables_requises, project_id, clause.code_clause),
         "sous_candidats": None,
     }
     if clause.sous_variantes_candidates:
@@ -266,6 +419,14 @@ def _clause_payload(db: Session, clause: ContractClauseLibrary, project_id, lega
 
 
 _SECTIONS_INTERACTIVES = ("mention_obligatoire", "clause_optionnelle", "variante_obligatoire")
+
+# Clé réservée de `session.reponses` (comme `__facultatifs_choisis__`) :
+# correction d'une section lancée depuis la vérification finale --
+# {"section": code_section, "reponses_avant": copie des réponses} pour
+# pouvoir annuler. Retirée quand le parcours se termine à nouveau.
+CLE_CORRECTION_EN_COURS = "__correction_en_cours__"
+# Réponses calculées par le moteur (jamais saisies par l'utilisateur).
+_MARQUEURS_REPONSE_CALCULEE = ("derivee", "auto_genere", "traite_automatiquement")
 
 
 def _section_progress(db: Session, session: DocumentGenerationSession) -> tuple[int | None, int]:
@@ -298,7 +459,23 @@ def _section_progress(db: Session, session: DocumentGenerationSession) -> tuple[
     return position, total
 
 
-def _nom_article_courant(db: Session, document_type: str, ordre_section: float) -> str | None:
+def _numeros_articles_statuts(db: Session, session: DocumentGenerationSession) -> dict[str, int] | None:
+    """Lot B (24/09/2026) : {numéro logique: numéro affiché} des articles
+    présents dans les statuts (voir statuts_sas_numerotation.py). `None` pour
+    les autres documents : le pacte garde ses numéros écrits dans le texte."""
+    if session.document_type != DOCUMENT_TYPE_STATUTS:
+        return None
+    from backend.entrepreneur.services.statuts_sas_numerotation import numeros_articles
+    from backend.entrepreneur.services.statuts_sas_resolvers import articles_par_section
+
+    sections = _sections(db, session.document_type)
+    article_courant = articles_par_section(sections).get(session.section_courante or "")
+    return numeros_articles(sections, session.reponses, article_courant)
+
+
+def _nom_article_courant(
+    db: Session, document_type: str, ordre_section: float, code_section: str = "", numeros: dict[str, int] | None = None
+) -> str | None:
     """Nom de l'article (ex. "Article 2 - Cessions libres et Cessions
     interdites...") auquel appartient la section d'ordre `ordre_section` --
     24/09/2026, demande utilisateur : le titre du formulaire n'affichait que
@@ -314,6 +491,14 @@ def _nom_article_courant(db: Session, document_type: str, ordre_section: float) 
     2e document_type introduit la même notion d'article ET une structure de
     nommage différente.
     """
+    # Lot C (24/09/2026) : une section hors article (clôture des statuts)
+    # n'a pas d'article parent -- sans ce cas, le formulaire affichait
+    # « Article 44 - Mandat… » au-dessus du bloc de signature.
+    if document_type == DOCUMENT_TYPE_STATUTS:
+        from backend.entrepreneur.services.statuts_sas_resolvers import SECTIONS_HORS_ARTICLE
+
+        if code_section in SECTIONS_HORS_ARTICLE:
+            return "Clôture des statuts"
     row = (
         db.query(DocumentTemplate)
         .filter(
@@ -324,7 +509,32 @@ def _nom_article_courant(db: Session, document_type: str, ordre_section: float) 
         .order_by(DocumentTemplate.ordre.desc())
         .first()
     )
-    return row.titre_affiche if row else None
+    if row is None:
+        return None
+    if numeros is not None:
+        # Lot B : statuts -- « Article {n} – {titre} » avec le numéro affiché
+        # (le clausier ne porte plus que l'intitulé).
+        from backend.entrepreneur.services.statuts_sas_numerotation import PREFIXE_TITRE_ARTICLE, libelle_article
+
+        return libelle_article(numeros.get(row.code_section[len(PREFIXE_TITRE_ARTICLE):]), row.titre_affiche)
+    return row.titre_affiche
+
+
+def prevalider(db: Session, user: User, project_id, document_type: str) -> dict[str, Any]:
+    """Pré-validation au démarrage (24/09/2026, décision utilisateur) : les
+    données du projet reprises automatiquement doivent être complètes AVANT
+    la première question -- voir statuts_sas_prevalidation.py. Statuts
+    uniquement ; les autres documents n'ont pas (encore) de pré-validation :
+    toujours prêts, comportement inchangé."""
+    project = get_owned_project(db, user, project_id)
+    if document_type != DOCUMENT_TYPE_STATUTS:
+        return {"pret": True, "problemes": []}
+    from backend.entrepreneur.services.statuts_sas_prevalidation import prevalider_statuts
+
+    legal_profile = db.query(ProjectLegalProfile).filter(ProjectLegalProfile.project_id == project.id).first()
+    siege = _formater_siege_social(legal_profile.registered_address if legal_profile else None)
+    problemes = prevalider_statuts(db, project.id, siege)
+    return {"pret": not problemes, "problemes": problemes}
 
 
 def get_current_section_state(db: Session, user: User, project_id, document_type: str) -> dict[str, Any]:
@@ -343,6 +553,35 @@ def get_current_section_state(db: Session, user: User, project_id, document_type
             "document_deja_genere": session.document_genere_id is not None,
         }
 
+    # AJOUT (24/09/2026, audit #19) : pause sur l'écran de choix des facultatifs.
+    if document_type == DOCUMENT_TYPE_STATUTS:
+        from backend.entrepreneur.services.statuts_sas_resolvers import (
+            SECTION_PAUSE_FACULTATIFS,
+            liste_facultatifs,
+        )
+        from backend.shared.knowledge_base.services.article_explication_service import textes_valides
+
+        if session.section_courante == SECTION_PAUSE_FACULTATIFS:
+            _, total = _section_progress(db, session)
+            return {
+                "session_id": session.id,
+                "statut": session.statut,
+                "code_section": SECTION_PAUSE_FACULTATIFS,
+                "titre_section": "Les protections de vos statuts",
+                "explication_section": (
+                    "Vos bases sont posées. Choisissez maintenant les articles facultatifs à ajouter : "
+                    "seuls ceux que vous cochez vous seront présentés ensuite, à leur place dans les statuts."
+                ),
+                "position": None,
+                "total_sections_estime": total,
+                "choix_facultatifs_requis": True,
+                # Étape 5 : explications relues (table `article_explications`,
+                # nécessite la migration e7b2d4f6a8c1), texte provisoire sinon.
+                "facultatifs": liste_facultatifs(
+                    session.reponses, textes_valides(db, document_type=document_type)
+                ),
+            }
+
     section = (
         db.query(DocumentTemplate)
         .filter(
@@ -355,6 +594,8 @@ def get_current_section_state(db: Session, user: User, project_id, document_type
         raise SectionNotFoundError(f"Section '{session.section_courante}' absente du squelette en base.")
 
     position, total = _section_progress(db, session)
+
+    correction = session.reponses.get(CLE_CORRECTION_EN_COURS)
 
     state: dict[str, Any] = {
         "session_id": session.id,
@@ -373,10 +614,36 @@ def get_current_section_state(db: Session, user: User, project_id, document_type
         "titre_section": section.titre_affiche,
         "explication_section": section.explication,
         # 24/09/2026 (demande utilisateur) — voir _nom_article_courant/_section_progress.
-        "nom_article": _nom_article_courant(db, document_type, section.ordre),
+        "nom_article": _nom_article_courant(
+            db, document_type, section.ordre, section.code_section, _numeros_articles_statuts(db, session)
+        ),
         "position": position,
         "total_sections_estime": total,
+        "correction_en_cours": correction is not None,
     }
+    if correction is not None:
+        # Formulaire prérempli avec la réponse d'avant la correction (aussi
+        # après un rechargement de page) : on ne change que ce qui est faux.
+        state["reponse_precedente"] = correction["reponses_avant"].get(section.code_section)
+
+    # AJOUT (24/09/2026, audit #19) : article facultatif coché dans l'écran de
+    # choix -> le frontend n'y redemande pas "l'inclure ?" et affiche le badge
+    # + "Ne plus inclure cet article".
+    if document_type == DOCUMENT_TYPE_STATUTS:
+        from backend.entrepreneur.services.statuts_sas_resolvers import (
+            articles_par_section,
+            code_facultatif_de_l_article,
+            est_article_facultatif_choisi,
+        )
+
+        article = articles_par_section(_sections(db, document_type)).get(section.code_section)
+        state["article_facultatif_choisi"] = est_article_facultatif_choisi(article, session.reponses)
+        # Seule la section de BASE de l'article (ex. `droit_preemption`) est
+        # incluse d'office ; ses options internes (ex. `preemption_exceptions`)
+        # restent de vraies questions oui/non.
+        state["section_de_base_facultatif"] = (
+            state["article_facultatif_choisi"] and section.code_section == code_facultatif_de_l_article(article)
+        )
 
     if section.comportement_section in ("mention_obligatoire", "clause_optionnelle", "variante_obligatoire"):
         # Chargé une seule fois ici (peut être `None`, un projet peut ne pas
@@ -431,6 +698,10 @@ def go_to_previous_section(db: Session, user: User, project_id, document_type: s
     rouvrir vide.
     """
     session = get_or_create_session(db, user, project_id, document_type)
+    if CLE_CORRECTION_EN_COURS in session.reponses:
+        # Reculer effacerait toutes les réponses suivantes -- exactement ce
+        # que la correction ciblée évite. Le frontend masque le bouton.
+        raise InvalidAnswerError("Correction en cours : utilisez « Revenir à la vérification ».")
 
     sections = _sections(db, document_type)
     ordre_par_section = {s.code_section: s.ordre for s in sections}
@@ -441,6 +712,12 @@ def go_to_previous_section(db: Session, user: User, project_id, document_type: s
         if s.comportement_section in _SECTIONS_INTERACTIVES
         and s.code_section in session.reponses
         and session.reponses[s.code_section].get("applicable", True) is not False
+        # AJOUT (24/09/2026, audit #19) : une section déduite n'a pas été
+        # remplie par l'utilisateur -- "Précédent" la saute ; elle sera
+        # recalculée par `_advance_to_next_section`.
+        and not session.reponses[s.code_section].get("derivee")
+        # Étape 3 : idem pour une section générée sans saisie (auto-skip).
+        and not session.reponses[s.code_section].get("auto_genere")
     ]
     if not candidats_retour:
         raise NoPreviousSectionError("Aucune section précédente à laquelle revenir.")
@@ -490,6 +767,147 @@ def restart_session(db: Session, user: User, project_id, document_type: str) -> 
     session.document_genere_id = None
     db.flush()
     _advance_to_next_section(db, session)
+    db.commit()
+    db.refresh(session)
+    return get_current_section_state(db, user, project_id, document_type)
+
+
+def rouvrir_section(db: Session, user: User, project_id, document_type: str, code_section: str) -> dict[str, Any]:
+    """Rouvre UNE section depuis la vérification finale (« Corriger → »,
+    24/09/2026), sans refaire tout le parcours.
+
+    Contrairement à « Section précédente » (qui efface tout ce qui suit),
+    seules sont retirées :
+    - la réponse de la section ;
+    - les réponses CALCULÉES qui la suivent (déduites, générées, non
+      applicables) : elles sont recalculées par `_advance_to_next_section`
+      avec la nouvelle réponse ;
+    - les réponses des sections qui DÉPENDENT d'elle (`depend_de_section`,
+      en cascade) : leur existence même peut changer.
+    Toutes les autres réponses sont gardées : après validation, le parcours
+    se termine tout seul et l'écran de vérification revient.
+
+    Une copie des réponses est gardée sous CLE_CORRECTION_EN_COURS pour
+    « Revenir à la vérification » (annuler) et pour préremplir le formulaire.
+    """
+    session = get_or_create_session(db, user, project_id, document_type)
+    if session.document_genere_id is not None:
+        raise SessionAlreadyCompleteError("Un document a déjà été généré : recommencez pour le modifier.")
+    if session.statut != "complete":
+        raise InvalidAnswerError("Une section ne peut être rouverte qu'une fois le parcours terminé.")
+
+    sections = _sections(db, document_type)
+    cible = next((s for s in sections if s.code_section == code_section), None)
+    if cible is None:
+        raise SectionNotFoundError(f"Section '{code_section}' absente du squelette en base.")
+    reponse = session.reponses.get(code_section)
+    if (
+        cible.comportement_section not in _SECTIONS_INTERACTIVES
+        or not isinstance(reponse, dict)
+        or reponse.get("applicable", True) is False
+        or any(reponse.get(m) for m in _MARQUEURS_REPONSE_CALCULEE)
+    ):
+        raise InvalidAnswerError("Cette section est remplie automatiquement : corrigez plutôt les données du projet.")
+
+    # Sections dépendantes, en cascade (A -> B -> C).
+    dependantes = {code_section}
+    ajoute = True
+    while ajoute:
+        ajoute = False
+        for s in sections:
+            if s.depend_de_section in dependantes and s.code_section not in dependantes:
+                dependantes.add(s.code_section)
+                ajoute = True
+
+    a_retirer = set(dependantes)
+    for s in sections:
+        r = session.reponses.get(s.code_section)
+        if s.ordre > cible.ordre and isinstance(r, dict) and (
+            r.get("applicable", True) is False or any(r.get(m) for m in _MARQUEURS_REPONSE_CALCULEE)
+        ):
+            a_retirer.add(s.code_section)
+    if document_type == DOCUMENT_TYPE_STATUTS:
+        # Le titre de l'Art. 8 marque l'écran des facultatifs comme passé :
+        # le retirer ferait réapparaître cet écran.
+        from backend.entrepreneur.services.statuts_sas_resolvers import _SECTION_AVANT_FACULTATIFS
+
+        a_retirer.discard(_SECTION_AVANT_FACULTATIFS)
+
+    avant = dict(session.reponses)
+    session.reponses = {
+        **{k: v for k, v in avant.items() if k not in a_retirer},
+        CLE_CORRECTION_EN_COURS: {"section": code_section, "reponses_avant": avant},
+    }
+    session.section_courante = code_section
+    session.statut = "en_cours"
+    db.commit()
+    db.refresh(session)
+    return get_current_section_state(db, user, project_id, document_type)
+
+
+# Types de variable qu'« Appliquer » peut modifier : des saisies simples.
+_TYPES_APPLICABLES = ("montant", "nombre", "date", "texte")
+
+
+def appliquer_correction(
+    db: Session, user: User, project_id, document_type: str, code_section: str, variable: str, valeur: str
+) -> None:
+    """« Appliquer » sur la vérification finale (25/09/2026) : enregistre une
+    valeur proposée (ex. somme déposée calculée) directement dans la section
+    concernée, sans la rouvrir. Mêmes garde-fous qu'une saisie : section
+    répondue par l'utilisateur, variable saisissable de sa clause, règles
+    de validité (niveau A) respectées. La vérification est relancée ensuite
+    par le frontend."""
+    from backend.entrepreneur.services.statuts_sas_regles_validite import GRAVITE_BLOQUANT, verifier_regles
+    from backend.shared.knowledge_base.services.clause_validity_criteria_service import list_for_clause
+
+    session = get_or_create_session(db, user, project_id, document_type)
+    if session.document_genere_id is not None:
+        raise SessionAlreadyCompleteError("Un document a déjà été généré : recommencez pour le modifier.")
+    if session.statut != "complete":
+        raise InvalidAnswerError("La correction ne peut être appliquée qu'une fois le parcours terminé.")
+    reponse = session.reponses.get(code_section)
+    if (
+        not isinstance(reponse, dict)
+        or not reponse.get("inclus")
+        or any(reponse.get(m) for m in _MARQUEURS_REPONSE_CALCULEE)
+    ):
+        raise InvalidAnswerError("Cette section ne peut pas être corrigée ainsi.")
+    clause = (
+        db.query(ContractClauseLibrary)
+        .filter(
+            ContractClauseLibrary.document_type == document_type,
+            ContractClauseLibrary.code_clause == reponse.get("code_clause"),
+        )
+        .first()
+    )
+    definition = next((v for v in (clause.variables_requises if clause else []) if v["nom"] == variable), None)
+    if definition is None or definition.get("type") not in _TYPES_APPLICABLES:
+        raise InvalidAnswerError(f"La valeur '{variable}' ne peut pas être modifiée ainsi.")
+
+    valeurs = {**(reponse.get("valeurs") or {}), variable: valeur}
+    criteres = [
+        {"valeur_limite": c.valeur_limite, "base_legale": c.base_legale, "description_critere": c.description_critere}
+        for c in list_for_clause(db, clause_library_id=clause.id)
+    ]
+    bloquants = [p for p in verifier_regles(clause.variables_requises, criteres, valeurs) if p["gravite"] == GRAVITE_BLOQUANT]
+    if bloquants:
+        raise InvalidAnswerError(f"« {bloquants[0]['libelle']} » : {bloquants[0]['message']}")
+
+    _set_reponse(session, code_section, {**reponse, "valeurs": valeurs})
+    db.commit()
+
+
+def annuler_correction(db: Session, user: User, project_id, document_type: str) -> dict[str, Any]:
+    """« Revenir à la vérification » : remet les réponses d'avant la
+    correction, telles quelles, et le parcours redevient terminé."""
+    session = get_or_create_session(db, user, project_id, document_type)
+    correction = session.reponses.get(CLE_CORRECTION_EN_COURS)
+    if correction is None:
+        raise InvalidAnswerError("Aucune correction en cours.")
+    session.reponses = dict(correction["reponses_avant"])
+    session.section_courante = None
+    session.statut = "complete"
     db.commit()
     db.refresh(session)
     return get_current_section_state(db, user, project_id, document_type)
@@ -546,6 +964,62 @@ def resolve_target_clause(
     return None
 
 
+def list_answered_sections(db: Session, user: User, project_id, document_type: str) -> list[dict]:
+    """Historique des sections déjà rédigées (`inclus=True` avec une clause
+    réellement appliquée) — service 1.1.15 (26/09/2026, revu suite au retour
+    utilisateur sur le hover-sur-titre : il faut pouvoir redemander une
+    explication sur une clause DÉJÀ validée, pas seulement celle en cours de
+    saisie, sans passer par "Précédent" qui rejoue le questionnaire et efface
+    les réponses suivantes).
+
+    Lecture seule : ne touche jamais `session.reponses` ni `section_courante`.
+    Une section sans `code_clause` (facultative refusée, texte_statique,
+    donnee_projet, non applicable) n'a rien à expliquer, donc absente du
+    résultat.
+
+    `variante`/`sous_variante` sont précalculés ici (pas laissés au frontend
+    à déduire) pour que l'appel à `explain_section` derrière chaque ligne de
+    l'historique soit un simple passe-plat — voir la distinction dans
+    `resolve_target_clause` : pour une `variante_obligatoire` à second niveau
+    (cas Article 3), `code_clause` pointe déjà la sous-variante réellement
+    appliquée, `variante` le candidat de premier niveau qui la regroupe.
+    """
+    session = get_or_create_session(db, user, project_id, document_type)
+    sections_par_code = {s.code_section: s for s in _sections(db, document_type)}
+
+    result: list[dict] = []
+    for code_section, reponse in session.reponses.items():
+        if not reponse.get("inclus") or not reponse.get("code_clause"):
+            continue
+        section = sections_par_code.get(code_section)
+        if section is None:
+            continue
+        clause = (
+            db.query(ContractClauseLibrary)
+            .filter(
+                ContractClauseLibrary.document_type == document_type,
+                ContractClauseLibrary.code_clause == reponse["code_clause"],
+            )
+            .first()
+        )
+        if clause is None:
+            continue
+        variante = reponse.get("variante")
+        result.append(
+            {
+                "code_section": code_section,
+                "titre": clause.titre_clause,
+                "ordre": section.ordre,
+                "variante": variante,
+                "sous_variante": reponse["code_clause"] if variante and reponse["code_clause"] != variante else None,
+                "valeurs": reponse.get("valeurs", {}),
+            }
+        )
+
+    result.sort(key=lambda r: r["ordre"])
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Soumission d'une réponse
 # ---------------------------------------------------------------------------
@@ -567,7 +1041,20 @@ def _variable_applicable(v: dict, valeurs: dict) -> bool:
     return valeurs.get(depend_de) in v.get("depend_de_valeurs", [])
 
 
-def _validate_variables(clause: ContractClauseLibrary | None, valeurs: dict) -> None:
+
+
+def _validate_variables(clause: ContractClauseLibrary | None, valeurs: dict, db: Session, project_id) -> None:
+    # Import local -- voir la docstring de module de `statuts_sas_resolvers.py`
+    # (casse la dépendance circulaire, ces exclusions restent des règles
+    # propres au clausier statuts SAS malgré leur emplacement dans cette
+    # fonction générique).
+    from backend.entrepreneur.services.statuts_sas_resolvers import (
+        _CLAUSES_ENTIEREMENT_AUTO_RESOLUES,
+        _CLAUSES_REPETEES_PAR_ASSOCIE,
+        _VARIABLES_MANDATAIRE,
+        _candidats_selection_associe,
+    )
+
     if clause is None:
         # Ne devrait jamais arriver : section.reference_id pointe vers une clause
         # supprimée depuis, ou le seed n'a pas encore tourné — signale une
@@ -575,6 +1062,17 @@ def _validate_variables(clause: ContractClauseLibrary | None, valeurs: dict) -> 
         raise InvalidAnswerError("Clause de référence introuvable pour cette section (squelette incohérent).")
 
     variables_applicables = [v for v in clause.variables_requises if _variable_applicable(v, valeurs)]
+
+    # AJOUT (23/09/2026, résolution complète dispense L225-8-1) : contrairement
+    # aux exclusions ci-dessous qui retirent UNE variable par TYPE ou par NOM,
+    # cette clause a désormais TOUTES ses variables résolues automatiquement
+    # (voir `_valeurs_dispense_l225_8_1_par_associe` -- montants déterministes
+    # au prorata du capital, désignation réutilisée depuis
+    # `apport_nature_identite`) : plus aucune saisie manuelle attendue, donc
+    # court-circuit avant le contrôle "manquant" plutôt qu'une énième
+    # exclusion au cas par cas.
+    if clause.code_clause in _CLAUSES_ENTIEREMENT_AUTO_RESOLUES:
+        return
 
     # 'auto_forme_juridique' (cases 95-96, service 1.1.13) : jamais saisie par
     # l'entrepreneur, résolue automatiquement depuis la forme juridique du
@@ -590,8 +1088,119 @@ def _validate_variables(clause: ContractClauseLibrary | None, valeurs: dict) -> 
             "auto_forme_juridique", "auto_nom_societe", "reference_croisee",
             "auto_repartition_associes", "auto_pourcentage_associes",
             "auto_profil_juridique", "auto_siege_social", "auto_poids_participation",
+            # AJOUT (23/09/2026, service 1.1.4 statuts) : voir
+            # _resoudre_variables_apports_statuts -- résolution déterministe
+            # (somme au prorata du capital), jamais un choix à deviner.
+            "auto_montant_apports_numeraire", "auto_montant_apports_nature",
+            # AJOUT (23/09/2026, service 1.1.4 statuts) : voir
+            # _resoudre_variables_officiers_statuts -- identité d'un dirigeant
+            # (Président/DG/membre du comité PERSONNE PHYSIQUE, art. 39/40/41)
+            # résolue depuis `company_officers`. Exclusion par TYPE valide ici :
+            # ces 2 types ne sont utilisés QUE par ces 3 clauses aujourd'hui,
+            # contrairement à `auto_identite_associe` ci-dessous.
+            "auto_nom_complet_associe", "auto_adresse_associe",
+            # AJOUT (24/09/2026, service 1.1.4 statuts, correction #12) : les 8
+            # variables PM de `premier_president_personne_morale` (art. 39) --
+            # voir _resoudre_variables_officiers_pm_statuts. Type dédié (pas
+            # une réutilisation de auto_nom_complet_associe/auto_adresse_associe,
+            # qui ne concernent que l'identité d'un ASSOCIÉ personne physique) :
+            # ce type n'est utilisé QUE par cette clause, exclusion par TYPE
+            # valide ici, même raisonnement que ci-dessus.
+            "auto_officier_pm",
+            # AJOUT (24/09/2026, demande utilisateur) : `duree_fonctions_
+            # premier_president` -- partagée par les 2 variantes du Président
+            # (art. 39, personne physique ET morale) -- lue directement sur
+            # `company_officers.duree_fonctions` (voir
+            # _resoudre_variables_officiers_statuts, champ "duree_fonctions").
+            # Type dédié, non réutilisé ailleurs -- exclusion par TYPE valide.
+            "auto_duree_fonctions_officier",
+            # AJOUT (lot 3-4, 24/09/2026) : sommes, actions, valeur nominale et
+            # désignation du bien PAR APPORTEUR (Art. 6.1/6.2) -- calculées ou
+            # lues sur `project_associates` par les résolveurs
+            # `_valeurs_apports_*_par_associe`, jamais saisies ici.
+            "auto_apport_par_associe",
+            # AJOUT (lot A, 24/09/2026) : lignes de signature de la clôture,
+            # construites depuis les associés et dirigeants
+            # (_resoudre_signatures_associes), jamais saisies.
+            "auto_signatures_associes",
+            # AJOUT (règles A, 24/09/2026) : fin d'exercice calculée depuis le
+            # jour + mois d'ouverture (_resoudre_exercice_social).
+            "auto_fin_exercice",
         )
+        # AJOUT (23/09/2026, service 1.1.4 statuts) : exclusion par NOM DE
+        # VARIABLE, pas par type -- `auto_identite_associe` est PARTAGÉ par des
+        # variables sans rapport (Article 6 "apports", Article 8
+        # "fondateur_avantage") qui restent volontairement en saisie manuelle
+        # (Cas B/C, non résolus). Exclure ce type entièrement aurait, à tort,
+        # dispensé aussi ces 4 autres variables de saisie -- voir docstring de
+        # _resoudre_variables_officiers_statuts.
+        and v["nom"] not in _VARIABLES_MANDATAIRE
     ]
+
+    # AJOUT (23/09/2026, service 1.1.4 statuts, Cas B/C) : les variables
+    # `auto_identite_associe` restantes (Article 6 apports, Article 8
+    # fondateur_avantage) ne sont exigées ici QUE si leur filtre `selection`
+    # retient plusieurs candidats -- et dans ce cas, la valeur doit être
+    # l'identifiant d'un des candidats proposés (`selections_requises`), pas
+    # un texte libre. Un seul candidat -> résolution automatique, jamais
+    # demandée (voir `_resoudre_variables_selection_associe`). Aucun candidat
+    # -> reste en saisie libre normale (fallback inchangé, cas rare/incohérent
+    # signalé ailleurs).
+    #
+    # EXCEPTION (23/09/2026, résolution Cas B -- clause `apport_nature_identite`,
+    # retouche du clausier) : dans CETTE clause précise, `identite_apporteur_nature`
+    # n'est JAMAIS un choix -- elle est répétée pour TOUS les apporteurs en
+    # nature (voir `_render_apports_nature_statuts`), jamais un seul choisi
+    # parmi eux. Exclue ici sans passer par le mécanisme choix/auto-résolution
+    # ci-dessus, qui ne s'applique qu'aux clauses "un seul concerné parmi
+    # plusieurs candidats" (Article 8, ou les autres variantes Article 6).
+    variables_a_saisir_normales = []
+    for v in variables_a_saisir:
+        if clause.code_clause in _CLAUSES_REPETEES_PAR_ASSOCIE and v["type"] == "auto_identite_associe":
+            continue
+        if v["type"] == "auto_identite_associe" and v.get("selection"):
+            candidats = _candidats_selection_associe(db, project_id, v["selection"])
+            if len(candidats) == 1:
+                continue
+            if len(candidats) > 1:
+                if valeurs.get(v["nom"]) not in {str(a.id) for a in candidats}:
+                    raise InvalidAnswerError(
+                        f"'{v['nom']}' doit être l'identifiant d'un des associés proposés "
+                        f"(voir 'selections_requises' de la clause)."
+                    )
+                continue
+        variables_a_saisir_normales.append(v)
+    variables_a_saisir = variables_a_saisir_normales
+
+    # AJOUT (23/09/2026, résolution Cas B ; étendu 25/09/2026 à
+    # `nombre_par_associe` -- apports en industrie, art. 6.2 bis) :
+    # `texte_par_associe`/`nombre_par_associe` ne sont pas UNE valeur mais un
+    # DICT `{id_associe: valeur}`, un par candidat du filtre `selection` --
+    # validés séparément du contrôle `missing` générique (qui suppose une
+    # valeur scalaire). Aucun candidat -> rien à saisir (retiré de la liste,
+    # exclu du contrôle "manquant" ci-dessous). Même validation de forme pour
+    # les deux types (dict complet) ; seule la vérification "manquant" diffère
+    # (`.strip()` pour du texte n'a pas de sens pour un nombre -- `None`/absent
+    # suffit à qualifier "manquant" pour `nombre_par_associe`).
+    variables_par_associe = [v for v in variables_a_saisir if v["type"] in ("texte_par_associe", "nombre_par_associe")]
+    variables_a_saisir = [v for v in variables_a_saisir if v["type"] not in ("texte_par_associe", "nombre_par_associe")]
+    for v in variables_par_associe:
+        candidats = _candidats_selection_associe(db, project_id, v.get("selection", ""))
+        if not candidats:
+            continue
+        valeur = valeurs.get(v["nom"])
+        if not isinstance(valeur, dict):
+            raise InvalidAnswerError(
+                f"'{v['nom']}' doit être un objet {{id_associé: valeur}}, un par associé proposé."
+            )
+        if v["type"] == "texte_par_associe":
+            manquants = [str(a.id) for a in candidats if not (valeur.get(str(a.id)) or "").strip()]
+        else:
+            manquants = [str(a.id) for a in candidats if valeur.get(str(a.id)) in (None, "")]
+        if manquants:
+            raise InvalidAnswerError(
+                f"'{v['nom']}' est manquant pour {len(manquants)} associé(s) parmi ceux proposés."
+            )
 
     missing = [v["nom"] for v in variables_a_saisir if v["nom"] not in valeurs]
     if missing:
@@ -620,7 +1229,12 @@ def submit_section(
     variante: str | None = None,
     sous_variante: str | None = None,
     valeurs: dict | None = None,
+    controle_juridique_en_attente: list[str] | None = None,
 ) -> DocumentGenerationSession:
+    """`controle_juridique_en_attente` (statuts, niveau B du garde-fou) :
+    champs que le garde-fou LLM n'a pas pu vérifier (service indisponible).
+    La saisie n'est pas bloquée ; les champs sont notés dans la réponse pour
+    être revérifiés par la validation globale avant génération."""
     session = get_or_create_session(db, user, project_id, document_type)
     if session.statut == "complete":
         raise SessionAlreadyCompleteError("Cette session est déjà terminée — un document a déjà été généré.")
@@ -642,7 +1256,7 @@ def submit_section(
 
     if section.comportement_section == "mention_obligatoire":
         clause = db.query(ContractClauseLibrary).filter(ContractClauseLibrary.id == section.reference_id).first()
-        _validate_variables(clause, valeurs)
+        _validate_variables(clause, valeurs, db, project_id)
         reponse = {"inclus": True, "code_clause": clause.code_clause, "valeurs": valeurs}
 
     elif section.comportement_section == "clause_optionnelle":
@@ -651,8 +1265,33 @@ def submit_section(
         if not inclus:
             reponse = {"inclus": False}
         else:
+            # Correction #9 (audit du 23/09/2026, VERSION FINALE 24/09/2026,
+            # décision utilisateur) : `comite_direction_voix_preponderante`
+            # (Art. 24) référence dynamiquement `limitation_pouvoirs_president`
+            # (Art. 22 -- reference_croisee `reference_article_limitation_
+            # pouvoirs`, voir le clausier). Deux solutions écartées : bloquer
+            # avec une erreur (mauvaise UX), rouvrir automatiquement le
+            # parcours sur l'Art. 22 en effaçant les réponses déjà données
+            # (rejeté par l'utilisateur -- perte de réponses). Retenue : cette
+            # section n'est désormais même plus PROPOSÉE tant qu'Art. 22 n'est
+            # pas inclus -- gérée en amont par SECTIONS_DERIVEES (auto-skip
+            # silencieux, comme n'importe quelle autre section non
+            # applicable), voir son commentaire dédié. Ce qui suit est donc un
+            # garde-fou défensif, pas un flux utilisateur normal : `_applicable`
+            # empêche déjà cette section de devenir `section_courante` sans
+            # Art. 22 inclus, donc ce cas ne devrait jamais se produire via le
+            # parcours standard (seulement en cas d'appel API direct/incohérent).
+            if code_section == "comite_direction_voix_preponderante":
+                dep = (session.reponses or {}).get("limitation_pouvoirs_president")
+                if not dep or not dep.get("inclus"):
+                    raise InvalidAnswerError(
+                        "Incohérence : 'Comité de direction — voix prépondérante' "
+                        "(Article 24) ne peut être incluse sans que 'Limitation de "
+                        "pouvoirs du Président' (Article 22) le soit déjà — cette "
+                        "section n'aurait pas dû être proposée sans cela."
+                    )
             clause = db.query(ContractClauseLibrary).filter(ContractClauseLibrary.id == section.reference_id).first()
-            _validate_variables(clause, valeurs)
+            _validate_variables(clause, valeurs, db, project_id)
             reponse = {"inclus": True, "code_clause": clause.code_clause, "valeurs": valeurs}
 
     elif section.comportement_section == "variante_obligatoire":
@@ -686,7 +1325,7 @@ def submit_section(
                     )
                     .first()
                 )
-            _validate_variables(clause, valeurs)
+            _validate_variables(clause, valeurs, db, project_id)
             # `variante` (en plus de `code_clause`) : conservé séparément pour que
             # `_resoudre_variables_reference_croisee` puisse retrouver le choix de
             # premier niveau même quand `code_clause` finit par pointer vers une
@@ -698,8 +1337,86 @@ def submit_section(
         # automatiquement par _advance_to_next_section avant de devenir "courante".
         raise InvalidAnswerError(f"La section '{code_section}' ({section.comportement_section}) ne prend pas de réponse.")
 
+    if controle_juridique_en_attente and reponse.get("inclus"):
+        reponse["controle_juridique_en_attente"] = controle_juridique_en_attente
     _set_reponse(session, section.code_section, reponse)
 
+    _advance_to_next_section(db, session)
+    db.commit()
+    db.refresh(session)
+    return session
+
+
+def submit_facultatifs(
+    db: Session, user: User, project_id, document_type: str, codes_choisis: list[str]
+) -> DocumentGenerationSession:
+    """POST .../facultatifs (audit #19) -- enregistre le choix des articles
+    facultatifs fait sur l'écran de pause, puis reprend le parcours.
+
+    Les articles non cochés ne sont pas écrits ici un par un : c'est
+    `_advance_to_next_section` qui écarte chacune de leurs sections en la
+    croisant (`reponse_facultatif_non_choisi`) -- une seule règle, appliquée
+    aussi après un retour en arrière."""
+    from backend.entrepreneur.services.statuts_sas_resolvers import (
+        CLE_FACULTATIFS_CHOISIS,
+        SECTION_PAUSE_FACULTATIFS,
+        _SECTION_AVANT_FACULTATIFS,
+        valider_choix_facultatifs,
+    )
+
+    if document_type != DOCUMENT_TYPE_STATUTS:
+        raise InvalidAnswerError("Le choix des articles facultatifs n'existe que pour les statuts.")
+    session = get_or_create_session(db, user, project_id, document_type)
+    if session.statut == "complete":
+        raise SessionAlreadyCompleteError("Cette session est déjà terminée — un document a déjà été généré.")
+    if session.section_courante != SECTION_PAUSE_FACULTATIFS:
+        raise InvalidAnswerError(
+            f"Le choix des articles facultatifs n'est pas attendu maintenant (section courante : "
+            f"'{session.section_courante}')."
+        )
+    try:
+        choisis = valider_choix_facultatifs(codes_choisis)
+    except ValueError as exc:
+        raise InvalidAnswerError(str(exc)) from exc
+
+    _set_reponse(session, CLE_FACULTATIFS_CHOISIS, choisis)
+    # Lève la pause : le titre de l'Art. 8 est un texte statique, marqué traité
+    # comme `_advance_to_next_section` l'aurait fait sans la pause.
+    _set_reponse(session, _SECTION_AVANT_FACULTATIFS, {"traite_automatiquement": True})
+    _advance_to_next_section(db, session)
+    db.commit()
+    db.refresh(session)
+    return session
+
+
+def retirer_facultatif_courant(db: Session, user: User, project_id, document_type: str) -> DocumentGenerationSession:
+    """POST .../facultatifs/retirer (audit #19) -- bouton "Ne plus inclure cet
+    article" : retire l'article de la section courante du choix, écarte cette
+    section, et `_advance_to_next_section` écarte les suivantes du même article.
+
+    Limite assumée : des clauses PLACÉES AVANT cet article et qui y renvoient
+    (ex. clauses de l'Art. 16 liées à l'agrément de l'Art. 17) ont déjà été
+    répondues et ne sont pas retirées -- cas rare, voir l'audit."""
+    from backend.entrepreneur.services.statuts_sas_resolvers import (
+        CLE_FACULTATIFS_CHOISIS,
+        _facultatifs_choisis,
+        articles_par_section,
+        code_facultatif_de_l_article,
+    )
+
+    if document_type != DOCUMENT_TYPE_STATUTS:
+        raise InvalidAnswerError("Le retrait d'un article facultatif n'existe que pour les statuts.")
+    session = get_or_create_session(db, user, project_id, document_type)
+    if session.statut == "complete":
+        raise SessionAlreadyCompleteError("Cette session est déjà terminée — un document a déjà été généré.")
+    choix = _facultatifs_choisis(session.reponses)
+    article = articles_par_section(_sections(db, document_type)).get(session.section_courante or "")
+    code = code_facultatif_de_l_article(article)
+    if choix is None or code is None or code not in choix:
+        raise InvalidAnswerError("La section courante n'appartient pas à un article facultatif choisi.")
+
+    _set_reponse(session, CLE_FACULTATIFS_CHOISIS, [c for c in session.reponses[CLE_FACULTATIFS_CHOISIS] if c != code])
+    _set_reponse(session, session.section_courante, {"inclus": False, "retire_par_utilisateur": True})
     _advance_to_next_section(db, session)
     db.commit()
     db.refresh(session)
@@ -722,14 +1439,6 @@ def submit_section(
 # actée avec l'utilisateur, 21/09/2026), seule cette section a un rendu
 # suffisamment différent entre les deux versions pour justifier une branche.
 # ---------------------------------------------------------------------------
-
-
-def _lit(texte: str) -> dict:
-    return {"texte": texte, "valeur_utilisateur": False, "nom_variable": None}
-
-
-def _val(texte: str, nom_variable: str) -> dict:
-    return {"texte": texte, "valeur_utilisateur": True, "nom_variable": nom_variable}
 
 
 def _render_patron_associe_v2(a: ProjectAssociate) -> list[dict]:
@@ -839,22 +1548,173 @@ def _render_identification_parties_v2(db: Session, project_id) -> list[dict]:
     return runs
 
 
-def _formater_siege_social(adresse: dict | None) -> str | None:
-    """Formate `ProjectLegalProfile.registered_address` (JSONB libre) en une
-    chaîne unique pour le Préambule ("ayant son siège social à (siège
-    social)"). Champs attendus, tous optionnels : `ligne1`, `ligne2`,
-    `code_postal`, `ville`. Pas de format d'adresse strict imposé ailleurs
-    dans le repo à ce jour (JSONB libre) -- reconstruction best-effort, jointe
-    par des virgules, en sautant les champs absents plutôt que d'écrire des
-    virgules vides ou "None"."""
-    if not adresse:
-        return None
-    parts = [adresse.get("ligne1"), adresse.get("ligne2")]
-    ville = " ".join(p for p in (adresse.get("code_postal"), adresse.get("ville")) if p)
-    if ville:
-        parts.append(ville)
-    parts = [p for p in parts if p]
-    return ", ".join(parts) if parts else None
+def _numero_ordinal_liste(n: int) -> str:
+    """Numérotation "1°, 2°, 3°..." du patron d'en-tête des statuts SAS (voir
+    decisions_articles_statuts_sas.json, article 'entete', note : "numérotés
+    1o, 2o, ..."). Le "o" du texte de la décision est l'abréviation française
+    de l'ordinal ; rendu ici par le caractère degré "°" plutôt que la lettre
+    "o", ambiguë avec un zéro dans un rendu PDF."""
+    return f"{n}°"
+
+
+def _render_patron_associe_statuts(a: ProjectAssociate) -> list[dict]:
+    """Rend le patron d'identification d'UN associé fondateur pour l'en-tête
+    des statuts SAS -- distinct du patron pacte (`_render_patron_associe_v2`,
+    voir sa docstring pour le principe général des "runs") : voir
+    decisions_articles_statuts_sas.json, article 'entete',
+    patron_personne_physique/patron_personne_morale (22/09/2026).
+
+    Différences avec le patron pacte :
+    - personne physique : ajoute lieu de naissance + situation et régime
+      matrimonial (`project_associates.lieu_naissance`/
+      `situation_et_regime_matrimonial`, colonnes propres aux statuts, absentes
+      du patron pacte qui n'en a pas besoin).
+    - personne morale : vocabulaire du modèle Bpifrance statuts ("forme",
+      "n° [SIREN]", "es qualités de", "dûment habilité aux fins des présentes")
+      différent de celui du pacte, mêmes champs source
+      (`type_societe`/`lieu_immatriculation`/`numero_siren`/`representant_*`).
+
+    Même convention que le pacte pour un champ manquant : placeholder textuel
+    explicite ("(champ non renseigné)"), jamais un vide silencieux.
+    """
+    if a.type_personne == "personne_morale":
+        representant = (
+            f"{a.representant_prenom} {a.representant_nom}"
+            if a.representant_prenom and a.representant_nom
+            else "(représentant non renseigné)"
+        )
+        return [
+            _val(a.denomination_sociale or "(dénomination sociale non renseignée)", "denomination_sociale"),
+            _lit(", "),
+            _val(a.type_societe or "(forme non renseignée)", "type_societe"),
+            _lit(" au capital de "),
+            _val(
+                formater_montant(a.capital_social) if a.capital_social is not None else "(capital non renseigné)",
+                "capital_social",
+            ),
+            _lit(" euros, ayant son siège social à "),
+            _val(a.siege_social or "(siège social non renseigné)", "siege_social"),
+            _lit(", immatriculée au Registre du commerce et des sociétés de "),
+            _val(a.lieu_immatriculation or "(lieu d'immatriculation non renseigné)", "lieu_immatriculation"),
+            _lit(" sous le n° "),
+            _val(a.numero_siren or "(numéro Siren non renseigné)", "numero_siren"),
+            _lit(" représentée par "),
+            _val(representant, "representant_legal"),
+            _lit(", es qualités de "),
+            _val(a.representant_qualite or "(fonction non renseignée)", "fonction"),
+            _lit(", dûment habilité aux fins des présentes"),
+        ]
+    return [
+        _val(a.nom_complet or "(nom non renseigné)", "nom_complet"),
+        _lit(", demeurant à "),
+        _val(a.adresse or "(adresse non renseignée)", "adresse"),
+        _lit(", né(e) le "),
+        _val(
+            a.date_naissance.strftime("%d/%m/%Y") if a.date_naissance else "(date de naissance non renseignée)",
+            "date_naissance",
+        ),
+        _lit(" à "),
+        _val(a.lieu_naissance or "(lieu de naissance non renseigné)", "lieu_naissance"),
+        _lit(", "),
+        _val(
+            a.situation_et_regime_matrimonial or "(situation et régime matrimonial non renseignés)",
+            "situation_et_regime_matrimonial",
+        ),
+    ]
+
+
+def _render_identification_parties_statuts(db: Session, project_id) -> list[dict]:
+    """Rend la page de garde + le bloc "Les soussignés" des statuts SAS --
+    équivalent statuts de `_render_identification_parties_v2` (pacte). Voir
+    decisions_articles_statuts_sas.json, article 'entete' (cible
+    "donnee_projet_dynamique" -- jamais une clause ordinaire, voir sa note).
+
+    AVANT cette fonction (23/09/2026) : `_assemble_document_blocks` appelait
+    `_render_identification_parties_v2` (pacte) SANS condition sur
+    `document_type` -- comme le générateur (`generate_statuts_sas_v2.py`,
+    comme celui du pacte) n'émet volontairement AUCUNE section pour l'entête
+    (`cible="donnee_projet_dynamique"` -- l'injection se fait en constante côté
+    `seed_statuts_sas.py`, voir `_SECTION_IDENTIFICATION_PARTIES`), cette
+    branche n'était simplement jamais atteinte pour un statuts : le document
+    généré aurait commencé directement à l'Article 1, sans page de garde ni
+    identification des fondateurs. Trou trouvé et corrigé ici.
+
+    Différences avec le pacte, actées le 22/09/2026 :
+    - Seuls les Associés FONDATEURS (`est_fondateur=True`) apparaissent -- les
+      statuts constitutifs n'ont pas la notion d'Associés Investisseurs du
+      pacte (elle n'existe qu'après signature d'un pacte séparé, postérieur).
+    - Numérotation "1°, 2°, ..." (physiques, puis moraux à la suite), les
+      associés d'un même groupe sont séparés par des virgules (modèle
+      Bpifrance) -- "Et/Ou" ne sépare QUE le groupe physique du groupe moral,
+      pas les associés entre eux (voir texte_assemblage de la décision).
+    - Page de garde (dénomination, forme, capital, siège, "société en cours de
+      constitution") avant "Les soussignés" -- absente du pacte, qui s'adresse
+      à une société déjà immatriculée.
+    """
+    legal_profile = (
+        db.query(ProjectLegalProfile).filter(ProjectLegalProfile.project_id == project_id).first()
+    )
+    fondateurs = (
+        db.query(ProjectAssociate)
+        .filter(ProjectAssociate.project_id == project_id, ProjectAssociate.est_fondateur.is_(True))
+        .order_by(ProjectAssociate.created_at)
+        .all()
+    )
+    if not fondateurs:
+        raise InvalidAnswerError(
+            "Aucun associé n'est marqué comme fondateur (project_associates.est_fondateur) "
+            "— impossible de générer l'identification des parties des statuts."
+        )
+
+    physiques = [a for a in fondateurs if a.type_personne != "personne_morale"]
+    morales = [a for a in fondateurs if a.type_personne == "personne_morale"]
+
+    def _bloc_numerote(associes: list[ProjectAssociate], depart: int) -> list[dict]:
+        runs: list[dict] = []
+        for i, a in enumerate(associes):
+            if i > 0:
+                runs.append(_lit(",\n"))
+            runs.append(_lit(f"{_numero_ordinal_liste(depart + i)} "))
+            runs.extend(_render_patron_associe_statuts(a))
+        return runs
+
+    runs: list[dict] = [
+        _val(
+            legal_profile.legal_name if legal_profile and legal_profile.legal_name else "(dénomination sociale non renseignée)",
+            "denomination_sociale",
+        ),
+        _lit(",\nsociété par actions simplifiée\nau capital de "),
+        _val(
+            formater_montant(legal_profile.capital_social) if legal_profile and legal_profile.capital_social is not None else "(capital non renseigné)",
+            "capital_social",
+        ),
+        _lit(" euros,\nSiège social : "),
+        _val(
+            _formater_siege_social(legal_profile.registered_address if legal_profile else None)
+            or "(siège social non renseigné)",
+            "siege_social",
+        ),
+        _lit("\nSociété en cours de constitution\n\nLes soussignés,\n\n"),
+    ]
+    runs.extend(_bloc_numerote(physiques, 1))
+    if morales:
+        if physiques:
+            # Lot B : « Et/Ou » était une consigne du modèle (choisir le
+            # patron PP ou PM), jamais un texte à imprimer.
+            runs.append(_lit("\n"))
+        runs.extend(_bloc_numerote(morales, len(physiques) + 1))
+    runs.append(
+        _lit(
+            "\n\nOnt établi ainsi qu'il suit :\nles statuts de la société par actions simplifiée devant exister "
+            "entre eux et toute autre personne qui viendrait ultérieurement à acquérir la qualité d'associé "
+            "(la « Société »)."
+        )
+    )
+    return runs
+
+
+
+
 
 
 def _resoudre_variables_auto(variables: list[dict], legal_profile) -> dict:
@@ -889,30 +1749,55 @@ def _resoudre_variables_auto(variables: list[dict], legal_profile) -> dict:
       d'un vrai formatage plutôt qu'un passage direct, garde son propre type.
 
     Dans tous les cas, si la donnée source du projet est absente/non
-    renseignée, le placeholder reste tel quel dans le texte plutôt que de
-    générer un document avec un vide silencieux -- signal visible d'un
-    problème de données, pas une erreur bloquante à ce stade de l'assemblage.
+    renseignée, un placeholder textuel explicite est renvoyé
+    (`f"({libelle} non renseigné)"`, même convention que
+    `_render_patron_associe_v2`/`_render_patron_associe_statuts`) plutôt
+    qu'un vide silencieux -- signal visible d'un problème de données, pas une
+    erreur bloquante à ce stade de l'assemblage.
+
+    CORRECTIF (23/09/2026) : avant, une donnée manquante laissait simplement
+    la clé absente de `resolues` -- ce qui ne produisait un placeholder
+    visible dans le document final que PAR ACCIDENT, quand le mécanisme de
+    substitution ne trouvait de toute façon aucun `(...)` correspondant dans
+    le texte (c'était le cas pour la quasi-totalité des variables statuts
+    avant le correctif du bug de substitution nom/libelle -- voir
+    `document_renderer_base.py`). Une fois la substitution corrigée, une clé
+    absente produisait un texte vide invisible (`.get(nom, "")`) au lieu d'un
+    signal -- exposé sur `activites_societe`/`duree` (type
+    `auto_profil_juridique`, lisant `project_legal_profiles.objet_social`/
+    `duree_societe`, colonnes qu'aucun écran de l'app ne remplit à ce jour,
+    voir dette technique du récap 1.1.4). Corrigé ici en renvoyant toujours
+    une valeur -- réelle ou un placeholder explicite -- jamais une absence.
     """
     resolues = {}
     forme_juridique = legal_profile.legal_form if legal_profile else None
     for var in variables:
         if var["type"] == "auto_forme_juridique":
             table = var.get("valeurs_par_forme_juridique", {})
-            if forme_juridique in table:
-                resolues[var["nom"]] = table[forme_juridique]
+            resolues[var["nom"]] = table.get(forme_juridique, f"({var['libelle']} non renseigné)")
         elif var["type"] == "auto_nom_societe":
-            if legal_profile and legal_profile.legal_name:
-                resolues[var["nom"]] = legal_profile.legal_name
+            resolues[var["nom"]] = (
+                legal_profile.legal_name if legal_profile and legal_profile.legal_name else f"({var['libelle']} non renseigné)"
+            )
         elif var["type"] == "auto_profil_juridique":
             champ = var.get("champ")
             valeur = getattr(legal_profile, champ, None) if legal_profile and champ else None
-            if valeur is not None:
+            if valeur is None:
+                resolues[var["nom"]] = f"({var['libelle']} non renseigné)"
+            elif isinstance(valeur, date):
+                # Lot 4 (24/09/2026) : date de signature des statuts -- format
+                # français dans le document, jamais l'ISO "2026-10-01".
+                resolues[var["nom"]] = valeur.strftime("%d/%m/%Y")
+            elif isinstance(valeur, (Decimal, int)) and not isinstance(valeur, bool):
+                # Capital, valeur nominale, nombre d'actions : « 20 000 », pas
+                # « 20000.00 » (24/09/2026).
+                resolues[var["nom"]] = formater_montant(valeur)
+            else:
                 resolues[var["nom"]] = str(valeur)
         elif var["type"] == "auto_siege_social":
             adresse = legal_profile.registered_address if legal_profile else None
             formatee = _formater_siege_social(adresse)
-            if formatee:
-                resolues[var["nom"]] = formatee
+            resolues[var["nom"]] = formatee if formatee else f"({var['libelle']} non renseigné)"
     return resolues
 
 
@@ -1049,78 +1934,12 @@ def _resoudre_variables_reference_croisee(variables: list[dict], reponses: dict)
         table = var.get("valeurs_par_clause", {})
         if source_code in table:
             resolues[var["nom"]] = table[source_code]
+        elif "valeur_par_defaut" in var:
+            # Lot A (24/09/2026) : section source non applicable ou non
+            # choisie (ex. Art. 7 « libérées » sans apport en numéraire) --
+            # valeur de repli déclarée dans le clausier plutôt qu'un vide.
+            resolues[var["nom"]] = var["valeur_par_defaut"]
     return resolues
-
-
-def _render_clause_texte(clause_texte: str, valeurs: dict, variables: list[dict]) -> list[dict]:
-    """Remplace chaque placeholder brut (`libelle`, tel qu'apparu dans le texte
-    Bpifrance, ex. "(nombre)") par la valeur saisie par l'utilisateur pour la
-    variable correspondante -- retourne des "runs" (liste de segments
-    `{texte, valeur_utilisateur, nom_variable}`) plutôt qu'une chaîne assemblée :
-    `render_document_as_pdf` colore en rouge tout run `valeur_utilisateur=True`
-    (exigence utilisateur, 21/09/2026 -- TOUTE valeur injectée, saisie ou
-    auto-résolue). Remplacement littéral, pas de moteur de templating : le
-    texte source contient les parenthèses telles quelles, on les retire au
-    passage plutôt que de les garder dans le document final signé.
-
-    Implémentation : chaque placeholder est d'abord remplacé par un marqueur
-    sentinelle unique portant le nom de variable + la valeur (`\\x00nom\\x00valeur\\x00`),
-    avec les mêmes règles `.replace()` que l'ancienne version (donc les mêmes
-    limites assumées : un placeholder identique répété dans le texte source
-    donnerait plusieurs runs avec le même `nom_variable`, aucun cas réel
-    aujourd'hui). Le texte final est ensuite découpé sur ces marqueurs pour
-    produire la liste de runs, sans jamais risquer qu'un `\\x00` apparaisse
-    dans une vraie valeur saisie (caractère non imprimable, absent de toute
-    saisie utilisateur normale).
-
-    `valeurs_par_choix` (dict sur une variable `type='choix'`, ex.
-    "(l'intégralité/au moins X %)" à l'article 7.5) : certains blancs Bpifrance
-    représentent en réalité 2 saisies distinctes -- un choix (`regle_distribution`
-    ici) + un nombre qui ne s'applique que pour UNE des options
-    (`seuil_pourcentage`, actif seulement si `regle_distribution="pourcentage
-    minimum"`, via le mécanisme `depend_de_variable`/`depend_de_valeurs` déjà
-    utilisé pour la validation -- voir `_variable_applicable`). `valeurs_par_choix`
-    associe l'option choisie à un gabarit qui peut référencer `{nom_autre_variable}`
-    -- résolu ici plutôt que par un remplacement séquentiel, pour ne substituer la
-    variable dépendante (`seuil_pourcentage`) qu'À L'INTÉRIEUR du gabarit de
-    l'option qui la rend applicable, jamais comme un 2e placeholder autonome dans
-    le texte (elle n'apparaît nulle part telle quelle dans le texte source).
-    """
-    valeurs_resolues = dict(valeurs)
-    for var in variables:
-        gabarits = var.get("valeurs_par_choix")
-        if not gabarits or var["type"] != "choix":
-            continue
-        choix_fait = valeurs.get(var["nom"])
-        gabarit = gabarits.get(choix_fait)
-        if gabarit is None:
-            continue
-        try:
-            valeurs_resolues[var["nom"]] = gabarit.format(**valeurs)
-        except KeyError:
-            # variable référencée par le gabarit pas encore renseignée --
-            # signal visible (placeholder du gabarit laissé tel quel), même
-            # choix que le reste de cette fonction plutôt qu'un vide silencieux.
-            valeurs_resolues[var["nom"]] = gabarit
-
-    marque = clause_texte
-    for var in variables:
-        placeholder = f"({var['libelle']})"
-        value = str(valeurs_resolues.get(var["nom"], "")).strip()
-        marque = marque.replace(placeholder, f"\x00{var['nom']}\x00{value}\x00")
-
-    segments = re.split(r"\x00([^\x00]+)\x00([^\x00]*)\x00", marque)
-    runs: list[dict] = []
-    if segments[0]:
-        runs.append(_lit(segments[0]))
-    i = 1
-    while i < len(segments):
-        runs.append(_val(segments[i + 1], segments[i]))
-        texte_suivant = segments[i + 2] if i + 2 < len(segments) else ""
-        if texte_suivant:
-            runs.append(_lit(texte_suivant))
-        i += 3
-    return runs
 
 
 def _placeholder_block(db: Session, section: DocumentTemplate) -> dict:
@@ -1147,7 +1966,9 @@ def _placeholder_block(db: Session, section: DocumentTemplate) -> dict:
     }
 
 
-def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -> list[dict]:
+def _assemble_document_blocks(
+    db: Session, session: DocumentGenerationSession, corrections_texte: list[dict] | None = None
+) -> list[dict]:
     """Assemble le document en blocs typés -- remplace `_assemble_document_text`
     (texte plat) : chaque bloc `{code_section, code_clause, type, titre,
     explication, runs}` porte des "runs" au lieu d'une chaîne, pour que
@@ -1196,12 +2017,31 @@ def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -
     aucun avant le prochain titre_article_N (ou la fin du document), il est
     silencieusement abandonné, jamais affiché.
     """
+    # Import local -- voir la docstring de module de `statuts_sas_resolvers.py`.
+    from backend.entrepreneur.services.statuts_sas_resolvers import (
+        _render_apports_industrie_statuts,
+        _render_apports_nature_statuts,
+        _render_apports_numeraire_statuts,
+        _render_dispense_l225_8_1_statuts,
+        _resoudre_references_articles,
+        _resoudre_variables_apports_statuts,
+        _resoudre_variables_officiers_pm_statuts,
+        _resoudre_signatures_associes,
+        _resoudre_variables_officiers_statuts,
+        _resoudre_variables_selection_associe,
+        _formater_dates_saisies,
+        _formater_montants_saisis,
+        _resoudre_exercice_social,
+    )
+
     legal_profile = (
         db.query(ProjectLegalProfile).filter(ProjectLegalProfile.project_id == session.project_id).first()
     )
 
     blocks: list[dict] = []
     titre_article_en_attente: dict | None = None
+    # Lot B : numéros affichés des articles (statuts uniquement, None sinon).
+    numeros = _numeros_articles_statuts(db, session)
 
     def _ajouter_bloc(bloc: dict) -> None:
         nonlocal titre_article_en_attente
@@ -1210,8 +2050,17 @@ def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -
             titre_article_en_attente = None
         blocks.append(bloc)
 
+    from backend.entrepreneur.services.statuts_sas_resolvers import SECTIONS_HORS_ARTICLE
+
     for section in _sections(db, session.document_type):
         reponse = session.reponses.get(section.code_section)
+
+        # Lot C (24/09/2026) : une section hors article (clôture des statuts)
+        # ferme l'article précédent -- un titre d'article resté en attente
+        # (ex. Art. 44 non coché, sans contenu) ne doit pas être imprimé
+        # au-dessus d'elle.
+        if session.document_type == DOCUMENT_TYPE_STATUTS and section.code_section in SECTIONS_HORS_ARTICLE:
+            titre_article_en_attente = None
 
         if reponse is None:
             if section.code_section != session.section_courante:
@@ -1220,6 +2069,94 @@ def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -
             continue
 
         if not reponse.get("applicable", True):
+            continue
+
+        # AJOUT (23/09/2026, service 1.1.4 statuts, Cas B résolu) -- section
+        # 6.1 "Apports en numéraire" : reste `variante_obligatoire` normale au
+        # niveau du squelette (la politique de libération est une réponse
+        # UNIQUE), mais son RENDU est spécial-casé ici pour produire un
+        # paragraphe par apporteur en numéraire plutôt qu'un seul -- voir
+        # `_render_apports_numeraire_statuts` pour le détail et les limites
+        # assumées.
+        if section.code_section == "apports_numeraire_liberation":
+            runs = _render_apports_numeraire_statuts(db, session)
+            if runs:
+                _ajouter_bloc(
+                    {
+                        "code_section": section.code_section,
+                        "code_clause": reponse.get("code_clause"),
+                        "type": "content",
+                        "titre": section.titre_affiche,
+                        "explication": None,
+                        "runs": runs,
+                    }
+                )
+            continue
+
+        # AJOUT (23/09/2026, service 1.1.4 statuts, Cas B résolu) -- clause
+        # dédiée `apport_nature_identite` (retouche du clausier, séparée de
+        # l'en-tête statique "apports") : même principe que
+        # `apports_numeraire_liberation` ci-dessus, un paragraphe par
+        # apporteur en NATURE plutôt qu'un seul -- voir
+        # `_render_apports_nature_statuts`.
+        if section.code_section == "apport_nature_identite":
+            runs = _render_apports_nature_statuts(db, session)
+            if runs:
+                _ajouter_bloc(
+                    {
+                        "code_section": section.code_section,
+                        "code_clause": reponse.get("code_clause"),
+                        "type": "content",
+                        "titre": section.titre_affiche,
+                        "explication": None,
+                        "runs": runs,
+                    }
+                )
+            continue
+
+        # AJOUT (23/09/2026, service 1.1.4 statuts, limite résolue) -- section
+        # `evaluation_apports_nature` (Article 6.2) a 4 variantes possibles
+        # (voir clausier) ; seule `dispense_commissaire_apports_l225_8_1` est
+        # spéciale-casée ici, un paragraphe par apporteur en nature -- les 3
+        # autres variantes ne référencent aucune variable par-associé et
+        # continuent le rendu générique normal ci-dessous (fallthrough, pas de
+        # `continue` avant la vérification du code_clause choisi).
+        if (
+            section.code_section == "evaluation_apports_nature"
+            and reponse.get("code_clause") == "dispense_commissaire_apports_l225_8_1"
+        ):
+            runs = _render_dispense_l225_8_1_statuts(db, session)
+            if runs:
+                _ajouter_bloc(
+                    {
+                        "code_section": section.code_section,
+                        "code_clause": reponse.get("code_clause"),
+                        "type": "content",
+                        "titre": section.titre_affiche,
+                        "explication": None,
+                        "runs": runs,
+                    }
+                )
+            continue
+
+        # AJOUT (25/09/2026, audit complet du clausier, trou résolu) -- clause
+        # optionnelle `apports_industrie` (art. 6.2 bis) : même principe que
+        # `apport_nature_identite`, un paragraphe par associé
+        # `type_apport='industrie'` (rare en pratique, mais pas déductible
+        # d'une formule -- voir `_valeurs_apports_industrie_par_associe`).
+        if section.code_section == "apports_industrie":
+            runs = _render_apports_industrie_statuts(db, session)
+            if runs:
+                _ajouter_bloc(
+                    {
+                        "code_section": section.code_section,
+                        "code_clause": reponse.get("code_clause"),
+                        "type": "content",
+                        "titre": section.titre_affiche,
+                        "explication": None,
+                        "runs": runs,
+                    }
+                )
             continue
 
         if section.comportement_section == "donnee_projet":
@@ -1231,7 +2168,18 @@ def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -
                 # _render_identification_parties (v1) a ete supprimee (code mort, plus jamais
                 # appelee) -- voir recap-service-1.1.13-pacte-fondateurs.md, nettoyage du
                 # 22/09/2026.
-                runs = _render_identification_parties_v2(db, session.project_id)
+                # AJOUT (23/09/2026, service 1.1.4 statuts) : cette branche appelait
+                # `_render_identification_parties_v2` (pacte) inconditionnellement --
+                # jamais atteinte pour un statuts (aucun bug visible AVANT que
+                # document_type="statuts_sas" existe), voir docstring de
+                # `_render_identification_parties_statuts` pour le trou trouvé/corrigé.
+                # CORRECTIF (24/09/2026) : comparait à "statuts_sas", valeur
+                # inexistante en base -- branche jamais prise (voir
+                # DOCUMENT_TYPE_STATUTS dans statuts_sas_renderer.py).
+                if session.document_type == DOCUMENT_TYPE_STATUTS:
+                    runs = _render_identification_parties_statuts(db, session.project_id)
+                else:
+                    runs = _render_identification_parties_v2(db, session.project_id)
                 _ajouter_bloc(
                     {
                         "code_section": section.code_section,
@@ -1277,10 +2225,30 @@ def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -
         )
         if clause is None:
             raise InvalidAnswerError(f"Clause '{reponse['code_clause']}' introuvable (donnée corrompue).")
+        texte_clause = clause.texte_clause
+        # Corrections de texte décidées par la vérification finale (tool
+        # `correction_renvois`, 25/09/2026) : appliquées UNIQUEMENT au
+        # document final (`finalize_session`), jamais pendant la rédaction.
+        for correction in corrections_texte or []:
+            if correction["code_section"] == section.code_section:
+                texte_clause = texte_clause.replace(correction["remplace"], correction["par"])
         valeurs = dict(reponse.get("valeurs", {}))
         valeurs.update(_resoudre_variables_auto(clause.variables_requises, legal_profile))
         valeurs.update(_resoudre_variables_associes(db, clause.variables_requises, session.project_id))
         valeurs.update(_resoudre_variables_reference_croisee(clause.variables_requises, session.reponses))
+        # Audit #13 (24/09/2026) : renvois d'article des statuts
+        # (`resout_depuis_section`), jamais résolus avant -- sans effet pour
+        # le pacte (aucune de ses variables ne porte ce champ).
+        valeurs.update(_resoudre_references_articles(clause.variables_requises, numeros))
+        valeurs.update(_resoudre_variables_apports_statuts(clause.variables_requises, db, session.project_id))
+        valeurs.update(_resoudre_variables_officiers_statuts(clause.variables_requises, db, session.project_id))
+        valeurs.update(_resoudre_variables_officiers_pm_statuts(clause.variables_requises, db, session.project_id))
+        valeurs.update(_resoudre_signatures_associes(clause.variables_requises, db, session.project_id))
+        if numeros is not None:
+            valeurs.update(_formater_dates_saisies(clause.variables_requises, valeurs))
+            valeurs.update(_formater_montants_saisis(clause.variables_requises, valeurs))
+            valeurs.update(_resoudre_exercice_social(clause.variables_requises, valeurs))
+        valeurs.update(_resoudre_variables_selection_associe(db, clause.variables_requises, session.project_id, valeurs))
         _ajouter_bloc(
             {
                 "code_section": section.code_section,
@@ -1288,10 +2256,28 @@ def _assemble_document_blocks(db: Session, session: DocumentGenerationSession) -
                 "type": "content",
                 "titre": clause.titre_clause,
                 "explication": clause.description_clause,
-                "runs": _render_clause_texte(clause.texte_clause, valeurs, clause.variables_requises),
+                # Dispatch par document_type (23/09/2026, correctif du bug de
+                # substitution des statuts) -- voir document_renderer_base.py :
+                # le clausier statuts utilise `(nom)` comme clé de placeholder,
+                # le clausier pacte `(libelle)`. Seul ce choix de renderer
+                # change ; le squelette de substitution appelé derrière est
+                # identique pour les 2 (ClauseRendererBase.render_clause_texte).
+                "runs": (
+                    # CORRECTIF (24/09/2026) : comparait à "statuts_sas" (jamais
+                    # vrai) -- les statuts passaient par le renderer du pacte.
+                    statuts_clause_renderer
+                    if session.document_type == DOCUMENT_TYPE_STATUTS
+                    else pacte_clause_renderer
+                ).render_clause_texte(texte_clause, valeurs, clause.variables_requises),
             }
         )
 
+    if numeros is not None:
+        # Lot B : titres « Article n – … », titres de clause retirés,
+        # sous-titres « § » numérotés -- voir statuts_sas_numerotation.py.
+        from backend.entrepreneur.services.statuts_sas_numerotation import numeroter_blocs
+
+        blocks = numeroter_blocs(blocks, _sections(db, session.document_type), numeros)
     return blocks
 
 
@@ -1311,6 +2297,23 @@ def _collect_variable_values(db: Session, session: DocumentGenerationSession) ->
     cette table sert à consulter/modifier les variables PROPRES au pacte
     (les blancs du texte Bpifrance), pas à recopier tout le projet.
     """
+    # Import local -- voir la docstring de module de `statuts_sas_resolvers.py`.
+    from backend.entrepreneur.services.statuts_sas_resolvers import (
+        _resoudre_references_articles,
+        _resoudre_variables_apports_statuts,
+        _resoudre_variables_officiers_pm_statuts,
+        _resoudre_signatures_associes,
+        _resoudre_exercice_social,
+        _resoudre_variables_officiers_statuts,
+        _resoudre_variables_selection_associe,
+        _valeurs_apports_industrie_par_associe,
+        _valeurs_apports_nature_par_associe,
+        _valeurs_apports_numeraire_par_associe,
+        _valeurs_dispense_l225_8_1_par_associe,
+    )
+
+    # Lot B : numéros affichés calculés UNE fois (pas une requête par clause).
+    numeros = _numeros_articles_statuts(db, session)
     legal_profile = (
         db.query(ProjectLegalProfile).filter(ProjectLegalProfile.project_id == session.project_id).first()
     )
@@ -1323,6 +2326,128 @@ def _collect_variable_values(db: Session, session: DocumentGenerationSession) ->
             continue
         if not reponse.get("inclus", True):
             continue
+
+        # AJOUT (23/09/2026, service 1.1.4 statuts, Cas B résolu) -- section
+        # répétée par apporteur (voir `_render_apports_numeraire_statuts`) :
+        # une ligne de traçabilité par (apporteur, variable), `nom_variable`
+        # suffixé de son rang ("#1", "#2"...) pour rester unique -- le schéma
+        # `document_generation_variable_values` (une ligne par variable de
+        # clause) suppose une seule occurrence par variable, jamais N.
+        if section.code_section == "apports_numeraire_liberation":
+            resultat = _valeurs_apports_numeraire_par_associe(db, session)
+            if resultat is not None:
+                clause, par_associe = resultat
+                valeurs_partagees_saisies = reponse.get("valeurs", {})
+                for i, (_associe, valeurs_associe) in enumerate(par_associe, start=1):
+                    for var in clause.variables_requises:
+                        nom = var["nom"]
+                        if nom not in valeurs_associe:
+                            continue
+                        rows.append(
+                            {
+                                "code_section": section.code_section,
+                                "code_clause": clause.code_clause,
+                                "nom_variable": f"{nom}#{i}",
+                                "type_variable": var["type"],
+                                "valeur": str(valeurs_associe[nom]),
+                                # Seuls les champs PARTAGÉS (ex. fraction_libérée)
+                                # peuvent être "saisis" -- identité/somme/actions
+                                # sont toujours auto-résolus, jamais dans
+                                # reponse["valeurs"] (voir docstring de
+                                # `_valeurs_apports_numeraire_par_associe`).
+                                "saisie_manuellement": nom in valeurs_partagees_saisies,
+                            }
+                        )
+            continue
+
+        # AJOUT (23/09/2026, service 1.1.4 statuts, Cas B résolu) -- même
+        # principe que `apports_numeraire_liberation` ci-dessus, pour la
+        # clause dédiée `apport_nature_identite`. `designation_bien_apporte`
+        # (texte_par_associe) est bien "saisie_manuellement=True" pour chaque
+        # apporteur -- contrairement à `identite_apporteur_nature`, résolu
+        # automatiquement.
+        if section.code_section == "apport_nature_identite":
+            resultat = _valeurs_apports_nature_par_associe(db, session)
+            if resultat is not None:
+                clause, par_associe = resultat
+                for i, (_associe, valeurs_associe) in enumerate(par_associe, start=1):
+                    for var in clause.variables_requises:
+                        nom = var["nom"]
+                        if nom not in valeurs_associe:
+                            continue
+                        rows.append(
+                            {
+                                "code_section": section.code_section,
+                                "code_clause": clause.code_clause,
+                                "nom_variable": f"{nom}#{i}",
+                                "type_variable": var["type"],
+                                "valeur": str(valeurs_associe[nom]),
+                                "saisie_manuellement": var["type"] == "texte_par_associe",
+                            }
+                        )
+            continue
+
+        # AJOUT (23/09/2026, service 1.1.4 statuts, limite résolue) -- même
+        # principe, pour la variante `dispense_commissaire_apports_l225_8_1`
+        # de la section `evaluation_apports_nature` (Article 6.2). Les 3
+        # autres variantes de cette section n'ont aucune variable par-associé
+        # et continuent le rendu générique ci-dessous (fallthrough). Toutes
+        # les variables sont ici `saisie_manuellement=False` : entièrement
+        # auto-résolues (voir `_CLAUSES_ENTIEREMENT_AUTO_RESOLUES`), y compris
+        # `nature_biens`, qui recopie `designation_bien_apporte` déjà saisi
+        # dans `apport_nature_identite` plutôt que de le redemander.
+        if (
+            section.code_section == "evaluation_apports_nature"
+            and reponse.get("code_clause") == "dispense_commissaire_apports_l225_8_1"
+        ):
+            resultat = _valeurs_dispense_l225_8_1_par_associe(db, session)
+            if resultat is not None:
+                clause, par_associe = resultat
+                for i, (_associe, valeurs_associe) in enumerate(par_associe, start=1):
+                    for var in clause.variables_requises:
+                        nom = var["nom"]
+                        if nom not in valeurs_associe:
+                            continue
+                        rows.append(
+                            {
+                                "code_section": section.code_section,
+                                "code_clause": clause.code_clause,
+                                "nom_variable": f"{nom}#{i}",
+                                "type_variable": var["type"],
+                                "valeur": str(valeurs_associe[nom]),
+                                "saisie_manuellement": False,
+                            }
+                        )
+            continue
+
+        # AJOUT (25/09/2026, audit complet du clausier, trou résolu) -- même
+        # principe, pour la clause optionnelle `apports_industrie`
+        # (art. 6.2 bis). Contrairement à `dispense_commissaire_apports_l225_8_1`,
+        # RIEN n'est ici déductible d'une formule -- seule l'identité est
+        # `saisie_manuellement=False`, les 4 autres champs
+        # (`texte_par_associe`/`nombre_par_associe`) sont bien des saisies de
+        # l'entrepreneur, juste réparties par associé plutôt qu'une seule fois.
+        if section.code_section == "apports_industrie":
+            resultat = _valeurs_apports_industrie_par_associe(db, session)
+            if resultat is not None:
+                clause, par_associe = resultat
+                for i, (_associe, valeurs_associe) in enumerate(par_associe, start=1):
+                    for var in clause.variables_requises:
+                        nom = var["nom"]
+                        if nom not in valeurs_associe:
+                            continue
+                        rows.append(
+                            {
+                                "code_section": section.code_section,
+                                "code_clause": clause.code_clause,
+                                "nom_variable": f"{nom}#{i}",
+                                "type_variable": var["type"],
+                                "valeur": str(valeurs_associe[nom]),
+                                "saisie_manuellement": var["type"] in ("texte_par_associe", "nombre_par_associe"),
+                            }
+                        )
+            continue
+
         code_clause = reponse.get("code_clause")
         if not code_clause:
             continue
@@ -1342,6 +2467,13 @@ def _collect_variable_values(db: Session, session: DocumentGenerationSession) ->
             **_resoudre_variables_auto(clause.variables_requises, legal_profile),
             **_resoudre_variables_associes(db, clause.variables_requises, session.project_id),
             **_resoudre_variables_reference_croisee(clause.variables_requises, session.reponses),
+            **_resoudre_references_articles(clause.variables_requises, numeros),
+            **_resoudre_variables_apports_statuts(clause.variables_requises, db, session.project_id),
+            **_resoudre_variables_officiers_statuts(clause.variables_requises, db, session.project_id),
+            **_resoudre_variables_officiers_pm_statuts(clause.variables_requises, db, session.project_id),
+            **_resoudre_signatures_associes(clause.variables_requises, db, session.project_id),
+            **_resoudre_variables_selection_associe(db, clause.variables_requises, session.project_id, valeurs_saisies),
+            **_resoudre_exercice_social(clause.variables_requises, valeurs_saisies),
         }
         for var in clause.variables_requises:
             nom = var["nom"]
@@ -1370,8 +2502,22 @@ def finalize_session(db: Session, user: User, project_id, document_type: str) ->
     if session.document_genere_id is not None:
         raise SessionAlreadyCompleteError("Un document a déjà été généré pour cette session.")
 
-    blocks = _assemble_document_blocks(db, session)
-    titre_document = document_type.replace("_", " ").title()
+    # Validation globale (24/09/2026) : refus côté serveur tant qu'un problème
+    # bloquant reste, même si le frontend est contourné. Import local : le
+    # service de validation importe ce module. Dette assumée : le document
+    # est assemblé deux fois (validation + rendu) -- simple, et la
+    # génération finale n'a lieu qu'une fois.
+    from backend.entrepreneur.services.document_generation_validation_service import valider_session
+
+    resultat_validation = valider_session(db, session)
+    if not resultat_validation["pret"]:
+        raise ValidationFinaleError(resultat_validation)
+
+    blocks = _assemble_document_blocks(db, session, resultat_validation.get("corrections_texte"))
+    # Statuts : titre « Statuts » en tête du document (retour utilisateur
+    # 24/09/2026 : le PDF n'avait plus de titre). Le « Statuts » en texte
+    # simple de l'en-tête a été retiré à la place (plus de doublon).
+    titre_document = "Statuts" if document_type == DOCUMENT_TYPE_STATUTS else document_type.replace("_", " ").title()
     pdf_bytes = render_document_as_pdf(blocks, titre=titre_document)
     filename = f"{document_type}_{project.id}.pdf"
     upload = cloudinary_service.upload_raw_file(
@@ -1425,5 +2571,8 @@ def get_document_preview_pdf(db: Session, user: User, project_id, document_type:
     get_owned_project(db, user, project_id)
     session = get_or_create_session(db, user, project_id, document_type)
     blocks = _assemble_document_blocks(db, session)
-    titre_document = document_type.replace("_", " ").title()
+    # Statuts : titre « Statuts » en tête du document (retour utilisateur
+    # 24/09/2026 : le PDF n'avait plus de titre). Le « Statuts » en texte
+    # simple de l'en-tête a été retiré à la place (plus de doublon).
+    titre_document = "Statuts" if document_type == DOCUMENT_TYPE_STATUTS else document_type.replace("_", " ").title()
     return render_document_as_pdf(blocks, titre=titre_document)
