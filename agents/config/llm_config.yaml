@@ -172,6 +172,15 @@ copilot_orchestrator:
     # sans dériver dans la creativite (les regles anti-hallucination restent
     # portees par le system prompt, pas par temperature=0).
     temperature: 0.2
+  # Appel de routage (voir copilot_agent_service.py::_classifier_domaine) --
+  # classe le dernier message en "reglementaire"/"conformite" avant de
+  # deleguer. temperature=0 : classification, une reponse deterministe est
+  # attendue pour un meme message.
+  routage:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
   # Second appel, independant du premier -- juge si la reponse ci-dessus est
   # soutenue par les chunks recuperes (voir grounding_verification_service.py).
   # temperature=0 : tache de classification, une reponse deterministe est
@@ -181,6 +190,36 @@ copilot_orchestrator:
     provider: groq
     model: openai/gpt-oss-120b
     temperature: 0
+
+administrative_agent:
+  # Agent reglementaire (EPIC-01) -- meme moteur/raisonnement de temperature
+  # que copilot_orchestrator.conversation (reponse conversationnelle libre).
+  conversation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0.2
+
+matching_copilot:
+  # Volet conversationnel du matching chercheur (lecture seule, voir
+  # matching_copilot_tools_service.py) -- meme raisonnement de temperature
+  # que copilot_orchestrator.conversation.
+  conversation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0.2
+
+matching_investisseur_copilot:
+  # Volet conversationnel du sens Investisseur -> Startup (lecture seule,
+  # voir matching_investisseur_copilot_tools_service.py) -- sens inverse de
+  # matching_copilot ci-dessus. Meme raisonnement de temperature que
+  # copilot_orchestrator.conversation.
+  conversation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0.2
 
 chercheur_llm:
   # paper_llm_service.py + researcher_profile_llm_service.py, via
@@ -226,4 +265,22 @@ matching_agent_chercheur:
     # Pas 0 : classement de chercheurs + redaction d'explications, pas une
     # extraction deterministe de champs factuels -- meme raisonnement que
     # copilot_orchestrator.conversation.
+    temperature: 0.2
+
+matching_agent_investisseur:
+  # Service EPIC-07, sens inverse (Investisseur -> Startup),
+  # agents/matching_agent/investisseur_matching_service.py. Meme moteur/
+  # raisonnement de temperature que matching_agent_chercheur ci-dessus.
+  matching:
+    provider: groq
+    model: openai/gpt-oss-120b
+    temperature: 0.2
+
+matching_agent_startup:
+  # Service EPIC-06, sens inverse (Startup -> Offres),
+  # agents/matching_agent/startup_offer_matching_service.py. Meme moteur/
+  # raisonnement de temperature que matching_agent_investisseur ci-dessus.
+  matching:
+    provider: groq
+    model: openai/gpt-oss-120b
     temperature: 0.2

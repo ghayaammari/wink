@@ -1,10 +1,13 @@
-"""Logique metier du copilot conformite -- conversations (creer/lister/lire)
+"""Logique metier du copilot entrepreneur -- conversations (creer/lister/lire)
 
-et envoi de message dans une conversation. Construit les tools de
-compliance_agent (reutilises tels quels, voir compliance_agent_tools_service.py),
-appelle l'agent conversationnel (agents/orchestrator/copilot_agent_service.py),
-puis la verification d'ancrage independante avant de persister le tour
-complet dans la conversation.
+et envoi de message dans une conversation. Construit LES 4 jeux de tools
+(compliance_agent, administrative_agent, matching_copilot, matching_
+investisseur_copilot) et les passe tous les 4 a l'agent conversationnel
+(agents/orchestrator/copilot_agent_service.py) qui route lui-meme vers le
+bon domaine (voir sa docstring) -- un seul des 4 jeux sert reellement par
+appel, mais construire les 4 ici reste bon marche (pas d'appel LLM, juste
+des fermetures sur la DB). Puis verification d'ancrage independante avant
+de persister le tour complet dans la conversation.
 
 Revient sur la decision V1 "pas de persistance, le frontend renvoie tout
 l'historique a chaque appel" -- demande explicite du 20/09/2026 : plusieurs
@@ -24,6 +27,11 @@ from backend.entrepreneur.schemas.copilot_schemas import (
     CopilotConversationSummary,
     CopilotMessage,
     CopilotMessageResponse,
+)
+from backend.entrepreneur.services.administrative_agent_tools_service import build_administrative_agent_tools
+from backend.matching.services.matching_copilot_tools_service import build_matching_copilot_tools
+from backend.matching.services.matching_investisseur_copilot_tools_service import (
+    build_matching_investisseur_copilot_tools,
 )
 from backend.entrepreneur.services.compliance_agent_tools_service import build_compliance_agent_tools
 from backend.entrepreneur.services.project_service import get_owned_project
@@ -147,8 +155,21 @@ def send_message(
     ] + [{"role": "user", "content": content}]
 
     seen_chunks: list[dict] = []
-    tools = build_compliance_agent_tools(db, user, project_id, seen_source_ids=[], seen_chunks=seen_chunks)
-    result = answer_message(conversation_pour_agent, tools)
+    tools_conformite = build_compliance_agent_tools(
+        db, user, project_id, seen_source_ids=[], seen_chunks=seen_chunks
+    )
+    tools_reglementaire = build_administrative_agent_tools(
+        db, user, project_id, seen_source_ids=[], seen_chunks=seen_chunks
+    )
+    tools_matching = build_matching_copilot_tools(db, user, project_id)
+    tools_matching_investisseur = build_matching_investisseur_copilot_tools(db, user, project_id)
+    result = answer_message(
+        conversation_pour_agent,
+        tools_conformite,
+        tools_reglementaire,
+        tools_matching,
+        tools_matching_investisseur,
+    )
     verification = verifier_reponse(result.reponse, seen_chunks)
 
     nouveau_message_utilisateur = CopilotMessage(role="user", content=content)
