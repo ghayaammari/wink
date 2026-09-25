@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useOutletContext } from "react-router-dom"
+import { Link, useOutletContext } from "react-router-dom"
 import { ApiError } from "../../shared/api/authApi"
 import LoadingSpinner from "../../shared/components/LoadingSpinner"
 import { useAuth } from "../../shared/context/AuthContext"
@@ -17,13 +17,49 @@ import { triggerBlobDownload } from "../utils/blobDownload"
 import type { MyProjectOutletContext } from "./MyProjectLayout"
 
 // Reflète document_schemas.DocumentType côté backend (CHECK constraint sur
-// `documents.document_type`) — seules ces 2 valeurs existent en base pour
-// l'instant (I0). Les futurs services (1.1.4 "statuts", 1.1.9 "kbis"...)
-// ajouteront chacun leur propre valeur à ce moment-là, pas ici (voir
-// docs/plan-implementation-groupe4.md, section 1.1.17).
+// `documents.document_type`). CORRIGÉ (25/09/2026) : "pacte_fondateurs" et
+// "statuts" existent déjà en base depuis la migration d2e3f4a5b6c7 (voir
+// Document côté backend) mais manquaient ici depuis 1.1.13 — un document
+// généré s'affichait avec son nom technique brut (`pacte_fondateurs`) au
+// lieu d'un libellé, `DOCUMENT_TYPE_LABEL[documentType] ?? documentType` ne
+// retombant sur le fallback brut que par accident. Les futurs services
+// (1.1.9 "kbis"...) ajouteront chacun leur propre valeur à ce moment-là, pas
+// ici (voir docs/plan-implementation-groupe4.md, section 1.1.17).
 const DOCUMENT_TYPE_LABEL: Record<DocumentType, string> = {
   entrepreneur_idea: "Présentation du projet",
   other: "Autre",
+  pacte_fondateurs: "Pacte de fondateurs",
+  statuts: "Statuts de la société",
+  attestation_annonce_legale: "Attestation de parution (annonce légale)",
+}
+
+// Raccourcis vers les services de rédaction interactive (1.1.13 pacte,
+// 1.1.4 statuts) — le coffre-fort est l'endroit où l'entrepreneur regarde
+// ses documents et remarque qu'il en manque un ; la sidebar ("Mon projet" >
+// "Pacte de fondateurs"/"Statuts") reste l'entrée principale pour y revenir,
+// ces boutons ne sont qu'un raccourci contextuel en plus, pas un
+// remplacement. Tableau plutôt que 2 composants séparés (AJOUT statuts,
+// 25/09/2026) : les 2 boutons partagent exactement le même rendu, un 3e
+// document généré interactivement réutilisera cette même liste.
+const DOCUMENT_GENERATION_SHORTCUTS: { route: string; label: string }[] = [
+  { route: "/entrepreneur/mon-projet/pacte-fondateurs-v2", label: "Rédiger le pacte de fondateurs" },
+  { route: "/entrepreneur/mon-projet/statuts", label: "Rédiger les statuts" },
+]
+
+function DocumentGenerationShortcuts() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {DOCUMENT_GENERATION_SHORTCUTS.map((shortcut) => (
+        <Link
+          key={shortcut.route}
+          to={shortcut.route}
+          className="shrink-0 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-indigo-700"
+        >
+          {shortcut.label}
+        </Link>
+      ))}
+    </div>
+  )
 }
 
 function formatFileSize(bytes: number | null): string {
@@ -184,8 +220,11 @@ export default function DocumentVaultPage() {
 
   if (documents.length === 0) {
     return (
-      <div className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+          <DocumentGenerationShortcuts />
+        </div>
         <p className="text-sm text-gray-500">Aucun document pour l'instant.</p>
       </div>
     )
@@ -195,7 +234,10 @@ export default function DocumentVaultPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-xl font-semibold text-gray-900">Coffre-fort documentaire</h1>
+        <DocumentGenerationShortcuts />
+      </div>
       {error && <p className="text-sm text-red-600">{error}</p>}
 
       {groupes.map((documentType) => (

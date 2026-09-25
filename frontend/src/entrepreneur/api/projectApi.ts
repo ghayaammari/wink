@@ -93,6 +93,17 @@ export interface ProjectLegalProfileCreate {
   objet_social?: string
   duree_societe?: number
   date_signature_statuts?: string
+  // Lot 1 (24/09/2026, service 1.1.4) : lus automatiquement par les statuts
+  // (Art. 2, 3, 6, 7 et clôture) -- voir StatutsRedactionFields.tsx.
+  // Montants en chaîne : le backend (Decimal) les sérialise ainsi.
+  sigle?: string
+  raison_d_etre?: string
+  objectifs_ess?: string
+  lieu_signature_statuts?: string
+  capital_social?: string
+  nombre_actions?: number
+  valeur_nominale?: string
+  lieu_immatriculation?: string
 }
 
 /** PATCH /projects/{id}/legal-profile (upsert, voir project_service.update_legal_profile) —
@@ -112,6 +123,17 @@ export interface ProjectLegalProfileUpdate {
   objet_social?: string
   duree_societe?: number
   date_signature_statuts?: string
+  // Lot 1 (24/09/2026, service 1.1.4) : lus automatiquement par les statuts
+  // (Art. 2, 3, 6, 7 et clôture) -- voir StatutsRedactionFields.tsx.
+  // Montants en chaîne : le backend (Decimal) les sérialise ainsi.
+  sigle?: string
+  raison_d_etre?: string
+  objectifs_ess?: string
+  lieu_signature_statuts?: string
+  capital_social?: string
+  nombre_actions?: number
+  valeur_nominale?: string
+  lieu_immatriculation?: string
 }
 
 export interface ProjectLegalProfileRead extends ProjectLegalProfileCreate {
@@ -164,15 +186,34 @@ export interface ProjectAssociateRead {
   type_personne: AssociateTypePersonne
   date_naissance: string | null
   lieu_naissance: string | null
+  /** Imprimée dans l'en-tête des statuts (personne physique). */
+  situation_et_regime_matrimonial: string | null
   nationalite: string | null
   adresse: string | null
   pourcentage_capital: string
   pourcentage_droits_vote: string | null
   type_apport: AssociateTypeApport
+  /** Désignation du bien apporté (si type_apport === "nature") — lue par les statuts (Art. 6). */
+  description_apport_nature: string | null
   est_dirigeant: boolean
   fonction_dirigeant: string | null
   foyer_fiscal_dirigeant_associate_id: string | null
   est_partie_au_pacte_fondateurs: boolean
+  /** Ajout migration c8f4d1a6b2e9 (service 1.1.13) — distingue Associés
+   * Fondateurs / Associés Investisseurs pour le préambule du pacte. */
+  est_fondateur: boolean
+  /** Ajout migration b2c4d6e8f0a2 (service 1.1.13) — pertinents seulement si
+   * `type_personne === "personne_morale"`. Manquaient du schéma Pydantic
+   * jusqu'au 24/09/2026 (colonnes en base mais jamais exposées par l'API). */
+  denomination_sociale: string | null
+  type_societe: string | null
+  capital_social: string | null
+  siege_social: string | null
+  lieu_immatriculation: string | null
+  numero_siren: string | null
+  representant_nom: string | null
+  representant_prenom: string | null
+  representant_qualite: string | null
   linked_user_id: string | null
   created_at: string
   updated_at: string
@@ -189,16 +230,62 @@ export interface ProjectAssociateBatchItem {
   type_personne: AssociateTypePersonne
   date_naissance?: string | null
   lieu_naissance?: string | null
+  situation_et_regime_matrimonial?: string | null
   nationalite?: string | null
   adresse?: string | null
   pourcentage_capital: string
   pourcentage_droits_vote?: string | null
   type_apport: AssociateTypeApport
+  description_apport_nature?: string | null
   est_dirigeant: boolean
   fonction_dirigeant?: string | null
   foyer_fiscal_dirigeant_associate_id?: string | null
   est_partie_au_pacte_fondateurs: boolean
+  est_fondateur: boolean
+  denomination_sociale?: string | null
+  type_societe?: string | null
+  capital_social?: string | null
+  siege_social?: string | null
+  lieu_immatriculation?: string | null
+  numero_siren?: string | null
+  representant_nom?: string | null
+  representant_prenom?: string | null
+  representant_qualite?: string | null
 }
+
+/** Dirigeants désignés dans les statuts (`company_officers`, service 1.1.4,
+ * lot 5) — Président, 1er Directeur Général, membres du comité, mandataire
+ * pour les actes avant immatriculation (art. 39-41, 44). */
+export type RoleDirigeant = "president" | "directeur_general" | "membre_comite" | "mandataire"
+
+interface CompanyOfficerFields {
+  role: RoleDirigeant
+  /** Renseigné si le dirigeant est un associé : son identité vient alors de
+   * "Équipe & capital" et les champs d'identité ci-dessous restent vides. */
+  associate_id: string | null
+  type_personne: AssociateTypePersonne
+  duree_fonctions: string | null
+  nom_complet: string | null
+  denomination_sociale: string | null
+  forme_juridique: string | null
+  capital_social: string | null
+  siege_social: string | null
+  lieu_immatriculation: string | null
+  siren: string | null
+  representant_nom: string | null
+  representant_prenom: string | null
+  adresse: string | null
+}
+
+export interface CompanyOfficerRead extends CompanyOfficerFields {
+  id: string
+  project_id: string
+  created_at: string
+  updated_at: string
+}
+
+/** Corps de POST /officers et PATCH /officers/{id} — un dirigeant à la fois. */
+export type CompanyOfficerWrite = CompanyOfficerFields
 
 export type ExtractionSource = "extrait_automatique" | "saisi_par_utilisateur"
 export type ValidationStatus = "en_attente" | "confirme" | "corrige"
@@ -524,4 +611,57 @@ export function replaceAssociates(
     `/projects/${projectId}/associates`,
     { method: "PUT", body: JSON.stringify(items) },
   )
+}
+
+/** PATCH /projects/{id}/associates/{associate_id} — mise à jour partielle
+ * (backend : `ProjectAssociateUpdate`, `exclude_unset=True`, aucune des règles
+ * de blocage de `replaceAssociates` ne s'applique à un champ non envoyé).
+ * Utilisée pour le seul champ `est_fondateur` par l'écran de sélection des
+ * fondateurs du pacte v2 (`PacteFoundersSelectionV2`) — plus léger que
+ * `replaceAssociates`, qui exigerait de renvoyer l'état complet de tous les
+ * associés (capital, dirigeant...) juste pour basculer un booléen. */
+export function updateAssociateFondateur(
+  accessToken: string,
+  projectId: string,
+  associateId: string,
+  estFondateur: boolean,
+): Promise<ProjectAssociateRead> {
+  return request<ProjectAssociateRead>(
+    accessToken,
+    `/projects/${projectId}/associates/${associateId}`,
+    { method: "PATCH", body: JSON.stringify({ est_fondateur: estFondateur }) },
+  )
+}
+
+export function getOfficers(accessToken: string, projectId: string): Promise<CompanyOfficerRead[]> {
+  return request<CompanyOfficerRead[]>(accessToken, `/projects/${projectId}/officers`)
+}
+
+/** Une action = un enregistrement (page Dirigeants). Refusé (400) si un 2e
+ * Président, DG ou mandataire est ajouté, ou si l'identité manque. */
+export function createOfficer(
+  accessToken: string,
+  projectId: string,
+  data: CompanyOfficerWrite,
+): Promise<CompanyOfficerRead> {
+  return request<CompanyOfficerRead>(accessToken, `/projects/${projectId}/officers`, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+}
+
+export function updateOfficer(
+  accessToken: string,
+  projectId: string,
+  officerId: string,
+  data: CompanyOfficerWrite,
+): Promise<CompanyOfficerRead> {
+  return request<CompanyOfficerRead>(accessToken, `/projects/${projectId}/officers/${officerId}`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  })
+}
+
+export function deleteOfficer(accessToken: string, projectId: string, officerId: string): Promise<void> {
+  return request<void>(accessToken, `/projects/${projectId}/officers/${officerId}`, { method: "DELETE" })
 }

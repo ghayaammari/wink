@@ -22,11 +22,14 @@ load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.entrepreneur.routes.document_generation_router import router as document_generation_router
 from backend.entrepreneur.routes.document_router import router as document_router
 from backend.entrepreneur.routes.document_vault_router import router as document_vault_router
+from backend.entrepreneur.routes.legal_announcement_router import router as legal_announcement_router
 from backend.entrepreneur.routes.name_availability_router import router as name_availability_router
 from backend.entrepreneur.routes.project_router import router as project_router
 from backend.entrepreneur.routes.roadmap_router import router as roadmap_router
+from backend.entrepreneur.routes.pacte_fondateur_copilot_router import router as pacte_fondateur_copilot_router
 from backend.entrepreneur.routes.rgpd_router import router as rgpd_router
 from backend.entrepreneur.routes.aipd_router import router as aipd_router
 from backend.entrepreneur.routes.ai_act_router import router as ai_act_router
@@ -51,6 +54,10 @@ from backend.shared.knowledge_base.routes.legal_texts_validation_router import (
 from backend.shared.knowledge_base.routes.sector_insurance_validation_router import (
     router as sector_insurance_validation_router,
 )
+from backend.shared.knowledge_base.routes.jal_reference_validation_router import router as jal_reference_validation_router
+from backend.shared.knowledge_base.routes.legal_announcement_guides_validation_router import (
+    router as legal_announcement_guides_validation_router,
+)
 from backend.shared.knowledge_base.routes.administrative_guides_validation_router import (
     router as administrative_guides_validation_router,
 )
@@ -71,6 +78,8 @@ app.include_router(investisseur_matching_router)
 app.include_router(investment_offer_router)
 app.include_router(legal_texts_validation_router)
 app.include_router(sector_insurance_validation_router)
+app.include_router(jal_reference_validation_router)
+app.include_router(legal_announcement_guides_validation_router)
 app.include_router(administrative_guides_validation_router)
 
 # CORS : nécessaire dès que le frontend (React, autre origine) appelle l'API
@@ -96,8 +105,10 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(project_router)
 app.include_router(document_router)
+app.include_router(document_generation_router)
 app.include_router(document_vault_router)
 app.include_router(roadmap_router)
+app.include_router(pacte_fondateur_copilot_router)
 app.include_router(rgpd_router)
 app.include_router(aipd_router)
 app.include_router(ai_act_router)
@@ -110,6 +121,7 @@ app.include_router(chercheur_matching_router)
 app.include_router(startup_offer_matching_router)
 app.include_router(investment_offer_catalogue_router)
 app.include_router(name_availability_router)
+app.include_router(legal_announcement_router)
 
 
 @app.get("/health", tags=["health"])

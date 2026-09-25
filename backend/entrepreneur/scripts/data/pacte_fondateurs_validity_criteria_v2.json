@@ -1,0 +1,33 @@
+[
+  {
+    "type_critere": "duree_maximale",
+    "description_critere": "La durée de l'inaliénabilité partielle (plafond en % des titres) ne doit pas excéder 10 ans, conformément à la limite légale applicable aux clauses d'inaliénabilité de titres de société.",
+    "valeur_limite": {
+      "unite": "annees",
+      "max": 10
+    },
+    "base_legale": "Article L. 227-13 du Code de commerce (SAS) -- clause d'inaliénabilité limitée à 10 ans.",
+    "code_clause": "inalienabilite_fondateurs_partielle_plafond"
+  },
+  {
+    "type_critere": "prix_determinable",
+    "description_critere": "Une clause de retrait ou de sortie n'est valable que si le prix d'acquisition des Titres est déterminé ou déterminable (ex. via une formule ou un expert), et ne doit jamais être arbitrairement fixé par la seule Partie qui prend l'initiative de l'offre.",
+    "valeur_limite": null,
+    "base_legale": "Article 1591 du Code civil (prix déterminé/déterminable) et article 1843-4 du Code civil (recours à un expert en cas de désaccord) -- voir aussi Notice explicative Bpifrance, introduction de l'Article 6.",
+    "code_clause": "retrait_sans_condition_investisseurs"
+  },
+  {
+    "type_critere": "prix_determinable",
+    "description_critere": "Une clause de retrait ou de sortie n'est valable que si le prix d'acquisition des Titres est déterminé ou déterminable (ex. via une formule ou un expert), et ne doit jamais être arbitrairement fixé par la seule Partie qui prend l'initiative de l'offre.",
+    "valeur_limite": null,
+    "base_legale": "Article 1591 du Code civil (prix déterminé/déterminable) et article 1843-4 du Code civil (recours à un expert en cas de désaccord) -- voir aussi Notice explicative Bpifrance, introduction de l'Article 6.",
+    "code_clause": "retrait_conditionnel_investisseurs"
+  },
+  {
+    "type_critere": "prix_determinable",
+    "description_critere": "Une clause de retrait ou de sortie n'est valable que si le prix d'acquisition des Titres est déterminé ou déterminable (ex. via une formule ou un expert), et ne doit jamais être arbitrairement fixé par la seule Partie qui prend l'initiative de l'offre.",
+    "valeur_limite": null,
+    "base_legale": "Article 1591 du Code civil (prix déterminé/déterminable) et article 1843-4 du Code civil (recours à un expert en cas de désaccord) -- voir aussi Notice explicative Bpifrance, introduction de l'Article 6.",
+    "code_clause": "sortie_alternative_shotgun"
+  }
+]

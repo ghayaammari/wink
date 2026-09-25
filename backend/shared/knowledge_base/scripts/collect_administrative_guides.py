@@ -37,7 +37,7 @@ SOURCES: list[tuple[str, str, list[AdministrativeGuideSeed]]] = [
     (guichet_unique_pre_depot.NOM_SOURCE, guichet_unique_pre_depot.DOMAINE, guichet_unique_pre_depot.PAGES),
     (bpifrance_statuts.NOM_SOURCE, bpifrance_statuts.DOMAINE, bpifrance_statuts.PAGES),
     (guichet_unique_tarifs.NOM_SOURCE, guichet_unique_tarifs.DOMAINE, guichet_unique_tarifs.PAGES),
-    (economie_gouv_annonce_legale.NOM_SOURCE, economie_gouv_annonce_legale.DOMAINE, economie_gouv_annonce_legale.PAGES),
+    (economie_gouv_annonce_legale.NOM_SOURCE, economie_gouv_annonce_legale.DOMAINE, economie_gouv_annonce_legale.ADMINISTRATIVE_PAGES),
 ]
 
 # Plafond de securite par source, meme role que MAX_PAGES_PER_SOURCE dans

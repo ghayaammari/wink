@@ -1,5 +1,6 @@
 """Schémas Pydantic pour `project_legal_profiles` — identité légale du projet."""
 from datetime import date, datetime
+from decimal import Decimal
 from typing import Any
 from uuid import UUID
 
@@ -24,6 +25,20 @@ class ProjectLegalProfileBase(BaseModel):
     objet_social: str | None = None
     duree_societe: int | None = Field(default=None, ge=1, le=99)
     date_signature_statuts: date | None = None
+    # B2 (service 1.1.4 statuts SAS) — faits juridiques, voir modèle/migration f5a7c9e1d3b2.
+    raison_d_etre: str | None = None
+    objectifs_ess: str | None = None
+    sigle: str | None = Field(default=None, max_length=120)
+    lieu_signature_statuts: str | None = Field(default=None, max_length=255)
+    # Lot 1 (24/09/2026, service 1.1.4) — capital du PROJET, colonnes déjà en
+    # base (migration 507ed2995d84) mais jamais exposées : lues par les statuts
+    # (Art. 6/7, apports au prorata) et le Préambule du pacte. Cohérence
+    # nombre_actions × valeur_nominale = capital_social contrôlée dans
+    # project_service.update_legal_profile (après fusion avec l'existant).
+    capital_social: Decimal | None = Field(default=None, gt=Decimal("0"), max_digits=14, decimal_places=2)
+    nombre_actions: int | None = Field(default=None, ge=1)
+    valeur_nominale: Decimal | None = Field(default=None, gt=Decimal("0"), max_digits=10, decimal_places=2)
+    lieu_immatriculation: str | None = Field(default=None, max_length=120)
 
 
 class ProjectLegalProfileCreate(ProjectLegalProfileBase):
@@ -44,6 +59,20 @@ class ProjectLegalProfileUpdate(BaseModel):
     objet_social: str | None = None
     duree_societe: int | None = Field(default=None, ge=1, le=99)
     date_signature_statuts: date | None = None
+    # B2 (service 1.1.4 statuts SAS) — faits juridiques, voir modèle/migration f5a7c9e1d3b2.
+    raison_d_etre: str | None = None
+    objectifs_ess: str | None = None
+    sigle: str | None = Field(default=None, max_length=120)
+    lieu_signature_statuts: str | None = Field(default=None, max_length=255)
+    # Lot 1 (24/09/2026, service 1.1.4) — capital du PROJET, colonnes déjà en
+    # base (migration 507ed2995d84) mais jamais exposées : lues par les statuts
+    # (Art. 6/7, apports au prorata) et le Préambule du pacte. Cohérence
+    # nombre_actions × valeur_nominale = capital_social contrôlée dans
+    # project_service.update_legal_profile (après fusion avec l'existant).
+    capital_social: Decimal | None = Field(default=None, gt=Decimal("0"), max_digits=14, decimal_places=2)
+    nombre_actions: int | None = Field(default=None, ge=1)
+    valeur_nominale: Decimal | None = Field(default=None, gt=Decimal("0"), max_digits=10, decimal_places=2)
+    lieu_immatriculation: str | None = Field(default=None, max_length=120)
     # Volontairement absents de ce PATCH générique — tous écrits par des mécanismes
     # dédiés, jamais par une édition libre de l'entrepreneur (voir "Schemas grp 4") :
     # - les 3 statuts de vérification : résultat d'un appel API (Parcours B) ou d'un

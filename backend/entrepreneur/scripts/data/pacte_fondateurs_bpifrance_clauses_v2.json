@@ -1,0 +1,1802 @@
+[
+  {
+    "code_clause": "preambule_avec_investisseurs",
+    "article": "preambule",
+    "titre_clause": "Préambule",
+    "description_clause": "Présente les parties signataires du pacte (fondateurs et investisseurs), la société concernée et son activité, en introduction du document.",
+    "texte_clause": "Les Parties sont associées de (dénomination sociale), société (type de société) au capital de (capital) €, ayant son siège social à (siège social), immatriculée au Registre du commerce et des sociétés de (lieu d'immatriculation) sous le numéro (numéro Siren) (ci-après désignée la « Société »).\n\nLa Société a pour activités (activités de la Société). Son capital social est divisé en (nombre d'actions) actions de (valeur nominale) euros de nominal, entièrement libérées et réparties comme suit :\n\n- Associés Fondateurs : (répartition des Associés Fondateurs)\n- Associés Investisseurs : (répartition des Associés Investisseurs)\n\nAux termes de l'article (numéro d'article des statuts) des statuts de la Société, les actions sont nominatives et sont librement cessibles.\n\nLa répartition actuelle du capital social de la Société est la condition déterminante de la prise de participation (minoritaire/majoritaire) des Associés Investisseurs, lesquels ont accepté de prendre cette participation dans la mesure où les Associés Fondateurs détiennent (pourcentage détenu par les Fondateurs) % du capital de la Société.\n\nLes Associés Investisseurs rappellent en outre qu'ils ont accepté de rentrer dans le capital de la Société, en considération de la possibilité de sortir de ladite Société dans un délai de (délai de sortie en années) ans à compter de leur entrée.\n\nAfin de se donner les moyens de mettre en œuvre les objectifs qu'ils se sont fixés et d'organiser au mieux leurs relations au sein de la Société, les Associés Fondateurs et les Associés Investisseurs ont décidé de conclure le présent pacte d'associés.\n\nLes Associés Fondateurs et les Associés Investisseurs renoncent expressément à l'application des dispositions de l'article 1195 du code civil.\n\nIl a été arrêté et convenu ce qui suit :",
+    "variables_requises": [
+      {
+        "nom": "denomination_sociale",
+        "type": "auto_nom_societe",
+        "libelle": "dénomination sociale"
+      },
+      {
+        "nom": "type_societe",
+        "type": "auto_forme_juridique",
+        "libelle": "type de société",
+        "valeurs_par_forme_juridique": {
+          "SAS": "par actions simplifiée",
+          "SASU": "par actions simplifiée unipersonnelle",
+          "SA": "anonyme",
+          "SARL": "à responsabilité limitée"
+        }
+      },
+      {
+        "nom": "capital",
+        "type": "auto_profil_juridique",
+        "libelle": "capital",
+        "champ": "capital_social"
+      },
+      {
+        "nom": "siege_social",
+        "type": "auto_siege_social",
+        "libelle": "siège social"
+      },
+      {
+        "nom": "lieu_immatriculation",
+        "type": "auto_profil_juridique",
+        "libelle": "lieu d'immatriculation",
+        "champ": "lieu_immatriculation"
+      },
+      {
+        "nom": "numero_siren",
+        "type": "auto_profil_juridique",
+        "libelle": "numéro Siren",
+        "champ": "siren"
+      },
+      {
+        "nom": "activites_societe",
+        "type": "auto_profil_juridique",
+        "libelle": "activités de la Société",
+        "champ": "objet_social"
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "auto_profil_juridique",
+        "libelle": "nombre d'actions",
+        "champ": "nombre_actions"
+      },
+      {
+        "nom": "valeur_nominale",
+        "type": "auto_profil_juridique",
+        "libelle": "valeur nominale",
+        "champ": "valeur_nominale"
+      },
+      {
+        "nom": "repartition_fondateurs",
+        "type": "auto_repartition_associes",
+        "libelle": "répartition des Associés Fondateurs",
+        "groupe": "fondateurs"
+      },
+      {
+        "nom": "numero_article_statuts",
+        "type": "nombre_ordinal",
+        "libelle": "numéro d'article des statuts"
+      },
+      {
+        "nom": "repartition_investisseurs",
+        "type": "auto_repartition_associes",
+        "libelle": "répartition des Associés Investisseurs",
+        "groupe": "investisseurs"
+      },
+      {
+        "nom": "poids_participation",
+        "type": "auto_poids_participation",
+        "libelle": "minoritaire/majoritaire"
+      },
+      {
+        "nom": "pourcentage_fondateurs",
+        "type": "auto_pourcentage_associes",
+        "libelle": "pourcentage détenu par les Fondateurs",
+        "groupe": "fondateurs"
+      },
+      {
+        "nom": "delai_sortie_annees",
+        "type": "duree",
+        "libelle": "délai de sortie en années"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preambule_sans_investisseurs",
+    "article": "preambule",
+    "titre_clause": "Préambule",
+    "description_clause": "Présente les parties signataires du pacte (fondateurs seuls), la société concernée et son activité, en introduction du document.",
+    "texte_clause": "Les Parties sont associées de (dénomination sociale), société (type de société) au capital de (capital) €, ayant son siège social à (siège social), immatriculée au Registre du commerce et des sociétés de (lieu d'immatriculation) sous le numéro (numéro Siren) (ci-après désignée la « Société »).\n\nLa Société a pour activités (activités de la Société). Son capital social est divisé en (nombre d'actions) actions de (valeur nominale) euros de nominal, entièrement libérées et réparties comme suit :\n\n- Associés Fondateurs : (répartition des Associés Fondateurs)\n\nAux termes de l'article (numéro d'article des statuts) des statuts de la Société, les actions sont nominatives et sont librement cessibles.\n\nAfin de se donner les moyens de mettre en œuvre les objectifs qu'ils se sont fixés et d'organiser au mieux leurs relations au sein de la Société, les Associés Fondateurs ont décidé de conclure le présent pacte d'associés.\n\nLes Associés Fondateurs renoncent expressément à l'application des dispositions de l'article 1195 du code civil.\n\nIl a été arrêté et convenu ce qui suit :",
+    "variables_requises": [
+      {
+        "nom": "denomination_sociale",
+        "type": "auto_nom_societe",
+        "libelle": "dénomination sociale"
+      },
+      {
+        "nom": "type_societe",
+        "type": "auto_forme_juridique",
+        "libelle": "type de société",
+        "valeurs_par_forme_juridique": {
+          "SAS": "par actions simplifiée",
+          "SASU": "par actions simplifiée unipersonnelle",
+          "SA": "anonyme",
+          "SARL": "à responsabilité limitée"
+        }
+      },
+      {
+        "nom": "capital",
+        "type": "auto_profil_juridique",
+        "libelle": "capital",
+        "champ": "capital_social"
+      },
+      {
+        "nom": "siege_social",
+        "type": "auto_siege_social",
+        "libelle": "siège social"
+      },
+      {
+        "nom": "lieu_immatriculation",
+        "type": "auto_profil_juridique",
+        "libelle": "lieu d'immatriculation",
+        "champ": "lieu_immatriculation"
+      },
+      {
+        "nom": "numero_siren",
+        "type": "auto_profil_juridique",
+        "libelle": "numéro Siren",
+        "champ": "siren"
+      },
+      {
+        "nom": "activites_societe",
+        "type": "auto_profil_juridique",
+        "libelle": "activités de la Société",
+        "champ": "objet_social"
+      },
+      {
+        "nom": "nombre_actions",
+        "type": "auto_profil_juridique",
+        "libelle": "nombre d'actions",
+        "champ": "nombre_actions"
+      },
+      {
+        "nom": "valeur_nominale",
+        "type": "auto_profil_juridique",
+        "libelle": "valeur nominale",
+        "champ": "valeur_nominale"
+      },
+      {
+        "nom": "repartition_fondateurs",
+        "type": "auto_repartition_associes",
+        "libelle": "répartition des Associés Fondateurs",
+        "groupe": "fondateurs"
+      },
+      {
+        "nom": "numero_article_statuts",
+        "type": "nombre_ordinal",
+        "libelle": "numéro d'article des statuts"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cessions_libres_chapeau",
+    "article": 2,
+    "titre_clause": "2.1 Cessions libres",
+    "description_clause": "Introduit la liste des cessions de titres qui échappent aux contraintes du pacte (conservation, préemption/préférence, agrément) : les cessions listées ci-après sont libres.",
+    "texte_clause": "Seules les Cessions énumérées ci-après (les « Cessions Libres ») peuvent être effectuées librement par les Parties au présent pacte, les stipulations du présent pacte relatives aux engagements de conservation des Titres, aux droits de (préemption/préférence) des Parties et à l'agrément préalable (organe compétent pour l'agrément) ne s'appliquant pas auxdites Cessions :\n\nIl est précisé que les Cessions Libres devront faire l'objet d'une information écrite préalable, par lettre recommandée avec accusé de réception, des autres Parties par la Partie Cédante.\n\nChaque Partie au présent pacte s'engage à ne pas réaliser une Cession Libre aux seules fins d'éviter l'application des stipulations du présent pacte afférentes au droit de (préemption/préférence -- anti-contournement) des autres Parties.",
+    "variables_requises": [
+      {
+        "nom": "regime_preemption_preference",
+        "type": "reference_croisee",
+        "libelle": "préemption/préférence",
+        "depend_de_section": "preemption_preference",
+        "valeurs_par_clause": {
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs": "préemption",
+          "preemption_sans_rang_entre_tous_associes": "préemption",
+          "preemption_investisseur_beneficiaire_unique": "préemption",
+          "preemption_fondateur_beneficiaire_unique": "préemption",
+          "preference_groupe_fondateurs_en_priorite": "préférence",
+          "preference_groupe_non_cedant": "préférence"
+        }
+      },
+      {
+        "nom": "organe_agrement",
+        "type": "choix",
+        "libelle": "organe compétent pour l'agrément",
+        "options": [
+          "Président",
+          "conseil d'administration",
+          "Comité de direction",
+          "Comité stratégique",
+          "Parties",
+          "Associés Fondateurs",
+          "Associés Investisseurs"
+        ]
+      },
+      {
+        "nom": "regime_preemption_preference_anti_contournement",
+        "type": "reference_croisee",
+        "libelle": "préemption/préférence -- anti-contournement",
+        "depend_de_section": "preemption_preference",
+        "valeurs_par_clause": {
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs": "préemption",
+          "preemption_sans_rang_entre_tous_associes": "préemption",
+          "preemption_investisseur_beneficiaire_unique": "préemption",
+          "preemption_fondateur_beneficiaire_unique": "préemption",
+          "preference_groupe_fondateurs_en_priorite": "préférence",
+          "preference_groupe_non_cedant": "préférence"
+        }
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_libre_heritiers",
+    "article": 2,
+    "titre_clause": "Cession libre — succession",
+    "description_clause": "Autorise sans contrainte la transmission des titres d'un associé décédé à ses héritiers.",
+    "texte_clause": "Les Cessions de Titres au profit des héritiers d'un associé personne physique, Partie au présent pacte, en cas de décès de cet associé.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_libre_societe_controlee_fondateur",
+    "article": 2,
+    "titre_clause": "Cession libre — société contrôlée par un Fondateur",
+    "description_clause": "Autorise un fondateur à céder ses titres à une société qu'il contrôle majoritairement, sous réserve que cette société adhère au pacte.",
+    "texte_clause": "La Cession de Titres par des membres des Associés Fondateurs, à une société dont ils détiendraient directement au moins (pourcentage de détention minimum du Cessionnaire) % du capital et des droits de vote, sous réserve que :\n\n(i) la société Cessionnaire adhère au présent pacte et devient membre des Associés Fondateurs avec la même qualité que le Cédant ;\n\n(ii) le membre des Associés Fondateurs concerné justifie préalablement au représentant des Associés Investisseurs de la détention de plus de (pourcentage de détention minimum du Cessionnaire) % du capital et des droits de vote de la société Cessionnaire, étant précisé que cette justification devra être fournie tous les ans au plus tard le (date limite de justification annuelle) de chaque année. Dans cette hypothèse, il est expressément convenu que le membre des Associés Fondateurs concerné sera solidairement tenu avec la société Cessionnaire du respect par cette dernière de l'intégralité de ses obligations au titre du présent pacte, pendant toute sa durée.",
+    "variables_requises": [
+      {
+        "nom": "pourcentage_detention_minimum_cessionnaire",
+        "type": "nombre",
+        "libelle": "pourcentage de détention minimum du Cessionnaire",
+        "occurrences_attendues": 2
+      },
+      {
+        "nom": "date_limite_justification_annuelle",
+        "type": "texte",
+        "libelle": "date limite de justification annuelle"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_libre_fonds_lie_investisseur",
+    "article": 2,
+    "titre_clause": "Cession libre — fonds ou société liée à un Investisseur",
+    "description_clause": "Autorise un investisseur à céder ses titres à un fonds ou une structure financière qu'il contrôle ou gère, ou appartenant au même groupe.",
+    "texte_clause": "Les Cessions par un membre des Associés Investisseurs, au profit de fonds d'investissement, ayant ou non la personnalité morale, ou de sociétés ayant une activité financière, (i) qu'il contrôle ou qu'il gère directement ou indirectement, ou (ii) par lesquels ce membre des Associés Investisseurs est directement ou indirectement contrôlé ou géré, ou (iii) qui sont contrôlés ou gérées, directement ou indirectement, par l'entité qui contrôle directement ou indirectement ledit membre des Associés Investisseurs, et ce sous réserve que ces fonds d'investissement ou ces sociétés ayant une activité financière adhèrent au présent pacte.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_libre_fonds_lie_investisseur_solidarite",
+    "article": 2,
+    "titre_clause": "Cession libre — solidarité des Investisseurs (option)",
+    "description_clause": "Complète la cession libre vers un fonds lié à l'investisseur : celui-ci reste solidairement responsable du respect du pacte par le fonds cessionnaire.",
+    "texte_clause": "En outre, les membres des Associés Investisseurs seront solidairement tenus avec le Cessionnaire du respect par celui-ci de l'intégralité de ses obligations au titre du présent pacte, pendant toute sa durée.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_libre_investisseur_apres_date",
+    "article": 2,
+    "titre_clause": "Cession libre — Investisseur après une date donnée",
+    "description_clause": "Autorise les investisseurs à céder librement leurs titres à compter d'une date déterminée fixée dans le pacte.",
+    "texte_clause": "Les Cessions par un membre des Associés Investisseurs réalisées à compter du (date de libre cession pour les Investisseurs).",
+    "variables_requises": [
+      {
+        "nom": "date_libre_cession_investisseurs",
+        "type": "date",
+        "libelle": "date de libre cession pour les Investisseurs"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "cession_libre_exercice_droits",
+    "article": 2,
+    "titre_clause": "Cession libre — exercice de droits déjà prévus au pacte",
+    "description_clause": "Précise que les cessions résultant de l'exercice d'un droit de préemption, de préférence, de sortie conjointe ou de retrait prévu par le pacte sont elles-mêmes libres.",
+    "texte_clause": "Les Cessions résultant de l'exercice du droit de (préemption/préférence), du droit de sortie conjointe ou du droit de retrait, conformément aux stipulations du présent pacte.",
+    "variables_requises": [
+      {
+        "nom": "regime_preemption_preference_exercice_droits",
+        "type": "reference_croisee",
+        "libelle": "préemption/préférence",
+        "depend_de_section": "preemption_preference",
+        "valeurs_par_clause": {
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs": "préemption",
+          "preemption_sans_rang_entre_tous_associes": "préemption",
+          "preemption_investisseur_beneficiaire_unique": "préemption",
+          "preemption_fondateur_beneficiaire_unique": "préemption",
+          "preference_groupe_fondateurs_en_priorite": "préférence",
+          "preference_groupe_non_cedant": "préférence"
+        }
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_totale_parties",
+    "article": 2,
+    "titre_clause": "Inaliénabilité — toutes les Parties",
+    "description_clause": "Interdiction temporaire de céder ses titres, applicable à tous les associés (fondateurs et investisseurs) de façon symétrique.",
+    "texte_clause": "À l'exception d'une Cession Libre, chacun des membres des Associés Fondateurs et des Associés Investisseurs s'interdit de céder tout ou partie de ses Titres pendant une durée de (durée) ans à compter de la date d'entrée en vigueur du présent pacte.",
+    "variables_requises": [
+      {
+        "nom": "duree",
+        "type": "duree",
+        "libelle": "durée"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_fondateurs_seuls",
+    "article": 2,
+    "titre_clause": "Inaliénabilité — Associés Fondateurs uniquement",
+    "description_clause": "Interdiction temporaire de céder ses titres, réservée aux fondateurs (les investisseurs restent libres de céder).",
+    "texte_clause": "Chacun des membres des Associés Fondateurs s'interdit de céder tout ou partie de ses Titres pendant une durée de (durée) ans à compter de la date d'entrée en vigueur du présent pacte.",
+    "variables_requises": [
+      {
+        "nom": "duree",
+        "type": "duree",
+        "libelle": "durée"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_fondateurs_seuls_sauf_accord_investisseurs",
+    "article": 2,
+    "titre_clause": "Inaliénabilité Fondateurs — levée possible par accord des Investisseurs (option)",
+    "description_clause": "Permet de lever l'interdiction de céder des fondateurs sur accord exprès et préalable d'une majorité des investisseurs.",
+    "texte_clause": "Cette interdiction de céder ne peut être levée sans l'accord exprès et préalable d'une majorité des membres des Associés Investisseurs.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_fondateurs_partielle_plafond",
+    "article": 2,
+    "titre_clause": "Inaliénabilité — Fondateurs, plafond en % des titres",
+    "description_clause": "Interdiction de céder plus d'un certain pourcentage cumulé de ses titres, réservée aux fondateurs, durée maximale légale 10 ans.",
+    "texte_clause": "Chacun des membres des Associés Fondateurs s'interdit de céder un nombre cumulé de Titres représentant plus de (pourcentage plafond de cession cumulée) % des Titres qu'il détient pendant une durée de (durée maximale) ans à compter de la date d'entrée en vigueur du présent pacte.\n\nToute Cession réalisée par un des membres des Associés Fondateurs portant sur un nombre cumulé de Titres (compte tenu le cas échéant des Titres Cédés précédemment par ce dernier) représentant plus de (pourcentage plafond de cession cumulée) %, en violation des stipulations du présent pacte, sera réputée nulle et non avenue.",
+    "variables_requises": [
+      {
+        "nom": "pourcentage_plafond_cession_cumulee",
+        "type": "nombre",
+        "libelle": "pourcentage plafond de cession cumulée",
+        "occurrences_attendues": 2
+      },
+      {
+        "nom": "duree_maximale_inalienabilite",
+        "type": "duree",
+        "libelle": "durée maximale"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "inalienabilite_fondateurs_partielle_plafond_sauf_accord_investisseurs",
+    "article": 2,
+    "titre_clause": "Inaliénabilité Fondateurs (plafond) — levée possible par accord des Investisseurs (option)",
+    "description_clause": "Permet de lever le plafond de cession des fondateurs sur accord exprès et préalable d'une majorité des investisseurs.",
+    "texte_clause": "Cette interdiction de céder ne peut être levée sans l'accord exprès et préalable d'une majorité des membres des Associés Investisseurs.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "limitation_participations",
+    "article": 2,
+    "titre_clause": "Limitation des participations (statu quo actionnarial)",
+    "description_clause": "Interdiction temporaire de modifier sa participation dans la société, pour tous les associés (au-delà des cessions libres).",
+    "texte_clause": "Pendant une durée de (durée de limitation des participations) à compter de la date du présent pacte, chacun des membres des Associés Fondateurs et des Associés Investisseurs s'engage à ne pas modifier sa participation dans la Société telle qu'indiquée dans le préambule, exception faite des Cessions Libres.",
+    "variables_requises": [
+      {
+        "nom": "duree_limitation_participations",
+        "type": "duree",
+        "libelle": "durée de limitation des participations"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_totalite",
+    "article": 3,
+    "titre_clause": "Préemption -- 1er rang Fondateurs, 2nd rang Investisseurs (exercice sur la totalité)",
+    "description_clause": "Droit de préemption à deux niveaux (fondateurs prioritaires entre eux, puis investisseurs sur le solde) : ne peut s'exercer que sur la totalité des titres cédés.",
+    "texte_clause": "3.1 Droit de préemption de premier rang au sein des Associés Fondateurs\n\nChaque membre des Associés Fondateurs (autre que le Cédant) bénéficie d'un droit de préemption prioritaire pour toute Cession de Titres qui serait envisagée par un membre de son groupe, quel que soit le Cessionnaire.\n\nPréalablement à la Cession envisagée, le membre des Associés Fondateurs Cédant devra notifier par lettre recommandée avec accusé de réception aux autres membres de son groupe le nombre de Titres qu'il souhaite céder, le prix et toutes les conditions retenues pour cette Cession ainsi que l'identité du ou des Cessionnaires. Une copie de cette notification sera adressée le même jour par lettre recommandée avec accusé de réception au représentant des Associés Investisseurs.\n\nDans les (délai d'exercice de la préemption 1er rang -- Fondateurs) jours de la réception de cette notification, les autres membres des Associés Fondateurs devront signifier au Cédant également par lettre recommandée avec accusé de réception leur intention éventuelle d'acquérir les Titres Cédés aux conditions notifiées par le Cédant. À défaut, ils seront réputés avoir renoncé à l'exercice de leur droit de préemption pour l'opération considérée.\n\nLa préemption ne pourra porter que sur la totalité des Titres dont la cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Fondateurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par les membres des Associés Fondateurs Cessionnaires et dans la limite de leurs demandes. En cas de rompus, le ou les Titres restants seront attribués au membre des Associés Fondateurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption. Le représentant des Associés Investisseurs sera informé par le Cédant, par lettre recommandée avec accusé de réception, des Cessions intervenues dans le cadre du droit de préemption institué par le présent article, dans les (délai d'information des Investisseurs après réalisation des Cessions 1er rang) jours de la réalisation desdites Cessions.\n\nSi la totalité des Titres dont la Cession est envisagée n'a pas été préemptée, le droit de préemption prioritaire en faveur des membres des Associés Fondateurs deviendra caduc automatiquement et de plein droit et le Cédant sera tenu de proposer les Titres dont la cession est envisagée aux membres des Associés Investisseurs comme il est indiqué à l'article ci-après.\n\n3.2 Droit de préemption de second rang au profit des Associés Investisseurs\n\nLes Associés Investisseurs bénéficient d'un droit de préemption de second rang sur les Titres qui n'auraient pas été préemptés par les membres des Associés Fondateurs, conformément à l'article ci-dessus.\n\nLe cas échéant, à l'issue de la procédure de premier rang visée ci-dessus et préalablement à la Cession envisagée, le Cédant devra réitérer la notification visée à l'article ci-dessus, en termes strictement identiques, et ce à l'intention du représentant des Associés Investisseurs.\n\nDans les (délai d'exercice de la préemption 2nd rang -- Investisseurs) jours de cette réitération, le représentant des Associés Investisseurs devra signifier au Cédant, par lettre recommandée avec accusé de réception, l'intention de son groupe d'acquérir les Titres dans les conditions énoncées, ainsi que l'identité des Associés Investisseurs Cessionnaires et le nombre de Titres que chacun d'eux souhaite acquérir.\n\nÀ défaut, les Associés Investisseurs seront réputés avoir renoncé à l'exercice de ce droit pour l'opération considérée.\n\nLa préemption des Associés Investisseurs ne pourra porter que sur la totalité des Titres dont la cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Investisseurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par chacun des membres des Associés Investisseurs et dans la limite de leurs demandes.\n\nEn cas de rompus, le ou les Titres restants seront attribués au membre des Associés Investisseurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nSi les Associés Investisseurs ne préemptent pas la totalité des Titres que le Cédant envisage de Céder, celui-ci sera libre de procéder à la Cession envisagée mais seulement au(x) Cessionnaire(s) et aux prix et conditions énoncés dans la notification, sous réserve du respect des autres stipulations du présent pacte.\n\n3.3 Prix des Titres Cédés en cas d'exercice du droit de préemption\n\nEn cas d'exercice du droit de préemption visé au présent article, le prix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de préemption sera :\n\n-  si la Cession envisagée par le Cédant est une vente des Titres, le prix en numéraire convenu entre le Cédant et le Cessionnaire et tel que visé dans la notification adressée par le Cédant ;\n\n-  dans les autres cas, et notamment si la Cession envisagée par le Cédant est une donation, un échange, un apport, une fusion ou une scission ou une forme combinée de ces formes de transfert de propriété, le prix offert de bonne foi par le Cédant, tel que notifié par ce dernier par lettre recommandée avec accusé de réception dans les (délai de notification du prix offert par le Cédant en cas de Cession non numéraire) jours à compter de la notification de l'exercice de leur droit de préemption par le(s) associé(s) concerné(s), ou en cas de désaccord, le prix fixé par un expert désigné à la demande d'un ou plusieurs membres des Associés Fondateurs, ou le cas échéant, à la demande du représentant des Associés Investisseurs, par ordonnance du président du tribunal de commerce statuant en la forme des référés et sans recours possible, conformément aux dispositions de l'article 1843-3 du Code civil.\n\nDans le cas visé à l'alinéa ci-dessus, en cas de désaccord de l'un au moins des membres des Associés Fondateurs ou du représentant des Associés Investisseurs, relatif au prix de cession des Titres notifié par le Cédant, la Partie contestant ledit prix de cession devra en informer le Cédant et chacune des autres Parties, par lettre recommandée avec accusé de réception, dans un délai de ..... (délai de contestation du prix par les Parties) jours à compter de la réception de la notification du prix offert par le Cédant. La notification d'une contestation dans ce délai aura pour effet de rendre caduc tout exercice du droit de préemption qui aurait été notifié préalablement à la notification du rapport de l'expert nommé par le président du tribunal de commerce. L'expert devra remettre son rapport au Cédant, ainsi qu'à la Société qui devra en transmettre une copie à chacune des Parties, dans un délai maximum de (délai de remise du rapport d'expertise) jours à compter de sa désignation. À compter de la notification du rapport faite par la Société à chacune des autres Parties, celles-ci pourront alors exercer leur droit de préemption au prix fixé par l'expert pour la valeur des Titres offerts par le Cédant, et dans un délai de (délai d'exercice de la préemption au prix fixé par l'expert) jours à compter de ladite notification.\n\nLe Cédant bénéficiera d'un droit de repentir si le prix fixé par l'expert est inférieur à (seuil de baisse de prix ouvrant le droit de repentir) % au prix initialement notifié par le Cédant. Dans ce cas, le Cédant devra notifier l'exercice de son droit de repentir et sa renonciation à céder les Titres offerts dans un délai de (délai d'exercice du droit de repentir par le Cédant) jours à compter de la remise de son rapport par l'expert.\n\nLes honoraires et frais de l'expert seront supportés pour moitié par le Cédant et pour moitié par ceux des membres des Associés Fondateurs ayant contesté le prix des Titres ou, le cas échéant, par le représentant des Associés Investisseurs si ce dernier a contesté le prix des Titres. En cas de pluralité de Parties contestataires, la fraction des honoraires et frais de l'expert incombant auxdites Parties sera répartie entre ces derniers au prorata de leur participation dans le capital de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_de_la_preemption_1er_rang_fondateurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 1er rang -- Fondateurs"
+      },
+      {
+        "nom": "delai_d_information_des_investisseurs_apres_realisation_des_cessions_1er_rang",
+        "type": "nombre",
+        "libelle": "délai d'information des Investisseurs après réalisation des Cessions 1er rang"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_2nd_rang_investisseurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 2nd rang -- Investisseurs"
+      },
+      {
+        "nom": "delai_de_notification_du_prix_offert_par_le_cedant_en_cas_de_cession_non_numeraire",
+        "type": "nombre",
+        "libelle": "délai de notification du prix offert par le Cédant en cas de Cession non numéraire"
+      },
+      {
+        "nom": "delai_de_contestation_du_prix_par_les_parties",
+        "type": "nombre",
+        "libelle": "délai de contestation du prix par les Parties"
+      },
+      {
+        "nom": "delai_de_remise_du_rapport_d_expertise",
+        "type": "nombre",
+        "libelle": "délai de remise du rapport d'expertise"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_au_prix_fixe_par_l_expert",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption au prix fixé par l'expert"
+      },
+      {
+        "nom": "seuil_de_baisse_de_prix_ouvrant_le_droit_de_repentir",
+        "type": "nombre",
+        "libelle": "seuil de baisse de prix ouvrant le droit de repentir"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_repentir_par_le_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de repentir par le Cédant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_partiel",
+    "article": 3,
+    "titre_clause": "Préemption -- 1er rang Fondateurs, 2nd rang Investisseurs (exercice partiel possible)",
+    "description_clause": "Droit de préemption à deux niveaux (fondateurs prioritaires entre eux, puis investisseurs sur le solde) : peut s'exercer sur tout ou partie des titres cédés.",
+    "texte_clause": "3.1 Droit de préemption de premier rang au sein des Associés Fondateurs\n\nChaque membre des Associés Fondateurs (autre que le Cédant) bénéficie d'un droit de préemption prioritaire pour toute Cession de Titres qui serait envisagée par un membre de son groupe, quel que soit le Cessionnaire.\n\nPréalablement à la Cession envisagée, le membre des Associés Fondateurs Cédant devra notifier par lettre recommandée avec accusé de réception aux autres membres de son groupe le nombre de Titres qu'il souhaite céder, le prix et toutes les conditions retenues pour cette Cession ainsi que l'identité du ou des Cessionnaires. Une copie de cette notification sera adressée le même jour par lettre recommandée avec accusé de réception au représentant des Associés Investisseurs.\n\nDans les (délai d'exercice de la préemption 1er rang -- Fondateurs) jours de la réception de cette notification, les autres membres des Associés Fondateurs devront signifier au Cédant également par lettre recommandée avec accusé de réception leur intention éventuelle d'acquérir les Titres Cédés aux conditions notifiées par le Cédant. À défaut, ils seront réputés avoir renoncé à l'exercice de leur droit de préemption pour l'opération considérée.\n\nLa préemption pourra porter sur tout ou partie des Titres dont la cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Fondateurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par les membres des Associés Fondateurs Cessionnaires et dans la limite de leurs demandes. En cas de rompus, le ou les Titres restants seront attribués au membre des Associés Fondateurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption. Le représentant des Associés Investisseurs sera informé par le Cédant, par lettre recommandée avec accusé de réception, des Cessions intervenues dans le cadre du droit de préemption institué par le présent article, dans les (délai d'information des Investisseurs après réalisation des Cessions 1er rang) jours de la réalisation desdites Cessions.\n\nSi la totalité des Titres dont la cession est envisagée n'a pas été préemptée, le Cédant sera tenu de proposer les Titres qui n'auraient pas été préemptés aux membres des Associés Investisseurs comme il est indiqué à l'article ci-après.\n\n3.2 Droit de préemption de second rang au profit des Associés Investisseurs\n\nLes Associés Investisseurs bénéficient d'un droit de préemption de second rang sur les Titres qui n'auraient pas été préemptés par les membres des Associés Fondateurs, conformément à l'article ci-dessus.\n\nLe cas échéant, à l'issue de la procédure de premier rang visée ci-dessus et préalablement à la Cession envisagée, le Cédant devra réitérer la notification visée à l'article ci-dessus, en termes strictement identiques, et ce à l'intention du représentant des Associés Investisseurs.\n\nDans les (délai d'exercice de la préemption 2nd rang -- Investisseurs) jours de cette réitération, le représentant des Associés Investisseurs devra signifier au Cédant, par lettre recommandée avec accusé de réception, l'intention de son groupe d'acquérir les Titres dans les conditions énoncées, ainsi que l'identité des Associés Investisseurs Cessionnaires et le nombre de Titres que chacun d'eux souhaite acquérir.\n\nÀ défaut, les Associés Investisseurs seront réputés avoir renoncé à l'exercice de ce droit pour l'opération considérée.\n\nLa préemption des Associés Investisseurs pourra porter sur tout ou partie des Titres dont la cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Investisseurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par chacun des membres des Associés Investisseurs et dans la limite de leurs demandes.\n\nEn cas de rompus, le ou les Titres restants seront attribués au membre des Associés Investisseurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nSi les Associés Investisseurs ne préemptent pas la totalité des Titres que le Cédant envisage de Céder, celui-ci sera libre de procéder à la Cession envisagée des Titres non préemptés, mais seulement au(x) Cessionnaire(s) et aux prix et conditions énoncés dans la notification, sous réserve du respect des autres stipulations du présent pacte.\n\nDans ce cas, si le Cédant n'a pas réalisé la Cession dans un délai de (délai de réalisation de la Cession après exercice partiel de la préemption 2nd rang -- Investisseurs) jours à compter de l'expiration du délai de (délai d'exercice de la préemption 2nd rang -- Investisseurs, rappel) jours, la procédure de préemption devra être réitérée dans son intégralité par l'envoi d'une nouvelle notification faisant naître pour les bénéficiaires les mêmes droits et obligations sur la Cession, au cas où la Cession resterait envisagée après ce délai.\n\n3.3 Prix des Titres Cédés en cas d'exercice du droit de préemption\n\nEn cas d'exercice du droit de préemption visé au présent article, le prix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de préemption sera :\n\n-  si la Cession envisagée par le Cédant est une vente des Titres, le prix en numéraire convenu entre le Cédant et le Cessionnaire et tel que visé dans la notification adressée par le Cédant ;\n\n-  dans les autres cas, et notamment si la Cession envisagée par le Cédant est une donation, un échange, un apport, une fusion ou une scission ou une forme combinée de ces formes de transfert de propriété, le prix offert de bonne foi par le Cédant, tel que notifié par ce dernier par lettre recommandée avec accusé de réception dans les (délai de notification du prix offert par le Cédant en cas de Cession non numéraire) jours à compter de la notification de l'exercice de leur droit de préemption par le(s) associé(s) concerné(s), ou en cas de désaccord, le prix fixé par un expert désigné à la demande d'un ou plusieurs membres des Associés Fondateurs, ou le cas échéant, à la demande du représentant des Associés Investisseurs, par ordonnance du président du tribunal de commerce statuant en la forme des référés et sans recours possible, conformément aux dispositions de l'article 1843-3 du Code civil.\n\nDans le cas visé à l'alinéa ci-dessus, en cas de désaccord de l'un au moins des membres des Associés Fondateurs ou du représentant des Associés Investisseurs, relatif au prix de cession des Titres notifié par le Cédant, la Partie contestant ledit prix de cession devra en informer le Cédant et chacune des autres Parties, par lettre recommandée avec accusé de réception, dans un délai de ..... (délai de contestation du prix par les Parties) jours à compter de la réception de la notification du prix offert par le Cédant. La notification d'une contestation dans ce délai aura pour effet de rendre caduc tout exercice du droit de préemption qui aurait été notifié préalablement à la notification du rapport de l'expert nommé par le président du tribunal de commerce. L'expert devra remettre son rapport au Cédant, ainsi qu'à la Société qui devra en transmettre une copie à chacune des Parties, dans un délai maximum de (délai de remise du rapport d'expertise) jours à compter de sa désignation. À compter de la notification du rapport faite par la Société à chacune des autres Parties, celles-ci pourront alors exercer leur droit de préemption au prix fixé par l'expert pour la valeur des Titres offerts par le Cédant, et dans un délai de (délai d'exercice de la préemption au prix fixé par l'expert) jours à compter de ladite notification.\n\nLe Cédant bénéficiera d'un droit de repentir si le prix fixé par l'expert est inférieur à (seuil de baisse de prix ouvrant le droit de repentir) % au prix initialement notifié par le Cédant. Dans ce cas, le Cédant devra notifier l'exercice de son droit de repentir et sa renonciation à céder les Titres offerts dans un délai de (délai d'exercice du droit de repentir par le Cédant) jours à compter de la remise de son rapport par l'expert.\n\nLes honoraires et frais de l'expert seront supportés pour moitié par le Cédant et pour moitié par ceux des membres des Associés Fondateurs ayant contesté le prix des Titres ou, le cas échéant, par le représentant des Associés Investisseurs si ce dernier a contesté le prix des Titres. En cas de pluralité de Parties contestataires, la fraction des honoraires et frais de l'expert incombant auxdites Parties sera répartie entre ces derniers au prorata de leur participation dans le capital de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_de_la_preemption_1er_rang_fondateurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 1er rang -- Fondateurs"
+      },
+      {
+        "nom": "delai_d_information_des_investisseurs_apres_realisation_des_cessions_1er_rang",
+        "type": "nombre",
+        "libelle": "délai d'information des Investisseurs après réalisation des Cessions 1er rang"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_2nd_rang_investisseurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 2nd rang -- Investisseurs"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_apres_exercice_partiel_de_la_preemption_2nd_rang_investisseurs",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession après exercice partiel de la préemption 2nd rang -- Investisseurs"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_2nd_rang_investisseurs_rappel",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 2nd rang -- Investisseurs, rappel"
+      },
+      {
+        "nom": "delai_de_notification_du_prix_offert_par_le_cedant_en_cas_de_cession_non_numeraire",
+        "type": "nombre",
+        "libelle": "délai de notification du prix offert par le Cédant en cas de Cession non numéraire"
+      },
+      {
+        "nom": "delai_de_contestation_du_prix_par_les_parties",
+        "type": "nombre",
+        "libelle": "délai de contestation du prix par les Parties"
+      },
+      {
+        "nom": "delai_de_remise_du_rapport_d_expertise",
+        "type": "nombre",
+        "libelle": "délai de remise du rapport d'expertise"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_au_prix_fixe_par_l_expert",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption au prix fixé par l'expert"
+      },
+      {
+        "nom": "seuil_de_baisse_de_prix_ouvrant_le_droit_de_repentir",
+        "type": "nombre",
+        "libelle": "seuil de baisse de prix ouvrant le droit de repentir"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_repentir_par_le_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de repentir par le Cédant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_totalite",
+    "article": 3,
+    "titre_clause": "Préemption -- 1er rang Investisseurs, 2nd rang Fondateurs (exercice sur la totalité)",
+    "description_clause": "Droit de préemption à deux niveaux inversé (investisseurs prioritaires entre eux, puis fondateurs sur le solde) : ne peut s'exercer que sur la totalité des titres cédés.",
+    "texte_clause": "3.1 Droit de préemption de premier rang au sein des Associés Investisseurs\n\nChaque membre des Associés Investisseurs (autre que le Cédant) bénéficie d'un droit de préemption prioritaire pour toute Cession de Titres de la Société qui serait envisagée par un membre de son groupe, quel que soit le Cessionnaire.\n\nPréalablement à la Cession envisagée, le membre des Associés Investisseurs Cédant devra notifier, par lettre recommandée avec accusé de réception, aux autres membres de son groupe le nombre de Titres qu'il souhaite céder, le prix et toutes les conditions retenues pour cette Cession ainsi que l'identité du ou des Cessionnaire(s). Une copie de cette notification sera adressée le même jour par lettre recommandée avec accusé de réception au représentant des Associés Fondateurs.\n\nDans les (délai d'exercice de la préemption 1er rang -- Investisseurs) jours de la réception de cette notification, les autres membres des Associés Investisseurs devront signifier au Cédant, également par lettre recommandée avec accusé de réception, leur intention éventuelle d'acquérir les Titres Cédés aux conditions notifiées par le Cédant. À défaut, ils seront réputés avoir renoncé à l'exercice de leur droit de préemption pour l'opération considérée.\n\nLa préemption ne pourra porter que sur la totalité des Titres dont la Cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Investisseurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par chacun des membres des Associés Investisseurs et dans la limite de leurs demandes.\n\nEn cas de rompus, le ou les Titres restants seront attribués au membre des Associés Investisseurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nLe représentant des Associés Fondateurs sera informé par le Cédant, par lettre recommandée avec accusé de réception, des Cessions intervenues dans le cadre du droit de préemption institué par le présent article dans les (délai d'information des Fondateurs après réalisation des Cessions 1er rang) jours de la réalisation desdites Cessions.\n\nSi la totalité des Titres dont la Cession est envisagée n'a pas été préemptée, le droit de préemption prioritaire en faveur des membres des Associés Investisseurs tombera automatiquement et le Cédant sera tenu de proposer les Titres dont la Cession est envisagée aux membres des Associés Fondateurs comme il est indiqué à l'article ci-après.\n\n3.2 Droit de préemption de second rang au profit des Associés Fondateurs\n\nLes Associés Fondateurs bénéficient d'un droit de préemption de second rang sur les Titres de la Société qui n'auraient pas été préemptés par les membres des Associés Investisseurs, conformément à l'article ci-dessus.\n\nLe cas échéant, à l'issue de la procédure visée de premier rang ci-dessus et préalablement à la Cession envisagée, le Cédant devra réitérer la notification visée à l'article ci-dessus, en termes strictement identiques, et ce à l'intention du représentant des Associés Fondateurs.\n\nDans les (délai d'exercice de la préemption 2nd rang -- Fondateurs) jours de cette réitération, le représentant des Associés Fondateurs devra signifier au Cédant, par lettre recommandée avec accusé de réception, l'intention de son groupe d'acquérir les Titres dans les conditions énoncées, ainsi que l'identité des Associés Fondateurs Cessionnaires et le nombre de Titres que chacun d'eux souhaite acquérir.\n\nÀ défaut, les Associés Fondateurs seront réputés avoir renoncé à l'exercice de ce droit pour l'opération considérée.\n\nLa préemption des Associés Fondateurs ne pourra porter que sur la totalité des Titres dont la Cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Fondateurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par chacun des membres des Associés Fondateurs et dans la limite de leurs demandes.\n\nEn cas de rompus, le ou les Titres restants seront attribués au membre des Associés Fondateurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nSi les Associés Fondateurs ne préemptent pas la totalité des Titres que le Cédant envisage de Céder, celui-ci sera libre de procéder à la Cession envisagée mais seulement au(x) Cessionnaire(s) et aux prix et conditions énoncés dans la notification, sous réserve du respect des autres stipulations du présent pacte.\n\n3.3 Prix des Titres cédés en cas d'exercice du droit de préemption\n\nEn cas d'exercice du droit de préemption visé au présent article, le prix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de préemption sera :\n\n-  si la Cession envisagée par le Cédant est une vente des Titres, le prix en numéraire convenu entre le Cédant et le Cessionnaire et tel que visé dans la notification adressée par le Cédant ;\n\n-  dans les autres cas, et notamment si la Cession envisagée par le Cédant est une donation, un échange, un apport, une fusion ou une scission ou une forme combinée de ces formes de transfert de propriété, le prix offert de bonne foi par le Cédant, tel que notifié par ce dernier par lettre recommandée avec accusé de réception dans les (délai de notification du prix offert par le Cédant en cas de Cession non numéraire) jours à compter de la notification de l'exercice de leur droit de préemption par le(s) associé(s) concerné(s), ou en cas de désaccord, le prix fixé par un expert désigné à la demande d'un ou plusieurs membres des Associés Fondateurs, ou le cas échéant, à la demande du représentant des Associés Investisseurs, par ordonnance du président du tribunal de commerce statuant en la forme des référés et sans recours possible, conformément aux dispositions de l'article 1843-3 du code civil.\n\nDans le cas visé à l'alinéa ci-dessus, en cas de désaccord de l'un au moins des membres des Associés Fondateurs ou du représentant des Associés Investisseurs, relatif au prix de cession des Titres notifié par le Cédant, la Partie contestant ledit prix de cession devra en informer le Cédant et chacune des autres Parties, par lettre recommandée avec accusé de réception, dans un délai de (délai de contestation du prix par les Parties) jours à compter de la réception de la notification du prix offert par le Cédant. La notification d'une contestation dans ce délai aura pour effet de rendre caduc tout exercice du droit de préemption qui aurait été notifié préalablement à la notification du rapport de l'expert nommé par le président du tribunal de commerce. L'expert devra remettre son rapport au Cédant, ainsi qu'à la Société qui devra en transmettre une copie à chacune des Parties, dans un délai maximum de (délai de remise du rapport d'expertise) jours à compter de sa désignation. À compter de la notification du rapport faite par la Société à chacune des autres Parties, celles-ci pourront alors exercer leur droit de préemption au prix fixé par l'expert pour la valeur des Titres offerts par le Cédant, et dans un délai de (délai d'exercice de la préemption au prix fixé par l'expert) jours à compter de ladite notification.\n\nLe Cédant bénéficiera d'un droit de repentir si le prix fixé par l'expert est inférieur à (seuil de baisse de prix ouvrant le droit de repentir) % au prix initialement notifié par le Cédant. Dans ce cas, le Cédant devra notifier l'exercice de son droit de repentir et sa renonciation à céder les Titres offerts dans un délai de (délai d'exercice du droit de repentir par le Cédant) jours à compter de la remise de son rapport par l'expert.\n\nLes honoraires et frais de l'expert seront supportés pour moitié par le Cédant et pour moitié par ceux des membres des Associés Fondateurs ayant contesté le prix des Titres ou, le cas échéant, par le représentant des Associés Investisseurs si ce dernier a contesté le prix des Titres. En cas de pluralité de Parties contestataires, la fraction des honoraires et frais de l'expert incombant auxdites Parties sera répartie entre ces derniers au prorata de leur participation dans le capital de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_de_la_preemption_1er_rang_investisseurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 1er rang -- Investisseurs"
+      },
+      {
+        "nom": "delai_d_information_des_fondateurs_apres_realisation_des_cessions_1er_rang",
+        "type": "nombre",
+        "libelle": "délai d'information des Fondateurs après réalisation des Cessions 1er rang"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_2nd_rang_fondateurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 2nd rang -- Fondateurs"
+      },
+      {
+        "nom": "delai_de_notification_du_prix_offert_par_le_cedant_en_cas_de_cession_non_numeraire",
+        "type": "nombre",
+        "libelle": "délai de notification du prix offert par le Cédant en cas de Cession non numéraire"
+      },
+      {
+        "nom": "delai_de_contestation_du_prix_par_les_parties",
+        "type": "nombre",
+        "libelle": "délai de contestation du prix par les Parties"
+      },
+      {
+        "nom": "delai_de_remise_du_rapport_d_expertise",
+        "type": "nombre",
+        "libelle": "délai de remise du rapport d'expertise"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_au_prix_fixe_par_l_expert",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption au prix fixé par l'expert"
+      },
+      {
+        "nom": "seuil_de_baisse_de_prix_ouvrant_le_droit_de_repentir",
+        "type": "nombre",
+        "libelle": "seuil de baisse de prix ouvrant le droit de repentir"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_repentir_par_le_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de repentir par le Cédant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_partiel",
+    "article": 3,
+    "titre_clause": "Préemption -- 1er rang Investisseurs, 2nd rang Fondateurs (exercice partiel possible)",
+    "description_clause": "Droit de préemption à deux niveaux inversé (investisseurs prioritaires entre eux, puis fondateurs sur le solde) : peut s'exercer sur tout ou partie des titres cédés.",
+    "texte_clause": "3.1 Droit de préemption de premier rang au sein des Associés Investisseurs\n\nChaque membre des Associés Investisseurs (autre que le Cédant) bénéficie d'un droit de préemption prioritaire pour toute Cession de Titres de la Société qui serait envisagée par un membre de son groupe, quel que soit le Cessionnaire.\n\nPréalablement à la Cession envisagée, le membre des Associés Investisseurs Cédant devra notifier, par lettre recommandée avec accusé de réception, aux autres membres de son groupe le nombre de Titres qu'il souhaite céder, le prix et toutes les conditions retenues pour cette Cession ainsi que l'identité du ou des Cessionnaire(s). Une copie de cette notification sera adressée le même jour par lettre recommandée avec accusé de réception au représentant des Associés Fondateurs.\n\nDans les (délai d'exercice de la préemption 1er rang -- Investisseurs) jours de la réception de cette notification, les autres membres des Associés Investisseurs devront signifier au Cédant, également par lettre recommandée avec accusé de réception, leur intention éventuelle d'acquérir les Titres Cédés aux conditions notifiées par le Cédant. À défaut, ils seront réputés avoir renoncé à l'exercice de leur droit de préemption pour l'opération considérée.\n\nLa préemption pourra porter sur tout ou partie des Titres dont la Cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Investisseurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par chacun des membres des Associés Investisseurs et dans la limite de leurs demandes.\n\nEn cas de rompus, le ou les Titres restants seront attribués au membre des Associés Investisseurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nLe représentant des Associés Fondateurs sera informé par le Cédant, par lettre recommandée avec accusé de réception, des Cessions intervenues dans le cadre du droit de préemption institué par le présent article dans les (délai d'information des Fondateurs après réalisation des Cessions 1er rang) jours de la réalisation desdites Cessions.\n\nSi la totalité des Titres dont la Cession est envisagée n'a pas été préemptée, le Cédant sera tenu de proposer les Titres qui n'auraient pas été préemptés aux membres des Associés Fondateurs comme il est indiqué à l'article ci-après.\n\n3.2 Droit de préemption de second rang au profit des Associés Fondateurs\n\nLes Associés Fondateurs bénéficient d'un droit de préemption de second rang sur les Titres de la Société qui n'auraient pas été préemptés par les membres des Associés Investisseurs, conformément à l'article ci-dessus.\n\nLe cas échéant, à l'issue de la procédure visée de premier rang ci-dessus et préalablement à la Cession envisagée, le Cédant devra réitérer la notification visée à l'article ci-dessus, en termes strictement identiques, et ce à l'intention du représentant des Associés Fondateurs.\n\nDans les (délai d'exercice de la préemption 2nd rang -- Fondateurs) jours de cette réitération, le représentant des Associés Fondateurs devra signifier au Cédant, par lettre recommandée avec accusé de réception, l'intention de son groupe d'acquérir les Titres dans les conditions énoncées, ainsi que l'identité des Associés Fondateurs Cessionnaires et le nombre de Titres que chacun d'eux souhaite acquérir.\n\nÀ défaut, les Associés Fondateurs seront réputés avoir renoncé à l'exercice de ce droit pour l'opération considérée.\n\nLa préemption des Associés Fondateurs pourra porter sur tout ou partie des Titres dont la Cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs membres des Associés Fondateurs, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par chacun des membres des Associés Fondateurs et dans la limite de leurs demandes.\n\nEn cas de rompus, le ou les Titres restants seront attribués au membre des Associés Fondateurs qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nSi les Associés Fondateurs ne préemptent pas la totalité des Titres que le Cédant envisage de Céder, celui-ci sera libre de procéder à la Cession envisagée des Titres non préemptés mais seulement au(x) Cessionnaire(s) et aux prix et conditions énoncés dans la notification, sous réserve du respect des autres stipulations du présent pacte.\n\nDans ce cas, si le Cédant n'a pas réalisé la Cession dans un délai de (délai de réalisation de la Cession après exercice partiel de la préemption 2nd rang -- Fondateurs) jours à compter de l'expiration du délai de (délai d'exercice de la préemption 2nd rang -- Fondateurs, rappel) jours ci-dessus, la procédure de préemption devra être réitérée dans son intégralité par l'envoi d'une nouvelle notification faisant naître pour les bénéficiaires les mêmes droits et obligations sur la Cession, au cas où la Cession resterait envisagée après ce délai.\n\n3.3 Prix des Titres cédés en cas d'exercice du droit de préemption\n\nEn cas d'exercice du droit de préemption visé au présent article, le prix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de préemption sera :\n\n-  si la Cession envisagée par le Cédant est une vente des Titres, le prix en numéraire convenu entre le Cédant et le Cessionnaire et tel que visé dans la notification adressée par le Cédant ;\n\n-  dans les autres cas, et notamment si la Cession envisagée par le Cédant est une donation, un échange, un apport, une fusion ou une scission ou une forme combinée de ces formes de transfert de propriété, le prix offert de bonne foi par le Cédant, tel que notifié par ce dernier par lettre recommandée avec accusé de réception dans les (délai de notification du prix offert par le Cédant en cas de Cession non numéraire) jours à compter de la notification de l'exercice de leur droit de préemption par le(s) associé(s) concerné(s), ou en cas de désaccord, le prix fixé par un expert désigné à la demande d'un ou plusieurs membres des Associés Fondateurs, ou le cas échéant, à la demande du représentant des Associés Investisseurs, par ordonnance du président du tribunal de commerce statuant en la forme des référés et sans recours possible, conformément aux dispositions de l'article 1843-3 du code civil.\n\nDans le cas visé à l'alinéa ci-dessus, en cas de désaccord de l'un au moins des membres des Associés Fondateurs ou du représentant des Associés Investisseurs, relatif au prix de cession des Titres notifié par le Cédant, la Partie contestant ledit prix de cession devra en informer le Cédant et chacune des autres Parties, par lettre recommandée avec accusé de réception, dans un délai de (délai de contestation du prix par les Parties) jours à compter de la réception de la notification du prix offert par le Cédant. La notification d'une contestation dans ce délai aura pour effet de rendre caduc tout exercice du droit de préemption qui aurait été notifié préalablement à la notification du rapport de l'expert nommé par le président du tribunal de commerce. L'expert devra remettre son rapport au Cédant, ainsi qu'à la Société qui devra en transmettre une copie à chacune des Parties, dans un délai maximum de (délai de remise du rapport d'expertise) jours à compter de sa désignation. À compter de la notification du rapport faite par la Société à chacune des autres Parties, celles-ci pourront alors exercer leur droit de préemption au prix fixé par l'expert pour la valeur des Titres offerts par le Cédant, et dans un délai de (délai d'exercice de la préemption au prix fixé par l'expert) jours à compter de ladite notification.\n\nLe Cédant bénéficiera d'un droit de repentir si le prix fixé par l'expert est inférieur à (seuil de baisse de prix ouvrant le droit de repentir) % au prix initialement notifié par le Cédant. Dans ce cas, le Cédant devra notifier l'exercice de son droit de repentir et sa renonciation à céder les Titres offerts dans un délai de (délai d'exercice du droit de repentir par le Cédant) jours à compter de la remise de son rapport par l'expert.\n\nLes honoraires et frais de l'expert seront supportés pour moitié par le Cédant et pour moitié par ceux des membres des Associés Fondateurs ayant contesté le prix des Titres ou, le cas échéant, par le représentant des Associés Investisseurs si ce dernier a contesté le prix des Titres. En cas de pluralité de Parties contestataires, la fraction des honoraires et frais de l'expert incombant auxdites Parties sera répartie entre ces derniers au prorata de leur participation dans le capital de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_de_la_preemption_1er_rang_investisseurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 1er rang -- Investisseurs"
+      },
+      {
+        "nom": "delai_d_information_des_fondateurs_apres_realisation_des_cessions_1er_rang",
+        "type": "nombre",
+        "libelle": "délai d'information des Fondateurs après réalisation des Cessions 1er rang"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_2nd_rang_fondateurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 2nd rang -- Fondateurs"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_apres_exercice_partiel_de_la_preemption_2nd_rang_fondateurs",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession après exercice partiel de la préemption 2nd rang -- Fondateurs"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_2nd_rang_fondateurs_rappel",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption 2nd rang -- Fondateurs, rappel"
+      },
+      {
+        "nom": "delai_de_notification_du_prix_offert_par_le_cedant_en_cas_de_cession_non_numeraire",
+        "type": "nombre",
+        "libelle": "délai de notification du prix offert par le Cédant en cas de Cession non numéraire"
+      },
+      {
+        "nom": "delai_de_contestation_du_prix_par_les_parties",
+        "type": "nombre",
+        "libelle": "délai de contestation du prix par les Parties"
+      },
+      {
+        "nom": "delai_de_remise_du_rapport_d_expertise",
+        "type": "nombre",
+        "libelle": "délai de remise du rapport d'expertise"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_au_prix_fixe_par_l_expert",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption au prix fixé par l'expert"
+      },
+      {
+        "nom": "seuil_de_baisse_de_prix_ouvrant_le_droit_de_repentir",
+        "type": "nombre",
+        "libelle": "seuil de baisse de prix ouvrant le droit de repentir"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_repentir_par_le_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de repentir par le Cédant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_sans_rang_entre_tous_associes_totalite",
+    "article": 3,
+    "titre_clause": "Préemption -- sans distinction de rang entre associés (exercice sur la totalité)",
+    "description_clause": "Sous-variante de la préemption sans rang : le droit ne peut s'exercer que sur la totalité des titres cédés.",
+    "texte_clause": "3.1 Droit de préemption entre associés\n\nChaque associé (autre que le Cédant) bénéficie d'un droit de préemption pour toute Cession de Titres qui serait envisagée par un autre associé, quel que soit le Cessionnaire.\n\nPréalablement à la Cession envisagée, l'associé Cédant devra notifier par lettre recommandée avec accusé de réception aux autres associés le nombre de Titres qu'il souhaite Céder, le prix et toutes les conditions retenues pour cette Cession ainsi que l'identité du ou des Cessionnaire(s).\n\nDans les (délai d'exercice du droit de préemption entre associés) jours de la réception de cette notification, les autres associés devront signifier au Cédant également par lettre recommandée avec accusé de réception leur intention éventuelle d'acquérir les Titres Cédés aux conditions notifiées par le Cédant. À défaut, ils seront réputés avoir renoncé à l'exercice de leur droit de préemption pour l'opération considérée.\n\nLa préemption ne pourra porter que sur la totalité des Titres dont la Cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs autres associés, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par les autres associés et dans la limite de leurs demandes. En cas de rompus, le ou les Titres restants seront attribués à l'associé qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nSi les autres associés ne préemptent pas la totalité des Titres que le Cédant envisage de céder, celui-ci sera libre de procéder à la Cession envisagée mais seulement au(x) Cessionnaire(s) et aux prix et conditions énoncés dans la notification, sous réserve du respect des autres stipulations du présent pacte.\n\n3.2 Prix des Titres cédés en cas d'exercice du droit de préemption\n\nEn cas d'exercice du droit de préemption visé au présent article, le prix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de préemption sera :\n\n-  si la Cession envisagée par le Cédant est une vente des Titres, le prix en numéraire convenu entre le Cédant et le Cessionnaire et tel que visé dans la notification adressée par le Cédant ;\n\n-  dans les autres cas, et notamment si la Cession envisagée par le Cédant est une donation, un échange, un apport, une fusion ou une scission ou une forme combinée de ces formes de transfert de propriété, le prix offert de bonne foi par le Cédant, tel que notifié par ce dernier par lettre recommandée avec accusé de réception dans les (délai de notification du prix offert par le Cédant en cas de Cession non numéraire) jours à compter de la notification de l'exercice de leur droit de préemption par le(s) associé(s) concerné(s), ou en cas de désaccord, le prix fixé par un expert désigné à la demande d'un ou plusieurs membres des Associés Fondateurs, ou le cas échéant, à la demande du représentant des Associés Investisseurs, par ordonnance du président du tribunal de commerce statuant en la forme des référés et sans recours possible, conformément aux dispositions de l'article 1843-3 du Code civil.\n\nDans le cas visé à l'alinéa ci-dessus, en cas de désaccord de l'un au moins des membres des Associés Fondateurs ou du représentant des Associés Investisseurs, relatif au prix de cession des Titres notifié par le Cédant, la Partie contestant ledit prix de cession devra en informer le Cédant et chacune des autres Parties, par lettre recommandée avec accusé de réception, dans un délai de (délai de contestation du prix par les Parties) jours à compter de la réception de la notification du prix offert par le Cédant. La notification d'une contestation dans ce délai aura pour effet de rendre caduc tout exercice du droit de préemption qui aurait été notifié préalablement à la notification du rapport de l'expert nommé par le président du tribunal de commerce. L'expert devra remettre son rapport au Cédant, ainsi qu'à la Société qui devra en transmettre une copie à chacune des Parties, dans un délai maximum de (délai de remise du rapport d'expertise) jours à compter de sa désignation. À compter de la notification du rapport faite par la Société à chacune des autres Parties, celles-ci pourront alors exercer leur droit de préemption au prix fixé par l'expert pour la valeur des Titres offerts par le Cédant, et dans un délai de (délai d'exercice de la préemption au prix fixé par l'expert) jours à compter de ladite notification.\n\nLe Cédant bénéficiera d'un droit de repentir si le prix fixé par l'expert est inférieur à (seuil de baisse de prix ouvrant le droit de repentir) % au prix initialement notifié par le Cédant. Dans ce cas, le Cédant devra notifier l'exercice de son droit de repentir et sa renonciation à Céder les Titres offerts dans un délai de (délai d'exercice du droit de repentir par le Cédant) jours à compter de la remise de son rapport par l'expert.\n\nLes honoraires et frais de l'expert seront supportés pour moitié par le Cédant et pour moitié par ceux des membres des Associés Fondateurs ayant contesté le prix des Titres ou, le cas échéant, par le représentant des Associés Investisseurs si ce dernier a contesté le prix des Titres. En cas de pluralité de Parties contestataires, la fraction des honoraires et frais de l'expert incombant auxdites Parties sera répartie entre ces derniers au prorata de leur participation dans le capital de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_du_droit_de_preemption_entre_associes",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préemption entre associés"
+      },
+      {
+        "nom": "delai_de_notification_du_prix_offert_par_le_cedant_en_cas_de_cession_non_numeraire",
+        "type": "nombre",
+        "libelle": "délai de notification du prix offert par le Cédant en cas de Cession non numéraire"
+      },
+      {
+        "nom": "delai_de_contestation_du_prix_par_les_parties",
+        "type": "nombre",
+        "libelle": "délai de contestation du prix par les Parties"
+      },
+      {
+        "nom": "delai_de_remise_du_rapport_d_expertise",
+        "type": "nombre",
+        "libelle": "délai de remise du rapport d'expertise"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_au_prix_fixe_par_l_expert",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption au prix fixé par l'expert"
+      },
+      {
+        "nom": "seuil_de_baisse_de_prix_ouvrant_le_droit_de_repentir",
+        "type": "nombre",
+        "libelle": "seuil de baisse de prix ouvrant le droit de repentir"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_repentir_par_le_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de repentir par le Cédant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_sans_rang_entre_tous_associes_partiel",
+    "article": 3,
+    "titre_clause": "Préemption -- sans distinction de rang entre associés (exercice partiel possible)",
+    "description_clause": "Sous-variante de la préemption sans rang : le droit peut s'exercer sur tout ou partie des titres cédés.",
+    "texte_clause": "3.1 Droit de préemption entre associés\n\nChaque associé (autre que le Cédant) bénéficie d'un droit de préemption pour toute Cession de Titres qui serait envisagée par un autre associé, quel que soit le Cessionnaire.\n\nPréalablement à la Cession envisagée, l'associé Cédant devra notifier par lettre recommandée avec accusé de réception aux autres associés le nombre de Titres qu'il souhaite Céder, le prix et toutes les conditions retenues pour cette Cession ainsi que l'identité du ou des Cessionnaire(s).\n\nDans les (délai d'exercice du droit de préemption entre associés) jours de la réception de cette notification, les autres associés devront signifier au Cédant également par lettre recommandée avec accusé de réception leur intention éventuelle d'acquérir les Titres Cédés aux conditions notifiées par le Cédant. À défaut, ils seront réputés avoir renoncé à l'exercice de leur droit de préemption pour l'opération considérée.\n\nLa préemption pourra porter sur tout ou partie des Titres dont la Cession est envisagée.\n\nEn cas d'exercice de leur droit de préemption par plusieurs autres associés, la répartition des Titres préemptés se fera au prorata du nombre de Titres détenus par les autres associés et dans la limite de leurs demandes. En cas de rompus, le ou les Titres restants seront attribués à l'associé qui aura demandé le plus grand nombre de Titres ou, en cas d'égalité, qui détiendra le plus grand nombre de Titres ou, en cas de nouvelle égalité, à celui qui aura notifié le premier son intention d'exercer son droit de préemption.\n\nSi les autres associés ne préemptent pas la totalité des Titres que le Cédant envisage de Céder, celui-ci sera libre de procéder à la Cession envisagée des Titres non préemptés mais seulement au(x) Cessionnaire(s) et aux prix et conditions énoncés dans la notification, sous réserve du respect des autres stipulations du présent pacte.\n\nDans ce cas, si le Cédant n'a pas réalisé la Cession dans un délai de (délai de réalisation de la Cession après exercice partiel de la préemption) jours à compter de l'expiration du délai de (délai d'exercice du droit de préemption entre associés -- rappel) jours ci-dessus, la procédure de préemption devra être réitérée dans son intégralité par l'envoi d'une nouvelle notification faisant naître pour les bénéficiaires les mêmes droits et obligations sur la Cession, au cas où la Cession resterait envisagée après ce délai.\n\n3.2 Prix des Titres cédés en cas d'exercice du droit de préemption\n\nEn cas d'exercice du droit de préemption visé au présent article, le prix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de préemption sera :\n\n-  si la Cession envisagée par le Cédant est une vente des Titres, le prix en numéraire convenu entre le Cédant et le Cessionnaire et tel que visé dans la notification adressée par le Cédant ;\n\n-  dans les autres cas, et notamment si la Cession envisagée par le Cédant est une donation, un échange, un apport, une fusion ou une scission ou une forme combinée de ces formes de transfert de propriété, le prix offert de bonne foi par le Cédant, tel que notifié par ce dernier par lettre recommandée avec accusé de réception dans les (délai de notification du prix offert par le Cédant en cas de Cession non numéraire) jours à compter de la notification de l'exercice de leur droit de préemption par le(s) associé(s) concerné(s), ou en cas de désaccord, le prix fixé par un expert désigné à la demande d'un ou plusieurs membres des Associés Fondateurs, ou le cas échéant, à la demande du représentant des Associés Investisseurs, par ordonnance du président du tribunal de commerce statuant en la forme des référés et sans recours possible, conformément aux dispositions de l'article 1843-3 du Code civil.\n\nDans le cas visé à l'alinéa ci-dessus, en cas de désaccord de l'un au moins des membres des Associés Fondateurs ou du représentant des Associés Investisseurs, relatif au prix de cession des Titres notifié par le Cédant, la Partie contestant ledit prix de cession devra en informer le Cédant et chacune des autres Parties, par lettre recommandée avec accusé de réception, dans un délai de (délai de contestation du prix par les Parties) jours à compter de la réception de la notification du prix offert par le Cédant. La notification d'une contestation dans ce délai aura pour effet de rendre caduc tout exercice du droit de préemption qui aurait été notifié préalablement à la notification du rapport de l'expert nommé par le président du tribunal de commerce. L'expert devra remettre son rapport au Cédant, ainsi qu'à la Société qui devra en transmettre une copie à chacune des Parties, dans un délai maximum de (délai de remise du rapport d'expertise) jours à compter de sa désignation. À compter de la notification du rapport faite par la Société à chacune des autres Parties, celles-ci pourront alors exercer leur droit de préemption au prix fixé par l'expert pour la valeur des Titres offerts par le Cédant, et dans un délai de (délai d'exercice de la préemption au prix fixé par l'expert) jours à compter de ladite notification.\n\nLe Cédant bénéficiera d'un droit de repentir si le prix fixé par l'expert est inférieur à (seuil de baisse de prix ouvrant le droit de repentir) % au prix initialement notifié par le Cédant. Dans ce cas, le Cédant devra notifier l'exercice de son droit de repentir et sa renonciation à Céder les Titres offerts dans un délai de (délai d'exercice du droit de repentir par le Cédant) jours à compter de la remise de son rapport par l'expert.\n\nLes honoraires et frais de l'expert seront supportés pour moitié par le Cédant et pour moitié par ceux des membres des Associés Fondateurs ayant contesté le prix des Titres ou, le cas échéant, par le représentant des Associés Investisseurs si ce dernier a contesté le prix des Titres. En cas de pluralité de Parties contestataires, la fraction des honoraires et frais de l'expert incombant auxdites Parties sera répartie entre ces derniers au prorata de leur participation dans le capital de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_du_droit_de_preemption_entre_associes",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préemption entre associés"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_apres_exercice_partiel_de_la_preemption",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession après exercice partiel de la préemption"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_preemption_entre_associes_rappel",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préemption entre associés -- rappel"
+      },
+      {
+        "nom": "delai_de_notification_du_prix_offert_par_le_cedant_en_cas_de_cession_non_numeraire",
+        "type": "nombre",
+        "libelle": "délai de notification du prix offert par le Cédant en cas de Cession non numéraire"
+      },
+      {
+        "nom": "delai_de_contestation_du_prix_par_les_parties",
+        "type": "nombre",
+        "libelle": "délai de contestation du prix par les Parties"
+      },
+      {
+        "nom": "delai_de_remise_du_rapport_d_expertise",
+        "type": "nombre",
+        "libelle": "délai de remise du rapport d'expertise"
+      },
+      {
+        "nom": "delai_d_exercice_de_la_preemption_au_prix_fixe_par_l_expert",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la préemption au prix fixé par l'expert"
+      },
+      {
+        "nom": "seuil_de_baisse_de_prix_ouvrant_le_droit_de_repentir",
+        "type": "nombre",
+        "libelle": "seuil de baisse de prix ouvrant le droit de repentir"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_repentir_par_le_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de repentir par le Cédant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_investisseur_beneficiaire_unique",
+    "article": 3,
+    "titre_clause": "Préemption -- bénéficiaire unique : l'Associé Investisseur",
+    "description_clause": "Cas d'un pacte à deux associés seulement (1 fondateur, 1 investisseur) : seul l'investisseur bénéficie d'un droit de préemption sur les cessions du fondateur.",
+    "texte_clause": "Sauf le cas des Cessions Libres, tout projet de Cession de Titres par l'Associé Fondateur sera soumis au droit de préemption de l'Associé Investisseur dans les conditions ci-après.\n\nL'Associé Fondateur devra notifier son projet de Cession à l'Associé Investisseur par lettre recommandée avec accusé de réception mentionnant l'identité du Cessionnaire pressenti, le nombre de Titres cédés, le prix offert et les conditions de l'opération. Toute notification incomplète sera réputée nulle et non avenue.\n\nL'Associé Investisseur disposera d'un délai de (délai de décision du bénéficiaire pour exercer son droit de préemption) jours à compter de la réception de cette notification pour faire connaître à l'Associé Fondateur, par lettre recommandée avec accusé de réception, sa décision d'exercer son droit de préemption aux prix et conditions notifiées par l'Associé Fondateur.\n\nEn cas d'exercice par l'Associé Investisseur de son droit de préemption, l'Associé Fondateur ne pourra pas se prévaloir d'un droit de repentir et renoncer à la Cession.\n\nLa Cession des Titres préemptés devra être réalisée dans le délai de (délai de réalisation de la Cession des Titres préemptés) jours à compter de la notification par l'Associé Investisseur de sa décision de préemption. Le prix des Titres devra être payé comptant.\n\nÀ défaut d'exercice du droit de préemption dans le délai fixé ci-dessus ou de réalisation de la Cession des Titres préemptés dans le délai fixé ci-dessus, l'Associé Fondateur pourra réaliser librement la Cession projetée aux conditions notifiées à l'Associé Investisseur, et ce dans un délai maximum de (délai de réalisation de la Cession libre à défaut de préemption) jours, sous réserve du respect des conditions fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du présent pacte.\n\nToute Cession réalisée par l'Associé Fondateur en violation des stipulations du présent article sera réputée nulle et non avenue. Les Parties donnent, par les présentes, instruction irrévocable au séquestre visé à l'article 9.3 ci-dessous à l'effet de ne pas inscrire une telle Cession dans le registre des mouvements de titres de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_de_decision_du_beneficiaire_pour_exercer_son_droit_de_preemption",
+        "type": "nombre",
+        "libelle": "délai de décision du bénéficiaire pour exercer son droit de préemption"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_des_titres_preemptes",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession des Titres préemptés"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_libre_a_defaut_de_preemption",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession libre à défaut de préemption"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preemption_fondateur_beneficiaire_unique",
+    "article": 3,
+    "titre_clause": "Préemption -- bénéficiaire unique : l'Associé Fondateur",
+    "description_clause": "Cas d'un pacte à deux associés seulement (1 fondateur, 1 investisseur) : seul le fondateur bénéficie d'un droit de préemption sur les cessions de l'investisseur.",
+    "texte_clause": "Sauf le cas des Cessions Libres, tout projet de Cession de Titres par l'Associé Investisseur sera soumis au droit de préemption de l'Associé Fondateur dans les conditions ci-après.\n\nL'Associé Investisseur devra notifier son projet de Cession à l'Associé Fondateur par lettre recommandée avec accusé de réception mentionnant l'identité du Cessionnaire pressenti, le nombre de Titres cédés, le prix offert et les conditions de l'opération. Toute notification incomplète sera réputée nulle et non avenue.\n\nL'Associé Fondateur disposera d'un délai de (délai de décision du bénéficiaire pour exercer son droit de préemption) jours à compter de la réception de cette notification pour faire connaître à l'Associé Investisseur, par lettre recommandée avec accusé de réception, sa décision d'exercer son droit de préemption aux prix et conditions notifiées par l'Associé Investisseur.\n\nEn cas d'exercice par l'Associé Fondateur de son droit de préemption, l'Associé Investisseur ne pourra pas se prévaloir d'un droit de repentir et renoncer à la Cession.\n\nLa Cession des Titres préemptés devra être réalisée dans le délai de (délai de réalisation de la Cession des Titres préemptés) jours à compter de la notification par l'Associé Fondateur de sa décision de préemption. Le prix des Titres devra être payé comptant.\n\nÀ défaut d'exercice du droit de préemption dans le délai fixé ci-dessus ou de réalisation de la Cession des Titres préemptés dans le délai fixé ci-dessus, l'Associé Investisseur pourra réaliser librement la Cession projetée aux conditions notifiées à l'Associé Fondateur, et ce dans un délai maximum de (délai de réalisation de la Cession libre à défaut de préemption) jours, sous réserve du respect des conditions fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du présent pacte.\n\nToute Cession réalisée par l'Associé Investisseur en violation des stipulations du présent article sera réputée nulle et non avenue. Les Parties donnent, par les présentes, instruction irrévocable au séquestre visé à l'article 9.3 ci-dessous à l'effet de ne pas inscrire une telle Cession dans le registre des mouvements de titres de la Société.",
+    "variables_requises": [
+      {
+        "nom": "delai_de_decision_du_beneficiaire_pour_exercer_son_droit_de_preemption",
+        "type": "nombre",
+        "libelle": "délai de décision du bénéficiaire pour exercer son droit de préemption"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_des_titres_preemptes",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession des Titres préemptés"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_libre_a_defaut_de_preemption",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession libre à défaut de préemption"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preference_groupe_fondateurs_en_priorite",
+    "article": 3,
+    "titre_clause": "Droit de préférence -- au sein du groupe Fondateurs",
+    "description_clause": "En cas de cession par un fondateur, priorité offerte aux autres fondateurs avant les investisseurs.",
+    "texte_clause": "Toute Cession de Titres par un membre des Associés Fondateurs est soumise aux dispositions suivantes.\n\nTout membre des Associés Fondateurs qui envisage de Céder tout ou partie de ses Titres dans la Société doit les offrir par préférence à tout autre Cessionnaire aux autres membres de son groupe, et ce au prorata de leur participation au capital de la Société.\n\nL'associé Cédant doit notifier son projet aux autres membres des Associés Fondateurs par lettre recommandée avec accusé de réception mentionnant le nombre de Titres qu'il souhaite Céder, le prix proposé, les conditions de paiement et, le cas échéant, l'identité du ou des Cessionnaire(s) envisagé(s).\n\nLes autres membres des Associés Fondateurs disposent d'un délai de (délai d'exercice du droit de préférence par les autres Associés Fondateurs) jours à compter de la réception de la notification ci-dessus pour exercer leur droit de préférence au prorata de leur nombre d'actions. Ils auront également le droit de se substituer, dans la même proportion, aux associés de leur groupe qui n'exerceraient pas leur droit, et même d'exercer ce droit pour la totalité des Titres qui n'auraient pas fait l'objet de l'exercice du droit de préférence.\n\nSi à l'expiration du délai susvisé de (délai d'exercice du droit de préférence par les autres Associés Fondateurs -- rappel, expiration du délai) jours, la totalité des Titres du Cédant n'a pas fait l'objet de l'exercice du droit de préférence d'un ou plusieurs membres des Associés Fondateurs aux conditions notifiées, la Cession des Titres pourra être offerte par le Cédant aux membres des Associés Investisseurs, dans les mêmes conditions qu'énoncées au présent article.\n\nSi à l'expiration du délai susvisé de (délai d'exercice du droit de préférence par les autres Associés Fondateurs -- rappel, second renvoi) jours, la totalité des Titres du Cédant n'a pas fait l'objet de l'exercice du droit de préférence d'un ou plusieurs membres des Associés Investisseurs aux conditions notifiées, la Cession des Titres pourra être entreprise par le Cédant au(x) Cessionnaire(s) de son choix, sous réserve du respect des conditions fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du présent pacte.",
+    "variables_requises": [
+      {
+        "nom": "delai_d_exercice_du_droit_de_preference_par_les_autres_associes_fondateurs",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préférence par les autres Associés Fondateurs"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_preference_par_les_autres_associes_fondateurs_rappel_expiration_du_delai",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préférence par les autres Associés Fondateurs -- rappel, expiration du délai"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_preference_par_les_autres_associes_fondateurs_rappel_second_renvoi",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préférence par les autres Associés Fondateurs -- rappel, second renvoi"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preference_groupe_non_cedant_totalite",
+    "article": 3,
+    "titre_clause": "Droits de préférence croisés -- exercice sur la totalité",
+    "description_clause": "Sous-variante des droits de préférence croisés : le droit ne peut s'exercer que sur la totalité des titres cédés.",
+    "texte_clause": "Les membres des Associés Fondateurs et des Associés Investisseurs s'engagent, s'ils décident de Céder tout ou partie de leurs Titres, à choisir pour acquéreur par préférence à tout autre :\n\n-  s'agissant des membres des Associés Fondateurs, les membres des Associés Investisseurs,\n\n-  s'agissant des membres des Associés Investisseurs, les membres des Associés Fondateurs.\n\nPar suite, chacun des membres des Associés Fondateurs et des Associés Investisseurs s'interdit toute Cession de ses Titres sans les offrir au préalable aux membres de l'autre groupe à conditions égales et par préférence à tout autre.\n\nLe droit de préférence des associés membres du groupe non Cédant s'exerce au prorata de leur participation au capital de la Société, avec faculté pour chacun desdits membres de se substituer, dans les mêmes proportions, aux membres de son groupe qui n'exerceraient pas leur droit de préférence, et même d'exercer ce droit pour la totalité des Titres qui n'auraient pas fait l'objet de l'exercice du droit de préférence.\n\nPour l'application des dispositions ci-dessus, l'Associé Cédant doit notifier au représentant de son groupe par lettre recommandée avec accusé de réception le nombre de Titres qu'il souhaite Céder, le prix offert, les conditions de paiement et, le cas échéant, l'identité du ou des Cessionnaire(s).\n\nLe représentant du groupe Cédant doit transmettre cette notification au représentant de l'autre groupe dans les (délai de transmission de la notification au groupe non Cédant) jours de sa réception, étant précisé que l'Associé Cédant dispose de la faculté d'adresser une copie de sa notification aux associés du groupe non Cédant. Les associés du groupe bénéficiaire du droit de préférence disposent d'un délai de (délai d'exercice du droit de préférence par le groupe non Cédant) jours à compter de la réception de cette notification pour exercer ce droit qui ne peut porter que sur la totalité des Titres Cédés. L'exercice du droit de préférence doit être notifié par le représentant du groupe bénéficiaire au représentant du groupe Cédant.\n\nEn l'absence de réponse dans ce délai, les bénéficiaires seront réputés avoir renoncé à l'exercice de ce droit et le ou les associés Cédants pourront réaliser la Cession projetée aux conditions notifiées, sous réserve du respect des conditions fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du présent pacte.\n\nDans ce cas, la Cession devra être réalisée dans un délai de (délai de réalisation de la Cession à défaut d'exercice de la préférence) jours à compter de l'expiration du délai visé ci-dessus.\n\nPassé ce délai de (délai de réitération de la procédure de notification) jours, et si le Cédant ne renonce pas à l'opération, la procédure de notification devra être réitérée pour permettre aux membres du groupe non Cédant d'exercer leur droit de préférence.",
+    "variables_requises": [
+      {
+        "nom": "delai_de_transmission_de_la_notification_au_groupe_non_cedant",
+        "type": "nombre",
+        "libelle": "délai de transmission de la notification au groupe non Cédant"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_preference_par_le_groupe_non_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préférence par le groupe non Cédant"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_a_defaut_d_exercice_de_la_preference",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession à défaut d'exercice de la préférence"
+      },
+      {
+        "nom": "delai_de_reiteration_de_la_procedure_de_notification",
+        "type": "nombre",
+        "libelle": "délai de réitération de la procédure de notification"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "preference_groupe_non_cedant_partiel",
+    "article": 3,
+    "titre_clause": "Droits de préférence croisés -- exercice partiel possible",
+    "description_clause": "Sous-variante des droits de préférence croisés : le droit peut s'exercer sur tout ou partie des titres cédés.",
+    "texte_clause": "Les membres des Associés Fondateurs et des Associés Investisseurs s'engagent, s'ils décident de Céder tout ou partie de leurs Titres, à choisir pour acquéreur par préférence à tout autre :\n\n-  s'agissant des membres des Associés Fondateurs, les membres des Associés Investisseurs,\n\n-  s'agissant des membres des Associés Investisseurs, les membres des Associés Fondateurs.\n\nPar suite, chacun des membres des Associés Fondateurs et des Associés Investisseurs s'interdit toute Cession de ses Titres sans les offrir au préalable aux membres de l'autre groupe à conditions égales et par préférence à tout autre.\n\nLe droit de préférence des associés membres du groupe non Cédant s'exerce au prorata de leur participation au capital de la Société, avec faculté pour chacun desdits membres de se substituer, dans les mêmes proportions, aux membres de son groupe qui n'exerceraient pas leur droit de préférence, et même d'exercer ce droit pour la totalité des Titres qui n'auraient pas fait l'objet de l'exercice du droit de préférence.\n\nPour l'application des dispositions ci-dessus, l'Associé Cédant doit notifier au représentant de son groupe par lettre recommandée avec accusé de réception le nombre de Titres qu'il souhaite Céder, le prix offert, les conditions de paiement et, le cas échéant, l'identité du ou des Cessionnaire(s).\n\nLe représentant du groupe Cédant doit transmettre cette notification au représentant de l'autre groupe dans les (délai de transmission de la notification au groupe non Cédant) jours de sa réception, étant précisé que l'Associé Cédant dispose de la faculté d'adresser une copie de sa notification aux associés du groupe non Cédant. Les associés du groupe bénéficiaire du droit de préférence disposent d'un délai de (délai d'exercice du droit de préférence par le groupe non Cédant) jours à compter de la réception de cette notification pour exercer ce droit qui peut porter sur tout ou partie des Titres Cédés. L'exercice du droit de préférence doit être notifié par le représentant du groupe bénéficiaire au représentant du groupe Cédant.\n\nEn l'absence de réponse dans ce délai, les bénéficiaires seront réputés avoir renoncé à l'exercice de ce droit et le ou les associés Cédants pourront réaliser la Cession projetée aux conditions notifiées, sous réserve du respect des conditions fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du présent pacte.\n\nDans ce cas, la Cession devra être réalisée dans un délai de (délai de réalisation de la Cession à défaut d'exercice de la préférence) jours à compter de l'expiration du délai visé ci-dessus.\n\nPassé ce délai de (délai de réitération de la procédure de notification) jours, et si le Cédant ne renonce pas à l'opération, la procédure de notification devra être réitérée pour permettre aux membres du groupe non Cédant d'exercer leur droit de préférence.",
+    "variables_requises": [
+      {
+        "nom": "delai_de_transmission_de_la_notification_au_groupe_non_cedant",
+        "type": "nombre",
+        "libelle": "délai de transmission de la notification au groupe non Cédant"
+      },
+      {
+        "nom": "delai_d_exercice_du_droit_de_preference_par_le_groupe_non_cedant",
+        "type": "nombre",
+        "libelle": "délai d'exercice du droit de préférence par le groupe non Cédant"
+      },
+      {
+        "nom": "delai_de_realisation_de_la_cession_a_defaut_d_exercice_de_la_preference",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession à défaut d'exercice de la préférence"
+      },
+      {
+        "nom": "delai_de_reiteration_de_la_procedure_de_notification",
+        "type": "nombre",
+        "libelle": "délai de réitération de la procédure de notification"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "agrement_standard",
+    "article": 4,
+    "titre_clause": "Clause d'agrément",
+    "description_clause": "Soumet toute cession de titres à un agrément préalable (organe ou associés désignés), sauf cessions libres et cas légaux d'exclusion (succession, conjoint, ascendant/descendant).",
+    "texte_clause": "La Cession de Titres, à quelque titre que ce soit, est soumise à l'agrément préalable (organe compétent pour l'agrément).\n\nToutefois :\n\n-  ce droit d'agrément ne s'applique pas aux Cessions Libres, telles qu'elles sont définies à l'article 2.1 du présent pacte ;\n\n-  ce droit d'agrément ne s'applique pas en cas de succession, de liquidation du régime matrimonial ou de Cession à un conjoint, un ascendant ou un descendant, ainsi qu'à un autre associé ;\n\n-  les dispositions du présent article ne pourront restreindre les droits de cession que les associés se sont reconnus au terme du présent pacte. En conséquence, l'agrément sera accordé de plein droit à toutes les personnes ayant acquis des Titres de la Société après la purge des droits et obligations prévus aux articles 2 et 3 du présent pacte.\n\nLe Cédant doit notifier, par lettre recommandée avec demande d'avis de réception, une demande d'agrément indiquant l'identité du ou des cessionnaire(s) envisagé(s), le nombre de Titres qu'il souhaite Céder, ainsi que le prix offert et les conditions de la vente.\n\nL'agrément résulte soit d'une notification de la décision (organe compétent pour l'agrément), soit du défaut de réponse dans un délai de (délai de réponse à la demande d'agrément) jours à compter de la demande. Dans ce cas, la Cession devra être réalisée dans les (délai de réalisation de la Cession après obtention de l'agrément) jours suivant l'obtention de cet agrément, à défaut de quoi ce dernier sera caduc et la procédure d'agrément devra être réitérée dans son intégralité si la Cession est toujours envisagée après ce délai.\n\nEn cas de refus d'agrément du Cessionnaire proposé et à moins que le Cédant ne décide de renoncer à la Cession envisagée, la Société est tenue, dans un délai de (délai de rachat par la Société après refus d'agrément) jours à compter de la notification du refus, de faire acquérir les Titres soit par un associé ou par un tiers, soit par la Société en vue d'une réduction de capital, mais dans ce cas, avec le consentement du Cédant.\n\nCette acquisition aura lieu moyennant un prix qui, à défaut d'accord entre les Parties, sera fixé à dire d'expert dans les conditions prévues à l'article1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.\n\nSi, à l'expiration du délai de (délai de rachat par la Société après refus d'agrément) jours prévu ci-dessus, le rachat des Titres n'est pas réalisé, l'agrément sera considéré comme donné.",
+    "variables_requises": [
+      {
+        "nom": "organe_agrement",
+        "type": "reference_croisee",
+        "libelle": "organe compétent pour l'agrément",
+        "occurrences_attendues": 2,
+        "depend_de_section": "cessions_libres_chapeau",
+        "resout_depuis_variable": "organe_agrement"
+      },
+      {
+        "nom": "delai_reponse_demande_agrement",
+        "type": "nombre",
+        "libelle": "délai de réponse à la demande d'agrément"
+      },
+      {
+        "nom": "delai_realisation_cession_apres_obtention_agrement",
+        "type": "nombre",
+        "libelle": "délai de réalisation de la Cession après obtention de l'agrément"
+      },
+      {
+        "nom": "delai_rachat_par_societe_apres_refus_agrement",
+        "type": "nombre",
+        "libelle": "délai de rachat par la Société après refus d'agrément",
+        "occurrences_attendues": 2
+      },
+      {
+        "nom": "delai_fixation_prix_expert",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sortie_conjointe_totale_drag_along",
+    "article": 5,
+    "titre_clause": "5.1 Droit de sortie conjointe totale (Clause de drag-along)",
+    "description_clause": "Si les fondateurs cèdent une participation majoritaire à un tiers, les investisseurs peuvent céder leur participation aux mêmes conditions.",
+    "texte_clause": "Dans l'hypothèse où les Associés Fondateurs envisageraient de procéder à une Cession de tout ou partie de leurs Titres dans la Société à un tiers, ayant pour effet de lui transférer la majorité du capital et des droits de vote dans la Société, et sous réserve des dispositions du présent pacte relatives au droit de (préemption/préférence), les Associés Fondateurs s'engagent à permettre aux Associés Investisseurs, si ces derniers le souhaitent, de Céder également, dans les mêmes proportions et aux mêmes conditions, leurs propres participations dans la Société.\n\nLe projet de Cession devra être notifié aux Associés Investisseurs par lettre recommandée avec demande d'avis de réception, (délai de notification du projet de Cession) jours au moins avant la date de réalisation de l'opération projetée, afin de leur permettre, le cas échéant, d'exercer la faculté de sortie conjointe qui leur est conférée aux termes de la présente clause.\n\nCette notification devra préciser la nature de l'opération projetée, le nombre de Titres concernés, leur prix de cession, les conditions de paiement, l'identité et les coordonnées du ou des Cessionnaire(s), ainsi que toute autre condition ou modalité importante de l'opération.\n\nLes Associés Investisseurs disposeront alors d'un délai de (délai d'exercice de la faculté de sortie conjointe totale) jours à compter de la réception de la notification ci-dessus pour faire savoir, par écrit, aux Associés Fondateurs, s'ils entendent faire usage de la faculté de sortie conjointe.\n\nÀ défaut, ils seront réputés avoir définitivement renoncé à l'exercice de cette faculté pour l'opération considérée.\n\nEn cas d'exercice de la faculté de sortie conjointe par les Associés Investisseurs, le prix de cession et les conditions de paiement seront identiques à celui et celles proposés dans la transaction principale. Toutefois, si le prix offert par le tiers Cessionnaire n'est pas entièrement en numéraire, en cas de contestation du prix de cession des Titres, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.\n\nLe rachat devra être effectué par le tiers Cessionnaire concomitamment au rachat des Titres Cédés par les Associés Fondateurs et dans un délai maximum de (délai de rachat par le Cessionnaire) jours à compter de la notification adressée par les Associés Investisseurs, bénéficiaires de la clause de sortie.\n\nL'absence d'exercice de la faculté de sortie par les Associés Investisseurs, alors que les Associés Fondateurs auraient réduit leur participation initiale dans la Société, ne pourrait les priver de la possibilité d'exercer cette faculté à l'occasion d'un autre projet de Cession.",
+    "variables_requises": [
+      {
+        "nom": "regime_preemption_preference",
+        "type": "reference_croisee",
+        "libelle": "préemption/préférence",
+        "depend_de_section": "preemption_preference",
+        "valeurs_par_clause": {
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_totalite": "préemption",
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_partiel": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_totalite": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_partiel": "préemption",
+          "preemption_sans_rang_entre_tous_associes_totalite": "préemption",
+          "preemption_sans_rang_entre_tous_associes_partiel": "préemption",
+          "preemption_investisseur_beneficiaire_unique": "préemption",
+          "preemption_fondateur_beneficiaire_unique": "préemption",
+          "preference_groupe_fondateurs_en_priorite": "préférence",
+          "preference_groupe_non_cedant_totalite": "préférence",
+          "preference_groupe_non_cedant_partiel": "préférence"
+        }
+      },
+      {
+        "nom": "delai_notification_projet_cession_sortie_totale",
+        "type": "nombre",
+        "libelle": "délai de notification du projet de Cession"
+      },
+      {
+        "nom": "delai_exercice_faculte_sortie_conjointe_totale",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la faculté de sortie conjointe totale"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_sortie_totale",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert"
+      },
+      {
+        "nom": "delai_rachat_par_cessionnaire_sortie_totale",
+        "type": "nombre",
+        "libelle": "délai de rachat par le Cessionnaire"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sortie_conjointe_proportionnelle",
+    "article": 5,
+    "titre_clause": "5.2 Droit de sortie conjointe proportionnelle",
+    "description_clause": "Si les fondateurs cèdent une participation minoritaire à un tiers, les investisseurs peuvent céder une quote-part proportionnelle de leurs titres.",
+    "texte_clause": "Dans l'hypothèse où les Associés Fondateurs envisageraient de procéder à une Cession de tout ou partie de leurs Titres dans la Société à un tiers, n'emportant pas transfert de la majorité du capital et des droits de vote dans la Société, et sous réserve des dispositions du présent pacte relatives au droit de (préemption/préférence), les Associés Fondateurs s'engagent à permettre aux Associés Investisseurs, si ces derniers le souhaitent, de Céder également, une quote-part des Titres qu'ils détiennent, déterminée comme il est dit ci-après.\n\nLe nombre de Titres de la Société pouvant être Cédés au résultat de l'exercice de la présente clause de sortie conjointe proportionnelle sera calculé en multipliant le nombre de Titres détenus par les Associés bénéficiant de la présente clause de sortie conjointe proportionnelle et souhaitant exercer leur droit de sortie conjointe par le rapport A/B où :\n\n-  A est le montant de la participation du (ou des) Associé(s) Fondateur(s) cédant(s) objet de la Cession ;\n\n-  B est le nombre total de Titres détenus par le(s) Associé(s) Fondateur(s).\n\nSi le résultat du calcul obtenu n'est pas un nombre entier, il sera arrondi à l'unité inférieure.\n\nLe projet de Cession devra être notifié aux Associés Investisseurs par lettre recommandée avec demande d'avis de réception, (délai de notification du projet de Cession) jours au moins avant la date de réalisation de l'opération projetée, afin de leur permettre, le cas échéant, d'exercer la faculté de sortie conjointe proportionnelle qui leur est conférée aux termes de la présente clause.\n\nCette notification devra préciser la nature de l'opération projetée, le nombre de Titres concernés, leur prix de cession, les conditions de paiement, l'identité et les coordonnées du ou des Cessionnaire(s), ainsi que toute autre condition ou modalité importante de l'opération.\n\nLes Associés Investisseurs disposeront alors d'un délai de (délai d'exercice de la faculté de sortie conjointe proportionnelle) jours à compter de la réception de la notification ci-dessus pour faire savoir, par écrit, aux Associés Fondateurs, s'ils entendent faire usage de la faculté de sortie conjointe proportionnelle.\n\nÀ défaut, ils seront réputés avoir définitivement renoncé à l'exercice de cette faculté pour l'opération considérée.\n\nEn cas d'exercice de la faculté de sortie conjointe proportionnelle par les Associés Investisseurs, le prix de cession et les conditions de paiement seront identiques à celui et celles proposés dans la transaction principale. Toutefois, si le prix offert par le tiers Cessionnaire n'est pas entièrement en numéraire, en cas de contestation du prix de cession des Titres, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.\n\nLe rachat devra être effectué par le tiers Cessionnaire concomitamment au rachat des Titres Cédés par les Associés Fondateurs et dans un délai maximum de (délai de rachat par le Cessionnaire) jours à compter de la notification adressée par les Associés Investisseurs, bénéficiaires de la clause de sortie.\n\nL'absence d'exercice de la faculté de sortie par les Associés Investisseurs, alors que les Associés Fondateurs auraient réduit leur participation initiale dans la Société, ne pourrait les priver de la possibilité d'exercer cette faculté à l'occasion d'un autre projet de Cession.",
+    "variables_requises": [
+      {
+        "nom": "regime_preemption_preference",
+        "type": "reference_croisee",
+        "libelle": "préemption/préférence",
+        "depend_de_section": "preemption_preference",
+        "valeurs_par_clause": {
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_totalite": "préemption",
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_partiel": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_totalite": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_partiel": "préemption",
+          "preemption_sans_rang_entre_tous_associes_totalite": "préemption",
+          "preemption_sans_rang_entre_tous_associes_partiel": "préemption",
+          "preemption_investisseur_beneficiaire_unique": "préemption",
+          "preemption_fondateur_beneficiaire_unique": "préemption",
+          "preference_groupe_fondateurs_en_priorite": "préférence",
+          "preference_groupe_non_cedant_totalite": "préférence",
+          "preference_groupe_non_cedant_partiel": "préférence"
+        }
+      },
+      {
+        "nom": "delai_notification_projet_cession_sortie_proportionnelle",
+        "type": "nombre",
+        "libelle": "délai de notification du projet de Cession"
+      },
+      {
+        "nom": "delai_exercice_faculte_sortie_conjointe_proportionnelle",
+        "type": "nombre",
+        "libelle": "délai d'exercice de la faculté de sortie conjointe proportionnelle"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_sortie_proportionnelle",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert"
+      },
+      {
+        "nom": "delai_rachat_par_cessionnaire_sortie_proportionnelle",
+        "type": "nombre",
+        "libelle": "délai de rachat par le Cessionnaire"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sortie_forcee_reciproque",
+    "article": 5,
+    "titre_clause": "Obligation de sortie — réciproque (fondateurs ou investisseurs)",
+    "description_clause": "Clause de sortie forcée jouant dans les deux sens selon qui reçoit une offre de cession totale.",
+    "texte_clause": "Les Associés Investisseurs ont décidé de prendre une participation dans le capital de la Société dans la perspective d'accompagner les Associés Fondateurs dans le développement de ladite Société pendant une période limitée, et avec pour objectif de Céder leur participation dans la Société au plus tard au terme d'une période de (nombre d'années avant l'objectif de sortie des Investisseurs) années, à compter de la date de signature des présentes.\n\nDans ce cadre, il a été convenu que, dans l'hypothèse où les Associés Investisseurs notifieraient aux Associés Fondateurs un projet de Cession portant sur la totalité des Titres de la Société au profit d'un ou plusieurs acquéreurs, les Associés Fondateurs s'engagent irrévocablement :\n\n-  soit à Céder, dans les (délai de Cession par les Fondateurs suite à la notification) jours de la réception de la notification susvisée, aux prix et selon les modalités indiquées dans celle-ci, la totalité des Titres de la Société leur appartenant au(x) Cessionnaire(s) indiqué(s).\n\nIl est précisé en tant que de besoin, que le prix de cession des Titres de la Société détenus par les Associés Fondateurs sera le prix par Titre initialement indiqué par les Associés Investisseurs dans la notification ci-dessus visée. Toutefois, en cas de contestation du prix de cession des Titres, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert -- Cession par les Fondateurs) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.\n\nÀ défaut de réponse des Associés Fondateurs dans le délai de (délai de Cession par les Fondateurs suite à la notification -- rappel) jours susvisés, ceux-ci seront réputés avoir accepté de Céder la totalité des Titres de la Société leur appartenant, aux prix et conditions indiquées dans la notification ;\n\n-  soit à racheter, dans le cadre de l'exercice du droit de (préemption/préférence) visé au présent pacte (ou à faire racheter par la personne de leur choix) dans un délai de (délai de rachat par les Fondateurs suite à la notification) jours à compter de la réception de la notification susvisée, la totalité des Titres de la Société détenus par les Associés Investisseurs aux conditions et selon les modalités définies dans ladite notification. Toutefois, en cas de contestation du prix de cession des Titres, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert -- Rachat par les Investisseurs) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.",
+    "variables_requises": [
+      {
+        "nom": "duree_horizon_sortie_investisseurs",
+        "type": "duree",
+        "libelle": "nombre d'années avant l'objectif de sortie des Investisseurs"
+      },
+      {
+        "nom": "delai_cession_fondateurs_apres_notification",
+        "type": "nombre",
+        "libelle": "délai de Cession par les Fondateurs suite à la notification"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_cession_fondateurs",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert -- Cession par les Fondateurs"
+      },
+      {
+        "nom": "delai_cession_fondateurs_apres_notification_rappel",
+        "type": "nombre",
+        "libelle": "délai de Cession par les Fondateurs suite à la notification -- rappel"
+      },
+      {
+        "nom": "regime_preemption_preference",
+        "type": "reference_croisee",
+        "libelle": "préemption/préférence",
+        "depend_de_section": "preemption_preference",
+        "valeurs_par_clause": {
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_totalite": "préemption",
+          "preemption_1er_rang_fondateurs_2eme_rang_investisseurs_partiel": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_totalite": "préemption",
+          "preemption_1er_rang_investisseurs_2eme_rang_fondateurs_partiel": "préemption",
+          "preemption_sans_rang_entre_tous_associes_totalite": "préemption",
+          "preemption_sans_rang_entre_tous_associes_partiel": "préemption",
+          "preemption_investisseur_beneficiaire_unique": "préemption",
+          "preemption_fondateur_beneficiaire_unique": "préemption",
+          "preference_groupe_fondateurs_en_priorite": "préférence",
+          "preference_groupe_non_cedant_totalite": "préférence",
+          "preference_groupe_non_cedant_partiel": "préférence"
+        }
+      },
+      {
+        "nom": "delai_rachat_fondateurs_apres_notification",
+        "type": "nombre",
+        "libelle": "délai de rachat par les Fondateurs suite à la notification"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_rachat_investisseurs",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert -- Rachat par les Investisseurs"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sortie_forcee_fondateurs_uniquement",
+    "article": 5,
+    "titre_clause": "Obligation de sortie — Fondateurs uniquement",
+    "description_clause": "Les fondateurs s'engagent à céder si les investisseurs cèdent la totalité de leurs titres à un tiers.",
+    "texte_clause": "Les Associés Investisseurs ont décidé de prendre une participation dans le capital de la Société dans la perspective d'accompagner les Associés Fondateurs dans le développement de ladite Société pendant une période limitée, et avec pour objectif de Céder leur participation dans la Société au plus tard au terme d'une période de (nombre d'années avant l'objectif de sortie des Investisseurs) années, à compter de la date de signature des présentes.\n\nDans ce cadre, il a été convenu que, dans l'hypothèse où les Associés Investisseurs notifieraient aux Associés Fondateurs un projet de Cession portant sur la totalité des Titres de la Société au profit d'un ou plusieurs acquéreurs, les Associés Fondateurs s'engagent irrévocablement à Céder, dans les (délai de Cession par les Fondateurs suite à la notification) jours de la réception de la notification susvisée, aux prix et selon les modalités indiquées dans celle-ci, la totalité des Titres de la Société leur appartenant au(x) Cessionnaire(s) indiqué(s).\n\nIl est précisé en tant que de besoin, que le prix de cession des Titres de la Société détenus par les Associés Fondateurs sera le prix par Titre initialement indiqué par les Associés Investisseurs dans la notification ci-dessus visée. Toutefois, en cas de contestation du prix de cession des Titres, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.",
+    "variables_requises": [
+      {
+        "nom": "duree_horizon_sortie_investisseurs",
+        "type": "duree",
+        "libelle": "nombre d'années avant l'objectif de sortie des Investisseurs"
+      },
+      {
+        "nom": "delai_cession_fondateurs_apres_notification",
+        "type": "nombre",
+        "libelle": "délai de Cession par les Fondateurs suite à la notification"
+      },
+      {
+        "nom": "delai_fixation_prix_expert",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sortie_forcee_investisseurs_uniquement",
+    "article": 5,
+    "titre_clause": "Obligation de sortie — Investisseurs uniquement",
+    "description_clause": "Les investisseurs s'engagent à céder si les fondateurs cèdent la totalité de leurs titres à un tiers.",
+    "texte_clause": "Les Parties conviennent que, dans l'hypothèse où les Associés Fondateurs notifieraient aux Associés Investisseurs un projet de Cession portant sur la totalité des Titres de la Société au profit d'un ou plusieurs acquéreurs, les Associés Investisseurs s'engagent irrévocablement à Céder, dans les (délai de Cession par les Investisseurs suite à la notification) jours de la réception de la notification susvisée, aux prix et selon les modalités indiquées dans celle-ci, la totalité des Titres de la Société leur appartenant au(x) Cessionnaire(s) indiqué(s).\n\nIl est précisé en tant que de besoin, que le prix de cession des Titres de la Société détenus par les Associés Fondateurs sera le prix par Titre initialement indiqué par les Associés Investisseurs dans la notification ci-dessus visée. Toutefois, en cas de contestation du prix de cession des Titres, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. L'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation définitive du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.",
+    "variables_requises": [
+      {
+        "nom": "delai_cession_investisseurs_apres_notification",
+        "type": "nombre",
+        "libelle": "délai de Cession par les Investisseurs suite à la notification"
+      },
+      {
+        "nom": "delai_fixation_prix_expert",
+        "type": "nombre",
+        "libelle": "délai de fixation définitive du prix par l'expert"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "retrait_sans_condition_investisseurs",
+    "article": 6,
+    "titre_clause": "Droit de retrait sans condition (Investisseurs)",
+    "description_clause": "Les investisseurs peuvent se retirer à la clôture de chaque exercice, sans condition, moyennant rachat de leurs titres par les fondateurs.",
+    "texte_clause": "6.1 Droit de retrait sans condition des Associés Investisseurs\n\nDe convention expresse entre les Parties, il est convenu que les Associés Investisseurs bénéficieront d'un droit de retrait sans condition de la Société.\n\nCe droit de retrait, qui devra porter sur la totalité des Titres appartenant aux Associés Investisseurs, pourra s'exercer à la clôture de chaque exercice social et pour la première fois à la date du (date) à condition d'avoir été notifié aux Associés Fondateurs par lettre recommandée avec accusé de réception adressée (délai de notification du retrait) jours à l'avance.\n\nÀ défaut de notification dans ce délai, le droit de retrait ne pourra être exercé qu'au titre du ou des exercice(s) suivant(s).\n\nEn cas d'exercice du droit de retrait, les Associés Fondateurs s'engagent à acquérir ou faire acquérir la totalité des Titres des Associés Investisseurs dans un délai maximum de (délai de rachat des Titres par les Fondateurs) jours suivant la date de clôture de l'exercice social au titre duquel le retrait a été notifié.\n\nSi les Titres des Associés Investisseurs sont rachetés par la Société, celle-ci est tenue de les Céder à un associé ou à un tiers dans un délai de (délai de Cession ou annulation par la Société) jours ou de les annuler.\n\nLe prix de rachat des Titres des Associés Investisseurs sera déterminé comme suit : (insérer une formule de détermination du prix).\n\nLe calcul du prix sera fait par la Société qui le notifiera aux Associés Investisseurs par lettre recommandée avec accusé de réception. Si dans les (délai de contestation du calcul du prix) jours de ladite notification, ni les Associés Investisseurs ni les Associés Fondateurs ne contestent le calcul effectué, le prix indiqué sera considéré comme définitivement accepté.\n\nÀ défaut d'accord entre les Associés Fondateurs et les Associés Investisseurs sur le prix de rachat tel qu'il est déterminé ci-dessus, celui-ci sera fixé à dire d'expert dans les conditions de l'article 1843-4 du code civil. Cet expert sera tenu d'appliquer la méthode de valorisation, indiquée ci-dessus qui, expressément acceptée, liera définitivement les Parties.\n\nL'expert ainsi désigné devra procéder à la fixation du prix de cession dans un délai maximum de (délai de fixation du prix par l'expert) jours à compter de sa désignation. La décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.\n\nLe prix des Titres des Associés Investisseurs sera payé comptant dans le délai de (délai de paiement du prix) jours suivant la fixation du prix résultant soit de l'accord des Parties, soit de la remise du rapport de l'expert à chacun des groupes.",
+    "variables_requises": [
+      {
+        "nom": "date_premier_exercice_droit_retrait",
+        "type": "date",
+        "libelle": "date"
+      },
+      {
+        "nom": "delai_notification_retrait_sans_condition",
+        "type": "nombre",
+        "libelle": "délai de notification du retrait"
+      },
+      {
+        "nom": "delai_rachat_titres_fondateurs_retrait_sans_condition",
+        "type": "nombre",
+        "libelle": "délai de rachat des Titres par les Fondateurs"
+      },
+      {
+        "nom": "delai_cession_ou_annulation_societe",
+        "type": "nombre",
+        "libelle": "délai de Cession ou annulation par la Société"
+      },
+      {
+        "nom": "formule_determination_prix_rachat_retrait_sans_condition",
+        "type": "texte",
+        "libelle": "insérer une formule de détermination du prix"
+      },
+      {
+        "nom": "delai_contestation_calcul_prix_retrait_sans_condition",
+        "type": "nombre",
+        "libelle": "délai de contestation du calcul du prix"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_retrait_sans_condition",
+        "type": "nombre",
+        "libelle": "délai de fixation du prix par l'expert"
+      },
+      {
+        "nom": "delai_paiement_prix_retrait_sans_condition",
+        "type": "nombre",
+        "libelle": "délai de paiement du prix"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "retrait_conditionnel_investisseurs",
+    "article": 6,
+    "titre_clause": "Droit de retrait conditionnel (Investisseurs)",
+    "description_clause": "Les investisseurs peuvent se retirer uniquement si un événement déclencheur défini survient (ex. non-atteinte d'objectifs).",
+    "texte_clause": "6.1 Droit de retrait conditionnel\n\nDe convention expresse entre les Parties, les Associés Investisseurs bénéficieront d'un droit de retrait en cas de survenance de l'un des événements suivants : (à compléter et préciser les cas de déclenchement du droit de retrait tels que la non-réalisation d'objectifs de chiffre d'affaires ou de résultats.)\n\nEn conséquence, les Associés Investisseurs pourront, en cas de survenance de cet événement ou de ces événements et dans un délai de (délai de notification du retrait) jours à compter de cette date, notifier aux Associés Fondateurs et à la Société, par lettre recommandée avec accusé de réception, leur intention d'user de cette faculté et d'exercer leur droit de retrait.\n\nCe droit de retrait ne pourra être exercé que pour la totalité des Titres détenus dans la Société.\n\nÀ défaut de notification dans ce délai, les Associés Investisseurs ne pourront plus exercer leur droit de retrait au titre de l'événement considéré.\n\nEn cas d'exercice du droit de retrait, les Associés Fondateurs s'engagent à acquérir ou faire acquérir les Titres détenus par les Associés Investisseurs dans un délai maximum de (délai de rachat des Titres par les Fondateurs) jours à compter de la réception de la notification susvisée.\n\nLe prix de rachat des Titres sera déterminé comme suit : (insérer une formule de détermination du prix).\n\nÀ défaut d'accord entre les Parties sur le prix de rachat des Titres tel qu'il est déterminé ci-dessus, celui-ci sera fixé à dire d'expert, dans les conditions prévues à l'article 1843-4 du code civil. Cet expert sera tenu d'appliquer la méthode de valorisation, indiquée ci-dessus qui, expressément acceptée, liera définitivement les Parties.\n\nL'expert ainsi désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.",
+    "variables_requises": [
+      {
+        "nom": "evenements_declenchant_droit_retrait",
+        "type": "texte",
+        "libelle": "à compléter et préciser les cas de déclenchement du droit de retrait tels que la non-réalisation d'objectifs de chiffre d'affaires ou de résultats."
+      },
+      {
+        "nom": "delai_notification_retrait_conditionnel",
+        "type": "nombre",
+        "libelle": "délai de notification du retrait"
+      },
+      {
+        "nom": "delai_rachat_titres_fondateurs_retrait_conditionnel",
+        "type": "nombre",
+        "libelle": "délai de rachat des Titres par les Fondateurs"
+      },
+      {
+        "nom": "formule_determination_prix_rachat_retrait_conditionnel",
+        "type": "texte",
+        "libelle": "insérer une formule de détermination du prix"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_retrait_conditionnel",
+        "type": "nombre",
+        "libelle": "délai de fixation du prix par l'expert"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "sortie_alternative_shotgun",
+    "article": 6,
+    "titre_clause": "6.2 Clause de sortie alternative (clause de « Buy or sell » ou « shotgun »)",
+    "description_clause": "En cas de blocage grave et persistant, un groupe peut proposer à l'autre de lui racheter ses titres ou de lui vendre les siens aux mêmes conditions.",
+    "texte_clause": "En cas de désaccord grave et persistant susceptible d'entraîner une paralysie dans le fonctionnement de la Société et de porter atteinte à l'intérêt social, chacun des Associés Fondateurs et des Associés Investisseurs pourra proposer à l'autre groupe, par lettre recommandée avec accusé de réception, de lui Céder la totalité de sa participation au sein de la Société ou de racheter la totalité de la participation de l'autre groupe, aux prix et conditions précisées dans son offre.\n\nLe groupe bénéficiaire de l'offre disposera d'un délai de (délai pour lever l'option) jours pour lever l'option qui lui sera ainsi conférée, par lettre recommandée avec accusé de réception. À défaut, le groupe bénéficiaire de l'offre pourra soit contester le prix proposé, qui sera dès lors déterminé à dire d'expert dans les conditions définies ci-après, soit proposer, selon le cas, de Céder ses propres Titres ou de racheter la totalité des Titres du groupe d'associés ayant pris l'initiative de cette procédure, aux prix et conditions déterminés dans l'offre initiale.\n\nÀ défaut d'accord entre les Parties sur le prix de cession, celui-ci sera déterminé à dire d'expert dans les conditions prévues à l'article 1843-4 du code civil. L'expert désigné devra procéder à la fixation définitive du prix de cession dans un délai maximum de (délai de fixation du prix par l'expert) jours à compter de sa désignation. Sa décision sera définitive et liera les Parties. Les frais d'expertise seront supportés par moitié par les Parties.\n\nLa Cession devra être effectuée et le prix payé dans un délai maximum de (délai de Cession et paiement du prix) jours à compter de la levée de l'option ou de la contre-offre ou, en cas de recours à une expertise en vue de la détermination du prix de cession, à compter de la fixation définitive du prix par l'expert.\n\nLe non-respect de ses engagements par l'un des Associés Fondateurs et l'un des Associés Investisseurs au titre du présent article entraînera le versement au profit du groupe d'associés non défaillants de la défaillance à titre de clause pénale, d'une indemnité définitive et forfaitaire d'un montant de (montant) €.",
+    "variables_requises": [
+      {
+        "nom": "delai_lever_option_shotgun",
+        "type": "nombre",
+        "libelle": "délai pour lever l'option"
+      },
+      {
+        "nom": "delai_fixation_prix_expert_shotgun",
+        "type": "nombre",
+        "libelle": "délai de fixation du prix par l'expert"
+      },
+      {
+        "nom": "delai_cession_paiement_prix_shotgun",
+        "type": "nombre",
+        "libelle": "délai de Cession et paiement du prix"
+      },
+      {
+        "nom": "montant_clause_penale_non_respect_shotgun",
+        "type": "montant",
+        "libelle": "montant"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "priorite_financement_ulterieur",
+    "article": 7,
+    "titre_clause": "7.1 Clause de priorité sur financement ultérieur",
+    "description_clause": "Les investisseurs déjà en place sont prioritaires pour participer à tout nouveau tour de financement.",
+    "texte_clause": "Le concours des Associés Investisseurs ayant comme condition essentielle et déterminante leur participation au développement de la Société, il est convenu qu'il sera donné préférence aux Associés Investisseurs par rapport à toute autre personne physique ou morale pour apporter tout nouveau concours financier à la Société, ou à toute société qu'elle Contrôle ou Contrôlera.\n\nPar concours financier, il faut entendre toute opération visant à la souscription ou à l'acquisition, de quelque manière que ce soit, par tout nouvel investisseur, de Titres émis par la Société.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "non_dilution_investisseurs",
+    "article": 7,
+    "titre_clause": "7.2 Clause de non-dilution",
+    "description_clause": "Permet aux investisseurs de souscrire à toute nouvelle émission dilutive pour conserver leur quote-part de capital.",
+    "texte_clause": "Les Parties au présent pacte s'engagent à faire en sorte que les membres des Associés Investisseurs bénéficient, dans le cadre d'une émission de Titres (à l'exception de l'émission de bons de souscription de parts de créateurs d'entreprise, d'attributions gratuites d'actions ou d'options de souscription ou d'acquisition d'actions au bénéfice de mandataires sociaux ou de salariés de la Société ou de ses filiales), d'un droit permanent de maintenir leur participation dans le capital de la Société à la quote-part de ce capital que représentent les Titres détenus avant une telle émission par chacun des membres des Associés Investisseurs.\n\nEn conséquence, les Parties au présent pacte s'engagent, en cas d'émission de Titres réalisée avec suppression du droit préférentiel de souscription, à ce que les membres des Associés Investisseurs soient mis en mesure de souscrire simultanément à une émission de Titres identiques et dans les mêmes conditions que celles de l'émission dilutive (notamment celles relatives au prix d'émission des Titres), de manière à leur permettre de conserver leur quote-part de capital, sur une base totalement diluée.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "clause_ratchet",
+    "article": 7,
+    "titre_clause": "7.3 Clause de ratchet",
+    "description_clause": "Protège les investisseurs en cas de levée de fonds ou cession à une valorisation inférieure à leur investissement initial.",
+    "texte_clause": "Au regard de l'investissement qui sera apporté par (nom de l'investisseur concerné) pour le projet de (nom du projet concerné), la clause de ratchet prévue au présent article pourra être exercée en permanence par les Associés Investisseurs en cas de valorisation en baisse de la Société ou de certains évènements qui entraineraient une dévalorisation de leur investissement dont notamment le cas où : \n\n- la Société émettrait de nouveaux titres sociaux ou toutes valeurs mobilières donnant accès, immédiatement ou à terme, à une quotité de capital de la Société\n\nou ;\n\n- un transfert sous quelque forme que ce soit de Titres de la Société et qui conférerait à une personne ou à plusieurs personnes agissant de concert le contrôle de la Société \n\nou \n\n- la valeur d'un Titre de la Société retenue dans le cadre d'une augmentation de capital s'établirait à un niveau inférieur au prix précèdent de souscription d'une part sociale.\n\nPour tous ces cas, les Associés Investisseurs auront le droit de souscrire à autant de titres sociaux leur permettant de ne pas diminuer le niveau de sa participation même si la valeur de la société diminue.\n\nCependant, il est expressément prévu par les parties que lorsque la valeur de l'investissement apporté par les Associés Investisseurs serait sous-évaluée, les Associés Investisseurs pourraient faire apport d'un investissement complémentaire en contrepartie de la cession par les autres associés de nouveaux titres sociaux.",
+    "variables_requises": [
+      {
+        "nom": "nom_investisseur_concerne_ratchet",
+        "type": "texte",
+        "libelle": "nom de l'investisseur concerné"
+      },
+      {
+        "nom": "nom_projet_concerne_ratchet",
+        "type": "texte",
+        "libelle": "nom du projet concerné"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "clause_liquidite",
+    "article": 7,
+    "titre_clause": "7.4 Clause de liquidité",
+    "description_clause": "Organise la recherche d'une solution de sortie (cession, IPO, opération financière) dans un horizon de temps déterminé.",
+    "texte_clause": "7.4.1. Les Parties conviennent de leur objectif commun de trouver une solution de liquidité de leur Investissement dans la Société à un horizon de (durée minimale) à (durée maximale) ans à compter de la date des présentes, sous la forme notamment (« Evènement de Liquidité ») :\n\n-  Soit du Transfert des Titres détenus par les Associés Investisseurs\n\n-  Soit du Transfert de l'intégralité du capital de la Société ;\n\n-  Soit d'une opération financière avec ou sans effet de levier ;\n\n-  Soit d'une introduction en bourse sur un marché réglementé ou non.\n\n7.4.2. En conséquence, la Majorité des Associés Investisseurs pourra, à tout moment, à compter du (Xème anniversaire) anniversaire de la date des présentes, demander qu'une réunion entre les Associés soit organisée, dans un délai maximum de trente (30) jours, dans le but d'étudier les perspectives et les moyens les mieux appropriés pour trouver des conditions optimales de sortie de la Société par les Associés le souhaitant.\n\n7.4.3. A défaut d'Evénement de Liquidité intervenu au plus tard le (Xème anniversaire -- rappel) anniversaire de la date des présentes, les Parties et la Société, en tant que de besoin, donnent tous pouvoirs à la Majorité des Investisseurs, qui l'accepte, aux fins, si elle le souhaite, de confier un mandat à une banque d'affaires ou à un autre intermédiaire financier de bonne réputation nationale ou internationale en vue d'aboutir à un Evènement de Liquidité.\n\n7.4.4. L'identité de l'intermédiaire sera déterminée par la Majorité des Associés Investisseurs.\n\n7.4.5. Les Parties s'engagent à coopérer avec l'intermédiaire afin de lui permettre de mener à bien sa mission dans les meilleures conditions et de susciter des offres au meilleur prix et d'offrir ainsi une liquidité acceptable aux Associés Investisseurs.",
+    "variables_requises": [
+      {
+        "nom": "duree_horizon_liquidite_min",
+        "type": "duree",
+        "libelle": "durée minimale"
+      },
+      {
+        "nom": "duree_horizon_liquidite_max",
+        "type": "duree",
+        "libelle": "durée maximale"
+      },
+      {
+        "nom": "ordinal_anniversaire_reunion_investisseurs",
+        "type": "nombre_ordinal",
+        "libelle": "Xème anniversaire"
+      },
+      {
+        "nom": "ordinal_anniversaire_reunion_investisseurs_rappel",
+        "type": "nombre_ordinal",
+        "libelle": "Xème anniversaire -- rappel"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "repartition_benefices",
+    "article": 7,
+    "titre_clause": "7.5 La clause de répartition des bénéfices",
+    "description_clause": "Engage la société à distribuer tout ou partie de sa trésorerie disponible sous forme de dividendes, sous réserve de ses obligations légales et financières.",
+    "texte_clause": "Les Parties s'engagent à faire le nécessaire, concernant la Société, pour que, (i) sous réserve des contraintes légales et réglementaires, (ii) des obligations de la Société envers tout établissement de crédit au regard des concours financiers consentis, (iii) des besoins prévisionnels de trésorerie pour les (durée) mois à venir liés au respect des termes du plan d'affaires ou de tout budget adopté conformément au Pacte, (l'intégralité/au moins X %) de la trésorerie disponible soit distribuée aux Associés sous forme de dividendes ou autrement (y compris par la distribution d'acomptes sur dividendes dès que possible), sauf décision collective contraire des Associés prise dans les conditions fixées par les statuts de la Société.",
+    "variables_requises": [
+      {
+        "nom": "regle_distribution",
+        "type": "choix",
+        "libelle": "l'intégralité/au moins X %",
+        "options": [
+          "intégralité",
+          "pourcentage minimum"
+        ],
+        "valeurs_par_choix": {
+          "intégralité": "l'intégralité",
+          "pourcentage minimum": "au moins {seuil_pourcentage} %"
+        }
+      },
+      {
+        "nom": "seuil_pourcentage",
+        "type": "nombre",
+        "libelle": null,
+        "depend_de_variable": "regle_distribution",
+        "depend_de_valeurs": [
+          "pourcentage minimum"
+        ]
+      },
+      {
+        "nom": "duree_besoins_previsionnels_tresorerie",
+        "type": "duree",
+        "libelle": "durée"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "droit_veto_investisseurs",
+    "article": 8,
+    "titre_clause": "8.1 Droit de veto",
+    "description_clause": "Liste les actes de gestion importants (modification du capital, fusion, dissolution, engagements financiers au-delà d'un seuil...) soumis à l'accord préalable des investisseurs.",
+    "texte_clause": "Les Associés Investisseurs disposent, (condition d'exercice du droit de veto), d'un droit de veto leur permettant de s'opposer à l'adoption des décisions suivantes :\n\n-  modifications du capital social ;\n\n-  fusions, scissions et apports partiels d'actifs et apports à toute autre société ;\n\n-  prises de participations dans toutes sociétés ou groupements ;\n\n-  transformation de la Société ;\n\n-  dissolution et liquidation de la Société ;\n\n-  acquisition et cession de fonds de commerce ou de branches d'activités ;\n\n-  engagements financiers d'un montant supérieur à (seuil des engagements financiers soumis à veto) euros, sauf au profit de filiales de la Société ;\n\n-  conclusion, modification ou résiliation d'accords ou de contrats engageant la Société pour un montant supérieur à (seuil des contrats soumis à veto) euros, et auxquels il ne peut être mis fin sans indemnité ou pénalité ou qu'avec un préavis supérieur à (préavis maximum de résiliation sans veto) mois ;\n\n-  tout investissement d'un montant supérieur à (seuil d'investissement soumis à veto) euros ;\n\n-  toute distribution de dividendes ou de réserves ;\n\n-  tout changement significatif de principes et/ou méthodes comptables ;\n\n-  constitution de tout gage, cautionnement ou autres sûretés, sous quelque forme que ce soit, autre que dans le cours normal des affaires ;\n\n-  ouverture ou conduite de toute procédure judiciaire, administrative, ou arbitrale, et/ou conclusion de toute transaction, en tant que défendeur ou demandeur, dont l'enjeu excède (seuil du litige soumis à veto) € ;\n\n-  agrément de tout nouvel associé ;\n\n-  tout engagement d'accomplir tout acte listé ci-dessus.\n\nPour exercer ce droit de veto, les Associés Investisseurs devront être informés préalablement et par écrit de tout projet correspondant à l'une des opérations énumérées ci-dessus. Les Associés Investisseurs disposeront d'un délai de (délai de réponse pour exercer le droit de veto) jours à compter de cette notification pour signifier à la Société, par écrit, s'ils entendent ou non exercer leur droit de veto.\n\nLes Associés Investisseurs s'engagent à utiliser leur droit de veto conformément à l'intérêt social et à ne pas s'opposer sans juste motif à l'une des décisions susvisées sous peine de voir leur responsabilité engagée.",
+    "variables_requises": [
+      {
+        "nom": "condition_droit_veto",
+        "type": "choix",
+        "libelle": "condition d'exercice du droit de veto",
+        "options": [
+          "sans condition de détention",
+          "seuil minimum de détention"
+        ],
+        "valeurs_par_choix": {
+          "sans condition de détention": "quelle que puisse être leur participation au capital et aux droits de vote de la Société",
+          "seuil minimum de détention": "à condition de détenir au moins {seuil_droit_veto_pourcentage} % du capital et/ou des droits de vote de la Société"
+        }
+      },
+      {
+        "nom": "seuil_droit_veto_pourcentage",
+        "type": "nombre",
+        "libelle": null,
+        "depend_de_variable": "condition_droit_veto",
+        "depend_de_valeurs": [
+          "seuil minimum de détention"
+        ]
+      },
+      {
+        "nom": "montant_veto_engagements_financiers",
+        "type": "montant",
+        "libelle": "seuil des engagements financiers soumis à veto"
+      },
+      {
+        "nom": "montant_veto_contrats",
+        "type": "montant",
+        "libelle": "seuil des contrats soumis à veto"
+      },
+      {
+        "nom": "duree_preavis_resiliation_contrats",
+        "type": "duree",
+        "libelle": "préavis maximum de résiliation sans veto"
+      },
+      {
+        "nom": "montant_veto_investissement",
+        "type": "montant",
+        "libelle": "seuil d'investissement soumis à veto"
+      },
+      {
+        "nom": "montant_veto_litige",
+        "type": "montant",
+        "libelle": "seuil du litige soumis à veto"
+      },
+      {
+        "nom": "delai_reponse_exercice_veto",
+        "type": "nombre",
+        "libelle": "délai de réponse pour exercer le droit de veto"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "repartition_sieges_organe_gouvernance",
+    "article": 8,
+    "titre_clause": "8.2 Répartition des sièges au sein de l'organe de gouvernance",
+    "description_clause": "Fixe le nombre de membres de l'organe de gouvernance et leur répartition entre fondateurs et investisseurs.",
+    "texte_clause": "8.2 Répartition des sièges au (organe compétent pour la gouvernance)\n\nLa Société est administrée par un (organe compétent pour la gouvernance) composé obligatoirement de (nombre de membres de l'organe de gouvernance) membres.\n\nLes membres peuvent être des personnes physiques ou morales. Ils seront nommés pour une durée de (durée du mandat des membres) ans, renouvelable, et pourront être révoqués à tout moment, ad nutum, par les associés de la Société.\n\n(nombre de membres présentés par les Investisseurs) membres devront être choisis parmi les candidats présentés par les Associés Investisseurs et (nombre de membres présentés par les Fondateurs) parmi les candidats présentés par les (autres associés/Associés Fondateurs). Le président du conseil d'administration sera choisi parmi les membres proposés par les Associés Fondateurs.\n\nLes Parties au présent pacte s'engagent à ce que tout membre qui cesserait ses fonctions avant le terme de son mandat, pour quelque cause que ce soit, soit remplacé par une personne choisie parmi les candidats présentés par les associés de son groupe.",
+    "variables_requises": [
+      {
+        "nom": "organe_gouvernance",
+        "type": "choix",
+        "libelle": "organe compétent pour la gouvernance",
+        "options": [
+          "Conseil d'administration",
+          "Comité stratégique",
+          "Comité de direction"
+        ],
+        "occurrences_attendues": 2
+      },
+      {
+        "nom": "nombre_membres_organe_gouvernance",
+        "type": "nombre",
+        "libelle": "nombre de membres de l'organe de gouvernance"
+      },
+      {
+        "nom": "duree_mandat_membres_organe",
+        "type": "duree",
+        "libelle": "durée du mandat des membres"
+      },
+      {
+        "nom": "nombre_membres_investisseurs_organe",
+        "type": "nombre",
+        "libelle": "nombre de membres présentés par les Investisseurs"
+      },
+      {
+        "nom": "nombre_membres_autres_organe",
+        "type": "nombre",
+        "libelle": "nombre de membres présentés par les Fondateurs"
+      },
+      {
+        "nom": "groupe_designant_membres_restants",
+        "type": "choix",
+        "libelle": "autres associés/Associés Fondateurs",
+        "options": [
+          "autres associés",
+          "Associés Fondateurs"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "decisions_organe_quorum",
+    "article": 8,
+    "titre_clause": "8.3 Décisions de l'organe de gouvernance — quorum",
+    "description_clause": "Fixe le quorum minimal pour que l'organe de gouvernance délibère valablement.",
+    "texte_clause": "8.3 Décisions du (organe compétent pour la gouvernance)\n\nLe (organe compétent pour la gouvernance) ne délibère valablement que si la moitié au moins de ses membres sont présents ou représentés.",
+    "variables_requises": [
+      {
+        "nom": "organe_gouvernance_ref_quorum",
+        "type": "reference_croisee",
+        "libelle": "organe compétent pour la gouvernance",
+        "depend_de_section": "repartition_sieges_organe_gouvernance",
+        "resout_depuis_variable": "organe_gouvernance",
+        "occurrences_attendues": 2
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "decisions_organe_majorite_commune",
+    "article": 8,
+    "titre_clause": "8.3 — Rédaction A : une seule règle de majorité pour toutes les décisions",
+    "description_clause": "Fixe la règle de majorité applicable aux décisions courantes de l'organe de gouvernance.",
+    "texte_clause": "« Sans préjudice du droit de veto des Associés Investisseurs visé à l'article ci-dessus, toutes les décisions du (organe compétent pour la gouvernance) sont adoptées à la majorité (qualificatif de majorité) des membres présents ou représentés.",
+    "variables_requises": [
+      {
+        "nom": "organe_gouvernance_ref_majorite_commune",
+        "type": "reference_croisee",
+        "libelle": "organe compétent pour la gouvernance",
+        "depend_de_section": "repartition_sieges_organe_gouvernance",
+        "resout_depuis_variable": "organe_gouvernance"
+      },
+      {
+        "nom": "regle_majorite_commune",
+        "type": "choix",
+        "libelle": "qualificatif de majorité",
+        "options": [
+          "simple",
+          "renforcée"
+        ],
+        "valeurs_par_choix": {
+          "simple": "simple",
+          "renforcée": "renforcée de {seuil_majorite_commune_renforcee} %"
+        }
+      },
+      {
+        "nom": "seuil_majorite_commune_renforcee",
+        "type": "nombre",
+        "libelle": null,
+        "depend_de_variable": "regle_majorite_commune",
+        "depend_de_valeurs": [
+          "renforcée"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "decisions_organe_majorite_differenciee",
+    "article": 8,
+    "titre_clause": "8.3 — Rédaction B : règle générale + règle renforcée pour les décisions listées",
+    "description_clause": "Fixe une majorité renforcée pour les décisions les plus importantes de l'organe de gouvernance, distincte de la majorité simple applicable aux autres décisions.",
+    "texte_clause": "« Sans préjudice du droit de veto des Associés Investisseurs visé à l'article ci-dessus, les décisions du (organe compétent pour la gouvernance) sont adoptées à (règle de majorité générale applicable) des membres présents ou représentés, à l'exception des décisions énumérées ci-après, qui sont adoptées à la majorité (seuil de majorité spéciale) % des membres présents ou représentés : (liste des décisions à majorité spéciale). »",
+    "variables_requises": [
+      {
+        "nom": "organe_gouvernance_ref_majorite_differenciee",
+        "type": "reference_croisee",
+        "libelle": "organe compétent pour la gouvernance",
+        "depend_de_section": "repartition_sieges_organe_gouvernance",
+        "resout_depuis_variable": "organe_gouvernance"
+      },
+      {
+        "nom": "regle_majorite_generale",
+        "type": "choix",
+        "libelle": "règle de majorité générale applicable",
+        "options": [
+          "simple",
+          "renforcée"
+        ],
+        "valeurs_par_choix": {
+          "simple": "la majorité simple",
+          "renforcée": "la majorité renforcée de {seuil_majorite_generale_renforcee} %"
+        }
+      },
+      {
+        "nom": "seuil_majorite_generale_renforcee",
+        "type": "nombre",
+        "libelle": null,
+        "depend_de_variable": "regle_majorite_generale",
+        "depend_de_valeurs": [
+          "renforcée"
+        ]
+      },
+      {
+        "nom": "seuil_majorite_speciale",
+        "type": "nombre",
+        "libelle": "seuil de majorité spéciale"
+      },
+      {
+        "nom": "decisions_a_majorite_speciale",
+        "type": "texte",
+        "libelle": "liste des décisions à majorité spéciale"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "droit_information_investisseurs",
+    "article": 8,
+    "titre_clause": "8.4 Droit d'information",
+    "description_clause": "Information périodique des investisseurs sur la marche de la société, avec possibilité d'audit à leurs frais.",
+    "texte_clause": "Outre les droits d'information visés par les textes légaux et réglementaires, les Associés Investisseurs seront tenus régulièrement, et a minima tous les (trimestres/semestres), informés par les Associés Fondateurs de la conduite et du développement des activités commerciales et financières de la Société, et notamment de tout fait susceptible de modifier, de façon sensible, ses conditions d'activité ou sa structure financière.\n\nLes Associés Investisseurs pourront également demander, au moins une fois par an, à ce qu'une mission d'audit, d'expertise ou de Contrôle, soit diligentée, à leurs frais, concernant tant la conduite de l'exploitation des activités de la Société, que sa comptabilité et sa gestion.",
+    "variables_requises": [
+      {
+        "nom": "periodicite_information_investisseurs",
+        "type": "choix",
+        "libelle": "trimestres/semestres",
+        "options": [
+          "trimestres",
+          "semestres"
+        ]
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "exclusivite",
+    "article": 9,
+    "titre_clause": "9.1 Exclusivité",
+    "description_clause": "Chaque associé actif s'engage à consacrer l'intégralité de son activité professionnelle au développement de la société.",
+    "texte_clause": "Sauf accord exprès des autres Associés, chaque Associé s’engage à consacrer l’intégralité de ses activités professionnelles au développement de la Société et de ses Filiales, aussi longtemps qu’il aura un contrat de travail ou un mandat social (directement ou indirectement) dans la Société et/ou ses Filiales.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "non_concurrence",
+    "article": 9,
+    "titre_clause": "9.2 Non-concurrence",
+    "description_clause": "Interdit aux fondateurs actifs d'exercer ou de soutenir une activité concurrente pendant qu'ils sont dans la société. ATTENTION garde-fou : une clause de non-concurrence sans contrepartie financière et/ou sans limite de durée/périmètre est fragilisée juridiquement — vérifier avant validation.",
+    "texte_clause": "Pour les besoins de la présente clause, il est précisé que le terme « Activité Concurrente » désigne (i) toute activité se rapportant à l’objet social visé dans le préambule du présent Pacte, et (ii) la détention d’une participation dans une entreprise exerçant une activité pouvant se rattacher à l’objet social visé au point (i) ci-dessus.\n\nChaque Associé Fondateur déclare et garantit que tant qu’il exercera des fonctions au sein de la Société :\n\n-  il n’est et ne sera pas administrateur, mandataire ou employé d’une société autre que la Société (à l’exception de sociétés holdings patrimoniales) ;\n\n-  il est et restera libre de tout engagement de non-concurrence qui pourrait être de nature à s’opposer au développement de la Société ;\n\n-  il ne détient pas de titres émis par des entreprises exerçant une Activité Concurrente, exception faite de titres financiers émis par des sociétés cotées et pour autant qu’il n’en détient pas le Contrôle ;\n\n-  il ne détient pas de droit de propriété industrielle, littéraire ou artistique utilisé ou pouvant être utilisé par la Société pour son développement.\n\nii)  En dehors de ses fonctions au sein de la Société, chaque Associé Fondateur s’engage vis-à-vis des autres Associés et de la Société, à compter des présentes et aussi longtemps qu’il exercera des fonctions au sein de la Société :\n\n-  à ne pas exercer d’Activité Concurrente, directement et/ou indirectement par tous moyens, en France ;\n\n-  à ne pas prêter son concours dans ou en faveur de toutes entreprises exerçant une Activité Concurrente, sous quelque forme que ce soit, y compris en tant que simple membre d’un conseil ou comité quelconque ;\n\n-  à ne pas développer tout nouveau projet qui serait similaire à l’activité de la Société en dehors de l’exploitation de la Société ;\n\n-  à ne pas détenir directement ou indirectement de titres financiers émis par des entreprises exerçant une Activité Concurrente, exception faite de titres financiers émis par des sociétés cotées et pour autant qu’il n’en détienne pas le Contrôle ;\n\n-  à ne pas déposer ou faire déposer, prendre ou faire prendre, acheter ou faire acheter, en son nom personnel ou au nom de son conjoint ou de ses descendants, ou pour son compte ou pour le compte de son conjoint ou de ses descendants, tout droit de propriété industrielle, littéraire ou artistique utilisé par la Société ou pouvant être utilisé par la Société pour son développement ;\n\n-  à ne pas solliciter ou prospecter, les clients et les fournisseurs de la Société pour leur proposer des produits ou services similaires et/ou concurrents de ceux de la Société ;\n\n-  à ne pas utiliser le nom « (nom de la société) » ou tout nom similaire, et plus généralement toute marque dont la Société est titulaire, à des fins commerciales ;\n\net\n\n-  de manière générale, ne pas utiliser à son profit ni communiquer à un tiers un secret, un savoir-faire ou une information confidentielle relative à la Société, en dehors du cours normal des affaires.",
+    "variables_requises": [
+      {
+        "nom": "nom_societe_non_concurrence",
+        "type": "auto_nom_societe",
+        "libelle": "nom de la société"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "non_debauchage",
+    "article": 9,
+    "titre_clause": "9.3 Non-débauchage",
+    "description_clause": "Interdit à chaque associé de débaucher les salariés/mandataires ou démarcher les clients/fournisseurs de la société pendant une durée définie.",
+    "texte_clause": "Chaque Associé s’interdit, tant qu’il détiendra directement ou indirectement des Titres, ou exercera des fonctions au sein de la Société et/ou de ses Filiales, et pour une durée de (durée de non-débauchage après sortie) mois et au-delà :\n\n- d’engager, recruter, solliciter ou démarcher, tout salarié ou mandataire social de la Société et/ou des Filiales aux fins de l’employer directement ou indirectement, à quelque titre que ce soit (notamment, salarié, consultant ou mandataire social) ou, plus généralement, aux fins de les inciter à quitter ou se détourner de la Société et/ou la Filiale ; et\n\n- de solliciter, engager ou démarcher, pour des projets susceptibles de concurrencer l’Activité l’un quelconque des clients et/ou fournisseurs et/ou prestataires avec lesquels la Société ou les Filiales, le cas échéant, entretiennent ou auront entretenu des relations commerciales ou de partenariat ou que la Société et/ou les Filiales prospectent ou auront, le cas échéant, prospecté.",
+    "variables_requises": [
+      {
+        "nom": "duree_non_debauchage",
+        "type": "duree",
+        "libelle": "durée de non-débauchage après sortie"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "engagement_propriete_intellectuelle",
+    "article": 9,
+    "titre_clause": "9.4 Engagement en matière de propriété intellectuelle",
+    "description_clause": "Garantit que la propriété intellectuelle utile à la société est ou sera cédée à la société par les fondateurs, sans redevance a posteriori.",
+    "texte_clause": "9.4.1 Chaque Associé Fondateur confirme et garantit n’être lui-même (directement ou indirectement), à ce jour, titulaire d’aucun Droit de Propriété Intellectuelle (à l’exception, le cas échéant, des droits strictement inaliénables de par la Loi) que la Société (ou une Filiale) utilise ou qui serait nécessaire au développement des activités de la Société (et de ses Filiales) et confirme et garantit que la Société ne lui est redevable d’aucune redevance ou contrepartie au titre d’un droit de Propriété Intellectuelle qu’il aurait développé et qu’il aurait transféré à la Société (ou une Filiale).\n\n9.4.2 Chaque Associé Fondateur s’interdit, tant qu’il détiendra directement ou indirectement des Titres, ou exercera des fonctions au sein de la Société et/ou de ses Filiales, et pour une durée de (durée de protection après sortie -- propriété intellectuelle) mois au-delà, de déposer ou protéger de quelque façon que ce soit, en son nom, directement, ou indirectement par personne interposée, tout Droit de Propriété Intellectuelle nécessaire à l’activité exercée par la Société ou les Filiales, le cas échéant.\n\n9.4.3 Chaque Associé Fondateur s’engage, le cas échéant, à déposer et protéger au nom et pour le compte de la Société ou à céder à la Société tout Droit de Propriété Intellectuelle qu’il développerait ou aurait développé pendant la durée de ses fonctions au sein de la Société ou des Filiales et qui serait nécessaire à l’activité exercée par la Société et les Filiales, le cas échéant, afin que la Société et les Filiales, le cas échéant, puissent en jouir de façon exclusive et en disposer librement, en qualité de propriétaire et ce, sauf disposition contraire et impérative de la loi, gratuitement ou, le cas échéant, au coût de revient du Droit de Propriété Intellectuelle concerné.\n\n9.4.4. Chaque Associé Fondateur s’interdit par conséquent d’intenter toute action administrative, judiciaire ou autre, à l’encontre de la Société et/ou de ses Filiales (et/ou leurs dirigeants, salariés et/ou associés) à l’effet de :\n\n-  revendiquer (ou contester la titularité par la Société et/ou ses Filiales de) un Droit de Propriété Intellectuelle dont la Société (ou une Filiale) est titulaire, et qu’elle utilise et/ou exploite dans le cadre de son activité et/ou de l’activité de ses filiales et/ou qui est nécessaire au développement des activités de la Société et/ou de ses Filiales ; et/ou\n\n-  interdire à ou limiter le droit de la Société et/ou une de ses Filiales de faire exercice de tout ou partie des prérogatives d’exploitation attachées à un Droit de Propriété Intellectuelle que la Société (ou une Filiale) utilise et/ou exploite dans le cadre de son activité et/ou de l’activité de ses filiales et/ou qui est nécessaire au développement des activités de la Société et/ou de ses Filiales ; et/ou\n\n-  obtenir une condamnation, pour contrefaçon et/ou concurrence déloyale, au paiement de dommages et intérêts, sur le fondement de Droits de Propriété Intellectuelle que la Société (ou une Filiale) utilise et/ou exploite, à titre onéreux ou non, dans le cadre de son activité et/ou de l’activité de ses filiales et/ou qui est nécessaire au développement des activités de la Société et/ou de ses Filiales.\n\n9.4.5. Chaque Associé Fondateur s’engage, sur simple demande de l’un des Investisseurs, à transférer immédiatement à la Société tout Droit de Propriété Intellectuelle dont il serait titulaire à la date des présentes ou dans le futur (en ce compris notamment les noms de domaine), et qui pourrait être utile à la Société (ou une Filiale) dans le cadre de son exploitation, gratuitement ou, le cas échéant, au coût de revient du Droit de Propriété Intellectuelle concerné.",
+    "variables_requises": [
+      {
+        "nom": "duree_protection_pi_apres_sortie",
+        "type": "duree",
+        "libelle": "durée de protection après sortie -- propriété intellectuelle"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "promesse_leaver_engagement",
+    "article": 9,
+    "titre_clause": "9.5.1 Promesse de vente irrévocable (« PROMESSE LEAVER »)",
+    "description_clause": "En cas de départ d'un fondateur, engage ce dernier à céder ses titres aux autres fondateurs selon les modalités prévues par le pacte.",
+    "texte_clause": "9.5. Promesse irrévocable de vente en cas de départ d’un Associé (« PROMESSE LEAVER »)\n\n9.5.1. Promesse de vente irrévocable\n\nLa survenance d’un Motif Fautif et/ou le Départ d’un Associé (pour les besoins du présent Article, l’« Associé Sortant ») entraînera de facto l’obligation de l’Associé Sortant de procéder à la cession de l’intégralité de ses Titres de la Société au profit des Associés Fondateurs (pour les besoins du présent Article, les « Bénéficiaires »), à première demande de leur part (la « Promesse de Vente »).\n\nPour les besoins du présent article :\n\nDépart Fautif : désigne la cessation des fonctions de mandataire social ou des fonctions salariées exercées par un Associé Fondateur au sein de la Société ou d’une Filiale et résultant de :\n\n(i) la démission (ou l’abandon de poste) intervenant préalablement au (Xème anniversaire) anniversaire de la date des présentes, sauf (a) avec l’accord préalable et écrit du (organe compétent pour la gouvernance), ou (ii) résultant du décès, de l’Incapacité ou de l’Invalidité de l’Associé Fondateur ;\n\n(ii) le licenciement ou la révocation pour « faute grave » ou « faute lourde » au sens de la jurisprudence de la Chambre sociale de la Cour de cassation ;\n\n(iii) le départ à la retraite anticipée sans l’accord préalable et écrit du (organe compétent pour la gouvernance) ;\n\n(iv) la rupture conventionnelle du contrat de travail sans l’accord préalable et écrit du (organe compétent pour la gouvernance)\n\nDépart Non Fautif : désigne toute cessation des fonctions de mandataire social ou des fonctions salariées exercées par un Associé Fondateur au sein de la Société ou d’une Filiale qui ne serait pas constitutive d’un Départ Fautif\n\nSi les Bénéficiaires souhaitent bénéficier de la Promesse de Vente de l’Associé Sortant, ils devront le lui notifier par lettre recommandée avec avis de réception dans le délai de (délai de notification de l’exercice de la Promesse de Vente) mois à compter de la Date de Départ de l’Associé Sortant ou, selon le cas, la date de survenance du Motif Fautif ou Non Fautif.\n\nEn cas d’exercice de la Promesse de Vente par les Bénéficiaires, les Titres de l’Associé Sortant seront répartis entre les Associés Fondateurs au prorata de leur Participation.\n\nIl est expressément convenu que la Promesse de Vente ci-dessus stipulée peut être valablement levée pour une partie seulement des Titres détenus par l’Associé Sortant dans la Société.\n\nLes Titres pour lesquels la Promesse de Vente aura été levée seront cédés pour un prix déterminé comme suit :\n\nEn cas de Départ pour Motif Non Fautif : le plus élevé des deux montants suivants :\n\n- à la valeur des Titres de l’Associé Fondateur calculée sur la base de la Valeur Nette Comptable de la Société telle qu’elle ressort des derniers comptes annuels approuvés de la Société ou,\n\n- au prix de souscription ou d’acquisition des Parts Sociales ;\n\nEn cas de Départ pour Motif Fautif : le plus faible des deux montants suivants :\n\n(pourcentage du prix d’acquisition -- Départ Fautif) % du prix d’acquisition ou de souscription des Titres.\n\n(pourcentage de la valeur nette comptable -- Départ Fautif) % de la valeur des Titres de l’Associé Fondateur calculée sur la base de la Valeur Nette Comptable de la Société telle qu’elle ressort des derniers comptes annuels approuvés de la Société.",
+    "variables_requises": [
+      {
+        "nom": "ordinal_anniversaire_demission_fautive",
+        "type": "nombre_ordinal",
+        "libelle": "Xème anniversaire"
+      },
+      {
+        "nom": "organe_gouvernance_ref_leaver",
+        "type": "reference_croisee",
+        "libelle": "organe compétent pour la gouvernance",
+        "depend_de_section": "repartition_sieges_organe_gouvernance",
+        "resout_depuis_variable": "organe_gouvernance",
+        "occurrences_attendues": 3
+      },
+      {
+        "nom": "delai_notification_exercice_promesse_leaver",
+        "type": "duree",
+        "libelle": "délai de notification de l’exercice de la Promesse de Vente"
+      },
+      {
+        "nom": "pourcentage_prix_acquisition_depart_fautif",
+        "type": "nombre",
+        "libelle": "pourcentage du prix d’acquisition -- Départ Fautif"
+      },
+      {
+        "nom": "pourcentage_valeur_nette_comptable_depart_fautif",
+        "type": "nombre",
+        "libelle": "pourcentage de la valeur nette comptable -- Départ Fautif"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "promesse_leaver_realisation",
+    "article": 9,
+    "titre_clause": "9.5.2 Réalisation de la Promesse de Vente irrévocable",
+    "description_clause": "Fixe le prix de cession des titres du fondateur sortant, différent selon que son départ est qualifié de bon ou mauvais leaver.",
+    "texte_clause": "En cas d’exercice de la Promesse de Vente, l’Associé Sortant transférera aux Bénéficiaires ayant levé la Promesse de Vente, la propriété des Titres de la Société pour lesquels la Promesse de Vente aura été levée dans un délai de quinze (15) jours à compter de ladite levée.\n\nLe paiement du prix de Transfert interviendra à la date du Transfert des Titres de la Société.\n\nLe Transfert sera réalisé par la délivrance :\n\nà l’Associé Sortant par chaque Bénéficiaire ayant levé la Promesse de Vente, d’un chèque bancaire ou d’un avis de virement d’un montant égal au prix d’achat des Titres de la Société dont il se porte acquéreur ;\n\net\n\nà chaque Bénéficiaire ayant levé la Promesse de Vente, d’un acte de cession dûment signé.\n\nDans l’hypothèse où l’Associé Sortant faillirait à son obligation de remettre aux Bénéficiaires ayant levée la Promesse de Vente, les documents permettant de procéder au transfert des Titres concernés conformément aux conditions ci-dessus, chaque Bénéficiaire pourra requérir de la Société et des autres Associés qu’ils formalisent le transfert des Parts Sociales dans les statuts de la Société sur simple présentation d’une copie de la notification d’exercice de la Promesse de Vente et du paiement des montants dus sur un compte séquestre ouvert par le Bénéficiaire au nom et pour le compte de l’Associé Sortant.\n\nLa Société, intervenant aux présentes, et les Associés ne pourront pas s’y opposer sauf s’ils se le voyait interdire par décision de justice.\n\nConformément aux dispositions des articles 1217, 1221 et 1341 du Code civil, chaque Bénéficiaire de la Promesse de Vente pourra toujours préférer poursuivre en justice l’exécution forcée en nature de la Promesse de Vente, au besoin à titre de réparation, aux fins d’obtenir la parfaite réalisation du Transfert des Titres concernés, aux conditions et suivant les modalités ci-dessus convenues, sans préjudice le cas échéant de tous dommages-intérêts complémentaires.\n\nChaque promettant de la Promesse de Vente reconnait expressément que, conformément aux dispositions de l’article 1124 du Code civil, son consentement n’est pas susceptible de révocation. En conséquence, la cession des Titres concernés étant parfaite dès l’expression de la volonté d’un Bénéficiaire matérialisée par une notification d’exercice, toute action ou intervention de l’Associé Sortant à compter de la date des présentes sera sans effet, et chaque Bénéficiaire pourra demander l’exécution forcée du transfert de propriété des Titres concernés suivant les modalités précisées au présent Article 9.5.2. et conformément à l’article 1124 du Code civil précité.\n\nChaque promettant de la Promesse de Vente reconnait que la contestation (i) la qualification du cas de Motif de Départ retenu par les Bénéficiaires de la promesse ou (ii) de la validité des engagements pouvant faire l’objet d’une Violation du Pacte, sera sans incidence sur l’exercice de la Promesse de vente et ne pourra en aucun cas avoir pour effet de faire échec au ou retarder le transfert des titres détenus par l’Associé promettant concerné ; sans préjudice de sa capacité à saisir les juridictions compétentes à l’effet de contester la qualification retenue et par conséquent, le prix, ou d’obtenir l’indemnisation de son préjudice.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "confidentialite",
+    "article": 10,
+    "titre_clause": "10.1 Confidentialité",
+    "description_clause": "Engagement de confidentialité réciproque sur l'existence et le contenu du pacte, pendant sa durée et 3 ans après.",
+    "texte_clause": "10.1.1.\tInformations confidentielles\n\nPendant toute la durée du Pacte et pendant une durée de trois (3) ans au-delà, chacune des Parties s'engage à considérer comme strictement confidentiels et à ne pas divulguer, céder ou transférer à un Tiers, toute information relative à la négociation, à l’existence et à l’exécution du Pacte ainsi que tous documents et informations qu'elle pourra acquérir ou auxquels elle aura eu accès dans le cadre de ses relations avec ou de ses responsabilités dans la Société et concernant, en particulier, l'activité, la technologie, les produits, les clients, la stratégie, le développement, les accords commerciaux ou de partenariat ou la situation financière de la Société ou de ses Filiales, le cas échéant, à moins :\n\n-  que la loi ou les règlements applicables ne l'exigent, ;\n\n-  qu'il ne s'agisse de divulgations faites à un mandataire social, cadre, ou conseil professionnel d'une Partie, mais seulement en vue de l'exécution par cette Partie de ses engagements et obligations ou de l'exercice de ses droits résultant de sa participation dans la Société et si le mandataire social, le cadre, le salarié ou le conseil professionnel susvisé est lui-même engagé à respecter la confidentialité de ces informations, ce dont cette Partie se portera fort, ;\n\n-  qu’il ne s’agisse de divulgations, à caractère général, faites par les Investisseurs à un de leurs mandataires sociaux ou actionnaires en vertu de ses obligations légales, réglementaires et/ou contractuelles,\n\nou\n\n-  qu’il ne s’agisse de répondre à l’action interrogatoire prévue aux alinéas 3 et 4 de l’article 1123 du Code civil, et uniquement dans ce cadre, pour confirmer l’existence du présent Pacte, et indiquer si elle entend s’en prévaloir.\n\n10.1.2.\tExceptions\n\nNe seront toutefois pas tenues pour confidentielles les informations :\n\n-  qui, au moment de leur divulgation, sont généralement connues, antérieurement publiées ou tombées dans le domaine public du fait de Tiers et sans violation du présent engagement de confidentialité, ;\n\n-  disponibles par d'autres sources sans violation du présent engagement de confidentialité..",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "duree_resiliation_pacte",
+    "article": 10,
+    "titre_clause": "10.2 Durée et résiliation du Pacte",
+    "description_clause": "Fixe une durée déterminée au pacte, renouvelable par tacite reconduction.",
+    "texte_clause": "10.2.1.\tLe Pacte entre en vigueur à compter de la Date de Réalisation pour une durée de (durée de la première période du pacte) années à compter de cette date. Au terme de cette première période de (durée de la première période du pacte) années, le Pacte sera renouvelable pour des périodes successives de quatre (4) années. A l'occasion de chaque renouvellement, y compris du premier d’entre eux, toute Partie pourra dénoncer le Pacte, pour ce qui la concerne, en notifiant sa décision au moins six (6) mois à l'avance aux autres Parties et à la Société.\n\n10.2.2.\tNéanmoins, à la date à laquelle une Partie ne détiendrait plus aucun Titre de la Société, le Pacte prendrait fin à l'égard de cette Partie, mais resterait en vigueur à l'égard des autres Parties.\n\n10.2.3.\tEn cas d’admission des Titres de la Société aux négociations sur un marché réglementé ou un système multilatéral de négociations organisé, en France ou à l’étranger, le Pacte sera résilié de plein droit à compter de la date d’admission aux négociations.\n\n10.2.4.\tL’expiration du Pacte ne sera cependant d’aucun effet sur la validité de tout droit ou obligation d’une Partie né(e) du fait de l’exécution ou de l’inexécution du Pacte préalablement à son expiration, tels que, notamment, tous les engagements dont le point de départ et la durée sont fixés dans le Pacte, indépendamment de la durée du Pacte.",
+    "variables_requises": [
+      {
+        "nom": "duree_premiere_periode_pacte",
+        "type": "duree",
+        "libelle": "durée de la première période du pacte",
+        "occurrences_attendues": 2
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "mandataire",
+    "article": 10,
+    "titre_clause": "10.3 Mandataire",
+    "description_clause": "Désigne la société comme mandataire commun chargé de faire respecter le pacte lors des mouvements de titres.",
+    "texte_clause": "10.3.1.\tAfin de garantir l'exercice des droits que se consentent mutuellement les Parties et pour conférer au Pacte sa pleine efficacité, les Parties conviennent de désigner de façon conjointe et irrévocable la Société en qualité de mandataire commun chargé de la gestion du Pacte (le « Mandataire »).\n\n10.3.2.\tLa Société, représentée par son Président, intervient spécialement aux présentes pour accepter ce mandat d'intérêt commun, dans les termes ci-après.\n\n10.3.3.\tEn sa qualité de gestionnaire du Pacte, spécialement mandaté par les Parties pour la durée du Pacte, le Mandataire :\n\n-  sera seul habilité à traiter et, le cas échéant, exécuter (documents de transfert des Titres) relatifs aux Titres et émanant des Parties,\n\n-  sera tenu de vérifier la régularité de ces demandes d'ordres de mouvement au regard des engagements contenus dans le Pacte,,\n\n-  devra veiller à ce que les comptes d’associés ouverts par la Société mentionnent les restrictions dont les Titres appartenant aux Parties sont grevés en application du Pacte,,\n\n-  n’enregistrera un ordre de mouvement qu'après s'être assuré que les procédures prévues au Pacte ont été respectées et que l'exécution de l'ordre de mouvement peut être menée à bien,,\n\n-  recueillera, au nom et pour le compte des Parties, les adhésions au Pacte,,\n\n-  signera, au nom et pour le compte des Parties, les Engagements Contractuels,,\n\n-  recueillera par tous moyens les décisions des Parties ayant pour objet le changement, la modification ou la renonciation à l'une quelconque des stipulations du Pacte, et procédera, le cas échéant, aux modifications du Pacte.\n\n10.3.4.\tLe présent mandat porte sur la gestion de tous les Titres appartenant aux Parties.\n\n10.3.5.\tConformément à l’article 1161 du Code civil, chaque Partie consent expressément que le Mandataire puisse représenter plusieurs parties dans le cadre du mandat qui lui est confié aux termes du présent Article, et le cas échéant, puisse être lui-même partie à tout accord dans lequel il interviendrait en sa qualité de Mandataire.",
+    "variables_requises": [
+      {
+        "nom": "formulation_transfert_titres_mandataire",
+        "type": "auto_forme_juridique",
+        "libelle": "documents de transfert des Titres",
+        "valeurs_par_forme_juridique": {
+          "SAS": "les ordres de mouvement",
+          "SASU": "les ordres de mouvement",
+          "SA": "les ordres de mouvement",
+          "SARL": "les actes de cession"
+        }
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "adhesion_engagement_contractuel",
+    "article": 10,
+    "titre_clause": "10.4 Adhésion au pacte — engagement contractuel",
+    "description_clause": "Impose à tout nouvel associé (par cession ou souscription) d'adhérer au pacte ou de signer un engagement contractuel équivalent.",
+    "texte_clause": "10.4.1.\tPour le cas où une Partie déciderait un Transfert d'un ou plusieurs de ses Titres à un Tiers, elle s'engage à faire adhérer le Tiers au Pacte au plus tard lors de la réalisation du Transfert conformément à un acte d’adhésion qui lui sera remis par la Société et par lequel il acceptera (i) d'être tenu de toutes les obligations résultant du Pacte, et (ii) de se soumettre à ses stipulations dans les mêmes conditions que s'il en avait été initialement signataire.\n\n10.4.2.\tToute adhésion au Pacte emportera automatiquement adhésion à l’ensemble des Engagements Contractuels signés préalablement à ladite adhésion.\n\n10.4.3.\tLe Tiers adhérera au Pacte en même qualité que la Partie ayant Transféré ses Titres. Par exception à ce qui précède :\n\n-  En cas de Transfert par un Fondateur, le Tiers adhèrera en qualité d’Autre Associé, sauf en cas de Transfert à un Affilié ou en cas de Transfert résultant d’un décès ;\n\n-  En cas de Transfert par un Associé Actif, le Tiers adhèrera en qualité d’Associé Actif s’il exerce un mandat social ou des fonctions salariées au sein de la Société ou d’une Filiale, ou en qualité d’Autre Associé dans les autres cas ; et\n\n-  En cas de Transfert par un Investisseur, ce dernier pourra librement décider que le Tiers adhère en qualité d’Investisseur ou d’Autre Associé.\n\n10.4.4.\tPour la mise en œuvre du présent article, les Parties donnent au Mandataire mandat irrévocable pour recueillir l'adhésion des Tiers en leur nom et pour leur compte.\n\n10.4.5.\tLes Parties s'engagent à ce que tout Tiers devenant titulaire de Titres de la Société autrement qu'au résultat d'un Transfert (notamment dans le cadre d’une souscription) signe un exemplaire de l’acte d’adhésion au plus tard à la date à laquelle il deviendra titulaire de Titres de la Société.\n\n10.4.6.\tAlternativement à l’adhésion au Pacte, le Mandataire pourra décider que le Tiers signera, au plus tard à la date de Transfert ou à la date de souscription des Titres, un engagement contractuel reprenant les principales clauses du Pacte et dont le modèle sera approuvé par les Fondateurs (l’« Engagement Contractuel »). Les Parties donnent au Mandataire mandat irrévocable pour signer tout Engagement Contractuel en leur nom et pour leur compte.\n\n10.4.7.\tFaute pour la Partie ayant décidé le Transfert d'obtenir l'adhésion du Tiers au Pacte ou la signature d’un Engagement Contractuel par le Tiers conformément à ce qui précède, au plus tard lors de la réalisation du Transfert, ou faute pour le Tiers d’adhérer au Pacte ou de signer un Engagement Contractuel préalablement à la souscription de Titres de la Société, les Parties donnent irrévocablement instruction au Mandataire de ne pas inscrire le Transfert des Titres au bénéfice du Tiers dans les comptes individuels d'associés de la Société jusqu'à ce que l'adhésion du Tiers au Pacte ait été recueillie ou que ce dernier ait signé un Engagement Contractuel.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "notifications",
+    "article": 10,
+    "titre_clause": "10.5 Notifications",
+    "description_clause": "Fixe les formes valables de notification entre parties (courrier recommandé, acte extrajudiciaire, email confirmé...).",
+    "texte_clause": "10.5.1.\tToute notification requise ou permise en vertu des stipulations du Pacte devra être en forme écrite, rédigée en français, et sera valablement effectuée si elle est effectuée par (i) lettre remise en mains propres, (ii) par acte extrajudiciaire, (iii) par courrier recommandé avec avis de réception (ou procédé équivalent en cas d’envoi à l’étranger, notamment DHL ou Fedex), ou (iv) par télécopie ou courrier électronique confirmé, au plus tard le premier Jour Ouvré suivant par l’un des procédés visés aux (i) à (iii), et si elle est adressée au siège social ou au domicile d'une Partie ou de la Société aux adresses déclarées par les Parties.\n\n10.5.2.\tChaque Partie pourra modifier l'adresse à laquelle devront lui être envoyées les notifications et leur copie, en notifiant ledit changement aux autres Parties ainsi qu'il est prévu ci-dessus. S’agissant d’une personne morale française immatriculée au registre du commerce et des sociétés, lorsque, les notifications doivent être adressées au siège social et/ou au représentant légal, tout changement de siège social et/ou de représentant légal sera opposable aux autres Parties à compter de sa publication sur Infogreffe.\n\n10.5.3.\tLes notifications faites par la poste (ou procédé équivalent en cas d’envoi à l’étranger, notamment DHL ou Fedex) seront présumées avoir été faites à la date de première présentation par l’agent de la poste (ou l’agent de l’entreprise de messagerie internationale).\n\n10.5.4\tLes notifications faites par télécopie ou par courrier électronique seront présumées avoir été faites à la date d'envoi de la télécopie ou du courrier électronique, à la condition que chaque notification par télécopie ou par courrier électronique soit confirmée, comme indiqué à l’Article (…), au plus tard le premier Jour Ouvré suivant.\n\n10.5.5.\tLes notifications faites par acte extrajudiciaire seront présumées avoir été faite à la date de signification de l’acte extrajudiciaire.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "force_executoire",
+    "article": 10,
+    "titre_clause": "10.6 Force exécutoire",
+    "description_clause": "Les parties peuvent poursuivre l'exécution forcée en nature des engagements du pacte.",
+    "texte_clause": "10.6.1.\tLes engagements énoncés au présent Pacte constituent des obligations dont les Parties conviennent expressément qu’elles pourront faire l’objet d’une exécution forcée en nature à l’initiative du (ou des) bénéficiaire(s) en cas de manquement de la Partie qui s’est engagée. Tout engagement consenti par l’une des Parties sera considéré, sauf stipulation contraire expresse du présent Pacte, comme ferme et irrévocable, de sorte qu’il ne pourra être rétracté autrement que par l’accord écrit du (ou des) créancier(s) et du (ou des) débiteur(s) de l’obligation en cause.\n\n10.6.2.\tAinsi, les Parties pourront toujours poursuivre l'exécution forcée des engagements souscrits par une autre Partie, sans préjudice de tous dommages et intérêts complémentaires. Les Parties conviennent que tout bénéficiaire pourra, en cas de levée de l’option qui lui aura été consentie, faire constater – le cas échéant judiciairement – la réalisation de l’opération en cause. Chaque Partie reconnaît que par dérogation à l’article 1221 du Code civil, l’exécution de ses obligations par chaque Partie au titre du présent Pacte ne se heurte à aucune impossibilité juridique matérielle ou morale, et chaque Partie pourra toujours poursuivre l’exécution forcée en nature, quand bien même il existerait une disproportion manifeste entre son coût pour le débiteur et son intérêt pour le créancier au sens de l’article 1221 du Code civil précité.\n\n10.6.3.\tLes Parties rappellent également que les promesses convenues au présent Pacte sont soumises à l’article 1124 du Code civil et que les dispositions de l’article 1123 sont applicables au Pacte.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "stipulations_diverses",
+    "article": 10,
+    "titre_clause": "10.7 Stipulations diverses",
+    "description_clause": "Primauté du pacte sur les statuts (hors ordre public), intégralité de l'accord, divisibilité des clauses, non-renonciation tacite.",
+    "texte_clause": "10.7.1.\tDans l'hypothèse où les Statuts de la Société contiendraient des stipulations contraires aux termes du Pacte, les Associés conviennent que le Pacte prévaudra sur les Statuts, à l’exception des stipulations d'ordre public figurant dans lesdits Statuts.\n\n10.7.2.\tLes Parties conviennent que le Pacte représente l'intégralité de leur accord quant à son objet et remplace, annule et prévaut sur toutes conventions ou documents antérieurs ayant un objet identique ou semblable à celui du Pacte.\n\n10.7.3.\tAucune Partie aux présentes ne conclura des conventions ou accords avec toute autre personne (y compris une autre Partie) concernant la Société ou les Titres selon des termes incompatibles avec les stipulations du présent Pacte, y compris, notamment, des conventions ou accords concernant le Transfert de Titres, contraires aux présentes.\n\n10.7.4.\tLes stipulations du présent Pacte engagent les Parties, leurs successeurs, héritiers, ayants droit, ayants cause et représentants légaux. En cas de décès de toute Partie personne physique, ses héritiers, légataires et/ou ayant droits seront tenus solidairement et indivisiblement de l’exécution du présent Pacte, et ce, même en l’absence de notification ou signification aux héritiers, légataires et/ou ayants droits. Dans une telle hypothèse, pour les besoins du présent Pacte, toute référence à ladite Partie devra s’entendre comme une référence à ladite Partie ou aux personnes visées au présent Article, selon le cas.\n\n10.7.5.\tEn cas de fusion par absorption de la Société par une personne morale quelconque, comme en cas de scission ou de toute autre modification de la structure ou de la forme sociétaire de la Société, les droits et obligations des Parties aux termes du présent Pacte seront automatiquement transférés ou reportés sur la nouvelle structure en résultant et s’exerceront sur les titres attribués à la suite de ces opérations.\n\n10.7.6.\tToute modification du Pacte ne pourra résulter que d'un accord écrit de chacune des Parties.\n\n10.7.7.\tDans l'éventualité où l'une quelconque des stipulations du Pacte serait déclarée nulle ou sans effet de quelque façon et pour quelque motif que ce soit, l’annulation n’aura aucun effet sur la validité des autres stipulations du Pacte et les Parties s'engagent à se concerter pour remédier à la cause de nullité constatée, de sorte que, sauf impossibilité, le Pacte poursuive ses effets sans discontinuité.\n\n10.7.8.\tLe fait pour une Partie de ne pas se prévaloir d’une stipulation du présent Pacte ne pourra en aucun cas être considéré comme une renonciation à se prévaloir de ladite stipulation dans un autre cas ou à invoquer toute autre stipulation.",
+    "variables_requises": [],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "loi_applicable_juridiction",
+    "article": 10,
+    "titre_clause": "10.9 Loi applicable et juridiction",
+    "description_clause": "Droit français, compétence exclusive du Tribunal de commerce du lieu à préciser.",
+    "texte_clause": "10.9.1.\tLe présent Pacte est régi par le droit français.\n\n10.9.2.\tTout conflit, procédure ou réclamation de quelque nature que ce soit relatif au Pacte et notamment à sa validité, son interprétation ou son exécution, relèvera de la compétence exclusive du Tribunal de commerce de (ville du tribunal compétent).",
+    "variables_requises": [
+      {
+        "nom": "ville_tribunal_competent",
+        "type": "texte",
+        "libelle": "ville du tribunal compétent"
+      }
+    ],
+    "sous_variantes_candidates": null
+  },
+  {
+    "code_clause": "nombre_exemplaires_signatures",
+    "article": 10,
+    "titre_clause": "10.10 Nombre d'exemplaires et signatures",
+    "description_clause": "Un exemplaire original du pacte est établi pour chaque partie et pour la société.",
+    "texte_clause": "10.10.\tNombre d'exemplaires\n\nLe présent Pacte est établi autant d’exemplaires qu’il n’y a de parties. Un exemplaire étant remis à chacune des Parties et à la Société.\n\nFait à (lieu de signature), le (date de signature) en (nombre d'exemplaires) exemplaires.\n\nSignatures",
+    "variables_requises": [
+      {
+        "nom": "lieu_signature_pacte",
+        "type": "texte",
+        "libelle": "lieu de signature"
+      },
+      {
+        "nom": "date_signature_pacte",
+        "type": "date",
+        "libelle": "date de signature"
+      },
+      {
+        "nom": "nombre_exemplaires_pacte",
+        "type": "nombre",
+        "libelle": "nombre d'exemplaires"
+      }
+    ],
+    "sous_variantes_candidates": null
+  }
+]

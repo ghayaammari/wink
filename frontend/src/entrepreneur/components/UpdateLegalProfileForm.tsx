@@ -6,6 +6,11 @@ import {
   type ProjectLegalProfileRead,
   type ProjectLegalProfileUpdate,
 } from "../api/projectApi"
+import StatutsRedactionFields, {
+  initialStatutsFields,
+  statutsFieldsToPayload,
+  validateStatutsFields,
+} from "./StatutsRedactionFields"
 import VerificationStatusBadge from "./VerificationStatusBadge"
 
 interface UpdateLegalProfileFormProps {
@@ -72,6 +77,11 @@ export default function UpdateLegalProfileForm({
   const [vatNumber, setVatNumber] = useState(legalProfile?.vat_number ?? "")
   const [nafCode, setNafCode] = useState(legalProfile?.naf_code ?? "")
   const [registrationDate, setRegistrationDate] = useState(legalProfile?.registration_date ?? "")
+  // Service 1.1.4 : champs lus automatiquement par les statuts (objet social,
+  // durée, capital, sigle…) -- bloc dédié, voir StatutsRedactionFields.tsx.
+  // Toujours éditables : ils se décident AVANT l'immatriculation, donc pas
+  // liés à `isCreated`.
+  const [statutsFields, setStatutsFields] = useState(() => initialStatutsFields(legalProfile))
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -96,12 +106,19 @@ export default function UpdateLegalProfileForm({
     // longueur max — une chaîne vide y est valide, envoyée telle quelle comme
     // avant (permet de les vider volontairement). Même traitement que
     // `registration_date` juste en dessous, qui gérait déjà ce cas pour lui seul.
+    const erreurStatuts = validateStatutsFields(statutsFields)
+    if (erreurStatuts) {
+      setError(erreurStatuts)
+      return
+    }
+
     const sirenOrOmit = siren.trim() === "" ? undefined : siren.trim()
     const siretOrOmit = siret.trim() === "" ? undefined : siret.trim()
 
     const payload: ProjectLegalProfileUpdate = {
       legal_name: legalName.trim(),
       legal_form: legalForm.trim(),
+      ...statutsFieldsToPayload(statutsFields),
       ...(isCreated
         ? {
             registration_number: registrationNumber.trim(),
@@ -165,6 +182,8 @@ export default function UpdateLegalProfileForm({
           className={inputClass}
         />
       </div>
+
+      <StatutsRedactionFields values={statutsFields} onChange={setStatutsFields} />
 
       {isCreated ? (
         <>

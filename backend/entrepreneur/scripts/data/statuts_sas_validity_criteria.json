@@ -1,0 +1,446 @@
+[
+  {
+    "type_critere": "duree_maximale",
+    "description_critere": "La durée de la Société ne peut excéder 99 ans. L'utilisateur doit donc saisir une durée comprise entre 1 et 99 ans ; au-delà, les statuts seraient irréguliers (la durée est en outre prorogeable avant expiration par décision collective).",
+    "valeur_limite": {
+      "unite": "annees",
+      "max": 99
+    },
+    "base_legale": "Article L.210-2 du Code de commerce -- la durée de la société ne peut excéder quatre-vingt-dix-neuf ans.",
+    "code_clause": "duree"
+  },
+  {
+    "type_critere": "taux_minimal",
+    "description_critere": "Lors de la constitution de la Société, les apports en numéraire doivent être libérés chacun à concurrence d'au moins 50 % de la valeur nominale des actions souscrites. La fraction_libérée saisie (en %) doit donc être >= 50 ; un taux inférieur rendrait la constitution irrégulière.",
+    "valeur_limite": {
+      "variable": "fraction_libérée",
+      "unite": "pourcentage",
+      "min": 50,
+      "max": 100,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Article L.225-3 du Code de commerce, applicable par renvoi de l'article L.227-2 (SAS) -- le capital social doit être libéré d'au moins la moitié des apports en numéraire lors de la constitution.",
+    "code_clause": "apport_numeraire_non_liberes"
+  },
+  {
+    "type_critere": "date_certificat_plausible",
+    "description_critere": "La date du certificat du dépositaire devrait être récente (moins d'un an) et déjà passée.",
+    "valeur_limite": {
+      "variable": "date_certificat",
+      "min_jours": -365,
+      "max_jours": 0,
+      "gravite": "avertissement"
+    },
+    "base_legale": "Plausibilité de la date saisie — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "apport_numeraire_non_liberes"
+  },
+  {
+    "type_critere": "somme_depot_positive",
+    "description_critere": "La somme déposée doit être supérieure à 0.",
+    "valeur_limite": {
+      "variable": "somme_depot",
+      "unite": "euros",
+      "min_exclu": 0,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un montant nul n'a pas de sens ici.",
+    "code_clause": "depot_fonds_numeraire"
+  },
+  {
+    "type_critere": "date_depot_plausible",
+    "description_critere": "La date de dépôt des fonds devrait être récente (moins d'un an) et déjà passée.",
+    "valeur_limite": {
+      "variable": "date_depot",
+      "min_jours": -365,
+      "max_jours": 0,
+      "gravite": "avertissement"
+    },
+    "base_legale": "Plausibilité de la date saisie — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "depot_fonds_numeraire"
+  },
+  {
+    "type_critere": "somme_depot_positive",
+    "description_critere": "La somme déposée doit être supérieure à 0.",
+    "valeur_limite": {
+      "variable": "somme_depot",
+      "unite": "euros",
+      "min_exclu": 0,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un montant nul n'a pas de sens ici.",
+    "code_clause": "depot_fonds_surplus"
+  },
+  {
+    "type_critere": "somme_surplus_positive",
+    "description_critere": "La somme restant à libérer doit être supérieure à 0.",
+    "valeur_limite": {
+      "variable": "somme_surplus",
+      "unite": "euros",
+      "min_exclu": 0,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un montant nul n'a pas de sens ici.",
+    "code_clause": "depot_fonds_surplus"
+  },
+  {
+    "type_critere": "date_depot_plausible",
+    "description_critere": "La date de dépôt des fonds devrait être récente (moins d'un an) et déjà passée.",
+    "valeur_limite": {
+      "variable": "date_depot",
+      "min_jours": -365,
+      "max_jours": 0,
+      "gravite": "avertissement"
+    },
+    "base_legale": "Plausibilité de la date saisie — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "depot_fonds_surplus"
+  },
+  {
+    "type_critere": "chronologie_rapport",
+    "description_critere": "La date du rapport du commissaire aux apports ne peut pas précéder la date de sa désignation.",
+    "valeur_limite": {
+      "variable": "date_rapport",
+      "min_variable": "date_designation",
+      "gravite": "bloquant"
+    },
+    "base_legale": "Chronologie de la procédure d'évaluation des apports en nature (le commissaire rédige son rapport après sa désignation).",
+    "code_clause": "commissaire_apports_unanimite"
+  },
+  {
+    "type_critere": "chronologie_rapport",
+    "description_critere": "La date du rapport du commissaire aux apports ne peut pas précéder la date de l'ordonnance qui l'a désigné.",
+    "valeur_limite": {
+      "variable": "date_rapport",
+      "min_variable": "date_ordonnance",
+      "gravite": "bloquant"
+    },
+    "base_legale": "Chronologie de la procédure d'évaluation des apports en nature (le commissaire rédige son rapport après sa désignation).",
+    "code_clause": "commissaire_apports_ordonnance"
+  },
+  {
+    "type_critere": "seuil_apport_commissaire",
+    "description_critere": "La dispense de commissaire aux apports n'est possible que si le montant d'aucun apport en nature n'excède 30 000 euros et que la valeur totale des apports en nature non évalués n'excède pas la moitié du capital social. Si l'un de ces seuils est dépassé, un commissaire aux apports doit être désigné.",
+    "valeur_limite": {
+      "unite": "euros",
+      "max": 30000
+    },
+    "base_legale": "Articles L.227-1 et D.227-3 du Code de commerce -- dispense de commissaire aux apports limitée aux apports inférieurs à 30 000 euros et n'excédant pas la moitié du capital.",
+    "code_clause": "dispense_commissaire_apports_l227_1"
+  },
+  {
+    "type_critere": "apport_industrie_hors_capital",
+    "description_critere": "Les apports en industrie ne concourent jamais à la formation du capital social : la part de capital attribuée en contrepartie d'un apport en industrie doit être nulle (pourcentage_capital = 0 et aucune action comptabilisée dans le capital), les droits donnés se limitant au partage des bénéfices et de l'actif net et à la contribution aux pertes.",
+    "valeur_limite": {
+      "unite": "pourcentage_capital",
+      "max": 0
+    },
+    "base_legale": "Article 1843-2 du Code civil (apports en industrie ne concourant pas au capital social), combiné au principe posé pour la SAS par l'article L.227-1 du Code de commerce.",
+    "code_clause": "apports_industrie"
+  },
+  {
+    "type_critere": "pourcentage_benefices_borne",
+    "description_critere": "Le pourcentage des bénéfices de chaque apporteur en industrie doit être entre 0 et 100 %.",
+    "valeur_limite": {
+      "variable": "pourcentage_benefices",
+      "unite": "pourcentage",
+      "min": 0,
+      "max": 100,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Un pourcentage de participation aux bénéfices ou aux pertes doit rester entre 0 et 100 % (article 1844-1 du Code civil pour le principe de la contribution aux pertes).",
+    "code_clause": "apports_industrie"
+  },
+  {
+    "type_critere": "pourcentage_pertes_borne",
+    "description_critere": "Le pourcentage des pertes de chaque apporteur en industrie doit être entre 0 et 100 %.",
+    "valeur_limite": {
+      "variable": "pourcentage_pertes",
+      "unite": "pourcentage",
+      "min": 0,
+      "max": 100,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Un pourcentage de participation aux bénéfices ou aux pertes doit rester entre 0 et 100 % (article 1844-1 du Code civil pour le principe de la contribution aux pertes).",
+    "code_clause": "apports_industrie"
+  },
+  {
+    "type_critere": "duree_maximale",
+    "description_critere": "La clause d'inaliénabilité des titres ne peut excéder 10 ans à compter de la souscription (ou de la réalisation de l'apport), conformément à la limite légale applicable aux clauses statutaires d'inaliénabilité. La variable duree_inalienabilite doit donc rester <= 10 ans.",
+    "valeur_limite": {
+      "variable": "duree_inalienabilite",
+      "unite": "annees",
+      "min": 1,
+      "max": 10,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Article L.227-13 du Code de commerce (SAS) -- clause d'inaliénabilité des actions limitée à une durée de dix ans au plus.",
+    "code_clause": "inalienabilite"
+  },
+  {
+    "type_critere": "coherence_delais",
+    "description_critere": "Le Président dispose de trois (3) mois à compter de la notification du refus pour faire acquérir les titres. Ce délai doit contenir le délai de renonciation du cédant puis le délai laissé aux associés, et laisser le temps de proposer les titres à des tiers. Chaque délai doit être supérieur à 0 et delai_renonciation_transfert + delai_acquisition_associes doit rester inférieur à 90 jours ; sinon l'agrément devient automatiquement acquis et la clause perd son effet. AVERTISSEMENT seulement, pas un blocage.",
+    "valeur_limite": {
+      "unite": "jours",
+      "min": 1,
+      "somme_max_exclue": 90,
+      "variables": [
+        "delai_renonciation_transfert",
+        "delai_acquisition_associes"
+      ],
+      "gravite": "avertissement"
+    },
+    "base_legale": "Cohérence interne de la clause (délai de trois mois du paragraphe 4 de l'article 17.2 du modèle Bpifrance) -- règle de bon sens, pas une interdiction légale.",
+    "code_clause": "agrement_refus_sanction_nantissement"
+  },
+  {
+    "type_critere": "delai_notification_minimal",
+    "description_critere": "Le délai de notification du changement de contrôle doit être d'au moins 1 jour.",
+    "valeur_limite": {
+      "variable": "delai_notification_controle",
+      "unite": "jours",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un délai nul ou négatif rendrait la procédure inapplicable.",
+    "code_clause": "changement_controle"
+  },
+  {
+    "type_critere": "delai_mise_en_oeuvre_minimal",
+    "description_critere": "Le délai de mise en œuvre de l'exclusion doit être d'au moins 1 jour.",
+    "valeur_limite": {
+      "variable": "delai_mise_en_oeuvre_exclusion",
+      "unite": "jours",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un délai nul ou négatif rendrait la procédure inapplicable.",
+    "code_clause": "changement_controle"
+  },
+  {
+    "type_critere": "delai_cession_minimal",
+    "description_critere": "Le délai de cession des actions de l'associé exclu doit être d'au moins 1 jour.",
+    "valeur_limite": {
+      "variable": "delai_cession_actions_exclusion",
+      "unite": "jours",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un délai nul ou négatif rendrait la procédure inapplicable.",
+    "code_clause": "exclusion"
+  },
+  {
+    "type_critere": "prix_determinable",
+    "description_critere": "Le prix de rachat des actions de l'associé exclu doit être déterminé ou déterminable (formule, expert, etc.) et doit pouvoir être fixé, à défaut d'accord, par un expert désigné conformément à l'article 1843-4 du Code civil. Ne pas laisser le prix à la seule discrétion d'une partie.",
+    "valeur_limite": null,
+    "base_legale": "Article 1843-4 du Code civil -- à défaut d'accord entre les parties, le prix des droits sociaux est fixé par un expert désigné d'un commun accord ou à défaut par ordonnance du président du tribunal, sans préjudice de la clause de détermination conventionnelle du prix prévue par les statuts.",
+    "code_clause": "exclusion_preemption_et_agrement"
+  },
+  {
+    "type_critere": "delai_preavis_minimal",
+    "description_critere": "Le préavis de révocation doit être d'au moins 1 jour (sinon, ne pas retenir cette clause).",
+    "valeur_limite": {
+      "variable": "delai_preavis_revocation",
+      "unite": "jours",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un délai nul ou négatif rendrait la procédure inapplicable.",
+    "code_clause": "preavis_revocation_president"
+  },
+  {
+    "type_critere": "nombre_membres_minimal",
+    "description_critere": "Le Comité de Direction doit compter au moins 1 membre.",
+    "valeur_limite": {
+      "variable": "nombre_membres_comite",
+      "unite": "membres",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause.",
+    "code_clause": "comite_direction"
+  },
+  {
+    "type_critere": "comite_collegial",
+    "description_critere": "Un comité est un organe collégial : il compte en principe au moins 2 membres.",
+    "valeur_limite": {
+      "variable": "nombre_membres_comite",
+      "unite": "membres",
+      "min": 2,
+      "gravite": "avertissement"
+    },
+    "base_legale": "Nature collégiale du Comité de Direction — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "comite_direction"
+  },
+  {
+    "type_critere": "membres_convocation_bornes",
+    "description_critere": "Le nombre de membres pouvant demander la convocation doit être d'au moins 1 et ne peut pas dépasser le nombre de membres du comité.",
+    "valeur_limite": {
+      "variable": "nombre_membres_convocation_comite",
+      "unite": "membres",
+      "min": 1,
+      "max_variable": "nombre_membres_comite",
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause.",
+    "code_clause": "comite_direction"
+  },
+  {
+    "type_critere": "seuil_cession_positif",
+    "description_critere": "Le seuil de cession ou d'acquisition d'actif doit être supérieur à 0.",
+    "valeur_limite": {
+      "variable": "montant_cession_actifs",
+      "unite": "euros",
+      "min_exclu": 0,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un montant nul n'a pas de sens ici.",
+    "code_clause": "domaine_reserve_seuils"
+  },
+  {
+    "type_critere": "seuil_investissement_positif",
+    "description_critere": "Le seuil d'investissement ou de dépense doit être supérieur à 0.",
+    "valeur_limite": {
+      "variable": "montant_investissement_depense",
+      "unite": "euros",
+      "min_exclu": 0,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un montant nul n'a pas de sens ici.",
+    "code_clause": "domaine_reserve_seuils"
+  },
+  {
+    "type_critere": "majorite_renforcee_bornes",
+    "description_critere": "La majorité renforcée doit être supérieure à la majorité simple : plus de 50 % et au plus 100 % des voix.",
+    "valeur_limite": {
+      "variable": "majorite_renforcee",
+      "unite": "pourcentage",
+      "min_exclu": 50,
+      "max": 100,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Article L.227-9 du Code de commerce (les statuts fixent les conditions de majorité) — cohérence interne : une majorité « renforcée » inférieure ou égale à 50 % n'a pas de sens.",
+    "code_clause": "modalites_decisions_collectives"
+  },
+  {
+    "type_critere": "pourcentage_convocation_borne",
+    "description_critere": "Le pourcentage du capital requis pour demander la convocation de l'assemblée doit être compris entre 0 et 100 %.",
+    "valeur_limite": {
+      "variable": "pourcentage_minimum_convocation",
+      "unite": "pourcentage",
+      "min": 0,
+      "max": 100,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause (un pourcentage du capital ne peut dépasser 100 %).",
+    "code_clause": "modalites_decisions_collectives"
+  },
+  {
+    "type_critere": "coherence_delais_consultation",
+    "description_critere": "Le délai au-delà duquel le silence d'un associé vaut réponse doit être au moins égal au délai minimal laissé pour répondre ; sinon un associé pourrait être réputé avoir répondu avant même la fin de son délai de réponse.",
+    "valeur_limite": {
+      "variable": "delai_silence_consultation_ecrite",
+      "min_variable": "delai_reponse_consultation_ecrite",
+      "unite": "jours",
+      "gravite": "avertissement"
+    },
+    "base_legale": "Cohérence interne de la clause — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "modalites_decisions_collectives"
+  },
+  {
+    "type_critere": "delai_convocation_minimal",
+    "description_critere": "Le délai de convocation de l'assemblée doit être d'au moins 1 jour.",
+    "valeur_limite": {
+      "variable": "delai_convocation",
+      "unite": "jours",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence interne de la clause — un délai nul ou négatif rendrait la procédure inapplicable.",
+    "code_clause": "modalites_decisions_collectives"
+  },
+  {
+    "type_critere": "jour_ouverture_valide",
+    "description_critere": "L'exercice ne peut pas commencer le 1er janvier : choisissez dans ce cas l'option « exercice social coïncidant avec l'année civile ».",
+    "valeur_limite": {
+      "jour_variable": "jour_ouverture_exercice",
+      "mois_variable": "mois_ouverture_exercice",
+      "exclure": [
+        [
+          1,
+          "janvier"
+        ]
+      ],
+      "gravite": "bloquant"
+    },
+    "base_legale": "Cohérence du choix : un exercice ouvert le 1er janvier coïncide avec l'année civile.",
+    "code_clause": "exercice_hors_annee_civile"
+  },
+  {
+    "type_critere": "premier_exercice_futur",
+    "description_critere": "La clôture du premier exercice doit être postérieure à aujourd'hui.",
+    "valeur_limite": {
+      "variable": "date_cloture_premier_exercice",
+      "min_jours": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Le premier exercice commence à l'immatriculation : sa clôture ne peut pas être déjà passée.",
+    "code_clause": "exercice_hors_annee_civile"
+  },
+  {
+    "type_critere": "premier_exercice_24_mois",
+    "description_critere": "Le premier exercice ne dure en pratique pas plus de 24 mois (au-delà, l'administration fiscale peut le contester).",
+    "valeur_limite": {
+      "variable": "date_cloture_premier_exercice",
+      "max_jours": 730,
+      "gravite": "avertissement"
+    },
+    "base_legale": "Pratique fiscale et comptable : premier exercice de 24 mois au plus — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "exercice_hors_annee_civile"
+  },
+  {
+    "type_critere": "taux_premier_dividende_borne",
+    "description_critere": "Le pourcentage du premier dividende doit être supérieur à 0 et au plus égal à 100 %.",
+    "valeur_limite": {
+      "variable": "pourcentage_premier_dividende",
+      "unite": "pourcentage",
+      "min_exclu": 0,
+      "max": 100,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Article L.232-16 du Code de commerce (premier dividende calculé sur le montant libéré et non remboursé des actions) — un pourcentage doit rester entre 0 et 100 %.",
+    "code_clause": "premier_dividende"
+  },
+  {
+    "type_critere": "plafond_pourcentage",
+    "description_critere": "La majoration du dividende ne peut excéder 10 % de la somme qui serait versée à l'associé s'il ne bénéficiait pas de cette majoration ; elle est réservée aux associés détenant leurs actions au nominatif depuis au moins deux ans. Le taux applicable étant fixé par la collectivité des associés, il doit rester <= 10 %.",
+    "valeur_limite": {
+      "unite": "pourcentage",
+      "max": 10
+    },
+    "base_legale": "Article L.232-14 du Code de commerce -- majoration de dividende plafonnée à 10 % pour les associés justifiant d'une inscription nominative depuis deux ans au moins.",
+    "code_clause": "dividende_majore"
+  },
+  {
+    "type_critere": "nombre_exemplaires_minimal",
+    "description_critere": "Les statuts doivent être établis en au moins un exemplaire original (en pratique un par associé, plus ceux destinés au dépôt et à l'enregistrement).",
+    "valeur_limite": {
+      "variable": "nombre_exemplaires",
+      "unite": "exemplaires",
+      "min": 1,
+      "gravite": "bloquant"
+    },
+    "base_legale": "Pratique de constitution : un exemplaire original est déposé au greffe lors de l'immatriculation (article R.123-103 du Code de commerce).",
+    "code_clause": "cloture_fait_a_signature"
+  },
+  {
+    "type_critere": "date_signature_plausible",
+    "description_critere": "La date de signature des statuts devrait se situer dans l'année (passée ou à venir).",
+    "valeur_limite": {
+      "variable": "date_signature",
+      "min_jours": -365,
+      "max_jours": 365,
+      "gravite": "avertissement"
+    },
+    "base_legale": "Plausibilité de la date saisie — règle de bon sens, pas une interdiction légale.",
+    "code_clause": "cloture_fait_a_signature"
+  }
+]

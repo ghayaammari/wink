@@ -1,0 +1,2728 @@
+{
+  "source_file": "notice_explicative",
+  "segments_avec_variables": [
+    {
+      "segment_type": "hors_marqueur",
+      "article_numero": null,
+      "premier_paragraphe_index": 0,
+      "occurrences": [
+        {
+          "paragraphe_index": 4,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": "(dénomination sociale), société SAS au capital de (("
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "(montant",
+          "nom": "montant",
+          "type": "NON_VARIABLE",
+          "contexte": "e), société SAS au capital de ((montant) € ayant son siège social à (l"
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "lieu",
+          "nom": "lieu",
+          "type": "texte",
+          "contexte": "t) € ayant son siège social à (lieu), immatriculée au Registre du "
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "lieu d'immatriculation",
+          "nom": "lieu_d_immatriculation",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de (lieu d'immatriculation) sous le numéro  (numéro Siren"
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "numéro Siren",
+          "nom": "num_ro_siren",
+          "type": "texte",
+          "contexte": "atriculation) sous le numéro  (numéro Siren), représentée par (prénom), (n"
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "uméro Siren), représentée par (prénom), (nom), en sa qualité de (qua"
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "n), représentée par (prénom), (nom), en sa qualité de (qualité),"
+        },
+        {
+          "paragraphe_index": 4,
+          "libelle": "qualité",
+          "nom": "qualit",
+          "type": "texte",
+          "contexte": "nom), (nom), en sa qualité de (qualité),"
+        },
+        {
+          "paragraphe_index": 6,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "(prénom), (nom), né/née le (date de na"
+        },
+        {
+          "paragraphe_index": 6,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "(prénom), (nom), né/née le (date de naissance"
+        },
+        {
+          "paragraphe_index": 6,
+          "libelle": "date de naissance",
+          "nom": "date_de_naissance",
+          "type": "date",
+          "contexte": "(prénom), (nom), né/née le (date de naissance), demeurant à (adresse), "
+        },
+        {
+          "paragraphe_index": 6,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "te de naissance), demeurant à (adresse), "
+        },
+        {
+          "paragraphe_index": 7,
+          "libelle": "dénommé(e",
+          "nom": "d_nomm_e",
+          "type": "NON_VARIABLE",
+          "contexte": "ci-après (dénommé(e)s) les « Associés Fondateurs »"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": "(dénomination sociale), (forme) au capital de (monta"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "forme",
+          "nom": "forme",
+          "type": "texte",
+          "contexte": "(dénomination sociale), (forme) au capital de (montant) €, ay"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "ciale), (forme) au capital de (montant) €, ayant son siège social à ("
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": ") €, ayant son siège social à (adresse), immatriculée au Registre du "
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "lieu d'immatriculation",
+          "nom": "lieu_d_immatriculation",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de (lieu d'immatriculation) sous le numéro (numéro Siren)"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "numéro Siren",
+          "nom": "num_ro_siren",
+          "type": "texte",
+          "contexte": "matriculation) sous le numéro (numéro Siren), représentée par (prénom) (no"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "uméro Siren), représentée par (prénom) (nom), en sa qualité de (qual"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "en), représentée par (prénom) (nom), en sa qualité de (qualité),"
+        },
+        {
+          "paragraphe_index": 10,
+          "libelle": "qualité",
+          "nom": "qualit",
+          "type": "texte",
+          "contexte": "énom) (nom), en sa qualité de (qualité),"
+        },
+        {
+          "paragraphe_index": 12,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "(prénom), (nom), (né/née) le (date de "
+        },
+        {
+          "paragraphe_index": 12,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "(prénom), (nom), (né/née) le (date de naissan"
+        },
+        {
+          "paragraphe_index": 12,
+          "libelle": "né/née",
+          "nom": "n_n_e",
+          "type": "A_CONFIRMER",
+          "contexte": "(prénom), (nom), (né/née) le (date de naissance), demeu"
+        },
+        {
+          "paragraphe_index": 12,
+          "libelle": "date de naissance",
+          "nom": "date_de_naissance",
+          "type": "date",
+          "contexte": "(prénom), (nom), (né/née) le (date de naissance), demeurant à (adresse),"
+        },
+        {
+          "paragraphe_index": 12,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "te de naissance), demeurant à (adresse),"
+        },
+        {
+          "paragraphe_index": 14,
+          "libelle": "e",
+          "nom": "e",
+          "type": "NON_VARIABLE",
+          "contexte": "ci-après ..... dénommé(e)s) les « Associés Investisseur"
+        },
+        {
+          "paragraphe_index": 16,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "le(s) Associé(s) Fondateur(s) et le"
+        },
+        {
+          "paragraphe_index": 16,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "le(s) Associé(s) Fondateur(s) et le(s) Associé"
+        },
+        {
+          "paragraphe_index": 16,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "le(s) Associé(s) Fondateur(s) et le(s) Associé(s) Investiss"
+        },
+        {
+          "paragraphe_index": 16,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " Associé(s) Fondateur(s) et le(s) Associé(s) Investisseur(s) ét"
+        },
+        {
+          "paragraphe_index": 16,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " Fondateur(s) et le(s) Associé(s) Investisseur(s) étant ci-aprè"
+        },
+        {
+          "paragraphe_index": 16,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " le(s) Associé(s) Investisseur(s) étant ci-après dénommés indiv"
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": "Les Parties sont associées de (dénomination sociale), société (type de société) au"
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "type de société",
+          "nom": "type_de_soci_t",
+          "type": "texte",
+          "contexte": "énomination sociale), société (type de société) au capital de (capital) €, ay"
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "capital",
+          "nom": "capital",
+          "type": "montant",
+          "contexte": "ype de société) au capital de (capital) €, ayant son siège social à ("
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "siège social",
+          "nom": "si_ge_social",
+          "type": "texte",
+          "contexte": ") €, ayant son siège social à (siège social), immatriculée au Registre du "
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "lieu d'immatriculation",
+          "nom": "lieu_d_immatriculation",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de (lieu d'immatriculation) sous le numéro (numéro Siren)"
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "numéro Siren",
+          "nom": "num_ro_siren",
+          "type": "texte",
+          "contexte": "matriculation) sous le numéro (numéro Siren) (ci-après désignée la « Socié"
+        },
+        {
+          "paragraphe_index": 18,
+          "libelle": "ci-après désignée la « Société »",
+          "nom": "ci_apr_s_d_sign_e_la_soci_t",
+          "type": "A_CONFIRMER",
+          "contexte": "sous le numéro (numéro Siren) (ci-après désignée la « Société »)."
+        },
+        {
+          "paragraphe_index": 19,
+          "libelle": "décrire les activités",
+          "nom": "d_crire_les_activit_s",
+          "type": "texte",
+          "contexte": "La Société a pour activités (décrire les activités). Son capital social est divis"
+        },
+        {
+          "paragraphe_index": 19,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " capital social est divisé en (nombre) actions de (montant) euros de"
+        },
+        {
+          "paragraphe_index": 19,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "divisé en (nombre) actions de (montant) euros de nominal, entièrement"
+        },
+        {
+          "paragraphe_index": 20,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "-  Associés Fondateurs : (à compléter)"
+        },
+        {
+          "paragraphe_index": 21,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "-  Associés Investisseurs : (à compléter)"
+        },
+        {
+          "paragraphe_index": 22,
+          "libelle": "numéro",
+          "nom": "num_ro",
+          "type": "texte",
+          "contexte": "Aux termes de l'article (numéro) des statuts de la Société, le"
+        },
+        {
+          "paragraphe_index": 23,
+          "libelle": "minoritaire/majoritaire",
+          "nom": "minoritaire_majoritaire",
+          "type": "A_CONFIRMER",
+          "contexte": " de la prise de participation (minoritaire/majoritaire) des Associés Investisseurs, l"
+        },
+        {
+          "paragraphe_index": 23,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "ssociés Fondateurs détiennent (à compléter) % du capital de la Société."
+        },
+        {
+          "paragraphe_index": 24,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "dite Société dans un délai de (à compléter) ans à compter de leur entrée."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 1,
+      "premier_paragraphe_index": 28,
+      "occurrences": [
+        {
+          "paragraphe_index": 33,
+          "libelle": "de vote ou autres",
+          "nom": "de_vote_ou_autres",
+          "type": "A_CONFIRMER",
+          "contexte": "é, constitution d'une fiducie (de vote ou autres), apport, échange, fusion, sci"
+        },
+        {
+          "paragraphe_index": 33,
+          "libelle": "nantissement ou autre",
+          "nom": "nantissement_ou_autre",
+          "type": "A_CONFIRMER",
+          "contexte": "i et réalisation d'une sûreté (nantissement ou autre), convention de croupier, prêt"
+        },
+        {
+          "paragraphe_index": 36,
+          "libelle": "y compris l'usufruit ou la nue-propriété des titres",
+          "nom": "y_compris_l_usufruit_ou_la_nue_propri_t_des_titres",
+          "type": "A_CONFIRMER",
+          "contexte": "tes autres valeurs mobilières (y compris l'usufruit ou la nue-propriété des titres) représentatives du capital et"
+        },
+        {
+          "paragraphe_index": 36,
+          "libelle": "ou l'une quelconque de ses filiales",
+          "nom": "ou_l_une_quelconque_de_ses_filiales",
+          "type": "A_CONFIRMER",
+          "contexte": "s ou à émettre par la Société (ou l'une quelconque de ses filiales) ;"
+        },
+        {
+          "paragraphe_index": 38,
+          "libelle": "ou l'une quelconque de ses filiales",
+          "nom": "ou_l_une_quelconque_de_ses_filiales",
+          "type": "A_CONFIRMER",
+          "contexte": " droits de vote de la Société (ou l'une quelconque de ses filiales) ;"
+        },
+        {
+          "paragraphe_index": 39,
+          "libelle": "ou l'une quelconque de ses filiales",
+          "nom": "ou_l_une_quelconque_de_ses_filiales",
+          "type": "A_CONFIRMER",
+          "contexte": "cission à laquelle la Société (ou l'une quelconque de ses filiales) serait partie ou de toutes au"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 2,
+      "premier_paragraphe_index": 41,
+      "occurrences": [
+        {
+          "paragraphe_index": 41,
+          "libelle": "clauses d'inaliénabilité des Cessions",
+          "nom": "clauses_d_inali_nabilit_des_cessions",
+          "type": "texte",
+          "contexte": "libres et Cessions interdites (clauses d'inaliénabilité des Cessions) : "
+        },
+        {
+          "paragraphe_index": 45,
+          "libelle": "les « Cessions Libres »",
+          "nom": "les_cessions_libres",
+          "type": "A_CONFIRMER",
+          "contexte": "s Cessions énumérées ci-après (les « Cessions Libres ») peuvent être effectuées libre"
+        },
+        {
+          "paragraphe_index": 45,
+          "libelle": "préemption/préférence",
+          "nom": "pr_emption_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": "ion des Titres, aux droits de (préemption/préférence) des Parties et (ajouter si un"
+        },
+        {
+          "paragraphe_index": 45,
+          "libelle": "ajouter si une clause d'agrément est prévue dans le pacte « à l'agrément préalable (du Président/du conseil d'administration/du Comité de direction/du Comité stratégique/des Parties/des Associés Fondateurs/des Associés Investisseurs »",
+          "nom": "ajouter_si_une_clause_d_agr_ment_est_pr_vue_dans_le_pacte_l_agr_ment_pr_alable_du_pr_sident_du_conseil_d_administration_du_comit_de_direction_du_comit_strat_gique_des_parties_des_associ_s_fondateurs_des_associ_s_investisseurs",
+          "type": "NON_VARIABLE",
+          "contexte": "on/préférence) des Parties et (ajouter si une clause d'agrément est prévue dans le pacte « à l'agrément préalable (du Président/du conseil d'administration/du Comité de direction/du Comité stratégique/des Parties/des Associés Fondateurs/des Associés Investisseurs ») ne s'appliquant pas auxdites "
+        },
+        {
+          "paragraphe_index": 48,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "ndraient directement au moins (à compléter) % du capital et des droits de"
+        },
+        {
+          "paragraphe_index": 49,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "(i) la société Cessionnaire adhèr"
+        },
+        {
+          "paragraphe_index": 50,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "(ii) le membre des Associés Fondat"
+        },
+        {
+          "paragraphe_index": 50,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "rs de la détention de plus de (à compléter) % du capital et des droits de"
+        },
+        {
+          "paragraphe_index": 50,
+          "libelle": "jour et mois",
+          "nom": "jour_et_mois",
+          "type": "texte",
+          "contexte": " tous les ans au plus tard le (jour et mois) de chaque année. Dans cette h"
+        },
+        {
+          "paragraphe_index": 51,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "yant une activité financière, (i) qu'il contrôle ou qu'il gère "
+        },
+        {
+          "paragraphe_index": 51,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "ectement ou indirectement, ou (ii) par lesquels ce membre des As"
+        },
+        {
+          "paragraphe_index": 51,
+          "libelle": "iii",
+          "nom": "iii",
+          "type": "NON_VARIABLE",
+          "contexte": "ectement contrôlé ou géré, ou (iii) qui sont contrôlés ou gérées,"
+        },
+        {
+          "paragraphe_index": 53,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "sseurs réalisées à compter du (date) ;"
+        },
+        {
+          "paragraphe_index": 54,
+          "libelle": "préemption/préférence",
+          "nom": "pr_emption_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": "ant de l'exercice du droit de (préemption/préférence), du droit de sortie conjointe"
+        },
+        {
+          "paragraphe_index": 56,
+          "libelle": "préemption/préférence",
+          "nom": "pr_emption_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": " pacte afférentes au droit de (préemption/préférence) des autres Parties. "
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 58,
+      "occurrences": [
+        {
+          "paragraphe_index": 59,
+          "libelle": "durée",
+          "nom": "dur_e",
+          "type": "texte",
+          "contexte": "s Titres pendant une durée de (durée) ans à compter de la date d'en"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 60,
+      "occurrences": [
+        {
+          "paragraphe_index": 61,
+          "libelle": "durée",
+          "nom": "dur_e",
+          "type": "texte",
+          "contexte": "s Titres pendant une durée de (durée) ans à compter de la date d'en"
+        },
+        {
+          "paragraphe_index": 61,
+          "libelle": "Ajouter le cas échéant : « sans l'accord exprès et préalable d'une majorité des membres des Associés Investisseurs ».",
+          "nom": "ajouter_le_cas_ch_ant_sans_l_accord_expr_s_et_pr_alable_d_une_majorit_des_membres_des_associ_s_investisseurs",
+          "type": "A_CONFIRMER",
+          "contexte": " en vigueur du présent pacte, (Ajouter le cas échéant : « sans l'accord exprès et préalable d'une majorité des membres des Associés Investisseurs ».)"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 62,
+      "occurrences": [
+        {
+          "paragraphe_index": 63,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "e Titres représentant plus de (à compléter) % des Titres qu'il détient pe"
+        },
+        {
+          "paragraphe_index": 63,
+          "libelle": "la durée indiquée ne doit pas excéder 10 ans",
+          "nom": "la_dur_e_indiqu_e_ne_doit_pas_exc_der_10_ans",
+          "type": "A_CONFIRMER",
+          "contexte": " détient pendant une durée de (la durée indiquée ne doit pas excéder 10 ans) ans à compter de la date d'en"
+        },
+        {
+          "paragraphe_index": 63,
+          "libelle": "Ajouter le cas échéant : « sans l'accord exprès et préalable d'une majorité des membres des Associés Investisseurs »",
+          "nom": "ajouter_le_cas_ch_ant_sans_l_accord_expr_s_et_pr_alable_d_une_majorit_des_membres_des_associ_s_investisseurs",
+          "type": "A_CONFIRMER",
+          "contexte": " en vigueur du présent pacte. (Ajouter le cas échéant : « sans l'accord exprès et préalable d'une majorité des membres des Associés Investisseurs »)."
+        },
+        {
+          "paragraphe_index": 64,
+          "libelle": "compte tenu le cas échéant des Titres Cédés précédemment par ce dernier",
+          "nom": "compte_tenu_le_cas_ch_ant_des_titres_c_d_s_pr_c_demment_par_ce_dernier",
+          "type": "A_CONFIRMER",
+          "contexte": "ur un nombre cumulé de Titres (compte tenu le cas échéant des Titres Cédés précédemment par ce dernier) représentant plus de (à compl"
+        },
+        {
+          "paragraphe_index": 64,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "dernier) représentant plus de (à compléter) %, (Ajouter, le cas échéant :"
+        },
+        {
+          "paragraphe_index": 64,
+          "libelle": "Ajouter, le cas échéant : « sans l'accord exprès et préalable de la majorité des membres des Associés Investisseurs »",
+          "nom": "ajouter_le_cas_ch_ant_sans_l_accord_expr_s_et_pr_alable_de_la_majorit_des_membres_des_associ_s_investisseurs",
+          "type": "A_CONFIRMER",
+          "contexte": "tant plus de (à compléter) %, (Ajouter, le cas échéant : « sans l'accord exprès et préalable de la majorité des membres des Associés Investisseurs ») en violation des stipulations"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 65,
+      "occurrences": [
+        {
+          "paragraphe_index": 66,
+          "libelle": "durée",
+          "nom": "dur_e",
+          "type": "texte",
+          "contexte": "Pendant une durée de (durée) à compter de la date du prése"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 81,
+      "occurrences": [
+        {
+          "paragraphe_index": 83,
+          "libelle": "autre que le Cédant",
+          "nom": "autre_que_le_c_dant",
+          "type": "texte",
+          "contexte": "embre des Associés Fondateurs (autre que le Cédant) bénéficie d'un droit de préem"
+        },
+        {
+          "paragraphe_index": 85,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "Dans les (nombre) jours de la réception de cett"
+        },
+        {
+          "paragraphe_index": 86,
+          "libelle": "ne pourra porter que sur la totalité/pourra porter sur tout ou partie",
+          "nom": "ne_pourra_porter_que_sur_la_totalit_pourra_porter_sur_tout_ou_partie",
+          "type": "A_CONFIRMER",
+          "contexte": "La préemption (ne pourra porter que sur la totalité/pourra porter sur tout ou partie) des Titres dont la cession es"
+        },
+        {
+          "paragraphe_index": 87,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " le présent article, dans les (nombre) jours de la réalisation desdi"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 90,
+      "occurrences": [
+        {
+          "paragraphe_index": 95,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "Dans les (nombre) jours de cette réitération, l"
+        },
+        {
+          "paragraphe_index": 97,
+          "libelle": "ne pourra porter que sur la totalité/pourra porter sur tout ou partie",
+          "nom": "ne_pourra_porter_que_sur_la_totalit_pourra_porter_sur_tout_ou_partie",
+          "type": "A_CONFIRMER",
+          "contexte": "on des Associés Investisseurs (ne pourra porter que sur la totalité/pourra porter sur tout ou partie) des Titres dont la cession es"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 100,
+      "occurrences": [
+        {
+          "paragraphe_index": 101,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "on envisagée mais seulement au(x) Cessionnaire(s) et aux prix e"
+        },
+        {
+          "paragraphe_index": 101,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "s seulement au(x) Cessionnaire(s) et aux prix et conditions éno"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 102,
+      "occurrences": [
+        {
+          "paragraphe_index": 103,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "n préemptés, mais seulement au(x) Cessionnaire(s) et aux prix e"
+        },
+        {
+          "paragraphe_index": 103,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "s seulement au(x) Cessionnaire(s) et aux prix et conditions éno"
+        },
+        {
+          "paragraphe_index": 104,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "é la Cession dans un délai de (nombre) jours à compter de l'expirati"
+        },
+        {
+          "paragraphe_index": 104,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "r de l'expiration du délai de (nombre) jours, la procédure de préemp"
+        },
+        {
+          "paragraphe_index": 106,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "ix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de p"
+        },
+        {
+          "paragraphe_index": 106,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "itres Cédés au(x) bénéficiaire(s) du droit de préemption sera :"
+        },
+        {
+          "paragraphe_index": 108,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " accusé de réception dans les (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 108,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "eur droit de préemption par le(s) associé(s) concerné(s), ou en"
+        },
+        {
+          "paragraphe_index": 108,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "e préemption par le(s) associé(s) concerné(s), ou en cas de dés"
+        },
+        {
+          "paragraphe_index": 108,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " par le(s) associé(s) concerné(s), ou en cas de désaccord, le p"
+        },
+        {
+          "paragraphe_index": 109,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "e réception, dans un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 109,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ies, dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 109,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "e Cédant, et dans un délai de (nombre) jours à compter de ladite not"
+        },
+        {
+          "paragraphe_index": 110,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": " par l'expert est inférieur à (à compléter) % au prix initialement notifi"
+        },
+        {
+          "paragraphe_index": 110,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "tres offerts dans un délai de (nombre) jours à compter de la remise "
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 114,
+      "occurrences": [
+        {
+          "paragraphe_index": 116,
+          "libelle": "autre que le Cédant",
+          "nom": "autre_que_le_c_dant",
+          "type": "texte",
+          "contexte": "re des Associés Investisseurs (autre que le Cédant) bénéficie d'un droit de préem"
+        },
+        {
+          "paragraphe_index": 117,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "dentité du ou des Cessionnaire(s). Une copie de cette notificat"
+        },
+        {
+          "paragraphe_index": 118,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "Dans les (nombre) jours de la réception de cett"
+        },
+        {
+          "paragraphe_index": 119,
+          "libelle": "« ne pourra porter que sur la totalité/pourra porter sur tout ou partie »",
+          "nom": "ne_pourra_porter_que_sur_la_totalit_pourra_porter_sur_tout_ou_partie",
+          "type": "A_CONFIRMER",
+          "contexte": "La préemption (« ne pourra porter que sur la totalité/pourra porter sur tout ou partie ») des Titres dont la Cession es"
+        },
+        {
+          "paragraphe_index": 122,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "r le présent article dans les (nombre) jours de la réalisation desdi"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 125,
+      "occurrences": [
+        {
+          "paragraphe_index": 130,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "Dans les (nombre) jours de cette réitération, l"
+        },
+        {
+          "paragraphe_index": 132,
+          "libelle": "ne pourra porter que sur la totalité/pourra porter sur tout ou partie",
+          "nom": "ne_pourra_porter_que_sur_la_totalit_pourra_porter_sur_tout_ou_partie",
+          "type": "A_CONFIRMER",
+          "contexte": "ption des Associés Fondateurs (ne pourra porter que sur la totalité/pourra porter sur tout ou partie) des Titres dont la Cession es"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 135,
+      "occurrences": [
+        {
+          "paragraphe_index": 136,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "on envisagée mais seulement au(x) Cessionnaire(s) et aux prix e"
+        },
+        {
+          "paragraphe_index": 136,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "s seulement au(x) Cessionnaire(s) et aux prix et conditions éno"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 137,
+      "occurrences": [
+        {
+          "paragraphe_index": 138,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "on préemptés mais seulement au(x) Cessionnaire(s) et aux prix e"
+        },
+        {
+          "paragraphe_index": 138,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "s seulement au(x) Cessionnaire(s) et aux prix et conditions éno"
+        },
+        {
+          "paragraphe_index": 139,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "é la Cession dans un délai de (nombre) jours à compter de l'expirati"
+        },
+        {
+          "paragraphe_index": 139,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "r de l'expiration du délai de (nombre) jours ci-dessus, la procédure"
+        },
+        {
+          "paragraphe_index": 141,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "ix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de p"
+        },
+        {
+          "paragraphe_index": 141,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "itres Cédés au(x) bénéficiaire(s) du droit de préemption sera :"
+        },
+        {
+          "paragraphe_index": 143,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " accusé de réception dans les (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 143,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "eur droit de préemption par le(s) associé(s) concerné(s), ou en"
+        },
+        {
+          "paragraphe_index": 143,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "e préemption par le(s) associé(s) concerné(s), ou en cas de dés"
+        },
+        {
+          "paragraphe_index": 143,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " par le(s) associé(s) concerné(s), ou en cas de désaccord, le p"
+        },
+        {
+          "paragraphe_index": 144,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "e réception, dans un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 144,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ies, dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 144,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "e Cédant, et dans un délai de (nombre) jours à compter de ladite not"
+        },
+        {
+          "paragraphe_index": 145,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": " par l'expert est inférieur à (à compléter) % au prix initialement notifi"
+        },
+        {
+          "paragraphe_index": 145,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "tres offerts dans un délai de (nombre) jours à compter de la remise "
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 148,
+      "occurrences": [
+        {
+          "paragraphe_index": 150,
+          "libelle": "autre que le Cédant",
+          "nom": "autre_que_le_c_dant",
+          "type": "texte",
+          "contexte": "Chaque associé (autre que le Cédant) bénéficie d'un droit de préem"
+        },
+        {
+          "paragraphe_index": 151,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "dentité du ou des Cessionnaire(s)."
+        },
+        {
+          "paragraphe_index": 152,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "Dans les (nombre) jours de la réception de cett"
+        },
+        {
+          "paragraphe_index": 153,
+          "libelle": "ne pourra porter que sur la totalité/pourra porter sur tout ou partie",
+          "nom": "ne_pourra_porter_que_sur_la_totalit_pourra_porter_sur_tout_ou_partie",
+          "type": "A_CONFIRMER",
+          "contexte": "La préemption (ne pourra porter que sur la totalité/pourra porter sur tout ou partie) des Titres dont la Cession es"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 155,
+      "occurrences": [
+        {
+          "paragraphe_index": 156,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "on envisagée mais seulement au(x) Cessionnaire(s) et aux prix e"
+        },
+        {
+          "paragraphe_index": 156,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "s seulement au(x) Cessionnaire(s) et aux prix et conditions éno"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 157,
+      "occurrences": [
+        {
+          "paragraphe_index": 158,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "on préemptés mais seulement au(x) Cessionnaire(s) et aux prix e"
+        },
+        {
+          "paragraphe_index": 158,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "s seulement au(x) Cessionnaire(s) et aux prix et conditions éno"
+        },
+        {
+          "paragraphe_index": 159,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "é la Cession dans un délai de (nombre) jours à compter de l'expirati"
+        },
+        {
+          "paragraphe_index": 159,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "r de l'expiration du délai de (nombre) jours ci-dessus, la procédure"
+        },
+        {
+          "paragraphe_index": 161,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "ix d'achat des Titres Cédés au(x) bénéficiaire(s) du droit de p"
+        },
+        {
+          "paragraphe_index": 161,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "itres Cédés au(x) bénéficiaire(s) du droit de préemption sera :"
+        },
+        {
+          "paragraphe_index": 163,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " accusé de réception dans les (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 163,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "eur droit de préemption par le(s) associé(s) concerné(s), ou en"
+        },
+        {
+          "paragraphe_index": 163,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "e préemption par le(s) associé(s) concerné(s), ou en cas de dés"
+        },
+        {
+          "paragraphe_index": 163,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " par le(s) associé(s) concerné(s), ou en cas de désaccord, le p"
+        },
+        {
+          "paragraphe_index": 164,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "e réception, dans un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 164,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ies, dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 164,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "e Cédant, et dans un délai de (nombre) jours à compter de ladite not"
+        },
+        {
+          "paragraphe_index": 165,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": " par l'expert est inférieur à (à compléter) % au prix initialement notifi"
+        },
+        {
+          "paragraphe_index": 165,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "tres offerts dans un délai de (nombre) jours à compter de la remise "
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 170,
+      "occurrences": [
+        {
+          "paragraphe_index": 173,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sseur disposera d'un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 175,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "tre réalisée dans le délai de (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 176,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "t ce dans un délai maximum de (nombre) jours, sous réserve du respec"
+        },
+        {
+          "paragraphe_index": 176,
+          "libelle": "notamment le prix de cession des Titres",
+          "nom": "notamment_le_prix_de_cession_des_titres",
+          "type": "A_CONFIRMER",
+          "contexte": "s fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du pré"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 179,
+      "occurrences": [
+        {
+          "paragraphe_index": 182,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ateur disposera d'un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 184,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "tre réalisée dans le délai de (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 185,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "t ce dans un délai maximum de (nombre) jours, sous réserve du respec"
+        },
+        {
+          "paragraphe_index": 185,
+          "libelle": "notamment le prix de cession des Titres",
+          "nom": "notamment_le_prix_de_cession_des_titres",
+          "type": "A_CONFIRMER",
+          "contexte": "s fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du pré"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 188,
+      "occurrences": [
+        {
+          "paragraphe_index": 191,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "dentité du ou des Cessionnaire(s) envisagé(s)."
+        },
+        {
+          "paragraphe_index": 191,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "u des Cessionnaire(s) envisagé(s)."
+        },
+        {
+          "paragraphe_index": 192,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "teurs disposent d'un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 193,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "xpiration du délai susvisé de (nombre) jours, la totalité des Titres"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "xpiration du délai susvisé de (nombre) jours, la totalité des Titres"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "re entreprise par le Cédant au(x) Cessionnaire(s) de son choix,"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "r le Cédant au(x) Cessionnaire(s) de son choix, sous réserve du"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "notamment le prix de cession des Titres",
+          "nom": "notamment_le_prix_de_cession_des_titres",
+          "type": "A_CONFIRMER",
+          "contexte": "s fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du pré"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 196,
+      "occurrences": [
+        {
+          "paragraphe_index": 202,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "dentité du ou des Cessionnaire(s)."
+        },
+        {
+          "paragraphe_index": 203,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "nt de l'autre groupe dans les (nombre) jours de sa réception, étant "
+        },
+        {
+          "paragraphe_index": 203,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "rence disposent d'un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 203,
+          "libelle": "ne peut porter que sur la totalité des Titres Cédés/peut porter sur tout ou partie des Titres Cédés",
+          "nom": "ne_peut_porter_que_sur_la_totalit_des_titres_c_d_s_peut_porter_sur_tout_ou_partie_des_titres_c_d_s",
+          "type": "A_CONFIRMER",
+          "contexte": "ion pour exercer ce droit qui (ne peut porter que sur la totalité des Titres Cédés/peut porter sur tout ou partie des Titres Cédés). L'exercice du droit de préfé"
+        },
+        {
+          "paragraphe_index": 204,
+          "libelle": "notamment le prix de cession des Titres",
+          "nom": "notamment_le_prix_de_cession_des_titres",
+          "type": "A_CONFIRMER",
+          "contexte": "s fixées dans la notification (notamment le prix de cession des Titres) et autres stipulations du pré"
+        },
+        {
+          "paragraphe_index": 205,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "tre réalisée dans un délai de (nombre) jours à compter de l'expirati"
+        },
+        {
+          "paragraphe_index": 206,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "Passé ce délai de (nombre) jours, et si le Cédant ne ren"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 4,
+      "premier_paragraphe_index": 208,
+      "occurrences": [
+        {
+          "paragraphe_index": 209,
+          "libelle": "du Président/du conseil d'administration/du Comité de direction/du Comité stratégique/des Parties/des Associés Fondateurs/des Associés Investisseurs",
+          "nom": "du_pr_sident_du_conseil_d_administration_du_comit_de_direction_du_comit_strat_gique_des_parties_des_associ_s_fondateurs_des_associ_s_investisseurs",
+          "type": "A_CONFIRMER",
+          "contexte": "oumise à l'agrément préalable (du Président/du conseil d'administration/du Comité de direction/du Comité stratégique/des Parties/des Associés Fondateurs/des Associés Investisseurs). Toutefois :"
+        },
+        {
+          "paragraphe_index": 213,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "dentité du ou des cessionnaire(s) envisagé(s), le nombre de Tit"
+        },
+        {
+          "paragraphe_index": 213,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "u des cessionnaire(s) envisagé(s), le nombre de Titres qu'il so"
+        },
+        {
+          "paragraphe_index": 214,
+          "libelle": "Président/du conseil d'administration/du Comité de direction/du Comité stratégique/des Parties/des Associés Fondateurs/des Associés Investisseurs",
+          "nom": "pr_sident_du_conseil_d_administration_du_comit_de_direction_du_comit_strat_gique_des_parties_des_associ_s_fondateurs_des_associ_s_investisseurs",
+          "type": "A_CONFIRMER",
+          "contexte": "otification de la décision du (Président/du conseil d'administration/du Comité de direction/du Comité stratégique/des Parties/des Associés Fondateurs/des Associés Investisseurs), soit du défaut de réponse da"
+        },
+        {
+          "paragraphe_index": 214,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "t de réponse dans un délai de (nombre) jours à compter de la demande"
+        },
+        {
+          "paragraphe_index": 214,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " devra être réalisée dans les (nombre) jours suivant l'obtention de "
+        },
+        {
+          "paragraphe_index": 215,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "é est tenue, dans un délai de (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 216,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 217,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "i, à l'expiration du délai de (nombre) jours prévu ci-dessus, le rac"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 5,
+      "premier_paragraphe_index": 219,
+      "occurrences": [
+        {
+          "paragraphe_index": 220,
+          "libelle": "Clause de drag-along",
+          "nom": "clause_de_drag_along",
+          "type": "texte",
+          "contexte": "it de sortie conjointe totale (Clause de drag-along)"
+        },
+        {
+          "paragraphe_index": 221,
+          "libelle": "préemption/préférence",
+          "nom": "pr_emption_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": "t pacte relatives au droit de (préemption/préférence), les Associés Fondateurs s'en"
+        },
+        {
+          "paragraphe_index": 222,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " demande d'avis de réception, (nombre) jours au moins avant la date "
+        },
+        {
+          "paragraphe_index": 223,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "données du ou des Cessionnaire(s), ainsi que toute autre condit"
+        },
+        {
+          "paragraphe_index": 224,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sposeront alors d'un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 226,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 227,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "s et dans un délai maximum de (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 230,
+          "libelle": "préemption/préférence",
+          "nom": "pr_emption_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": "t pacte relatives au droit de (préemption/préférence), les Associés Fondateurs s'en"
+        },
+        {
+          "paragraphe_index": 232,
+          "libelle": "de l'Associé Fondateur cédant/des Associés Fondateurs cédants",
+          "nom": "de_l_associ_fondateur_c_dant_des_associ_s_fondateurs_c_dants",
+          "type": "A_CONFIRMER",
+          "contexte": "e montant de la participation (de l'Associé Fondateur cédant/des Associés Fondateurs cédants) objet de la Cession ;"
+        },
+        {
+          "paragraphe_index": 233,
+          "libelle": "l'Associé Fondateur/les Associés Fondateurs",
+          "nom": "l_associ_fondateur_les_associ_s_fondateurs",
+          "type": "A_CONFIRMER",
+          "contexte": "e total de Titres détenus par (l'Associé Fondateur/les Associés Fondateurs)."
+        },
+        {
+          "paragraphe_index": 235,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " demande d'avis de réception, (nombre) jours au moins avant la date "
+        },
+        {
+          "paragraphe_index": 236,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "données du ou des Cessionnaire(s), ainsi que toute autre condit"
+        },
+        {
+          "paragraphe_index": 237,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sposeront alors d'un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 239,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 240,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "s et dans un délai maximum de (nombre) jours à compter de la notific"
+        },
+        {
+          "paragraphe_index": 242,
+          "libelle": "Clause de sortie forcée",
+          "nom": "clause_de_sortie_forc_e",
+          "type": "texte",
+          "contexte": "5.3 Obligation de sortie (Clause de sortie forcée)"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 243,
+      "occurrences": [
+        {
+          "paragraphe_index": 244,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ard au terme d'une période de (nombre) années, à compter de la date "
+        },
+        {
+          "paragraphe_index": 246,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "-  soit à Céder, dans les (nombre) jours de la réception de la n"
+        },
+        {
+          "paragraphe_index": 246,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "la Société leur appartenant au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 246,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "appartenant au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 246,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 247,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 248,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "s Fondateurs dans le délai de (nombre) jours susvisés, ceux-ci seron"
+        },
+        {
+          "paragraphe_index": 249,
+          "libelle": "préemption/préférence",
+          "nom": "pr_emption_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": "re de l'exercice du droit de. (préemption/préférence) visé au présent pacte (ou à f"
+        },
+        {
+          "paragraphe_index": 249,
+          "libelle": "ou à faire racheter par la personne de leur choix",
+          "nom": "ou_faire_racheter_par_la_personne_de_leur_choix",
+          "type": "A_CONFIRMER",
+          "contexte": "érence) visé au présent pacte (ou à faire racheter par la personne de leur choix) dans un délai de (nombre) jou"
+        },
+        {
+          "paragraphe_index": 249,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " leur choix) dans un délai de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 249,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 250,
+      "occurrences": [
+        {
+          "paragraphe_index": 251,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ard au terme d'une période de (nombre) années, à compter de la date "
+        },
+        {
+          "paragraphe_index": 252,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "vocablement à Céder, dans les (nombre) jours de la réception de la n"
+        },
+        {
+          "paragraphe_index": 252,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "la Société leur appartenant au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 252,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "appartenant au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 252,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 253,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 254,
+      "occurrences": [
+        {
+          "paragraphe_index": 255,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "vocablement à Céder, dans les (nombre) jours de la réception de la n"
+        },
+        {
+          "paragraphe_index": 255,
+          "libelle": "x",
+          "nom": "x",
+          "type": "NON_VARIABLE",
+          "contexte": "la Société leur appartenant au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 255,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "appartenant au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 255,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " au(x) Cessionnaire(s) indiqué(s)."
+        },
+        {
+          "paragraphe_index": 256,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 6,
+      "premier_paragraphe_index": 257,
+      "occurrences": [
+        {
+          "paragraphe_index": 258,
+          "libelle": "ou d'un groupe d'associés",
+          "nom": "ou_d_un_groupe_d_associ_s",
+          "type": "A_CONFIRMER",
+          "contexte": "La sortie d'un associé (ou d'un groupe d'associés) est systématiquement réglée p"
+        },
+        {
+          "paragraphe_index": 264,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "la première fois à la date du (date) à condition d'avoir été notif"
+        },
+        {
+          "paragraphe_index": 264,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " accusé de réception adressée (nombre) jours à l'avance."
+        },
+        {
+          "paragraphe_index": 265,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "qu'au titre du ou des exercice(s) suivant(s)."
+        },
+        {
+          "paragraphe_index": 265,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": " du ou des exercice(s) suivant(s)."
+        },
+        {
+          "paragraphe_index": 266,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "eurs dans un délai maximum de (nombre) jours suivant la date de clôt"
+        },
+        {
+          "paragraphe_index": 267,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "u à un tiers dans un délai de (nombre) jours ou de les annuler."
+        },
+        {
+          "paragraphe_index": 268,
+          "libelle": "insérer une formule de détermination du prix",
+          "nom": "ins_rer_une_formule_de_d_termination_du_prix",
+          "type": "A_CONFIRMER",
+          "contexte": "s sera déterminé comme suit : (insérer une formule de détermination du prix)."
+        },
+        {
+          "paragraphe_index": 269,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "usé de réception. Si dans les (nombre) jours de ladite notification,"
+        },
+        {
+          "paragraphe_index": 271,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 272,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ayé comptant dans le délai de (nombre) jours suivant la fixation du "
+        },
+        {
+          "paragraphe_index": 275,
+          "libelle": "préciser les cas de déclenchement du droit de retrait tels que la non-réalisation d'objectifs de chiffre d'affaires ou de résultats.",
+          "nom": "pr_ciser_les_cas_de_d_clenchement_du_droit_de_retrait_tels_que_la_non_r_alisation_d_objectifs_de_chiffre_d_affaires_ou_de_r_sultats",
+          "type": "A_CONFIRMER",
+          "contexte": "'un des événements suivants : (préciser les cas de déclenchement du droit de retrait tels que la non-réalisation d'objectifs de chiffre d'affaires ou de résultats.)"
+        },
+        {
+          "paragraphe_index": 276,
+          "libelle": "ces",
+          "nom": "ces",
+          "type": "texte",
+          "contexte": ", en cas de survenance de cet (ces) événement(s) et dans un délai"
+        },
+        {
+          "paragraphe_index": 276,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "venance de cet (ces) événement(s) et dans un délai de (nombre) "
+        },
+        {
+          "paragraphe_index": 276,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "nement(s) et dans un délai de (nombre) jours à compter de cette date"
+        },
+        {
+          "paragraphe_index": 279,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "eurs dans un délai maximum de (nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 280,
+          "libelle": "insérer une formule de détermination du prix",
+          "nom": "ins_rer_une_formule_de_d_termination_du_prix",
+          "type": "A_CONFIRMER",
+          "contexte": "s sera déterminé comme suit : (insérer une formule de détermination du prix)."
+        },
+        {
+          "paragraphe_index": 282,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 283,
+          "libelle": "clause de « Buy or sell » ou « shotgun »",
+          "nom": "clause_de_buy_or_sell_ou_shotgun",
+          "type": "A_CONFIRMER",
+          "contexte": " Clause de sortie alternative (clause de « Buy or sell » ou « shotgun »)"
+        },
+        {
+          "paragraphe_index": 285,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "offre disposera d'un délai de (nombre) jours pour lever l'option qui"
+        },
+        {
+          "paragraphe_index": 286,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sion dans un délai maximum de (nombre) jours à compter de sa désigna"
+        },
+        {
+          "paragraphe_index": 287,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "payé dans un délai maximum de (nombre) jours à compter de la levée d"
+        },
+        {
+          "paragraphe_index": 288,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "t forfaitaire d'un montant de (montant) €."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 7,
+      "premier_paragraphe_index": 289,
+      "occurrences": [
+        {
+          "paragraphe_index": 294,
+          "libelle": "à l'exception de l'émission de bons de souscription de parts de créateurs d'entreprise, d'attributions gratuites d'actions ou d'options de souscription ou d'acquisition d'actions au bénéfice de mandataires sociaux ou de salariés de la Société ou de ses filiales",
+          "nom": "l_exception_de_l_mission_de_bons_de_souscription_de_parts_de_cr_ateurs_d_entreprise_d_attributions_gratuites_d_actions_ou_d_options_de_souscription_ou_d_acquisition_d_actions_au_b_n_fice_de_mandataires_sociaux_ou_de_salari_s_de_la_soci_t_ou_de_ses_filiales",
+          "type": "A_CONFIRMER",
+          "contexte": "adre d'une émission de Titres (à l'exception de l'émission de bons de souscription de parts de créateurs d'entreprise, d'attributions gratuites d'actions ou d'options de souscription ou d'acquisition d'actions au bénéfice de mandataires sociaux ou de salariés de la Société ou de ses filiales), d'un droit permanent de main"
+        },
+        {
+          "paragraphe_index": 295,
+          "libelle": "notamment celles relatives au prix d'émission des Titres",
+          "nom": "notamment_celles_relatives_au_prix_d_mission_des_titres",
+          "type": "A_CONFIRMER",
+          "contexte": "celles de l'émission dilutive (notamment celles relatives au prix d'émission des Titres), de manière à leur permettre "
+        },
+        {
+          "paragraphe_index": 297,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "issement qui sera apporté par (à compléter) pour le projet de (à compléte"
+        },
+        {
+          "paragraphe_index": 297,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": " compléter) pour le projet de (à compléter), la clause de ratchet prévue "
+        },
+        {
+          "paragraphe_index": 308,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "t dans la Société à un horizon(nombre) à (nombre) ans à compter de l"
+        },
+        {
+          "paragraphe_index": 308,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ociété à un horizon(nombre) à (nombre) ans à compter de la date des "
+        },
+        {
+          "paragraphe_index": 308,
+          "libelle": "« Evènement de Liquidité »",
+          "nom": "ev_nement_de_liquidit",
+          "type": "A_CONFIRMER",
+          "contexte": "ntes, sous la forme notamment (« Evènement de Liquidité ») :"
+        },
+        {
+          "paragraphe_index": 314,
+          "libelle": "Xème",
+          "nom": "x_me",
+          "type": "nombre_ordinal",
+          "contexte": ", à tout moment, à compter du (Xème) anniversaire de la date des p"
+        },
+        {
+          "paragraphe_index": 314,
+          "libelle": "30",
+          "nom": "30",
+          "type": "NON_VARIABLE",
+          "contexte": "ns un délai maximum de trente (30) jours, dans le but d’étudier "
+        },
+        {
+          "paragraphe_index": 316,
+          "libelle": "Xème",
+          "nom": "x_me",
+          "type": "nombre_ordinal",
+          "contexte": "ité intervenu au plus tard le (Xème) anniversaire de la date des p"
+        },
+        {
+          "paragraphe_index": 323,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "cernant la Société, pour que, (i) sous réserve des contraintes "
+        },
+        {
+          "paragraphe_index": 323,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "es légales et réglementaires, (ii) des obligations de la Société"
+        },
+        {
+          "paragraphe_index": 323,
+          "libelle": "iii",
+          "nom": "iii",
+          "type": "NON_VARIABLE",
+          "contexte": "oncours financiers consentis, (iii) des besoins prévisionnels de "
+        },
+        {
+          "paragraphe_index": 323,
+          "libelle": "l'intégralité/au moins X %",
+          "nom": "l_int_gralit_au_moins_x",
+          "type": "A_CONFIRMER",
+          "contexte": "adopté conformément au Pacte, (l'intégralité/au moins X %) de la trésorerie disponible s"
+        },
+        {
+          "paragraphe_index": 323,
+          "libelle": "y compris par la distribution d'acomptes sur dividendes dès que possible",
+          "nom": "y_compris_par_la_distribution_d_acomptes_sur_dividendes_d_s_que_possible",
+          "type": "A_CONFIRMER",
+          "contexte": "me de dividendes ou autrement (y compris par la distribution d'acomptes sur dividendes dès que possible), sauf décision collective con"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 8,
+      "premier_paragraphe_index": 328,
+      "occurrences": [
+        {
+          "paragraphe_index": 330,
+          "libelle": "quelle que puisse être leur participation au capital et aux droits de vote de la Société/à condition de détenir au moins … % du capital et/ou des droits de vote de la Société",
+          "nom": "quelle_que_puisse_tre_leur_participation_au_capital_et_aux_droits_de_vote_de_la_soci_t_condition_de_d_tenir_au_moins_du_capital_et_ou_des_droits_de_vote_de_la_soci_t",
+          "type": "A_CONFIRMER",
+          "contexte": "ciés Investisseurs disposent, (quelle que puisse être leur participation au capital et aux droits de vote de la Société/à condition de détenir au moins … % du capital et/ou des droits de vote de la Société), d'un droit de veto leur perm"
+        },
+        {
+          "paragraphe_index": 337,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "iers d'un montant supérieur à (montant) €, sauf au profit de filiales"
+        },
+        {
+          "paragraphe_index": 338,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "é pour un montant supérieur à (montant) €, et auxquels il ne peut êtr"
+        },
+        {
+          "paragraphe_index": 338,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "u'avec un préavis supérieur à (nombre) mois ;"
+        },
+        {
+          "paragraphe_index": 339,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "ment d'un montant supérieur à (montant) € ;"
+        },
+        {
+          "paragraphe_index": 343,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "emandeur, dont l'enjeu excède (montant) € ;"
+        },
+        {
+          "paragraphe_index": 346,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "urs disposeront d'un délai de (nombre) jours à compter de cette noti"
+        },
+        {
+          "paragraphe_index": 348,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "8.2 Répartition des sièges au (Conseil d'administration/Comité stratégique/Comité de direction)"
+        },
+        {
+          "paragraphe_index": 349,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "ociété est administrée par un (Conseil d'administration/Comité stratégique/Comité de direction) composé obligatoirement de (n"
+        },
+        {
+          "paragraphe_index": 349,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "n) composé obligatoirement de (nombre) membres."
+        },
+        {
+          "paragraphe_index": 350,
+          "libelle": "durée",
+          "nom": "dur_e",
+          "type": "texte",
+          "contexte": "ront nommés pour une durée de (durée) ans, renouvelable, et pourron"
+        },
+        {
+          "paragraphe_index": 351,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "(nombre) membres devront être choisis "
+        },
+        {
+          "paragraphe_index": 351,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "les Associés Investisseurs et (nombre) parmi les candidats présentés"
+        },
+        {
+          "paragraphe_index": 351,
+          "libelle": "autres associés/Associés Fondateurs",
+          "nom": "autres_associ_s_associ_s_fondateurs",
+          "type": "A_CONFIRMER",
+          "contexte": "s candidats présentés par les (autres associés/Associés Fondateurs). Le président du conseil d'ad"
+        },
+        {
+          "paragraphe_index": 353,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "8.3 Décisions du (Conseil d'administration/Comité stratégique/Comité de direction)"
+        },
+        {
+          "paragraphe_index": 354,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "Le (Conseil d'administration/Comité stratégique/Comité de direction) ne délibère valablement que s"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 355,
+      "occurrences": [
+        {
+          "paragraphe_index": 355,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "une à toutes les décisions du (Conseil d'administration/Comité stratégique/Comité de direction), indiquer :"
+        },
+        {
+          "paragraphe_index": 356,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "ssus, toutes les décisions du (Conseil d'administration/Comité stratégique/Comité de direction) sont adoptées à la majorité ("
+        },
+        {
+          "paragraphe_index": 356,
+          "libelle": "à compléter, le cas échéant, pour définir une majorité renforcée",
+          "nom": "compl_ter_le_cas_ch_ant_pour_d_finir_une_majorit_renforc_e",
+          "type": "A_CONFIRMER",
+          "contexte": ") sont adoptées à la majorité (à compléter, le cas échéant, pour définir une majorité renforcée) des membres présents ou repré"
+        }
+      ]
+    },
+    {
+      "segment_type": "annotation",
+      "article_numero": null,
+      "premier_paragraphe_index": 357,
+      "occurrences": [
+        {
+          "paragraphe_index": 357,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": "on la nature des décisions du (Conseil d'administration/Comité stratégique/Comité de direction), remplacer par :"
+        },
+        {
+          "paragraphe_index": 358,
+          "libelle": "Conseil d'administration/Comité stratégique/Comité de direction",
+          "nom": "conseil_d_administration_comit_strat_gique_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": " ci-dessus, les décisions du  (Conseil d'administration/Comité stratégique/Comité de direction) sont adoptées à la majorité ("
+        },
+        {
+          "paragraphe_index": 358,
+          "libelle": "à compléter, le cas échéant, pour définir une majorité renforcée",
+          "nom": "compl_ter_le_cas_ch_ant_pour_d_finir_une_majorit_renforc_e",
+          "type": "A_CONFIRMER",
+          "contexte": ") sont adoptées à la majorité (à compléter, le cas échéant, pour définir une majorité renforcée) des membres présents ou repré"
+        },
+        {
+          "paragraphe_index": 358,
+          "libelle": "à compléter pour définir une majorité spécifique aux décisions ci-après",
+          "nom": "compl_ter_pour_d_finir_une_majorit_sp_cifique_aux_d_cisions_ci_apr_s",
+          "type": "A_CONFIRMER",
+          "contexte": "i sont adoptées à la majorité (à compléter pour définir une majorité spécifique aux décisions ci-après) des membres présents ou repré"
+        },
+        {
+          "paragraphe_index": 358,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "res présents ou représentés : (à compléter) »."
+        },
+        {
+          "paragraphe_index": 360,
+          "libelle": "trimestres/semestres",
+          "nom": "trimestres_semestres",
+          "type": "A_CONFIRMER",
+          "contexte": "èrement, et a minima tous les (trimestres/semestres), informés par les Associés Fo"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 9,
+      "premier_paragraphe_index": 362,
+      "occurrences": [
+        {
+          "paragraphe_index": 364,
+          "libelle": "directement ou indirectement",
+          "nom": "directement_ou_indirectement",
+          "type": "A_CONFIRMER",
+          "contexte": "e travail ou un mandat social (directement ou indirectement) dans la Société et/ou ses Fil"
+        },
+        {
+          "paragraphe_index": 366,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "ctivité Concurrente » désigne (i) toute activité se rapportant "
+        },
+        {
+          "paragraphe_index": 366,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "réambule du présent Pacte, et (ii) la détention d’une participat"
+        },
+        {
+          "paragraphe_index": 366,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": " l’objet social visé au point (i) ci-dessus."
+        },
+        {
+          "paragraphe_index": 369,
+          "libelle": "à l’exception de sociétés holdings patrimoniales",
+          "nom": "l_exception_de_soci_t_s_holdings_patrimoniales",
+          "type": "A_CONFIRMER",
+          "contexte": " société autre que la Société (à l’exception de sociétés holdings patrimoniales) ;"
+        },
+        {
+          "paragraphe_index": 380,
+          "libelle": "nom de la société",
+          "nom": "nom_de_la_soci_t",
+          "type": "texte",
+          "contexte": "-\tà ne pas utiliser le nom « (nom de la société) » ou tout nom similaire, et p"
+        },
+        {
+          "paragraphe_index": 383,
+          "libelle": "12",
+          "nom": "12",
+          "type": "NON_VARIABLE",
+          "contexte": "s, et pour une durée de douze (12) mois et au-delà :"
+        },
+        {
+          "paragraphe_index": 384,
+          "libelle": "notamment, salarié, consultant ou mandataire social",
+          "nom": "notamment_salari_consultant_ou_mandataire_social",
+          "type": "A_CONFIRMER",
+          "contexte": ", à quelque titre que ce soit (notamment, salarié, consultant ou mandataire social) ou, plus généralement, aux fi"
+        },
+        {
+          "paragraphe_index": 389,
+          "libelle": "directement ou indirectement",
+          "nom": "directement_ou_indirectement",
+          "type": "A_CONFIRMER",
+          "contexte": "e et garantit n’être lui-même (directement ou indirectement), à ce jour, titulaire d’aucun"
+        },
+        {
+          "paragraphe_index": 389,
+          "libelle": "à l’exception, le cas échéant, des droits strictement inaliénables de par la Loi",
+          "nom": "l_exception_le_cas_ch_ant_des_droits_strictement_inali_nables_de_par_la_loi",
+          "type": "A_CONFIRMER",
+          "contexte": "t de Propriété Intellectuelle (à l’exception, le cas échéant, des droits strictement inaliénables de par la Loi) que la Société (ou une Filial"
+        },
+        {
+          "paragraphe_index": 389,
+          "libelle": "ou une Filiale",
+          "nom": "ou_une_filiale",
+          "type": "A_CONFIRMER",
+          "contexte": "de par la Loi) que la Société (ou une Filiale) utilise ou qui serait nécessa"
+        },
+        {
+          "paragraphe_index": 389,
+          "libelle": "et de ses Filiales",
+          "nom": "et_de_ses_filiales",
+          "type": "texte",
+          "contexte": "t des activités de la Société (et de ses Filiales) et confirme et garantit que l"
+        },
+        {
+          "paragraphe_index": 389,
+          "libelle": "ou une Filiale",
+          "nom": "ou_une_filiale",
+          "type": "A_CONFIRMER",
+          "contexte": "aurait transféré à la Société (ou une Filiale)."
+        },
+        {
+          "paragraphe_index": 391,
+          "libelle": "12",
+          "nom": "12",
+          "type": "NON_VARIABLE",
+          "contexte": "s, et pour une durée de douze (12) mois au-delà, de déposer ou p"
+        },
+        {
+          "paragraphe_index": 395,
+          "libelle": "et/ou leurs dirigeants, salariés et/ou associés",
+          "nom": "et_ou_leurs_dirigeants_salari_s_et_ou_associ_s",
+          "type": "A_CONFIRMER",
+          "contexte": "Société et/ou de ses Filiales (et/ou leurs dirigeants, salariés et/ou associés) à l’effet de :"
+        },
+        {
+          "paragraphe_index": 397,
+          "libelle": "ou contester la titularité par la Société et/ou ses Filiales de",
+          "nom": "ou_contester_la_titularit_par_la_soci_t_et_ou_ses_filiales_de",
+          "type": "A_CONFIRMER",
+          "contexte": "-\trevendiquer (ou contester la titularité par la Société et/ou ses Filiales de) un Droit de Propriété Intelle"
+        },
+        {
+          "paragraphe_index": 397,
+          "libelle": "ou une Filiale",
+          "nom": "ou_une_filiale",
+          "type": "A_CONFIRMER",
+          "contexte": "ntellectuelle dont la Société (ou une Filiale) est titulaire, et qu’elle uti"
+        },
+        {
+          "paragraphe_index": 398,
+          "libelle": "ou une Filiale",
+          "nom": "ou_une_filiale",
+          "type": "A_CONFIRMER",
+          "contexte": "Intellectuelle que la Société (ou une Filiale) utilise et/ou exploite dans l"
+        },
+        {
+          "paragraphe_index": 399,
+          "libelle": "ou une Filiale",
+          "nom": "ou_une_filiale",
+          "type": "A_CONFIRMER",
+          "contexte": "Intellectuelle que la Société (ou une Filiale) utilise et/ou exploite, à tit"
+        },
+        {
+          "paragraphe_index": 401,
+          "libelle": "en ce compris notamment les noms de domaine",
+          "nom": "en_ce_compris_notamment_les_noms_de_domaine",
+          "type": "A_CONFIRMER",
+          "contexte": "es présentes ou dans le futur (en ce compris notamment les noms de domaine), et qui pourrait être utile à"
+        },
+        {
+          "paragraphe_index": 401,
+          "libelle": "ou une Filiale",
+          "nom": "ou_une_filiale",
+          "type": "A_CONFIRMER",
+          "contexte": "rrait être utile à la Société (ou une Filiale) dans le cadre de son exploita"
+        },
+        {
+          "paragraphe_index": 403,
+          "libelle": "« PROMESSE LEAVER »",
+          "nom": "promesse_leaver",
+          "type": "A_CONFIRMER",
+          "contexte": "en cas de départ d’un Associé (« PROMESSE LEAVER »)"
+        },
+        {
+          "paragraphe_index": 405,
+          "libelle": "pour les besoins du présent Article, l’« Associé Sortant »",
+          "nom": "pour_les_besoins_du_pr_sent_article_l_associ_sortant",
+          "type": "A_CONFIRMER",
+          "contexte": " et/ou le Départ d’un Associé (pour les besoins du présent Article, l’« Associé Sortant ») entraînera de facto l’obligat"
+        },
+        {
+          "paragraphe_index": 405,
+          "libelle": "pour les besoins du présent Article, les « Bénéficiaires »",
+          "nom": "pour_les_besoins_du_pr_sent_article_les_b_n_ficiaires",
+          "type": "A_CONFIRMER",
+          "contexte": "ateurs ou Associés fondateurs (pour les besoins du présent Article, les « Bénéficiaires »), à première demande de leur p"
+        },
+        {
+          "paragraphe_index": 405,
+          "libelle": "la « Promesse de Vente »",
+          "nom": "la_promesse_de_vente",
+          "type": "A_CONFIRMER",
+          "contexte": "première demande de leur part (la « Promesse de Vente »). "
+        },
+        {
+          "paragraphe_index": 408,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "(i)\tla démission (ou l’abandon de"
+        },
+        {
+          "paragraphe_index": 408,
+          "libelle": "ou l’abandon de poste",
+          "nom": "ou_l_abandon_de_poste",
+          "type": "A_CONFIRMER",
+          "contexte": "(i)\tla démission (ou l’abandon de poste) intervenant préalablement au "
+        },
+        {
+          "paragraphe_index": 408,
+          "libelle": "Nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " intervenant préalablement au (Nombre) anniversaire de la date des p"
+        },
+        {
+          "paragraphe_index": 408,
+          "libelle": "a",
+          "nom": "a",
+          "type": "NON_VARIABLE",
+          "contexte": "e la date des présentes, sauf (a) avec l’accord préalable et éc"
+        },
+        {
+          "paragraphe_index": 409,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": ", ou (ii) résultant du décès, de l’Inca"
+        },
+        {
+          "paragraphe_index": 410,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "(ii)\tle licenciement ou la révocat"
+        },
+        {
+          "paragraphe_index": 411,
+          "libelle": "iii",
+          "nom": "iii",
+          "type": "NON_VARIABLE",
+          "contexte": "(iii)\tle départ à la retraite antic"
+        },
+        {
+          "paragraphe_index": 412,
+          "libelle": "iv",
+          "nom": "iv",
+          "type": "NON_VARIABLE",
+          "contexte": "(iv)\tla rupture conventionnelle du"
+        },
+        {
+          "paragraphe_index": 416,
+          "libelle": "3",
+          "nom": "3",
+          "type": "NON_VARIABLE",
+          "contexte": "eption dans le délai de trois (3) mois à compter de la Date de "
+        },
+        {
+          "paragraphe_index": 426,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "(montant) % du prix d’acquisition ou de"
+        },
+        {
+          "paragraphe_index": 427,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "(montant) % de la valeur des Titres de "
+        },
+        {
+          "paragraphe_index": 429,
+          "libelle": "15",
+          "nom": "15",
+          "type": "NON_VARIABLE",
+          "contexte": "levée dans un délai de quinze (15) jours à compter de ladite lev"
+        },
+        {
+          "paragraphe_index": 438,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "reconnait que la contestation (i) la qualification du cas de Mo"
+        },
+        {
+          "paragraphe_index": 438,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "néficiaires de la promesse ou (ii) de la validité des engagement"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 10,
+      "premier_paragraphe_index": 440,
+      "occurrences": [
+        {
+          "paragraphe_index": 447,
+          "libelle": "3",
+          "nom": "3",
+          "type": "NON_VARIABLE",
+          "contexte": "et pendant une durée de trois (3) ans au-delà, chacune des Part"
+        },
+        {
+          "paragraphe_index": 466,
+          "libelle": "chiffre",
+          "nom": "chiffre",
+          "type": "texte",
+          "contexte": "tion pour une durée de nombre (chiffre) années à compter de cette dat"
+        },
+        {
+          "paragraphe_index": 466,
+          "libelle": "Chiffre",
+          "nom": "chiffre",
+          "type": "texte",
+          "contexte": "te première période de nombre (Chiffre) années, le Pacte sera renouve"
+        },
+        {
+          "paragraphe_index": 466,
+          "libelle": "4",
+          "nom": "4",
+          "type": "NON_VARIABLE",
+          "contexte": "ériodes successives de quatre (4) années. A l'occasion de chaqu"
+        },
+        {
+          "paragraphe_index": 466,
+          "libelle": "6",
+          "nom": "6",
+          "type": "NON_VARIABLE",
+          "contexte": "iant sa décision au moins six (6) mois à l'avance aux autres Pa"
+        },
+        {
+          "paragraphe_index": 472,
+          "libelle": "e",
+          "nom": "e",
+          "type": "NON_VARIABLE",
+          "contexte": " ou obligation d’une Partie né(e) du fait de l’exécution ou de "
+        },
+        {
+          "paragraphe_index": 476,
+          "libelle": "le « Mandataire »",
+          "nom": "le_mandataire",
+          "type": "A_CONFIRMER",
+          "contexte": "chargé de la gestion du Pacte (le « Mandataire »)."
+        },
+        {
+          "paragraphe_index": 482,
+          "libelle": "pour une société par action",
+          "nom": "pour_une_soci_t_par_action",
+          "type": "A_CONFIRMER",
+          "contexte": "cuter les ordres de mouvement (pour une société par action) ou actes de cession (pour une"
+        },
+        {
+          "paragraphe_index": 482,
+          "libelle": "pour une SARL",
+          "nom": "pour_une_sarl",
+          "type": "A_CONFIRMER",
+          "contexte": "r action) ou actes de cession (pour une SARL) relatifs aux Titres et émanan"
+        },
+        {
+          "paragraphe_index": 497,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "té et par lequel il acceptera (i) d'être tenu de toutes les obl"
+        },
+        {
+          "paragraphe_index": 497,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "ations résultant du Pacte, et (ii) de se soumettre à ses stipula"
+        },
+        {
+          "paragraphe_index": 509,
+          "libelle": "notamment dans le cadre d’une souscription",
+          "nom": "notamment_dans_le_cadre_d_une_souscription",
+          "type": "A_CONFIRMER",
+          "contexte": "qu'au résultat d'un Transfert (notamment dans le cadre d’une souscription) signe un exemplaire de l’acte"
+        },
+        {
+          "paragraphe_index": 511,
+          "libelle": "l’« Engagement Contractuel »",
+          "nom": "l_engagement_contractuel",
+          "type": "A_CONFIRMER",
+          "contexte": "a approuvé par les Fondateurs (l’« Engagement Contractuel »). Les Parties donnent au Manda"
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "uée si elle est effectuée par (i) lettre remise en mains propre"
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "ii",
+          "nom": "ii",
+          "type": "NON_VARIABLE",
+          "contexte": "ttre remise en mains propres, (ii) par acte extrajudiciaire, (ii"
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "iii",
+          "nom": "iii",
+          "type": "NON_VARIABLE",
+          "contexte": "ii) par acte extrajudiciaire, (iii) par courrier recommandé avec "
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "ou procédé équivalent en cas d’envoi à l’étranger, notamment DHL ou Fedex",
+          "nom": "ou_proc_d_quivalent_en_cas_d_envoi_l_tranger_notamment_dhl_ou_fedex",
+          "type": "A_CONFIRMER",
+          "contexte": "mmandé avec avis de réception (ou procédé équivalent en cas d’envoi à l’étranger, notamment DHL ou Fedex), ou (iv) par télécopie ou cou"
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "iv",
+          "nom": "iv",
+          "type": "NON_VARIABLE",
+          "contexte": ", notamment DHL ou Fedex), ou (iv) par télécopie ou courrier éle"
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "i",
+          "nom": "i",
+          "type": "NON_VARIABLE",
+          "contexte": "r l’un des procédés visés aux (i) à (iii), et si elle est adres"
+        },
+        {
+          "paragraphe_index": 518,
+          "libelle": "iii",
+          "nom": "iii",
+          "type": "NON_VARIABLE",
+          "contexte": " des procédés visés aux (i) à (iii), et si elle est adressée au s"
+        },
+        {
+          "paragraphe_index": 523,
+          "libelle": "ou procédé équivalent en cas d’envoi à l’étranger, notamment DHL ou Fedex",
+          "nom": "ou_proc_d_quivalent_en_cas_d_envoi_l_tranger_notamment_dhl_ou_fedex",
+          "type": "A_CONFIRMER",
+          "contexte": "fications faites par la poste (ou procédé équivalent en cas d’envoi à l’étranger, notamment DHL ou Fedex) seront présumées avoir été fa"
+        },
+        {
+          "paragraphe_index": 523,
+          "libelle": "ou l’agent de l’entreprise de messagerie internationale",
+          "nom": "ou_l_agent_de_l_entreprise_de_messagerie_internationale",
+          "type": "A_CONFIRMER",
+          "contexte": "ation par l’agent de la poste (ou l’agent de l’entreprise de messagerie internationale)."
+        },
+        {
+          "paragraphe_index": 525,
+          "libelle": "…",
+          "nom": "",
+          "type": "A_CONFIRMER",
+          "contexte": "ée, comme indiqué à l’Article (…), au plus tard le premier Jour"
+        },
+        {
+          "paragraphe_index": 532,
+          "libelle": "ou des",
+          "nom": "ou_des",
+          "type": "A_CONFIRMER",
+          "contexte": "e en nature à l’initiative du (ou des) bénéficiaire(s) en cas de man"
+        },
+        {
+          "paragraphe_index": 532,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "ative du (ou des) bénéficiaire(s) en cas de manquement de la Pa"
+        },
+        {
+          "paragraphe_index": 532,
+          "libelle": "ou des",
+          "nom": "ou_des",
+          "type": "A_CONFIRMER",
+          "contexte": "ent que par l’accord écrit du (ou des) créancier(s) et du (ou des) d"
+        },
+        {
+          "paragraphe_index": 532,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "rd écrit du (ou des) créancier(s) et du (ou des) débiteur(s) de"
+        },
+        {
+          "paragraphe_index": 532,
+          "libelle": "ou des",
+          "nom": "ou_des",
+          "type": "A_CONFIRMER",
+          "contexte": "u (ou des) créancier(s) et du (ou des) débiteur(s) de l’obligation e"
+        },
+        {
+          "paragraphe_index": 532,
+          "libelle": "s",
+          "nom": "s",
+          "type": "NON_VARIABLE",
+          "contexte": "ier(s) et du (ou des) débiteur(s) de l’obligation en cause."
+        },
+        {
+          "paragraphe_index": 545,
+          "libelle": "y compris une autre Partie",
+          "nom": "y_compris_une_autre_partie",
+          "type": "A_CONFIRMER",
+          "contexte": "rds avec toute autre personne (y compris une autre Partie) concernant la Société ou les "
+        },
+        {
+          "paragraphe_index": 561,
+          "libelle": "Ville",
+          "nom": "ville",
+          "type": "texte",
+          "contexte": "ve du Tribunal de commerce de (Ville)."
+        },
+        {
+          "paragraphe_index": 567,
+          "libelle": "lieu",
+          "nom": "lieu",
+          "type": "texte",
+          "contexte": "Fait à (lieu), le (date) en (nombre) exempl"
+        },
+        {
+          "paragraphe_index": 567,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "Fait à (lieu), le (date) en (nombre) exemplaires"
+        },
+        {
+          "paragraphe_index": 567,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "Fait à (lieu), le (date) en (nombre) exemplaires"
+        }
+      ]
+    }
+  ]
+}

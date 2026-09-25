@@ -22,17 +22,38 @@ type DraftAssociate = {
   type_personne: AssociateTypePersonne
   date_naissance: string | null
   lieu_naissance: string | null
+  situation_et_regime_matrimonial: string | null
   nationalite: string | null
   adresse: string | null
   pourcentage_capital: string
   pourcentage_droits_vote: string | null
   type_apport: AssociateTypeApport
+  description_apport_nature: string | null
   est_dirigeant: boolean
   fonction_dirigeant: string | null
   /** id de la ligne de l'associé dirigeant (chef de foyer) auquel cette personne
    * est rattachée fiscalement (conjoint/PACS/enfant à charge) — NULL sinon. */
   foyer_fiscal_dirigeant_associate_id: string | null
   est_partie_au_pacte_fondateurs: boolean
+  /** Distingue Associé Fondateur / Associé Investisseur pour le préambule
+   * du pacte de fondateurs (v2) — voir ProjectAssociateRead.est_fondateur
+   * côté API. Non exposé si `est_partie_au_pacte_fondateurs` est faux : sans
+   * intérêt hors contexte pacte. */
+  est_fondateur: boolean
+  /** AJOUT 24/09/2026 — pertinents seulement si `type_personne === "personne_morale"`.
+   * `nom_complet` reste rempli automatiquement (= denomination_sociale) pour ce
+   * type : la colonne `nom_complet` est NOT NULL en base et sert d'étiquette
+   * d'affichage générique (liste, badges, sélecteur de foyer fiscal) — pas la
+   * peine de redemander la même information deux fois à l'utilisateur. */
+  denomination_sociale: string | null
+  type_societe: string | null
+  capital_social: string | null
+  siege_social: string | null
+  lieu_immatriculation: string | null
+  numero_siren: string | null
+  representant_nom: string | null
+  representant_prenom: string | null
+  representant_qualite: string | null
 }
 
 type AssociateFormState = {
@@ -40,16 +61,28 @@ type AssociateFormState = {
   type_personne: AssociateTypePersonne
   date_naissance: string
   lieu_naissance: string
+  situation_et_regime_matrimonial: string
   nationalite: string
   adresse: string
   pourcentage_capital: string
   pourcentage_droits_vote_defined: boolean
   pourcentage_droits_vote: string
   type_apport: AssociateTypeApport
+  description_apport_nature: string
   est_dirigeant: boolean
   fonction_dirigeant: string
   foyer_fiscal_dirigeant_associate_id: string
   est_partie_au_pacte_fondateurs: boolean
+  est_fondateur: boolean
+  denomination_sociale: string
+  type_societe: string
+  capital_social: string
+  siege_social: string
+  lieu_immatriculation: string
+  numero_siren: string
+  representant_nom: string
+  representant_prenom: string
+  representant_qualite: string
 }
 
 const EMPTY_FORM: AssociateFormState = {
@@ -57,16 +90,28 @@ const EMPTY_FORM: AssociateFormState = {
   type_personne: "personne_physique",
   date_naissance: "",
   lieu_naissance: "",
+  situation_et_regime_matrimonial: "",
   nationalite: "",
   adresse: "",
   pourcentage_capital: "",
   pourcentage_droits_vote_defined: false,
   pourcentage_droits_vote: "",
   type_apport: "numeraire",
+  description_apport_nature: "",
   est_dirigeant: false,
   fonction_dirigeant: "",
   foyer_fiscal_dirigeant_associate_id: "",
   est_partie_au_pacte_fondateurs: false,
+  est_fondateur: false,
+  denomination_sociale: "",
+  type_societe: "",
+  capital_social: "",
+  siege_social: "",
+  lieu_immatriculation: "",
+  numero_siren: "",
+  representant_nom: "",
+  representant_prenom: "",
+  representant_qualite: "",
 }
 
 function draftFromAssociate(a: ProjectAssociateRead): DraftAssociate {
@@ -76,15 +121,27 @@ function draftFromAssociate(a: ProjectAssociateRead): DraftAssociate {
     type_personne: a.type_personne,
     date_naissance: a.date_naissance,
     lieu_naissance: a.lieu_naissance,
+    situation_et_regime_matrimonial: a.situation_et_regime_matrimonial,
     nationalite: a.nationalite,
     adresse: a.adresse,
     pourcentage_capital: a.pourcentage_capital,
     pourcentage_droits_vote: a.pourcentage_droits_vote,
     type_apport: a.type_apport,
+    description_apport_nature: a.description_apport_nature,
     est_dirigeant: a.est_dirigeant,
     fonction_dirigeant: a.fonction_dirigeant,
     foyer_fiscal_dirigeant_associate_id: a.foyer_fiscal_dirigeant_associate_id,
     est_partie_au_pacte_fondateurs: a.est_partie_au_pacte_fondateurs,
+    est_fondateur: a.est_fondateur,
+    denomination_sociale: a.denomination_sociale,
+    type_societe: a.type_societe,
+    capital_social: a.capital_social,
+    siege_social: a.siege_social,
+    lieu_immatriculation: a.lieu_immatriculation,
+    numero_siren: a.numero_siren,
+    representant_nom: a.representant_nom,
+    representant_prenom: a.representant_prenom,
+    representant_qualite: a.representant_qualite,
   }
 }
 
@@ -94,26 +151,44 @@ function formFromDraft(d: DraftAssociate): AssociateFormState {
     type_personne: d.type_personne,
     date_naissance: d.date_naissance ?? "",
     lieu_naissance: d.lieu_naissance ?? "",
+    situation_et_regime_matrimonial: d.situation_et_regime_matrimonial ?? "",
     nationalite: d.nationalite ?? "",
     adresse: d.adresse ?? "",
     pourcentage_capital: d.pourcentage_capital,
     pourcentage_droits_vote_defined: d.pourcentage_droits_vote !== null,
     pourcentage_droits_vote: d.pourcentage_droits_vote ?? "",
     type_apport: d.type_apport,
+    description_apport_nature: d.description_apport_nature ?? "",
     est_dirigeant: d.est_dirigeant,
     fonction_dirigeant: d.fonction_dirigeant ?? "",
     foyer_fiscal_dirigeant_associate_id: d.foyer_fiscal_dirigeant_associate_id ?? "",
     est_partie_au_pacte_fondateurs: d.est_partie_au_pacte_fondateurs,
+    est_fondateur: d.est_fondateur,
+    denomination_sociale: d.denomination_sociale ?? "",
+    type_societe: d.type_societe ?? "",
+    capital_social: d.capital_social ?? "",
+    siege_social: d.siege_social ?? "",
+    lieu_immatriculation: d.lieu_immatriculation ?? "",
+    numero_siren: d.numero_siren ?? "",
+    representant_nom: d.representant_nom ?? "",
+    representant_prenom: d.representant_prenom ?? "",
+    representant_qualite: d.representant_qualite ?? "",
   }
 }
 
 function formToDraft(form: AssociateFormState, id: string | null): DraftAssociate {
+  const isMorale = form.type_personne === "personne_morale"
   return {
     id,
-    nom_complet: form.nom_complet.trim(),
+    // Pour une personne morale, `nom_complet` (NOT NULL en base) reflète la
+    // dénomination sociale — pas de champ redondant à remplir deux fois côté
+    // utilisateur (voir DraftAssociate.denomination_sociale ci-dessus).
+    nom_complet: isMorale ? form.denomination_sociale.trim() : form.nom_complet.trim(),
     type_personne: form.type_personne,
     date_naissance: form.date_naissance || null,
     lieu_naissance: form.lieu_naissance.trim() || null,
+    // Personne physique uniquement (en-tête des statuts).
+    situation_et_regime_matrimonial: isMorale ? null : form.situation_et_regime_matrimonial.trim() || null,
     nationalite: form.nationalite.trim() || null,
     adresse: form.adresse.trim() || null,
     pourcentage_capital: parseDecimal(form.pourcentage_capital).toFixed(2),
@@ -121,10 +196,29 @@ function formToDraft(form: AssociateFormState, id: string | null): DraftAssociat
       ? parseDecimal(form.pourcentage_droits_vote).toFixed(2)
       : null,
     type_apport: form.type_apport,
+    // Vidée si le type n'est plus "nature" (même règle que le backend).
+    description_apport_nature:
+      form.type_apport === "nature" ? form.description_apport_nature.trim() || null : null,
     est_dirigeant: form.est_dirigeant,
     fonction_dirigeant: form.fonction_dirigeant.trim() || null,
     foyer_fiscal_dirigeant_associate_id: form.foyer_fiscal_dirigeant_associate_id || null,
     est_partie_au_pacte_fondateurs: form.est_partie_au_pacte_fondateurs,
+    // Une case décochée pour "partie au pacte" annule aussi "fondateur" —
+    // évite un état incohérent en base (fondateur=true sur un associé qui
+    // n'est plus partie au pacte) si l'utilisateur décoche l'une après l'autre.
+    est_fondateur: form.est_partie_au_pacte_fondateurs ? form.est_fondateur : false,
+    denomination_sociale: isMorale ? form.denomination_sociale.trim() || null : null,
+    type_societe: isMorale ? form.type_societe.trim() || null : null,
+    capital_social: isMorale && form.capital_social ? parseDecimal(form.capital_social).toFixed(2) : null,
+    siege_social: isMorale ? form.siege_social.trim() || null : null,
+    lieu_immatriculation: isMorale ? form.lieu_immatriculation.trim() || null : null,
+    // Retire les espaces (format d'affichage habituel "123 456 789") avant
+    // l'envoi : le backend attend exactement 9 chiffres (max_length=9), pas
+    // la peine d'imposer à l'utilisateur de taper sans espaces.
+    numero_siren: isMorale ? form.numero_siren.replace(/\s/g, "").trim() || null : null,
+    representant_nom: isMorale ? form.representant_nom.trim() || null : null,
+    representant_prenom: isMorale ? form.representant_prenom.trim() || null : null,
+    representant_qualite: isMorale ? form.representant_qualite.trim() || null : null,
   }
 }
 
@@ -141,15 +235,27 @@ function draftFieldKey(d: DraftAssociate) {
     type_personne: d.type_personne,
     date_naissance: d.date_naissance,
     lieu_naissance: d.lieu_naissance,
+    situation_et_regime_matrimonial: d.situation_et_regime_matrimonial,
     nationalite: d.nationalite,
     adresse: d.adresse,
     pourcentage_capital: d.pourcentage_capital,
     pourcentage_droits_vote: d.pourcentage_droits_vote,
     type_apport: d.type_apport,
+    description_apport_nature: d.description_apport_nature,
     est_dirigeant: d.est_dirigeant,
     fonction_dirigeant: d.fonction_dirigeant,
     foyer_fiscal_dirigeant_associate_id: d.foyer_fiscal_dirigeant_associate_id,
     est_partie_au_pacte_fondateurs: d.est_partie_au_pacte_fondateurs,
+    est_fondateur: d.est_fondateur,
+    denomination_sociale: d.denomination_sociale,
+    type_societe: d.type_societe,
+    capital_social: d.capital_social,
+    siege_social: d.siege_social,
+    lieu_immatriculation: d.lieu_immatriculation,
+    numero_siren: d.numero_siren,
+    representant_nom: d.representant_nom,
+    representant_prenom: d.representant_prenom,
+    representant_qualite: d.representant_qualite,
   })
 }
 
@@ -258,12 +364,21 @@ export default function TeamCapitalPage() {
 
   /** Applique le formulaire au BROUILLON local (aucun appel serveur). */
   async function handleFormSubmit() {
-    if (!form.nom_complet.trim()) {
+    if (form.type_personne === "personne_morale") {
+      if (!form.denomination_sociale.trim()) {
+        setFormError("La dénomination sociale est obligatoire.")
+        return
+      }
+    } else if (!form.nom_complet.trim()) {
       setFormError("Le nom de l'associé est obligatoire.")
       return
     }
     if (form.est_dirigeant && !form.fonction_dirigeant.trim()) {
       setFormError("Un dirigeant doit avoir une fonction renseignée.")
+      return
+    }
+    if (form.type_apport === "nature" && !form.description_apport_nature.trim()) {
+      setFormError("Décrivez le bien apporté en nature : cette description est reprise dans les statuts.")
       return
     }
     if (form.type_apport === "industrie" && parseDecimal(form.pourcentage_capital) !== 0) {
@@ -366,7 +481,7 @@ export default function TeamCapitalPage() {
                       )}
                       {a.est_partie_au_pacte_fondateurs && (
                         <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
-                          Pacte fondateurs
+                          Pacte fondateurs{a.est_fondateur ? " · Fondateur" : " · Investisseur"}
                         </span>
                       )}
                       {a.foyer_fiscal_dirigeant_associate_id !== null && (
@@ -479,16 +594,11 @@ export default function TeamCapitalPage() {
               handleFormSubmit()
             }}
           >
-            <label className="flex flex-col gap-1">
-              <span className="text-xs text-gray-500">Nom complet *</span>
-              <input
-                type="text"
-                value={form.nom_complet}
-                onChange={(e) => setField("nom_complet", e.target.value)}
-                className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-              />
-            </label>
-
+            {/* Type de personne EN PREMIER (24/09/2026) : détermine quels champs
+                d'identité suivent (nom complet + naissance pour une personne
+                physique, dénomination sociale + représentant pour une personne
+                morale) — le choisir après aurait laissé "Nom complet" affiché à
+                tort pour une personne morale, sans aucun champ de remplacement. */}
             <label className="flex flex-col gap-1">
               <span className="text-xs text-gray-500">Type de personne</span>
               <select
@@ -501,41 +611,140 @@ export default function TeamCapitalPage() {
               </select>
             </label>
 
-            {form.type_personne === "personne_physique" && (
-              <div className="flex flex-col gap-1">
-                <span className="text-xs text-gray-500">Identité (facultatif)</span>
+            {form.type_personne === "personne_physique" ? (
+              <>
+                <label className="flex flex-col gap-1">
+                  <span className="text-xs text-gray-500">Nom complet *</span>
+                  <input
+                    type="text"
+                    value={form.nom_complet}
+                    onChange={(e) => setField("nom_complet", e.target.value)}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                  />
+                </label>
+
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs text-gray-500">Identité (requise pour rédiger les statuts)</span>
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      type="date"
+                      value={form.date_naissance}
+                      onChange={(e) => setField("date_naissance", e.target.value)}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      placeholder="Date de naissance"
+                    />
+                    <input
+                      type="text"
+                      value={form.lieu_naissance}
+                      onChange={(e) => setField("lieu_naissance", e.target.value)}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      placeholder="Lieu de naissance"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      type="text"
+                      value={form.nationalite}
+                      onChange={(e) => setField("nationalite", e.target.value)}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      placeholder="Nationalité"
+                    />
+                    <input
+                      type="text"
+                      value={form.adresse}
+                      onChange={(e) => setField("adresse", e.target.value)}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                      placeholder="Adresse"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    value={form.situation_et_regime_matrimonial}
+                    onChange={(e) => setField("situation_et_regime_matrimonial", e.target.value)}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                    placeholder="Situation et régime matrimonial (ex : célibataire, marié(e) sous le régime de la communauté)"
+                  />
+                  <span className="text-xs text-gray-400">
+                    Date et lieu de naissance, adresse et situation matrimoniale figurent dans vos statuts.
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <label className="flex flex-col gap-1">
+                  <span className="text-xs text-gray-500">Dénomination sociale *</span>
+                  <input
+                    type="text"
+                    value={form.denomination_sociale}
+                    onChange={(e) => setField("denomination_sociale", e.target.value)}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                  />
+                </label>
                 <div className="grid grid-cols-2 gap-2">
                   <input
-                    type="date"
-                    value={form.date_naissance}
-                    onChange={(e) => setField("date_naissance", e.target.value)}
+                    type="text"
+                    value={form.type_societe}
+                    onChange={(e) => setField("type_societe", e.target.value)}
                     className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                    placeholder="Date de naissance"
+                    placeholder="Type de société (ex : SAS)"
                   />
                   <input
-                    type="text"
-                    value={form.lieu_naissance}
-                    onChange={(e) => setField("lieu_naissance", e.target.value)}
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={form.capital_social}
+                    onChange={(e) => setField("capital_social", e.target.value)}
                     className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                    placeholder="Lieu de naissance"
+                    placeholder="Capital social (€)"
                   />
                 </div>
+                <input
+                  type="text"
+                  value={form.siege_social}
+                  onChange={(e) => setField("siege_social", e.target.value)}
+                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                  placeholder="Siège social"
+                />
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     type="text"
-                    value={form.nationalite}
-                    onChange={(e) => setField("nationalite", e.target.value)}
+                    value={form.lieu_immatriculation}
+                    onChange={(e) => setField("lieu_immatriculation", e.target.value)}
                     className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                    placeholder="Nationalité"
+                    placeholder="Lieu d'immatriculation (RCS)"
                   />
                   <input
                     type="text"
-                    value={form.adresse}
-                    onChange={(e) => setField("adresse", e.target.value)}
+                    value={form.numero_siren}
+                    onChange={(e) => setField("numero_siren", e.target.value)}
                     className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                    placeholder="Adresse"
+                    placeholder="Numéro Siren"
                   />
                 </div>
+                <span className="mt-1 text-xs text-gray-500">Représentant légal (facultatif)</span>
+                <div className="grid grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    value={form.representant_prenom}
+                    onChange={(e) => setField("representant_prenom", e.target.value)}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                    placeholder="Prénom"
+                  />
+                  <input
+                    type="text"
+                    value={form.representant_nom}
+                    onChange={(e) => setField("representant_nom", e.target.value)}
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                    placeholder="Nom"
+                  />
+                </div>
+                <input
+                  type="text"
+                  value={form.representant_qualite}
+                  onChange={(e) => setField("representant_qualite", e.target.value)}
+                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                  placeholder="Qualité (ex : Président)"
+                />
               </div>
             )}
 
@@ -567,6 +776,20 @@ export default function TeamCapitalPage() {
                 </select>
               </label>
             </div>
+
+            {form.type_apport === "nature" && (
+              <label className="flex flex-col gap-1">
+                <span className="text-xs text-gray-500">Bien apporté</span>
+                <textarea
+                  rows={2}
+                  value={form.description_apport_nature}
+                  onChange={(e) => setField("description_apport_nature", e.target.value)}
+                  placeholder="Ex : un fonds de commerce situé 12 rue…, un brevet n°…, du matériel informatique (liste)…"
+                  className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                />
+                <span className="text-xs text-gray-400">Repris automatiquement dans les statuts (article 6).</span>
+              </label>
+            )}
 
             <label className="flex items-center gap-2 text-sm text-gray-700">
               <input
@@ -610,10 +833,24 @@ export default function TeamCapitalPage() {
                 <input
                   type="checkbox"
                   checked={form.est_partie_au_pacte_fondateurs}
-                  onChange={(e) => setField("est_partie_au_pacte_fondateurs", e.target.checked)}
+                  onChange={(e) => {
+                    const value = e.target.checked
+                    setField("est_partie_au_pacte_fondateurs", value)
+                    if (!value) setField("est_fondateur", false)
+                  }}
                 />
                 Membre du pacte de fondateurs
               </label>
+              {form.est_partie_au_pacte_fondateurs && (
+                <label className="flex items-center gap-2 pl-4 text-sm text-gray-700">
+                  <input
+                    type="checkbox"
+                    checked={form.est_fondateur}
+                    onChange={(e) => setField("est_fondateur", e.target.checked)}
+                  />
+                  Associé fondateur (sinon : Associé investisseur)
+                </label>
+              )}
             </div>
 
             {form.est_dirigeant && (

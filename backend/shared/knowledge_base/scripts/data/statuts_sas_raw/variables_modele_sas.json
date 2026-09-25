@@ -1,0 +1,1755 @@
+{
+  "source_file": "modele_sas",
+  "segments_avec_variables": [
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 18,
+      "occurrences": [
+        {
+          "paragraphe_index": 19,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "1o .....(prénom) .....(nom), demeurant à ....."
+        },
+        {
+          "paragraphe_index": 19,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "1o .....(prénom) .....(nom), demeurant à .....(adresse), "
+        },
+        {
+          "paragraphe_index": 19,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "énom) .....(nom), demeurant à .....(adresse), né(e) le .....(date de naiss"
+        },
+        {
+          "paragraphe_index": 19,
+          "libelle": "date de naissance",
+          "nom": "date_de_naissance",
+          "type": "date",
+          "contexte": "nt à .....(adresse), né(e) le .....(date de naissance) à .....(lieu de"
+        },
+        {
+          "paragraphe_index": 20,
+          "libelle": "situation et régime matrimonial",
+          "nom": "situation_et_r_gime_matrimonial",
+          "type": "texte",
+          "contexte": "naissance), .....(situation et régime matrimonial),"
+        },
+        {
+          "paragraphe_index": 21,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "2o .....(prénom) .....(nom), demeurant à ....."
+        },
+        {
+          "paragraphe_index": 21,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "2o .....(prénom) .....(nom), demeurant à .....(adresse), "
+        },
+        {
+          "paragraphe_index": 21,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "énom) .....(nom), demeurant à .....(adresse), né(e) le .....(date de naiss"
+        },
+        {
+          "paragraphe_index": 21,
+          "libelle": "date de naissance",
+          "nom": "date_de_naissance",
+          "type": "date",
+          "contexte": "nt à .....(adresse), né(e) le .....(date de naissance) à .....(lieu de"
+        },
+        {
+          "paragraphe_index": 22,
+          "libelle": "situation et régime matrimonial",
+          "nom": "situation_et_r_gime_matrimonial",
+          "type": "texte",
+          "contexte": "naissance), .....(situation et régime matrimonial),"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 25,
+      "occurrences": [
+        {
+          "paragraphe_index": 26,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": "3o .....(dénomination sociale), .....(forme) au capital de ."
+        },
+        {
+          "paragraphe_index": 26,
+          "libelle": "forme",
+          "nom": "forme",
+          "type": "texte",
+          "contexte": " .....(dénomination sociale), .....(forme) au capital de .....(capital) "
+        },
+        {
+          "paragraphe_index": 26,
+          "libelle": "capital",
+          "nom": "capital",
+          "type": "montant",
+          "contexte": "), .....(forme) au capital de .....(capital) euros, ayant son siège social"
+        },
+        {
+          "paragraphe_index": 27,
+          "libelle": "siège social",
+          "nom": "si_ge_social",
+          "type": "texte",
+          "contexte": ".....(siège social), immatriculée au Registre du "
+        },
+        {
+          "paragraphe_index": 27,
+          "libelle": "RCS",
+          "nom": "rcs",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de .....(RCS), sous le"
+        },
+        {
+          "paragraphe_index": 28,
+          "libelle": "numéro SIREN",
+          "nom": "num_ro_siren",
+          "type": "texte",
+          "contexte": "no  .....(numéro SIREN) représentée par .....(représe"
+        },
+        {
+          "paragraphe_index": 28,
+          "libelle": "représentant légal",
+          "nom": "repr_sentant_l_gal",
+          "type": "texte",
+          "contexte": "numéro SIREN) représentée par .....(représentant légal), ès qualités de .....(fonctio"
+        },
+        {
+          "paragraphe_index": 28,
+          "libelle": "fonction",
+          "nom": "fonction",
+          "type": "texte",
+          "contexte": "entant légal), ès qualités de .....(fonction),"
+        },
+        {
+          "paragraphe_index": 30,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": "3o .....(dénomination sociale), .....(forme) au capital de ."
+        },
+        {
+          "paragraphe_index": 30,
+          "libelle": "forme",
+          "nom": "forme",
+          "type": "texte",
+          "contexte": " .....(dénomination sociale), .....(forme) au capital de .....(capital) "
+        },
+        {
+          "paragraphe_index": 30,
+          "libelle": "capital",
+          "nom": "capital",
+          "type": "montant",
+          "contexte": "), .....(forme) au capital de .....(capital) euros, ayant son siège social"
+        },
+        {
+          "paragraphe_index": 31,
+          "libelle": "siège social",
+          "nom": "si_ge_social",
+          "type": "texte",
+          "contexte": ".....(siège social), immatriculée au Registre du "
+        },
+        {
+          "paragraphe_index": 31,
+          "libelle": "RCS",
+          "nom": "rcs",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de .....(RCS), sous le"
+        },
+        {
+          "paragraphe_index": 37,
+          "libelle": "numéro SIREN",
+          "nom": "num_ro_siren",
+          "type": "texte",
+          "contexte": "no  .....(numéro SIREN) représentée par .....(représe"
+        },
+        {
+          "paragraphe_index": 37,
+          "libelle": "représentant légal",
+          "nom": "repr_sentant_l_gal",
+          "type": "texte",
+          "contexte": "numéro SIREN) représentée par .....(représentant légal), ès qualités de .....(fonctio"
+        },
+        {
+          "paragraphe_index": 37,
+          "libelle": "fonction",
+          "nom": "fonction",
+          "type": "texte",
+          "contexte": "entant légal), ès qualités de .....(fonction),"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 2,
+      "premier_paragraphe_index": 51,
+      "occurrences": [
+        {
+          "paragraphe_index": 53,
+          "libelle": "décrire en des termes généraux l’activité envisagée par la Société",
+          "nom": "d_crire_en_des_termes_g_n_raux_l_activit_envisag_e_par_la_soci_t",
+          "type": "A_CONFIRMER",
+          "contexte": "• .....(décrire en des termes généraux l’activité envisagée par la Société) ;"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 61,
+      "occurrences": [
+        {
+          "paragraphe_index": 62,
+          "libelle": "décrire la raison d’être de la Société",
+          "nom": "d_crire_la_raison_d_tre_de_la_soci_t",
+          "type": "A_CONFIRMER",
+          "contexte": " Société a pour raison d’être .....(décrire la raison d’être de la Société)."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 3,
+      "premier_paragraphe_index": 73,
+      "occurrences": [
+        {
+          "paragraphe_index": 74,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": "a pour dénomination sociale : .....(dénomination sociale) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 75,
+      "occurrences": [
+        {
+          "paragraphe_index": 76,
+          "libelle": "sigle",
+          "nom": "sigle",
+          "type": "texte",
+          "contexte": "eut être résumée par le sigle .....(sigle)."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 4,
+      "premier_paragraphe_index": 77,
+      "occurrences": [
+        {
+          "paragraphe_index": 78,
+          "libelle": "adresse du siège social",
+          "nom": "adresse_du_si_ge_social",
+          "type": "texte",
+          "contexte": "Le siège social est fixé à : .....(adresse du siège social)."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 5,
+      "premier_paragraphe_index": 118,
+      "occurrences": [
+        {
+          "paragraphe_index": 119,
+          "libelle": "remplir la durée de 99 ans maximum",
+          "nom": "remplir_la_dur_e_de_99_ans_maximum",
+          "type": "A_CONFIRMER",
+          "contexte": "La durée de la Société est de .. (remplir la durée de 99 ans maximum) ans à compter de la date de s"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 125,
+      "occurrences": [
+        {
+          "paragraphe_index": 126,
+          "libelle": "identité de l’apporteur en numéraire",
+          "nom": "identit_de_l_apporteur_en_num_raire",
+          "type": "texte",
+          "contexte": ".....(identité de l’apporteur en numéraire) apporte à la Société une somm"
+        },
+        {
+          "paragraphe_index": 126,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": "a Société une somme totale de .....(somme) euros"
+        },
+        {
+          "paragraphe_index": 127,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "correspondant à .....(nombre) actions de .....(montant) eur"
+        },
+        {
+          "paragraphe_index": 127,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "nt à .....(nombre) actions de .....(montant) euros de valeur nominale chac"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 134,
+      "occurrences": [
+        {
+          "paragraphe_index": 136,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": "Laquelle somme de .....(somme)..... euros a été régulièremen"
+        },
+        {
+          "paragraphe_index": 137,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "Société en formation, le .....(date), auprès de Me .....(identité)"
+        },
+        {
+          "paragraphe_index": 137,
+          "libelle": "identité",
+          "nom": "identit",
+          "type": "texte",
+          "contexte": " le .....(date), auprès de Me .....(identité), Notaire, ou Banque ou à la C"
+        },
+        {
+          "paragraphe_index": 138,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "dépôts et consignations .....(adresse) sous le numéro de compte no  "
+        },
+        {
+          "paragraphe_index": 138,
+          "libelle": "numéro du compte",
+          "nom": "num_ro_du_compte",
+          "type": "texte",
+          "contexte": " sous le numéro de compte no  .....(numéro du compte)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 140,
+      "occurrences": [
+        {
+          "paragraphe_index": 141,
+          "libelle": "identité de l’apporteur en numéraire",
+          "nom": "identit_de_l_apporteur_en_num_raire",
+          "type": "texte",
+          "contexte": ".....(identité de l’apporteur en numéraire) apporte à la Société une somm"
+        },
+        {
+          "paragraphe_index": 141,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": "a Société une somme totale de .....(somme) euros."
+        },
+        {
+          "paragraphe_index": 142,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": "apport en numéraire s’élève à .....(somme) euros,"
+        },
+        {
+          "paragraphe_index": 143,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "correspondant à .....(nombre) actions de .....(montant) eur"
+        },
+        {
+          "paragraphe_index": 143,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "nt à .....(nombre) actions de .....(montant) euros de valeur nominale chac"
+        },
+        {
+          "paragraphe_index": 146,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "icat du dépositaire établi le .....(date) par la banque .....(dénominat"
+        },
+        {
+          "paragraphe_index": 146,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": " le .....(date) par la banque .....(dénomination sociale) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 147,
+      "occurrences": [
+        {
+          "paragraphe_index": 149,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": "Laquelle somme de .....(somme)..... euros a été régulièremen"
+        },
+        {
+          "paragraphe_index": 150,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "Société en formation, le .....(date), auprès de Me .....(identité)"
+        },
+        {
+          "paragraphe_index": 150,
+          "libelle": "identité",
+          "nom": "identit",
+          "type": "texte",
+          "contexte": " le .....(date), auprès de Me .....(identité), Notaire, ou Banque ou à la C"
+        },
+        {
+          "paragraphe_index": 151,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "dépôts et consignations .....(adresse) sous le numéro de compte no  "
+        },
+        {
+          "paragraphe_index": 151,
+          "libelle": "numéro du compte",
+          "nom": "num_ro_du_compte",
+          "type": "texte",
+          "contexte": " sous le numéro de compte no  .....(numéro du compte)."
+        },
+        {
+          "paragraphe_index": 152,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": " du surplus, soit la somme de .....(somme) euros, devra intervenir dans "
+        },
+        {
+          "paragraphe_index": 157,
+          "libelle": "identité de l’apporteur en nature",
+          "nom": "identit_de_l_apporteur_en_nature",
+          "type": "texte",
+          "contexte": "1°  .....(identité de l’apporteur en nature) apporte à la Société sous les"
+        },
+        {
+          "paragraphe_index": 159,
+          "libelle": "désignation du bien apporté",
+          "nom": "d_signation_du_bien_apport",
+          "type": "texte",
+          "contexte": "Désignation : .....(désignation du bien apporté) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 160,
+      "occurrences": [
+        {
+          "paragraphe_index": 163,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "sa responsabilité le .....(date), ledit commissaire ayant été "
+        },
+        {
+          "paragraphe_index": 164,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "date du .....(date)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 171,
+      "occurrences": [
+        {
+          "paragraphe_index": 175,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "sa responsabilité le .....(date), ledit commissaire ayant été "
+        },
+        {
+          "paragraphe_index": 176,
+          "libelle": "lieu",
+          "nom": "lieu",
+          "type": "texte",
+          "contexte": "nt du Tribunal de commerce de .....(lieu), le .....(date), sur requête "
+        },
+        {
+          "paragraphe_index": 176,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "e commerce de .....(lieu), le .....(date), sur requête de .....(identit"
+        },
+        {
+          "paragraphe_index": 176,
+          "libelle": "identité du requérant",
+          "nom": "identit_du_requ_rant",
+          "type": "texte",
+          "contexte": "e .....(date), sur requête de .....(identité du requérant),"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 188,
+      "occurrences": [
+        {
+          "paragraphe_index": 190,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": " objets de l’apport, à savoir .....(à compléter) , il a été décidé de ne pas"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "somme",
+          "nom": "somme",
+          "type": "texte",
+          "contexte": "somme totale de .....(somme) euros, .....(identité de l’ap"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "identité de l’apporteur en nature",
+          "nom": "identit_de_l_apporteur_en_nature",
+          "type": "texte",
+          "contexte": "totale de .....(somme) euros, .....(identité de l’apporteur en nature) s’est vu attribuer .....(nomb"
+        },
+        {
+          "paragraphe_index": 194,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "en nature) s’est vu attribuer .....(nombre)"
+        },
+        {
+          "paragraphe_index": 195,
+          "libelle": "montant",
+          "nom": "montant",
+          "type": "montant",
+          "contexte": "actions de .....(montant) euros de valeur nominale chac"
+        },
+        {
+          "paragraphe_index": 197,
+          "libelle": "identité de l’apporteur en nature",
+          "nom": "identit_de_l_apporteur_en_nature",
+          "type": "texte",
+          "contexte": "2°  .....(identité de l’apporteur en nature) apporte à la Société sous les"
+        },
+        {
+          "paragraphe_index": 198,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "pareille matière .....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 199,
+      "occurrences": [
+        {
+          "paragraphe_index": 201,
+          "libelle": "identité de l’apporteur",
+          "nom": "identit_de_l_apporteur",
+          "type": "texte",
+          "contexte": ".....(identité de l’apporteur), soussigné, apporte à la Soci"
+        },
+        {
+          "paragraphe_index": 202,
+          "libelle": "décrire les prestations de l’apporteur et leur durée",
+          "nom": "d_crire_les_prestations_de_l_apporteur_et_leur_dur_e",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(décrire les prestations de l’apporteur et leur durée). Il reçoit en contrepartie .."
+        },
+        {
+          "paragraphe_index": 202,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "e). Il reçoit en contrepartie .....(nombre) actions"
+        },
+        {
+          "paragraphe_index": 203,
+          "libelle": "pourcentage",
+          "nom": "pourcentage",
+          "type": "texte",
+          "contexte": "t de l’actif net à hauteur de .....(pourcentage) %, à charge de"
+        },
+        {
+          "paragraphe_index": 204,
+          "libelle": "pourcentage",
+          "nom": "pourcentage",
+          "type": "texte",
+          "contexte": "ibuer aux pertes à hauteur de .....(pourcentage) %."
+        },
+        {
+          "paragraphe_index": 212,
+          "libelle": "montant en lettres",
+          "nom": "montant_en_lettres",
+          "type": "montant",
+          "contexte": ".....(montant en lettres) euros [ .....(montant en chif"
+        },
+        {
+          "paragraphe_index": 212,
+          "libelle": "montant en chiffres",
+          "nom": "montant_en_chiffres",
+          "type": "montant",
+          "contexte": ".(montant en lettres) euros [ .....(montant en chiffres) euros] représentant :"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 221,
+      "occurrences": [
+        {
+          "paragraphe_index": 222,
+          "libelle": "montant en lettres",
+          "nom": "montant_en_lettres",
+          "type": "montant",
+          "contexte": "social est fixé à la somme de .....(montant en lettres) euros [ .....(montant en chif"
+        },
+        {
+          "paragraphe_index": 222,
+          "libelle": "montant en chiffres",
+          "nom": "montant_en_chiffres",
+          "type": "montant",
+          "contexte": ".(montant en lettres) euros [ .....(montant en chiffres) euros]."
+        },
+        {
+          "paragraphe_index": 223,
+          "libelle": "nombre en lettres",
+          "nom": "nombre_en_lettres",
+          "type": "texte",
+          "contexte": "Il est divisé en .....(nombre en lettres) [ .....(nombre en chiffres)] "
+        },
+        {
+          "paragraphe_index": 223,
+          "libelle": "nombre en chiffres",
+          "nom": "nombre_en_chiffres",
+          "type": "texte",
+          "contexte": "en .....(nombre en lettres) [ .....(nombre en chiffres)] actions de .....(montant en "
+        },
+        {
+          "paragraphe_index": 223,
+          "libelle": "montant en lettres",
+          "nom": "montant_en_lettres",
+          "type": "montant",
+          "contexte": "mbre en chiffres)] actions de .....(montant en lettres) euros ["
+        },
+        {
+          "paragraphe_index": 224,
+          "libelle": "montant en chiffres",
+          "nom": "montant_en_chiffres",
+          "type": "montant",
+          "contexte": ".....(montant en chiffres) euros] de valeur nominale cha"
+        },
+        {
+          "paragraphe_index": 224,
+          "libelle": "intégralement/partiellement",
+          "nom": "int_gralement_partiellement",
+          "type": "A_CONFIRMER",
+          "contexte": "] de valeur nominale chacune, .....(intégralement/partiellement) libérées et"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 227,
+      "occurrences": [
+        {
+          "paragraphe_index": 228,
+          "libelle": "montant en lettres",
+          "nom": "montant_en_lettres",
+          "type": "montant",
+          "contexte": "social est fixé à la somme de .....(montant en lettres) euros [ .....(montant en chif"
+        },
+        {
+          "paragraphe_index": 228,
+          "libelle": "montant en chiffres",
+          "nom": "montant_en_chiffres",
+          "type": "montant",
+          "contexte": ".(montant en lettres) euros [ .....(montant en chiffres) euros]."
+        },
+        {
+          "paragraphe_index": 229,
+          "libelle": "nombre en lettres",
+          "nom": "nombre_en_lettres",
+          "type": "texte",
+          "contexte": "Il est divisé en .....(nombre en lettres) [ .....(nombre en chiffres)] "
+        },
+        {
+          "paragraphe_index": 229,
+          "libelle": "nombre en chiffres",
+          "nom": "nombre_en_chiffres",
+          "type": "texte",
+          "contexte": "en .....(nombre en lettres) [ .....(nombre en chiffres)] actions de .....(montant en "
+        },
+        {
+          "paragraphe_index": 229,
+          "libelle": "montant en lettres",
+          "nom": "montant_en_lettres",
+          "type": "montant",
+          "contexte": "mbre en chiffres)] actions de .....(montant en lettres) euros ["
+        },
+        {
+          "paragraphe_index": 230,
+          "libelle": "montant en chiffres",
+          "nom": "montant_en_chiffres",
+          "type": "montant",
+          "contexte": ".....(montant en chiffres) euros] de valeur nominale cha"
+        },
+        {
+          "paragraphe_index": 230,
+          "libelle": "intégralement/partiellement",
+          "nom": "int_gralement_partiellement",
+          "type": "A_CONFIRMER",
+          "contexte": "] de valeur nominale chacune, .....(intégralement/partiellement) libérées,"
+        },
+        {
+          "paragraphe_index": 232,
+          "libelle": "nombre en lettres",
+          "nom": "nombre_en_lettres",
+          "type": "texte",
+          "contexte": "• .....(nombre en lettres) [ .....(nombre en chiffres)] "
+        },
+        {
+          "paragraphe_index": 232,
+          "libelle": "nombre en chiffres",
+          "nom": "nombre_en_chiffres",
+          "type": "texte",
+          "contexte": "• .....(nombre en lettres) [ .....(nombre en chiffres)] actions ordinaires ; et"
+        },
+        {
+          "paragraphe_index": 233,
+          "libelle": "nombre en lettres",
+          "nom": "nombre_en_lettres",
+          "type": "texte",
+          "contexte": "• .....(nombre en lettres) [ .....(nombre en chiffres)] "
+        },
+        {
+          "paragraphe_index": 233,
+          "libelle": "nombre en chiffres",
+          "nom": "nombre_en_chiffres",
+          "type": "texte",
+          "contexte": "• .....(nombre en lettres) [ .....(nombre en chiffres)] actions de préférence (les «"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 236,
+      "occurrences": [
+        {
+          "paragraphe_index": 238,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "objet d’un rapport en date du .....(date) établi par .....(identité"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 241,
+      "occurrences": [
+        {
+          "paragraphe_index": 249,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": ".....(date)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 251,
+      "occurrences": [
+        {
+          "paragraphe_index": 254,
+          "libelle": "lieu",
+          "nom": "lieu",
+          "type": "texte",
+          "contexte": "Tribunal de commerce de .....(lieu) le .....(date), sur requête d"
+        },
+        {
+          "paragraphe_index": 254,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "de commerce de .....(lieu) le .....(date), sur requête de .....(identit"
+        },
+        {
+          "paragraphe_index": 254,
+          "libelle": "identité du requérant",
+          "nom": "identit_du_requ_rant",
+          "type": "texte",
+          "contexte": "e .....(date), sur requête de .....(identité du requérant), agissant en"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 260,
+      "occurrences": [
+        {
+          "paragraphe_index": 261,
+          "libelle": "identité ou dénomination sociale du fondateur concerné",
+          "nom": "identit_ou_d_nomination_sociale_du_fondateur_concern",
+          "type": "A_CONFIRMER",
+          "contexte": "onsidération du rôle joué par .....(identité ou dénomination sociale du fondateur concerné) dans"
+        },
+        {
+          "paragraphe_index": 262,
+          "libelle": "indiquer le rôle joué qui justifie l’octroi de l’avantage",
+          "nom": "indiquer_le_r_le_jou_qui_justifie_l_octroi_de_l_avantage",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(indiquer le rôle joué qui justifie l’octroi de l’avantage), celui-ci bénéficiera .....(q"
+        },
+        {
+          "paragraphe_index": 263,
+          "libelle": "description de l’avantage",
+          "nom": "description_de_l_avantage",
+          "type": "texte",
+          "contexte": "l’avantage), .....(description de l’avantage)."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 267,
+      "occurrences": [
+        {
+          "paragraphe_index": 269,
+          "libelle": "numéro de l’article des statuts prévoyant la clause d’agrément",
+          "nom": "num_ro_de_l_article_des_statuts_pr_voyant_la_clause_d_agr_ment",
+          "type": "A_CONFIRMER",
+          "contexte": "onditions prévues à l’article .....(numéro de l’article des statuts prévoyant la clause d’agrément)"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 329,
+      "occurrences": [
+        {
+          "paragraphe_index": 333,
+          "libelle": "décrire les droits particuliers attachés aux actions de préférence",
+          "nom": "d_crire_les_droits_particuliers_attach_s_aux_actions_de_pr_f_rence",
+          "type": "A_CONFIRMER",
+          "contexte": "roits particuliers suivants : .....(décrire les droits particuliers attachés aux actions de préférence)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 337,
+      "occurrences": [
+        {
+          "paragraphe_index": 338,
+          "libelle": "durée",
+          "nom": "dur_e",
+          "type": "texte",
+          "contexte": "temporaire, pour une durée de .....(durée) à compter de la date"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 352,
+      "occurrences": [
+        {
+          "paragraphe_index": 355,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 363,
+      "occurrences": [
+        {
+          "paragraphe_index": 369,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 371,
+      "occurrences": [
+        {
+          "paragraphe_index": 377,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 379,
+      "occurrences": [
+        {
+          "paragraphe_index": 390,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 15,
+      "premier_paragraphe_index": 433,
+      "occurrences": [
+        {
+          "paragraphe_index": 435,
+          "libelle": "10 ans maximum",
+          "nom": "10_ans_maximum",
+          "type": "texte",
+          "contexte": ".....(10 ans maximum) à compter de la date de ....."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 440,
+      "occurrences": [
+        {
+          "paragraphe_index": 442,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter)"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 511,
+      "occurrences": [
+        {
+          "paragraphe_index": 513,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 542,
+      "occurrences": [
+        {
+          "paragraphe_index": 549,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "l’associé cédant disposera de .....(nombre) jours à compter de la date de"
+        },
+        {
+          "paragraphe_index": 553,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "de .....(nombre) jours susvisé, le Président s"
+        },
+        {
+          "paragraphe_index": 557,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "sposeront alors d’un délai de .....(nombre) jours pour se porter acquéreu"
+        },
+        {
+          "paragraphe_index": 560,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "ù, à l’expiration du délai de .....(nombre) jours susvisé, les titres de"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 588,
+      "occurrences": [
+        {
+          "paragraphe_index": 591,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter)."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 600,
+      "occurrences": [
+        {
+          "paragraphe_index": 602,
+          "libelle": "numéro de l'article des statuts prévoyant la clause d'agrément",
+          "nom": "num_ro_de_l_article_des_statuts_pr_voyant_la_clause_d_agr_ment",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(numéro de l'article des statuts prévoyant la clause d'agrément) ci-avant."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 19,
+      "premier_paragraphe_index": 609,
+      "occurrences": [
+        {
+          "paragraphe_index": 612,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "de réception dans un délai de .....(nombre) jours à compter de la date de"
+        },
+        {
+          "paragraphe_index": 618,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "2. Dans un délai de .....(nombre) jours à compter de la date de"
+        },
+        {
+          "paragraphe_index": 621,
+          "libelle": "numéro de l’article prévoyant la clause d’exclusion",
+          "nom": "num_ro_de_l_article_pr_voyant_la_clause_d_exclusion",
+          "type": "A_CONFIRMER",
+          "contexte": " telle que prévue à l’article .....(numéro de l’article prévoyant la clause d’exclusion) ci-"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 20,
+      "premier_paragraphe_index": 627,
+      "occurrences": [
+        {
+          "paragraphe_index": 637,
+          "libelle": "autres motifs",
+          "nom": "autres_motifs",
+          "type": "texte",
+          "contexte": "• .....(autres motifs)."
+        },
+        {
+          "paragraphe_index": 639,
+          "libelle": "27.5/27.6",
+          "nom": "27_5_27_6",
+          "type": "A_CONFIRMER",
+          "contexte": "prévues à l'article .....(27.5/27.6) des statuts. L'associé dont l"
+        },
+        {
+          "paragraphe_index": 657,
+          "libelle": "huissier/commissaire",
+          "nom": "huissier_commissaire",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(huissier/commissaire) de justice."
+        },
+        {
+          "paragraphe_index": 658,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " exclu doit, dans un délai de .....(nombre) jours à compter de la date du"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 667,
+      "occurrences": [
+        {
+          "paragraphe_index": 671,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "actions est ainsi déterminé : .....(à compléter). A défaut d’accord sur le pri"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 22,
+      "premier_paragraphe_index": 692,
+      "occurrences": [
+        {
+          "paragraphe_index": 699,
+          "libelle": "indéterminée/de ... (durée",
+          "nom": "ind_termin_e_de_dur_e",
+          "type": "A_CONFIRMER",
+          "contexte": "es fonctions de Président est .....(indéterminée/de ... (durée)."
+        },
+        {
+          "paragraphe_index": 700,
+          "libelle": "non renouvelable/renouvelable sans limitation",
+          "nom": "non_renouvelable_renouvelable_sans_limitation",
+          "type": "A_CONFIRMER",
+          "contexte": "Le mandat du Président est .....(non renouvelable/renouvelable sans limitation)."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 720,
+      "occurrences": [
+        {
+          "paragraphe_index": 721,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "rtie d’un délai de préavis de .....(nombre) jours, qui commence à courir "
+        },
+        {
+          "paragraphe_index": 724,
+          "libelle": "fixe/proportionnelle/fixe et proportionnelle",
+          "nom": "fixe_proportionnelle_fixe_et_proportionnelle",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(fixe/proportionnelle/fixe et proportionnelle). Le Président pourra obtenir "
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 736,
+      "occurrences": [
+        {
+          "paragraphe_index": 738,
+          "libelle": "de la collectivité des associés/du Comité de Direction",
+          "nom": "de_la_collectivit_des_associ_s_du_comit_de_direction",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(de la collectivité des associés/du Comité de Direction) :"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 24,
+      "premier_paragraphe_index": 769,
+      "occurrences": [
+        {
+          "paragraphe_index": 770,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "irection composé d’au minimum .....(nombre) membres, associés"
+        },
+        {
+          "paragraphe_index": 776,
+          "libelle": "indéterminée/de ...",
+          "nom": "ind_termin_e_de",
+          "type": "A_CONFIRMER",
+          "contexte": "on sont nommés pour une durée .....(indéterminée/de ...),"
+        },
+        {
+          "paragraphe_index": 777,
+          "libelle": "renouvelable/non renouvelable",
+          "nom": "renouvelable_non_renouvelable",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(renouvelable/non renouvelable) et leurs fonctions prennent f"
+        },
+        {
+          "paragraphe_index": 779,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "onvocation du Président ou de .....(nombre) de ses membres."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 890,
+      "occurrences": [
+        {
+          "paragraphe_index": 892,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "• .....(à compléter)  ;"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 28,
+      "premier_paragraphe_index": 898,
+      "occurrences": [
+        {
+          "paragraphe_index": 912,
+          "libelle": "pourcentage minimum",
+          "nom": "pourcentage_minimum",
+          "type": "texte",
+          "contexte": "associé représentant au moins .....(pourcentage minimum) du capital et des droits de v"
+        },
+        {
+          "paragraphe_index": 915,
+          "libelle": "délai de convocation",
+          "nom": "d_lai_de_convocation",
+          "type": "texte",
+          "contexte": "ion est faite par tous moyens .....(délai de convocation) avant la date de"
+        },
+        {
+          "paragraphe_index": 934,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": "minimal de .....(nombre) jours à compter de la récepti"
+        },
+        {
+          "paragraphe_index": 935,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "duree",
+          "contexte": " pas répondu dans le délai de .....(nombre) jours à compter de la"
+        },
+        {
+          "paragraphe_index": 936,
+          "libelle": "rejeté/approuvé",
+          "nom": "rejet_approuv",
+          "type": "A_CONFIRMER",
+          "contexte": "ons est considéré comme ayant .....(rejeté/approuvé) ces résolutions."
+        },
+        {
+          "paragraphe_index": 955,
+          "libelle": "l’unanimité/la majorité renforcée des….(majorité",
+          "nom": "l_unanimit_la_majorit_renforc_e_des_majorit",
+          "type": "A_CONFIRMER",
+          "contexte": "doivent être adoptées à .....(l’unanimité/la majorité renforcée des….(majorité)) des voix dont disposent les"
+        },
+        {
+          "paragraphe_index": 958,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": "• .....(à compléter)  ;"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 981,
+      "occurrences": [
+        {
+          "paragraphe_index": 982,
+          "libelle": "jour",
+          "nom": "jour",
+          "type": "texte",
+          "contexte": "L’exercice social commence le .....(jour) de chaque année et se termine"
+        },
+        {
+          "paragraphe_index": 982,
+          "libelle": "jour",
+          "nom": "jour",
+          "type": "texte",
+          "contexte": "chaque année et se termine le .....(jour) de l’année suivante."
+        },
+        {
+          "paragraphe_index": 983,
+          "libelle": "date de clôture du premier exercice social",
+          "nom": "date_de_cl_ture_du_premier_exercice_social",
+          "type": "A_CONFIRMER",
+          "contexte": " exercice social sera clos au .....(date de clôture du premier exercice social)."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 990,
+      "occurrences": [
+        {
+          "paragraphe_index": 995,
+          "libelle": "à compléter",
+          "nom": "compl_ter",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 997,
+      "occurrences": [
+        {
+          "paragraphe_index": 1001,
+          "libelle": "six/sept/huit/neuf",
+          "nom": "six_sept_huit_neuf",
+          "type": "A_CONFIRMER",
+          "contexte": "Dans les .....(six/sept/huit/neuf) mois de la clôture de l’exerc"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 1016,
+      "occurrences": [
+        {
+          "paragraphe_index": 1019,
+          "libelle": "pourcentage",
+          "nom": "pourcentage",
+          "type": "texte",
+          "contexte": ".....(pourcentage) % du montant libéré et non re"
+        },
+        {
+          "paragraphe_index": 1020,
+          "libelle": "ne seront pas/seront",
+          "nom": "ne_seront_pas_seront",
+          "type": "A_CONFIRMER",
+          "contexte": "ode de commerce. Les réserves .....(ne seront pas/seront) prises en compte pour le"
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 39,
+      "premier_paragraphe_index": 1086,
+      "occurrences": [
+        {
+          "paragraphe_index": 1087,
+          "libelle": "indiquer la durée",
+          "nom": "indiquer_la_dur_e",
+          "type": "A_CONFIRMER",
+          "contexte": " la Société pour une durée de .....(indiquer la durée) :"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 1088,
+      "occurrences": [
+        {
+          "paragraphe_index": 1089,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": ".....(prénom)"
+        },
+        {
+          "paragraphe_index": 1090,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": ".....(nom), demeurant .....(adresse)."
+        },
+        {
+          "paragraphe_index": 1090,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": ".....(nom), demeurant .....(adresse)."
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 1092,
+      "occurrences": [
+        {
+          "paragraphe_index": 1093,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": ".....(dénomination sociale), .....(forme) au capital de ."
+        },
+        {
+          "paragraphe_index": 1093,
+          "libelle": "forme",
+          "nom": "forme",
+          "type": "texte",
+          "contexte": ".....(dénomination sociale), .....(forme) au capital de .....(capital) "
+        },
+        {
+          "paragraphe_index": 1093,
+          "libelle": "capital",
+          "nom": "capital",
+          "type": "montant",
+          "contexte": "), .....(forme) au capital de .....(capital) euros, ayant son siège social"
+        },
+        {
+          "paragraphe_index": 1094,
+          "libelle": "RCS",
+          "nom": "rcs",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de .....(RCS) sous le numéro .....(numéro"
+        },
+        {
+          "paragraphe_index": 1095,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "t pour représentant permanent .....(prénom) .....(nom), demeurant .....(a"
+        },
+        {
+          "paragraphe_index": 1095,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "ntant permanent .....(prénom) .....(nom), demeurant .....(adresse)."
+        },
+        {
+          "paragraphe_index": 1095,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "prénom) .....(nom), demeurant .....(adresse)."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 40,
+      "premier_paragraphe_index": 1100,
+      "occurrences": [
+        {
+          "paragraphe_index": 1101,
+          "libelle": "indiquer la durée",
+          "nom": "indiquer_la_dur_e",
+          "type": "A_CONFIRMER",
+          "contexte": " la Société pour une durée de .....(indiquer la durée) :"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 1102,
+      "occurrences": [
+        {
+          "paragraphe_index": 1103,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": ".....(prénom) .....(nom), demeurant .....(a"
+        },
+        {
+          "paragraphe_index": 1103,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": ".....(prénom) .....(nom), demeurant .....(adresse) ;"
+        },
+        {
+          "paragraphe_index": 1103,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "prénom) .....(nom), demeurant .....(adresse) ;"
+        }
+      ]
+    },
+    {
+      "segment_type": "variante",
+      "article_numero": null,
+      "premier_paragraphe_index": 1105,
+      "occurrences": [
+        {
+          "paragraphe_index": 1106,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": ".....(dénomination sociale), .....(forme) au capital de ."
+        },
+        {
+          "paragraphe_index": 1106,
+          "libelle": "forme",
+          "nom": "forme",
+          "type": "texte",
+          "contexte": ".....(dénomination sociale), .....(forme) au capital de .....(capital) "
+        },
+        {
+          "paragraphe_index": 1106,
+          "libelle": "capital",
+          "nom": "capital",
+          "type": "montant",
+          "contexte": "), .....(forme) au capital de .....(capital) euros, ayant son siège social"
+        },
+        {
+          "paragraphe_index": 1107,
+          "libelle": "RCS",
+          "nom": "rcs",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de .....(RCS) sous le numéro .....(numéro"
+        },
+        {
+          "paragraphe_index": 1108,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "t pour représentant permanent .....(prénom) .....(nom), demeurant .....(a"
+        },
+        {
+          "paragraphe_index": 1108,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "ntant permanent .....(prénom) .....(nom), demeurant .....(adresse)."
+        },
+        {
+          "paragraphe_index": 1108,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "prénom) .....(nom), demeurant .....(adresse)."
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 1121,
+      "occurrences": [
+        {
+          "paragraphe_index": 1123,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": ".....(prénom) .....(nom), demeurant .....(a"
+        },
+        {
+          "paragraphe_index": 1123,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": ".....(prénom) .....(nom), demeurant .....(adresse) ;"
+        },
+        {
+          "paragraphe_index": 1123,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "prénom) .....(nom), demeurant .....(adresse) ;"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 1124,
+      "occurrences": [
+        {
+          "paragraphe_index": 1125,
+          "libelle": "dénomination sociale",
+          "nom": "d_nomination_sociale",
+          "type": "texte",
+          "contexte": ".....(dénomination sociale), .....(forme) au capital de ."
+        },
+        {
+          "paragraphe_index": 1125,
+          "libelle": "forme",
+          "nom": "forme",
+          "type": "texte",
+          "contexte": ".....(dénomination sociale), .....(forme) au capital de .....(capital) "
+        },
+        {
+          "paragraphe_index": 1125,
+          "libelle": "capital",
+          "nom": "capital",
+          "type": "montant",
+          "contexte": "), .....(forme) au capital de .....(capital) euros, ayant son siège social"
+        },
+        {
+          "paragraphe_index": 1126,
+          "libelle": "RCS",
+          "nom": "rcs",
+          "type": "texte",
+          "contexte": "u commerce et des sociétés de .....(RCS) sous le numéro .....(numéro"
+        },
+        {
+          "paragraphe_index": 1127,
+          "libelle": "prénom",
+          "nom": "pr_nom",
+          "type": "texte",
+          "contexte": "t pour représentant permanent .....(prénom) .....(nom), demeurant .....(a"
+        },
+        {
+          "paragraphe_index": 1127,
+          "libelle": "nom",
+          "nom": "nom",
+          "type": "texte",
+          "contexte": "ntant permanent .....(prénom) .....(nom), demeurant .....(adresse)."
+        },
+        {
+          "paragraphe_index": 1127,
+          "libelle": "adresse",
+          "nom": "adresse",
+          "type": "texte",
+          "contexte": "prénom) .....(nom), demeurant .....(adresse)."
+        }
+      ]
+    },
+    {
+      "segment_type": "titre_article",
+      "article_numero": 42,
+      "premier_paragraphe_index": 1132,
+      "occurrences": [
+        {
+          "paragraphe_index": 1135,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "comptes de l’exercice clos le .....(date) :"
+        },
+        {
+          "paragraphe_index": 1136,
+          "libelle": "identité et adresse ou dénomination sociale et siège social du commissaire aux comptes",
+          "nom": "identit_et_adresse_ou_d_nomination_sociale_et_si_ge_social_du_commissaire_aux_comptes",
+          "type": "A_CONFIRMER",
+          "contexte": "• .....(identité et adresse ou dénomination sociale et siège social du commissaire aux comptes),"
+        },
+        {
+          "paragraphe_index": 1138,
+          "libelle": "identité et adresse ou dénomination sociale et siège social du commissaire aux comptes",
+          "nom": "identit_et_adresse_ou_d_nomination_sociale_et_si_ge_social_du_commissaire_aux_comptes",
+          "type": "A_CONFIRMER",
+          "contexte": "• .....(identité et adresse ou dénomination sociale et siège social du commissaire aux comptes),"
+        }
+      ]
+    },
+    {
+      "segment_type": "ajout_optionnel",
+      "article_numero": null,
+      "premier_paragraphe_index": 1188,
+      "occurrences": [
+        {
+          "paragraphe_index": 1190,
+          "libelle": "lieu",
+          "nom": "lieu",
+          "type": "texte",
+          "contexte": "Fait à .....(lieu), le .....(date)"
+        },
+        {
+          "paragraphe_index": 1190,
+          "libelle": "date",
+          "nom": "date",
+          "type": "date",
+          "contexte": "Fait à .....(lieu), le .....(date)"
+        },
+        {
+          "paragraphe_index": 1191,
+          "libelle": "nombre",
+          "nom": "nombre",
+          "type": "nombre",
+          "contexte": "en .....(nombre) exemplaires"
+        },
+        {
+          "paragraphe_index": 1197,
+          "libelle": "à insérer",
+          "nom": "ins_rer",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à insérer)"
+        },
+        {
+          "paragraphe_index": 1216,
+          "libelle": "identité ou dénomination sociale de l’associé",
+          "nom": "identit_ou_d_nomination_sociale_de_l_associ",
+          "type": "A_CONFIRMER",
+          "contexte": "ndat est expressément donné à .....(identité ou dénomination sociale de l’associé), avec faculté de"
+        },
+        {
+          "paragraphe_index": 1222,
+          "libelle": "autres : contrats divers, etc.",
+          "nom": "autres_contrats_divers_etc",
+          "type": "texte",
+          "contexte": "• .....(autres : contrats divers, etc.) ;"
+        },
+        {
+          "paragraphe_index": 1231,
+          "libelle": "à compléter le cas échéant",
+          "nom": "compl_ter_le_cas_ch_ant",
+          "type": "A_CONFIRMER",
+          "contexte": ".....(à compléter le cas échéant)"
+        }
+      ]
+    }
+  ]
+}

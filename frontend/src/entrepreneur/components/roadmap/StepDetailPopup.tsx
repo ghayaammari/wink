@@ -18,6 +18,19 @@ interface StepDetailPopupProps {
 // nœud concerné : pas besoin d'une prop dédiée, ce composant sait déjà lequel.
 const NAME_AVAILABILITY_NODE_ID = "e3_verification_disponibilite_nom"
 
+// Nœuds roadmap avec une page de rédaction interactive dédiée — GÉNÉRALISÉ
+// (25/09/2026) : c'était un simple id en dur (service 1.1.13 pacte, seul
+// nœud concerné) avec un commentaire annonçant explicitement cette table de
+// correspondance pour le jour où un 2e nœud (statuts, service 1.1.4) en
+// aurait une. C'est fait ici — un 3e nœud de rédaction n'aura qu'une ligne
+// à ajouter, pas un nouveau bloc JSX.
+const DOCUMENT_GENERATION_NODE_ROUTES: Record<string, { route: string; label: string }> = {
+  e4_pacte_fondateurs: { route: "/entrepreneur/mon-projet/pacte-fondateurs-v2", label: "Rédiger le pacte de fondateurs" },
+  e5_redaction_statuts: { route: "/entrepreneur/mon-projet/statuts", label: "Rédiger les statuts" },
+  // Service 1.1.5 — rédaction de l'annonce + journaux habilités du département.
+  e9b_annonce_legale: { route: "/entrepreneur/mon-projet/annonce-legale", label: "Rédiger l'annonce légale" },
+}
+
 // Étapes dont la donnée source vit dans "Équipe & capital" (`project_associates`,
 // socle partagé Groupe 5 : services 1.1.13 pacte / 1.1.4 statuts / 1.1.6 DBE /
 // e21 régime fiscal) — voir TeamCapitalPage. (réalisé par OPENCODE)
@@ -260,6 +273,16 @@ export default function StepDetailPopup({
 
         {node.details_pratiques && (
           <p className="rounded-lg bg-gray-50 p-3 text-xs text-gray-500">{node.details_pratiques}</p>
+        )}
+
+        {DOCUMENT_GENERATION_NODE_ROUTES[item.node_id] && (
+          <Link
+            to={DOCUMENT_GENERATION_NODE_ROUTES[item.node_id].route}
+            onClick={onClose}
+            className="rounded-lg bg-indigo-600 px-3 py-2 text-center text-sm font-medium text-white transition hover:bg-indigo-700"
+          >
+            {DOCUMENT_GENERATION_NODE_ROUTES[item.node_id].label}
+          </Link>
         )}
 
         {TEAM_CAPITAL_DATA_NODES.has(item.node_id) && (

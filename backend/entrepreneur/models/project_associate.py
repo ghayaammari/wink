@@ -56,10 +56,26 @@ class ProjectAssociate(Base):
     lieu_naissance: Mapped[str | None] = mapped_column(String(120), nullable=True)
     nationalite: Mapped[str | None] = mapped_column(String(60), nullable=True)
     adresse: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # AJOUT (migration —, service 1.1.4 statuts) — situation et régime
+    # matrimonial des fondateurs (patron personne physique de l'en-tête du
+    # clausier SAS, ex. "marié(e) sous le régime de la communauté légale").
+    # NULLABLE : renseigné lors de la génération des statuts, sans vérification
+    # inter-champs (exigible seulement si type_personne='personne_physique',
+    # cohérent avec le reste de la table). Saisie libre (texte), pas d'enum :
+    # les régimes matrimoniaux ne forment pas une liste fermée exploitable.
+    situation_et_regime_matrimonial: Mapped[str | None] = mapped_column(String(255), nullable=True)
     # Répartition : pourcentage_droits_vote NULL = défaut (1 action = 1 voix, égal au capital).
     pourcentage_capital: Mapped[Decimal] = mapped_column(Numeric(6, 2), nullable=False)
     pourcentage_droits_vote: Mapped[Decimal | None] = mapped_column(Numeric(6, 2), nullable=True)
     type_apport: Mapped[str] = mapped_column(String(20), nullable=False, server_default="numeraire")
+    # AJOUT (migration d3f7a1c9e5b4, service 1.1.4 statuts, audit du 23/09/2026,
+    # correction #4/ex-P2) -- ce qu'un associé apporte en nature (un bien, pas
+    # de l'argent), auparavant piégé dans la session du document statuts
+    # (session.reponses["apport_nature_identite"]) et invisible à tout autre
+    # service Wink. NULLABLE, pertinente seulement si type_apport='nature' --
+    # pas de CHECK inter-champs, même convention que les champs personne
+    # morale ci-dessous.
+    description_apport_nature: Mapped[str | None] = mapped_column(Text, nullable=True)
     # Repli automatique DBE (si aucun associé ne dépasse 25%) ET population de la
     # condition e21 (droits de vote des dirigeants, régime fiscal) — roadmap_service.
     est_dirigeant: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default=text("false"))
@@ -71,9 +87,28 @@ class ProjectAssociate(Base):
     foyer_fiscal_dirigeant_associate_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), ForeignKey("project_associates.id", ondelete="SET NULL"), nullable=True
     )
+    # AJOUT (migration b2c4d6e8f0a2, service 1.1.13) -- infos propres à une
+    # personne morale associée (ex. un fonds d'investissement), manquantes
+    # jusqu'ici : seuls des champs personne physique existaient. Tous
+    # nullable, utilisés seulement si type_personne='personne_morale' --
+    # pas de CHECK inter-champs, cohérent avec le reste de la table.
+    denomination_sociale: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    type_societe: Mapped[str | None] = mapped_column(String(60), nullable=True)
+    capital_social: Mapped[Decimal | None] = mapped_column(Numeric(14, 2), nullable=True)
+    siege_social: Mapped[str | None] = mapped_column(Text, nullable=True)
+    lieu_immatriculation: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    numero_siren: Mapped[str | None] = mapped_column(String(9), nullable=True)
+    representant_nom: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    representant_prenom: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    representant_qualite: Mapped[str | None] = mapped_column(String(120), nullable=True)
     est_partie_au_pacte_fondateurs: Mapped[bool] = mapped_column(
         Boolean, nullable=False, server_default=text("false")
     )
+    # AJOUT (migration c8f4d1a6b2e9, service 1.1.13) — distingue Associés
+    # Fondateurs / Associés Investisseurs, exigé par le préambule du pacte
+    # Bpifrance. Booléen indépendant (pas un enum, pas "est_investisseur" —
+    # collision avec users.role) : voir docstring de la migration.
+    est_fondateur: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default=text("false"))
     # Auto-rempli avec l'user_id du propriétaire du projet (I0) ; NULL pour les autres.
     linked_user_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id"), nullable=True

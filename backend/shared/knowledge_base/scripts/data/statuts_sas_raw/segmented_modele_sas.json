@@ -1,0 +1,6113 @@
+{
+  "source_file": "modele_sas",
+  "segments": [
+    {
+      "type": "hors_marqueur",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 5,
+          "page": 1,
+          "texte": "MODELE DE STATUTS SAS"
+        },
+        {
+          "index": 6,
+          "page": 1,
+          "texte": "Avertissement : l'établissement de statuts de SAS est un acte important pouvant avoir des conséquences"
+        },
+        {
+          "index": 7,
+          "page": 1,
+          "texte": "juridiques, fiscales et sociales. Le présent modèle est mis à la disposition de l'utilisateur à titre informatif"
+        },
+        {
+          "index": 8,
+          "page": 1,
+          "texte": "et en aucun cas ne se substitue aux conseils ou accompagnement par un professionnel du droit. Ainsi"
+        },
+        {
+          "index": 9,
+          "page": 1,
+          "texte": "l'utilisateur porte l’entière responsabilité quant à l'usage qui en sera fait."
+        },
+        {
+          "index": 11,
+          "page": 1,
+          "texte": ".....[DENOMINATION SOCIALE],"
+        },
+        {
+          "index": 12,
+          "page": 1,
+          "texte": "société par actions simplifiée"
+        },
+        {
+          "index": 13,
+          "page": 1,
+          "texte": "au capital de NOMBRE (CHIFFRE)  euros,"
+        },
+        {
+          "index": 14,
+          "page": 1,
+          "texte": "Siège social : ADRESSE"
+        },
+        {
+          "index": 15,
+          "page": 1,
+          "texte": "Société en cours de constitution"
+        },
+        {
+          "index": 16,
+          "page": 1,
+          "texte": "Statuts"
+        },
+        {
+          "index": 17,
+          "page": 1,
+          "texte": "Les soussignés,"
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 18,
+          "page": 1,
+          "texte": "› Si le(s) fondateur(s) est/sont une/des personnes physiques :"
+        },
+        {
+          "index": 19,
+          "page": 1,
+          "texte": "1o .....(prénom) .....(nom), demeurant à .....(adresse), né(e) le .....(date de naissance) à .....(lieu de"
+        },
+        {
+          "index": 20,
+          "page": 1,
+          "texte": "naissance), .....(situation et régime matrimonial),"
+        },
+        {
+          "index": 21,
+          "page": 1,
+          "texte": "2o .....(prénom) .....(nom), demeurant à .....(adresse), né(e) le .....(date de naissance) à .....(lieu de"
+        },
+        {
+          "index": 22,
+          "page": 1,
+          "texte": "naissance), .....(situation et régime matrimonial),"
+        },
+        {
+          "index": 24,
+          "page": 1,
+          "texte": "Et/Ou"
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 25,
+          "page": 1,
+          "texte": "› Si le(s) fondateur(s) est/sont une/des personnes morales :"
+        },
+        {
+          "index": 26,
+          "page": 1,
+          "texte": "3o .....(dénomination sociale), .....(forme) au capital de .....(capital) euros, ayant son siège social à"
+        },
+        {
+          "index": 27,
+          "page": 1,
+          "texte": ".....(siège social), immatriculée au Registre du commerce et des sociétés de .....(RCS), sous le"
+        },
+        {
+          "index": 28,
+          "page": 1,
+          "texte": "no  .....(numéro SIREN) représentée par .....(représentant légal), ès qualités de .....(fonction),"
+        },
+        {
+          "index": 29,
+          "page": 1,
+          "texte": "dûment habilité aux fins des présentes,"
+        },
+        {
+          "index": 30,
+          "page": 1,
+          "texte": "3o .....(dénomination sociale), .....(forme) au capital de .....(capital) euros, ayant son siège social à"
+        },
+        {
+          "index": 31,
+          "page": 1,
+          "texte": ".....(siège social), immatriculée au Registre du commerce et des sociétés de .....(RCS), sous le"
+        },
+        {
+          "index": 37,
+          "page": 2,
+          "texte": "no  .....(numéro SIREN) représentée par .....(représentant légal), ès qualités de .....(fonction),"
+        },
+        {
+          "index": 38,
+          "page": 2,
+          "texte": "dûment habilité aux fins des présentes,"
+        },
+        {
+          "index": 40,
+          "page": 2,
+          "texte": "Ont établi ainsi qu’il suit :"
+        },
+        {
+          "index": 41,
+          "page": 2,
+          "texte": "les statuts de la société par actions simplifiée devant exister entre eux et toute autre personne qui"
+        },
+        {
+          "index": 42,
+          "page": 2,
+          "texte": "viendrait ultérieurement à acquérir la qualité d’associé (la « Société »)."
+        }
+      ]
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 43,
+          "page": 2,
+          "texte": "I. – FORME - OBJET - DÉNOMINATION SOCIALE- SIÈGE SOCIAL - DURÉE"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 1,
+      "paragraphes": [
+        {
+          "index": 44,
+          "page": 2,
+          "texte": "Article 1 - . Forme"
+        },
+        {
+          "index": 45,
+          "page": 2,
+          "texte": "La Société est une société par actions simplifiée."
+        },
+        {
+          "index": 46,
+          "page": 2,
+          "texte": "Elle est régie par les dispositions législatives et réglementaires en vigueur ainsi que par les présents"
+        },
+        {
+          "index": 47,
+          "page": 2,
+          "texte": "statuts."
+        },
+        {
+          "index": 48,
+          "page": 2,
+          "texte": "Elle fonctionne indifféremment sous la même forme avec un ou plusieurs associés. A tout moment, la"
+        },
+        {
+          "index": 49,
+          "page": 2,
+          "texte": "Société pourra devenir unipersonnelle ou redevenir pluripersonnelle sans que la forme sociale n’en soit"
+        },
+        {
+          "index": 50,
+          "page": 2,
+          "texte": "modifiée."
+        }
+      ],
+      "article_numero_imprime": 1
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 2,
+      "paragraphes": [
+        {
+          "index": 51,
+          "page": 2,
+          "texte": "Article 2 - . Objet"
+        },
+        {
+          "index": 52,
+          "page": 2,
+          "texte": "La Société a pour objet, directement ou indirectement, en France ou à l’étranger :"
+        },
+        {
+          "index": 53,
+          "page": 2,
+          "texte": "• .....(décrire en des termes généraux l’activité envisagée par la Société) ;"
+        },
+        {
+          "index": 54,
+          "page": 2,
+          "texte": "• la participation directe ou indirecte de la Société à toutes activités ou opérations industrielles,"
+        },
+        {
+          "index": 55,
+          "page": 2,
+          "texte": "commerciales ou financières, mobilières ou immobilières, en France ou à l’étranger, sous quelque"
+        },
+        {
+          "index": 56,
+          "page": 2,
+          "texte": "forme que ce soit, dès lors que ces activités ou opérations peuvent se rattacher directement ou"
+        },
+        {
+          "index": 57,
+          "page": 2,
+          "texte": "indirectement à l’objet social ou à tous objets similaires, connexes ou complémentaires ;"
+        },
+        {
+          "index": 58,
+          "page": 2,
+          "texte": "• et plus généralement toutes opérations de quelque nature qu’elles soient, économiques ou"
+        },
+        {
+          "index": 59,
+          "page": 2,
+          "texte": "juridiques, financières, civiles ou commerciales, pouvant se rattacher, directement ou"
+        },
+        {
+          "index": 60,
+          "page": 2,
+          "texte": "indirectement, à cet objet social ou à tous objets similaires, connexes ou complémentaires."
+        }
+      ],
+      "article_numero_imprime": 2
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 61,
+          "page": 2,
+          "texte": "+ S’il est prévu de doter la Société d’une raison d’être, ajouter :"
+        },
+        {
+          "index": 62,
+          "page": 2,
+          "texte": "La Société a pour raison d’être .....(décrire la raison d’être de la Société)."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 69,
+          "page": 3,
+          "texte": "+ Si la Société est constituée en tant qu’entreprise de l’économie sociale et solidaire (ESS) et"
+        },
+        {
+          "index": 70,
+          "page": 3,
+          "texte": "poursuit une utilité sociale,"
+        },
+        {
+          "index": 71,
+          "page": 3,
+          "texte": "- La recherche d’une utilité sociale, par la réalisation des objectifs suivants : (décrire les objectifs de"
+        },
+        {
+          "index": 72,
+          "page": 3,
+          "texte": "la Société)."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 3,
+      "paragraphes": [
+        {
+          "index": 73,
+          "page": 3,
+          "texte": "Article 3 - . Dénomination sociale"
+        },
+        {
+          "index": 74,
+          "page": 3,
+          "texte": "La Société a pour dénomination sociale : .....(dénomination sociale) ."
+        }
+      ],
+      "article_numero_imprime": 3
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 75,
+          "page": 3,
+          "texte": "+ Si un sigle a été choisi, ajouter :"
+        },
+        {
+          "index": 76,
+          "page": 3,
+          "texte": "Cette dénomination sociale peut être résumée par le sigle .....(sigle)."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 4,
+      "paragraphes": [
+        {
+          "index": 77,
+          "page": 3,
+          "texte": "Article 4 - . Siège social"
+        },
+        {
+          "index": 78,
+          "page": 3,
+          "texte": "Le siège social est fixé à : .....(adresse du siège social)."
+        }
+      ],
+      "article_numero_imprime": 4
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 79,
+          "page": 3,
+          "texte": "› En cas de transfert par le Président sans ratification par les associés, indiquer :"
+        },
+        {
+          "index": 80,
+          "page": 3,
+          "texte": "Il peut être transféré en tout autre endroit du territoire français par décision du Président, qui est habilité à"
+        },
+        {
+          "index": 81,
+          "page": 3,
+          "texte": "modifier les statuts en conséquence."
+        },
+        {
+          "index": 82,
+          "page": 3,
+          "texte": "La création, le déplacement, la fermeture des succursales, agences et dépôts situés en tous lieux ou à"
+        },
+        {
+          "index": 83,
+          "page": 3,
+          "texte": "l'étranger, interviennent également sur décision du Président."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 85,
+          "page": 3,
+          "texte": "› En cas de transfert par le Président avec ratification par les associés, remplacer par :"
+        },
+        {
+          "index": 86,
+          "page": 3,
+          "texte": "Il peut être transféré en tout autre endroit du territoire français par décision du Président, qui est habilité à"
+        },
+        {
+          "index": 87,
+          "page": 3,
+          "texte": "modifier les statuts en conséquence. Toutefois, cette décision devra être ratifiée par la plus proche décision"
+        },
+        {
+          "index": 88,
+          "page": 3,
+          "texte": "collective des associés."
+        },
+        {
+          "index": 89,
+          "page": 3,
+          "texte": "La création, le déplacement, la fermeture des succursales, agences et dépôts situés en tous lieux ou à"
+        },
+        {
+          "index": 90,
+          "page": 3,
+          "texte": "l'étranger, interviennent également sur décision du Président qui devra être ratifiée par la plus proche"
+        },
+        {
+          "index": 91,
+          "page": 3,
+          "texte": "décision collective des associés"
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 93,
+          "page": 3,
+          "texte": "› En cas de transfert par le Président (avec ratification par les associés) limité à une zone"
+        },
+        {
+          "index": 94,
+          "page": 3,
+          "texte": "géographique, remplacer par :"
+        },
+        {
+          "index": 95,
+          "page": 3,
+          "texte": "Il peut être transféré en tout autre endroit du même département ou d’un département limitrophe par"
+        },
+        {
+          "index": 96,
+          "page": 3,
+          "texte": "décision du Président, qui est habilité à modifier les statuts en conséquence. Cette décision devra être"
+        },
+        {
+          "index": 97,
+          "page": 3,
+          "texte": "ratifiée par la plus proche décision collective des associés."
+        },
+        {
+          "index": 103,
+          "page": 4,
+          "texte": "La création, le déplacement, la fermeture des succursales, agences et dépôts situés dans le département de"
+        },
+        {
+          "index": 104,
+          "page": 4,
+          "texte": "situation du siège ou dans un département limitrophe interviennent également sur décision du Président"
+        },
+        {
+          "index": 105,
+          "page": 4,
+          "texte": "qui devra être ratifiée par la plus proche décision collective des associés."
+        },
+        {
+          "index": 106,
+          "page": 4,
+          "texte": "Le transfert du siège social en tout autre lieu que le département de situation du siège ou dans un"
+        },
+        {
+          "index": 107,
+          "page": 4,
+          "texte": "département limitrophe doit résulter d’une décision collective des associés."
+        },
+        {
+          "index": 108,
+          "page": 4,
+          "texte": "La création, le déplacement, la fermeture des succursales, agences et dépôts situés en tout autre lieu que le"
+        },
+        {
+          "index": 109,
+          "page": 4,
+          "texte": "département de situation du siège ou dans un département limitrophe interviennent sur décision collective"
+        },
+        {
+          "index": 110,
+          "page": 4,
+          "texte": "des associés"
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 113,
+          "page": 4,
+          "texte": "› En cas de transfert exclusif par décision des associés, remplacer par :"
+        },
+        {
+          "index": 114,
+          "page": 4,
+          "texte": "Il peut être transféré en tout autre endroit du territoire français par décision collective des associés."
+        },
+        {
+          "index": 115,
+          "page": 4,
+          "texte": "La création, le déplacement, la fermeture des succursales, agences et dépôts situés en tous lieux ou à"
+        },
+        {
+          "index": 116,
+          "page": 4,
+          "texte": "l'étranger, interviennent également sur décision collective des associés"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 5,
+      "paragraphes": [
+        {
+          "index": 118,
+          "page": 4,
+          "texte": "Article 5 - . Durée"
+        },
+        {
+          "index": 119,
+          "page": 4,
+          "texte": "La durée de la Société est de .. (remplir la durée de 99 ans maximum) ans à compter de la date de son"
+        },
+        {
+          "index": 120,
+          "page": 4,
+          "texte": "immatriculation au Registre du commerce et des sociétés, sauf prorogation ou dissolution anticipée."
+        }
+      ],
+      "article_numero_imprime": 5
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 121,
+          "page": 4,
+          "texte": "II. - APPORTS - CAPITAL SOCIAL - ACTIONS"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 6,
+      "paragraphes": [
+        {
+          "index": 123,
+          "page": 4,
+          "texte": "Article 6 - . Apports"
+        },
+        {
+          "index": 124,
+          "page": 4,
+          "texte": "6.1. Apports en numéraire"
+        }
+      ],
+      "article_numero_imprime": 6
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 125,
+          "page": 4,
+          "texte": "› Si toutes les actions souscrites ont été libérées, indiquer :"
+        },
+        {
+          "index": 126,
+          "page": 4,
+          "texte": ".....(identité de l’apporteur en numéraire) apporte à la Société une somme totale de .....(somme) euros"
+        },
+        {
+          "index": 127,
+          "page": 4,
+          "texte": "correspondant à .....(nombre) actions de .....(montant) euros de valeur nominale chacune, entièrement"
+        },
+        {
+          "index": 128,
+          "page": 4,
+          "texte": "souscrites et intégralement libérées."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 134,
+          "page": 5,
+          "texte": "› Lorsque les sommes versées ont été reçues en dépôt par un notaire, un établissement financier ou"
+        },
+        {
+          "index": 135,
+          "page": 5,
+          "texte": "la Caisses des dépôts et consignations, indiquer :"
+        },
+        {
+          "index": 136,
+          "page": 5,
+          "texte": "Laquelle somme de .....(somme)..... euros a été régulièrement déposée à un compte ouvert au nom de la"
+        },
+        {
+          "index": 137,
+          "page": 5,
+          "texte": "Société en formation, le .....(date), auprès de Me .....(identité), Notaire, ou Banque ou à la Caisse des"
+        },
+        {
+          "index": 138,
+          "page": 5,
+          "texte": "dépôts et consignations .....(adresse) sous le numéro de compte no  .....(numéro du compte)."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 140,
+          "page": 5,
+          "texte": "› Si certaines des actions souscrites n’ont pas été libérées, remplacer par :"
+        },
+        {
+          "index": 141,
+          "page": 5,
+          "texte": ".....(identité de l’apporteur en numéraire) apporte à la Société une somme totale de .....(somme) euros."
+        },
+        {
+          "index": 142,
+          "page": 5,
+          "texte": "La somme effectivement libérée au titre dudit apport en numéraire s’élève à .....(somme) euros,"
+        },
+        {
+          "index": 143,
+          "page": 5,
+          "texte": "correspondant à .....(nombre) actions de .....(montant) euros de valeur nominale chacune, souscrites en"
+        },
+        {
+          "index": 144,
+          "page": 5,
+          "texte": "totalité et libérées chacune à concurrence de .....(indiquer une fraction du capital libéré, qui doit être au"
+        },
+        {
+          "index": 145,
+          "page": 5,
+          "texte": "moins égale à la moitié de la valeur nominale des actions) % de leur valeur nominale, ainsi que l’atteste le"
+        },
+        {
+          "index": 146,
+          "page": 5,
+          "texte": "certificat du dépositaire établi le .....(date) par la banque .....(dénomination sociale) ."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 147,
+          "page": 5,
+          "texte": "› Lorsque les sommes versées ont été reçues en dépôt par un notaire, un établissement financier ou"
+        },
+        {
+          "index": 148,
+          "page": 5,
+          "texte": "la Caisse des dépôts et consignations, indiquer :"
+        },
+        {
+          "index": 149,
+          "page": 5,
+          "texte": "Laquelle somme de .....(somme)..... euros a été régulièrement déposée à un compte ouvert au nom de la"
+        },
+        {
+          "index": 150,
+          "page": 5,
+          "texte": "Société en formation, le .....(date), auprès de Me .....(identité), Notaire, ou Banque ou à la Caisse des"
+        },
+        {
+          "index": 151,
+          "page": 5,
+          "texte": "dépôts et consignations .....(adresse) sous le numéro de compte no  .....(numéro du compte)."
+        },
+        {
+          "index": 152,
+          "page": 5,
+          "texte": "La libération du surplus, soit la somme de .....(somme) euros, devra intervenir dans les conditions fixées"
+        },
+        {
+          "index": 153,
+          "page": 5,
+          "texte": "par la loi."
+        },
+        {
+          "index": 154,
+          "page": 5,
+          "texte": "Le certificat du dépositaire, avec la liste des souscripteurs et l’indication, pour chacun d’eux, des sommes"
+        },
+        {
+          "index": 155,
+          "page": 5,
+          "texte": "versées est annexé aux présents statuts."
+        },
+        {
+          "index": 156,
+          "page": 5,
+          "texte": "6.2. Apports en nature"
+        },
+        {
+          "index": 157,
+          "page": 5,
+          "texte": "1°  .....(identité de l’apporteur en nature) apporte à la Société sous les garanties ordinaires et de droit en"
+        },
+        {
+          "index": 158,
+          "page": 5,
+          "texte": "pareille matière :"
+        },
+        {
+          "index": 159,
+          "page": 5,
+          "texte": "Désignation : .....(désignation du bien apporté) ."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 160,
+          "page": 5,
+          "texte": "› Si un commissaire aux apports a été désigné à l’unanimité des fondateurs de la Société, indiquer :"
+        },
+        {
+          "index": 161,
+          "page": 5,
+          "texte": "Évaluation : l’évaluation des biens ci-avant désignés a été faite au vu du rapport de .....(identité et adresse"
+        },
+        {
+          "index": 162,
+          "page": 5,
+          "texte": "ou dénomination sociale et siège social du commissaire aux apports), commissaire aux apports, établi sous"
+        },
+        {
+          "index": 163,
+          "page": 5,
+          "texte": "sa responsabilité le .....(date), ledit commissaire ayant été désigné par décision unanime des fondateurs en"
+        },
+        {
+          "index": 164,
+          "page": 5,
+          "texte": "date du .....(date)."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 171,
+          "page": 6,
+          "texte": "› Si un commissaire aux apports a été désigné par ordonnance du président du tribunal de"
+        },
+        {
+          "index": 172,
+          "page": 6,
+          "texte": "commerce, remplacer par :"
+        },
+        {
+          "index": 173,
+          "page": 6,
+          "texte": "Évaluation : l’évaluation des biens ci-avant désignés a été faite au vu du rapport de .....(identité et adresse"
+        },
+        {
+          "index": 174,
+          "page": 6,
+          "texte": "ou dénomination sociale et siège social du commissaire aux apports), commissaire aux apports, établi sous"
+        },
+        {
+          "index": 175,
+          "page": 6,
+          "texte": "sa responsabilité le .....(date), ledit commissaire ayant été désigné par ordonnance de Monsieur le"
+        },
+        {
+          "index": 176,
+          "page": 6,
+          "texte": "président du Tribunal de commerce de .....(lieu), le .....(date), sur requête de .....(identité du requérant),"
+        },
+        {
+          "index": 177,
+          "page": 6,
+          "texte": "agissant en qualité de fondateur."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 179,
+          "page": 6,
+          "texte": "› En cas de dispense de commissaire aux apports à l’unanimité des associés fondateurs fondée sur"
+        },
+        {
+          "index": 180,
+          "page": 6,
+          "texte": "l’article L.227-1 du Code de commerce, (possible notamment si la valeur de l’apport est inférieure à"
+        },
+        {
+          "index": 181,
+          "page": 6,
+          "texte": "30.000 euros et si la valeur totale de l'ensemble des apports en nature non soumis à l'évaluation d'un"
+        },
+        {
+          "index": 182,
+          "page": 6,
+          "texte": "commissaire aux apports n'excède pas la moitié du capital.) remplacer par :"
+        },
+        {
+          "index": 183,
+          "page": 6,
+          "texte": "Évaluation : l’évaluation des biens ci-avant désignés a été réalisée sous la seule responsabilité des"
+        },
+        {
+          "index": 184,
+          "page": 6,
+          "texte": "associés fondateurs, qui décident à l’unanimité de ne pas recourir à un commissaire aux apports,"
+        },
+        {
+          "index": 185,
+          "page": 6,
+          "texte": "conformément à la faculté offerte par l’article L.227-1 du Code de commerce et aux conditions posées par"
+        },
+        {
+          "index": 186,
+          "page": 6,
+          "texte": "ce même article ainsi que par l’article D.227-3 du Code de commerce."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 188,
+          "page": 6,
+          "texte": "› En cas de dispense de commissaire aux apports à l’unanimité des associés fondateurs fondée sur"
+        },
+        {
+          "index": 189,
+          "page": 6,
+          "texte": "l’article L.225-8-1 du Code de commerce, remplacer par :"
+        },
+        {
+          "index": 190,
+          "page": 6,
+          "texte": "Au regard de la nature des biens objets de l’apport, à savoir .....(à compléter) , il a été décidé de ne pas"
+        },
+        {
+          "index": 191,
+          "page": 6,
+          "texte": "faire application des dispositions de l’article L.225-8 du Code de commerce et ainsi de ne pas désigner de"
+        },
+        {
+          "index": 192,
+          "page": 6,
+          "texte": "commissaire aux apports."
+        },
+        {
+          "index": 193,
+          "page": 6,
+          "texte": "Rémunération de l’apport : en rémunération de l’apport en nature ci-dessus désigné et évalué à la"
+        },
+        {
+          "index": 194,
+          "page": 6,
+          "texte": "somme totale de .....(somme) euros, .....(identité de l’apporteur en nature) s’est vu attribuer .....(nombre)"
+        },
+        {
+          "index": 195,
+          "page": 6,
+          "texte": "actions de .....(montant) euros de valeur nominale chacune, dont la valeur correspond au montant de"
+        },
+        {
+          "index": 196,
+          "page": 6,
+          "texte": "l’évaluation de son apport."
+        },
+        {
+          "index": 197,
+          "page": 6,
+          "texte": "2°  .....(identité de l’apporteur en nature) apporte à la Société sous les garanties ordinaires et de droit en"
+        },
+        {
+          "index": 198,
+          "page": 6,
+          "texte": "pareille matière .....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 199,
+          "page": 6,
+          "texte": "+ En présence d’apports en industrie, ajouter :"
+        },
+        {
+          "index": 200,
+          "page": 6,
+          "texte": "6.2 bis. Apports en industrie"
+        },
+        {
+          "index": 201,
+          "page": 6,
+          "texte": ".....(identité de l’apporteur), soussigné, apporte à la Société son industrie selon les modalités suivantes"
+        },
+        {
+          "index": 202,
+          "page": 6,
+          "texte": ".....(décrire les prestations de l’apporteur et leur durée). Il reçoit en contrepartie .....(nombre) actions"
+        },
+        {
+          "index": 203,
+          "page": 6,
+          "texte": "ouvrant droit au partage des bénéfices et de l’actif net à hauteur de .....(pourcentage) %, à charge de"
+        },
+        {
+          "index": 204,
+          "page": 6,
+          "texte": "contribuer aux pertes à hauteur de .....(pourcentage) %."
+        },
+        {
+          "index": 210,
+          "page": 7,
+          "texte": "6.3. Récapitulation des apports formant le capital social"
+        },
+        {
+          "index": 211,
+          "page": 7,
+          "texte": "L’ensemble des apports effectués à la Société qui forment le capital social s’élève à la somme de"
+        },
+        {
+          "index": 212,
+          "page": 7,
+          "texte": ".....(montant en lettres) euros [ .....(montant en chiffres) euros] représentant :"
+        },
+        {
+          "index": 213,
+          "page": 7,
+          "texte": "1o Les apports en numéraire pour un montant total"
+        },
+        {
+          "index": 214,
+          "page": 7,
+          "texte": "de :"
+        },
+        {
+          "index": 215,
+          "page": 7,
+          "texte": "NOMBRE (CHIFFRE euros)"
+        },
+        {
+          "index": 216,
+          "page": 7,
+          "texte": "2o Les apports en nature évalués pour un montant"
+        },
+        {
+          "index": 217,
+          "page": 7,
+          "texte": "total de :"
+        },
+        {
+          "index": 218,
+          "page": 7,
+          "texte": "NOMBRE (CHIFFRE euros)"
+        },
+        {
+          "index": 219,
+          "page": 7,
+          "texte": "Total égal au montant du capital social  NOMBRE (CHIFFRE euros)"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 7,
+      "paragraphes": [
+        {
+          "index": 220,
+          "page": 7,
+          "texte": "Article 7 - . Capital social"
+        }
+      ],
+      "article_numero_imprime": 7
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 221,
+          "page": 7,
+          "texte": "› Si le capital social est composé exclusivement d’actions ordinaires, indiquer :"
+        },
+        {
+          "index": 222,
+          "page": 7,
+          "texte": "Le capital social est fixé à la somme de .....(montant en lettres) euros [ .....(montant en chiffres) euros]."
+        },
+        {
+          "index": 223,
+          "page": 7,
+          "texte": "Il est divisé en .....(nombre en lettres) [ .....(nombre en chiffres)] actions de .....(montant en lettres) euros ["
+        },
+        {
+          "index": 224,
+          "page": 7,
+          "texte": ".....(montant en chiffres) euros] de valeur nominale chacune, .....(intégralement/partiellement) libérées et"
+        },
+        {
+          "index": 225,
+          "page": 7,
+          "texte": "de même catégorie."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 227,
+          "page": 7,
+          "texte": "› Si le capital social est composé d’actions ordinaires et d’actions de préférence, remplacer par :"
+        },
+        {
+          "index": 228,
+          "page": 7,
+          "texte": "Le capital social est fixé à la somme de .....(montant en lettres) euros [ .....(montant en chiffres) euros]."
+        },
+        {
+          "index": 229,
+          "page": 7,
+          "texte": "Il est divisé en .....(nombre en lettres) [ .....(nombre en chiffres)] actions de .....(montant en lettres) euros ["
+        },
+        {
+          "index": 230,
+          "page": 7,
+          "texte": ".....(montant en chiffres) euros] de valeur nominale chacune, .....(intégralement/partiellement) libérées,"
+        },
+        {
+          "index": 231,
+          "page": 7,
+          "texte": "dont :"
+        },
+        {
+          "index": 232,
+          "page": 7,
+          "texte": "• .....(nombre en lettres) [ .....(nombre en chiffres)] actions ordinaires ; et"
+        },
+        {
+          "index": 233,
+          "page": 7,
+          "texte": "• .....(nombre en lettres) [ .....(nombre en chiffres)] actions de préférence (les « Actions de"
+        },
+        {
+          "index": 234,
+          "page": 7,
+          "texte": "Préférence »), qui bénéficient des droits spécifiques définis à l’article .....(numéro de l’article"
+        },
+        {
+          "index": 235,
+          "page": 7,
+          "texte": "relatif aux actions de préférence) des présents statuts."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 236,
+          "page": 7,
+          "texte": "+ Si les actions de préférence ont été émises au profit d’une ou plusieurs personnes nommément"
+        },
+        {
+          "index": 237,
+          "page": 7,
+          "texte": "désignées, ajouter :"
+        },
+        {
+          "index": 238,
+          "page": 7,
+          "texte": "La création des Actions de Préférence a fait l’objet d’un rapport en date du .....(date) établi par .....(identité"
+        },
+        {
+          "index": 239,
+          "page": 7,
+          "texte": "et adresse ou dénomination sociale et siège social du commissaire aux avantages particuliers), en qualité"
+        },
+        {
+          "index": 240,
+          "page": 7,
+          "texte": "de commissaire aux avantages particuliers."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 241,
+          "page": 7,
+          "texte": "› Si le commissaire aux avantages particuliers a été désigné à l’unanimité des fondateurs de la"
+        },
+        {
+          "index": 242,
+          "page": 7,
+          "texte": "Société, indiquer :"
+        },
+        {
+          "index": 248,
+          "page": 8,
+          "texte": "Le commissaire aux avantages particuliers été désigné par décision unanime des fondateurs en date du"
+        },
+        {
+          "index": 249,
+          "page": 8,
+          "texte": ".....(date)."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 251,
+          "page": 8,
+          "texte": "› Si le commissaire aux avantages particuliers a été désigné par ordonnance du président du"
+        },
+        {
+          "index": 252,
+          "page": 8,
+          "texte": "tribunal de commerce, remplacer par :"
+        },
+        {
+          "index": 253,
+          "page": 8,
+          "texte": "Le commissaire aux avantages particuliers été désigné par ordonnance de Monsieur le président du"
+        },
+        {
+          "index": 254,
+          "page": 8,
+          "texte": "Tribunal de commerce de .....(lieu) le .....(date), sur requête de .....(identité du requérant), agissant en"
+        },
+        {
+          "index": 255,
+          "page": 8,
+          "texte": "qualité de fondateur."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 8,
+      "paragraphes": [
+        {
+          "index": 256,
+          "page": 8,
+          "texte": "Article 8 - . Avantages particuliers"
+        }
+      ],
+      "article_numero_imprime": 8
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 257,
+          "page": 8,
+          "texte": "› En l’absence d’avantages particuliers, indiquer :"
+        },
+        {
+          "index": 258,
+          "page": 8,
+          "texte": "Les présents statuts ne stipulent aucun avantage particulier."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 260,
+          "page": 8,
+          "texte": "› En cas d’avantages particuliers, remplacer par :"
+        },
+        {
+          "index": 261,
+          "page": 8,
+          "texte": "En considération du rôle joué par .....(identité ou dénomination sociale du fondateur concerné) dans"
+        },
+        {
+          "index": 262,
+          "page": 8,
+          "texte": ".....(indiquer le rôle joué qui justifie l’octroi de l’avantage), celui-ci bénéficiera .....(qualification de"
+        },
+        {
+          "index": 263,
+          "page": 8,
+          "texte": "l’avantage), .....(description de l’avantage)."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 9,
+      "paragraphes": [
+        {
+          "index": 264,
+          "page": 8,
+          "texte": "Article 9 - . Modifications du capital"
+        },
+        {
+          "index": 265,
+          "page": 8,
+          "texte": "Le capital social peut être augmenté, réduit ou amorti conformément aux dispositions législatives et"
+        },
+        {
+          "index": 266,
+          "page": 8,
+          "texte": "réglementaires en vigueur."
+        }
+      ],
+      "article_numero_imprime": 9
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 267,
+          "page": 8,
+          "texte": "+ En présence d’une clause d’agrément, ajouter :"
+        },
+        {
+          "index": 268,
+          "page": 8,
+          "texte": "Toute augmentation de capital réalisée au bénéfice d’un tiers doit être soumise à l’agrément des associés"
+        },
+        {
+          "index": 269,
+          "page": 8,
+          "texte": "dans les conditions prévues à l’article .....(numéro de l’article des statuts prévoyant la clause d’agrément)"
+        },
+        {
+          "index": 270,
+          "page": 8,
+          "texte": "ci-après."
+        },
+        {
+          "index": 271,
+          "page": 8,
+          "texte": "Les associés peuvent déléguer au Président les pouvoirs nécessaires à l’effet de décider ou de réaliser,"
+        },
+        {
+          "index": 272,
+          "page": 8,
+          "texte": "dans les conditions et délais prévus par la loi, l’augmentation ou la réduction du capital."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 10,
+      "paragraphes": [
+        {
+          "index": 273,
+          "page": 8,
+          "texte": "Article 10 - . Libération des actions"
+        },
+        {
+          "index": 274,
+          "page": 8,
+          "texte": "Les actions sont libérées lors de leur souscription conformément aux dispositions légales."
+        },
+        {
+          "index": 280,
+          "page": 9,
+          "texte": "Les sommes restant à verser sur les actions à libérer en espèces sont appelées par le Président, qui"
+        },
+        {
+          "index": 281,
+          "page": 9,
+          "texte": "détermine les dates et l’importance des appels de fonds."
+        }
+      ],
+      "article_numero_imprime": 10
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 11,
+      "paragraphes": [
+        {
+          "index": 282,
+          "page": 9,
+          "texte": "Article 11 - . Forme des actions"
+        },
+        {
+          "index": 283,
+          "page": 9,
+          "texte": "Les actions de la Société doivent obligatoirement être nominatives."
+        },
+        {
+          "index": 284,
+          "page": 9,
+          "texte": "Elles donnent lieu à une inscription à un compte ouvert par la Société au nom de chaque associé dans les"
+        },
+        {
+          "index": 285,
+          "page": 9,
+          "texte": "conditions et selon les modalités prévues par les dispositions législatives et réglementaires applicables."
+        }
+      ],
+      "article_numero_imprime": 11
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 12,
+      "paragraphes": [
+        {
+          "index": 286,
+          "page": 9,
+          "texte": "Article 12 - . Indivisibilité des actions - Nue-propriété et usufruit"
+        },
+        {
+          "index": 287,
+          "page": 9,
+          "texte": "Les actions sont indivisibles à l’égard de la Société."
+        },
+        {
+          "index": 288,
+          "page": 9,
+          "texte": "Les copropriétaires d’actions indivises sont représentés aux assemblées générales par l’un d’eux ou par un"
+        },
+        {
+          "index": 289,
+          "page": 9,
+          "texte": "mandataire unique."
+        }
+      ],
+      "article_numero_imprime": 12
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 290,
+          "page": 9,
+          "texte": "›  En cas d’exercice du droit de vote par le nu-propriétaire sauf pour l’affectation des bénéfices,"
+        },
+        {
+          "index": 291,
+          "page": 9,
+          "texte": "indiquer :"
+        },
+        {
+          "index": 292,
+          "page": 9,
+          "texte": "Lorsque les actions sont grevées d’usufruit, le droit de vote est exercé par le nu-propriétaire, sauf pour les"
+        },
+        {
+          "index": 293,
+          "page": 9,
+          "texte": "décisions concernant l’affectation des bénéfices où il est réservé à l’usufruitier."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 295,
+          "page": 9,
+          "texte": "›  En cas d’exercice du droit de vote par le nu-propriétaire uniquement pour les décisions entraînant"
+        },
+        {
+          "index": 296,
+          "page": 9,
+          "texte": "modification des statuts, remplacer par :"
+        },
+        {
+          "index": 297,
+          "page": 9,
+          "texte": "Lorsque les actions sont grevées d’usufruit, le droit de vote est exercé par le nu-propriétaire pour les"
+        },
+        {
+          "index": 298,
+          "page": 9,
+          "texte": "décisions entraînant modification des statuts et par l’usufruitier pour les autres décisions collectives des"
+        },
+        {
+          "index": 299,
+          "page": 9,
+          "texte": "associés."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 301,
+          "page": 9,
+          "texte": "› En cas d’exercice du droit de vote par le nu-propriétaire uniquement pour les décisions pour"
+        },
+        {
+          "index": 302,
+          "page": 9,
+          "texte": "lesquelles la loi exige l’accord unanime des associés, remplacer par :"
+        },
+        {
+          "index": 303,
+          "page": 9,
+          "texte": "Lorsque les actions sont grevées d’usufruit, le droit de vote est exercé par l’usufruitier pour toutes les"
+        },
+        {
+          "index": 304,
+          "page": 9,
+          "texte": "décisions collectives des associés, sauf pour les décisions pour lesquelles la loi exige l’accord unanime des"
+        },
+        {
+          "index": 305,
+          "page": 9,
+          "texte": "associés où il est réservé au nu-propriétaire."
+        },
+        {
+          "index": 306,
+          "page": 9,
+          "texte": "Ces règles s’appliquent sous réserve de toute convention contraire entre nu-propriétaire et usufruitier"
+        },
+        {
+          "index": 307,
+          "page": 9,
+          "texte": "portant sur des décisions collectives autres que celles relatives l’affection des résultats, étant précisé"
+        },
+        {
+          "index": 308,
+          "page": 9,
+          "texte": "qu’une telle convention doit être portée à la connaissance de la Société dans le délai de .....(préciser le"
+        },
+        {
+          "index": 309,
+          "page": 9,
+          "texte": "délai souhaité) précédant la première décision collective à laquelle elle est susceptible de s’appliquer."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 13,
+      "paragraphes": [
+        {
+          "index": 315,
+          "page": 10,
+          "texte": "Article 13 - . Droits et obligations attachés aux actions"
+        },
+        {
+          "index": 316,
+          "page": 10,
+          "texte": "1. Chaque action donne droit, dans la propriété de l’actif, dans le partage des bénéfices et dans le boni de"
+        },
+        {
+          "index": 317,
+          "page": 10,
+          "texte": "liquidation, à une part proportionnelle à la quotité du capital qu’elle représente."
+        }
+      ],
+      "article_numero_imprime": 13
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 318,
+          "page": 10,
+          "texte": "+ En présence d’actions de préférence, ajouter le cas échéant :"
+        },
+        {
+          "index": 319,
+          "page": 10,
+          "texte": "Ce principe s’applique sous réserve des droits spécifiques attachés aux Actions de Préférence."
+        },
+        {
+          "index": 320,
+          "page": 10,
+          "texte": "Chaque action donne en outre le droit au vote et à la représentation dans les assemblées générales, ainsi"
+        },
+        {
+          "index": 321,
+          "page": 10,
+          "texte": "que le droit d’être informé sur la marche de la Société et d’obtenir communication de certains documents"
+        },
+        {
+          "index": 322,
+          "page": 10,
+          "texte": "sociaux aux époques et dans les conditions prévues par la loi et les statuts."
+        },
+        {
+          "index": 323,
+          "page": 10,
+          "texte": "2. Les associés ne sont responsables du passif social qu’à concurrence de leurs apports respectifs."
+        },
+        {
+          "index": 324,
+          "page": 10,
+          "texte": "3. Les droits et obligations attachés à l’action suivent le titre dans quelque main qu’il passe."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 325,
+          "page": 10,
+          "texte": "+ En présence d’actions de préférence, ajouter le cas échéant :"
+        },
+        {
+          "index": 326,
+          "page": 10,
+          "texte": "Ce principe s’applique sous réserve des droits spécifiques attachés aux Actions de Préférence."
+        },
+        {
+          "index": 327,
+          "page": 10,
+          "texte": "La propriété d’une action comporte de plein droit adhésion aux statuts et aux décisions collectives des"
+        },
+        {
+          "index": 328,
+          "page": 10,
+          "texte": "associés de la Société."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 329,
+          "page": 10,
+          "texte": "+ En présence d’actions de préférence, ajouter :"
+        },
+        {
+          "index": 330,
+          "page": 10,
+          "texte": "4. Les Actions de Préférence sont des actions de préférence au sens des articles L.228-11 et suivants du"
+        },
+        {
+          "index": 331,
+          "page": 10,
+          "texte": "Code de commerce."
+        },
+        {
+          "index": 332,
+          "page": 10,
+          "texte": "Les Actions de Préférence bénéficient des mêmes droits et obligations que les actions ordinaires ainsi que"
+        },
+        {
+          "index": 333,
+          "page": 10,
+          "texte": "des droits particuliers suivants : .....(décrire les droits particuliers attachés aux actions de préférence)."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 334,
+          "page": 10,
+          "texte": "›  Si les actions de préférence sont créées à titre permanent, indiquer :"
+        },
+        {
+          "index": 335,
+          "page": 10,
+          "texte": "Les Actions de Préférence sont créées à titre permanent."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 337,
+          "page": 10,
+          "texte": "› Si les actions de préférence sont créées à titre temporaire, remplacer par :"
+        },
+        {
+          "index": 338,
+          "page": 10,
+          "texte": "Les Actions de Préférence sont créées à titre temporaire, pour une durée de .....(durée) à compter de la date"
+        },
+        {
+          "index": 339,
+          "page": 10,
+          "texte": "de leur création. A l’expiration de cette durée, elles seront automatiquement assimilées aux actions"
+        },
+        {
+          "index": 340,
+          "page": 10,
+          "texte": "ordinaires."
+        },
+        {
+          "index": 341,
+          "page": 10,
+          "texte": "Les Actions de Préférence peuvent être converties en actions ordinaires ou en actions de préférence d’une"
+        },
+        {
+          "index": 342,
+          "page": 10,
+          "texte": "autre catégorie."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 343,
+          "page": 10,
+          "texte": "› Si les modalités de conversion des actions de préférence sont prévues par la collectivité des"
+        },
+        {
+          "index": 344,
+          "page": 10,
+          "texte": "associés, indiquer :"
+        },
+        {
+          "index": 350,
+          "page": 11,
+          "texte": "Les conditions et modalités de cette conversion seront fixées par la collectivité des associés."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 352,
+          "page": 11,
+          "texte": "›  Si les modalités de conversion des actions de préférence sont prévues par les statuts, remplacer"
+        },
+        {
+          "index": 353,
+          "page": 11,
+          "texte": "par :"
+        },
+        {
+          "index": 354,
+          "page": 11,
+          "texte": "Les Actions de Préférence pourront être converties dans les conditions et selon les modalités suivantes :"
+        },
+        {
+          "index": 355,
+          "page": 11,
+          "texte": ".....(à compléter)."
+        },
+        {
+          "index": 356,
+          "page": 11,
+          "texte": "La conversion des Actions de Préférence emporte automatiquement renonciation des associés au droit"
+        },
+        {
+          "index": 357,
+          "page": 11,
+          "texte": "préférentiel de souscription pour les actions issues de la conversion."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 358,
+          "page": 11,
+          "texte": "›  Si les statuts ne prévoient pas le principe et les modalités du rachat des actions de préférence,"
+        },
+        {
+          "index": 359,
+          "page": 11,
+          "texte": "indiquer :"
+        },
+        {
+          "index": 360,
+          "page": 11,
+          "texte": "Les Actions de Préférence peuvent être rachetées dans les conditions et selon les modalités de droit"
+        },
+        {
+          "index": 361,
+          "page": 11,
+          "texte": "commun prévues aux articles L.225-204 à L. 225-214 du Code de commerce."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 363,
+          "page": 11,
+          "texte": "›  Si les statuts prévoient le principe et les modalités du rachat des actions de préférence et que le"
+        },
+        {
+          "index": 364,
+          "page": 11,
+          "texte": "rachat ne peut avoir lieu qu’à l’initiative exclusive de la Société, remplacer par :"
+        },
+        {
+          "index": 365,
+          "page": 11,
+          "texte": "Les Actions de Préférence pourront être rachetées par la Société dans le respect des conditions fixées par"
+        },
+        {
+          "index": 366,
+          "page": 11,
+          "texte": "l’article L.228-12, III du Code de commerce. Le rachat des Actions de Préférence à leurs titulaires"
+        },
+        {
+          "index": 367,
+          "page": 11,
+          "texte": "respectifs aura lieu à l’initiative exclusive de la Société, dans les conditions et selon les modalités"
+        },
+        {
+          "index": 368,
+          "page": 11,
+          "texte": "suivantes :"
+        },
+        {
+          "index": 369,
+          "page": 11,
+          "texte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 371,
+          "page": 11,
+          "texte": "›  Si les statuts prévoient le principe et les modalités du rachat des actions de préférence et que le"
+        },
+        {
+          "index": 372,
+          "page": 11,
+          "texte": "rachat peut avoir lieu à l’initiative conjointe de la Société et des détenteurs, remplacer par :"
+        },
+        {
+          "index": 373,
+          "page": 11,
+          "texte": "Les Actions de Préférence pourront être rachetées par la Société dans le respect des conditions fixées par"
+        },
+        {
+          "index": 374,
+          "page": 11,
+          "texte": "l’article L.228-12, III du Code de commerce. Le rachat des Actions de Préférence à leurs titulaires"
+        },
+        {
+          "index": 375,
+          "page": 11,
+          "texte": "respectifs aura lieu à l’initiative conjointe de la Société et du détenteur concerné, dans les conditions et"
+        },
+        {
+          "index": 376,
+          "page": 11,
+          "texte": "selon les modalités suivantes :"
+        },
+        {
+          "index": 377,
+          "page": 11,
+          "texte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 379,
+          "page": 11,
+          "texte": "› Si les statuts prévoient le principe et les modalités du rachat des actions de préférence et que le"
+        },
+        {
+          "index": 380,
+          "page": 11,
+          "texte": "rachat peut avoir lieu à l’initiative exclusive des détenteurs, remplacer par :"
+        },
+        {
+          "index": 381,
+          "page": 11,
+          "texte": "Les Actions de Préférence pourront être rachetées par la Société dans le respect des conditions fixées par"
+        },
+        {
+          "index": 382,
+          "page": 11,
+          "texte": "l'article L.228-12, III du Code de commerce. Le rachat des Actions de Préférence à leurs titulaires"
+        },
+        {
+          "index": 388,
+          "page": 12,
+          "texte": "respectifs aura lieu à l'initiative exclusive du détenteur concerné, dans les conditions et selon les modalités"
+        },
+        {
+          "index": 389,
+          "page": 12,
+          "texte": "suivantes :"
+        },
+        {
+          "index": 390,
+          "page": 12,
+          "texte": ".....(à compléter) ."
+        },
+        {
+          "index": 391,
+          "page": 12,
+          "texte": "La protection des titulaires d’Actions de Préférence sera assurée conformément aux lois et règlements"
+        },
+        {
+          "index": 392,
+          "page": 12,
+          "texte": "applicables et conformément aux stipulations des statuts de la Société."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 14,
+      "paragraphes": [
+        {
+          "index": 393,
+          "page": 12,
+          "texte": "Article 14 - . Transmission des actions"
+        }
+      ],
+      "article_numero_imprime": 14
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 394,
+          "page": 12,
+          "texte": "› Si la cession des actions est libre, indiquer :"
+        },
+        {
+          "index": 395,
+          "page": 12,
+          "texte": "Les actions sont librement négociables, sauf dispositions législatives ou réglementaires contraires."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 397,
+          "page": 12,
+          "texte": "› Lorsqu’il est prévu de soumettre la cession à des restrictions (inaliénabilité, préemption,"
+        },
+        {
+          "index": 398,
+          "page": 12,
+          "texte": "agrément), remplacer par :"
+        },
+        {
+          "index": 399,
+          "page": 12,
+          "texte": "Les actions sont librement négociables, sauf dispositions législatives ou réglementaires contraires et sous"
+        },
+        {
+          "index": 400,
+          "page": 12,
+          "texte": "réserve des restrictions prévues par les présents statuts."
+        },
+        {
+          "index": 401,
+          "page": 12,
+          "texte": "La propriété des actions résulte de leur inscription en compte individuel au nom du ou des titulaires dans"
+        },
+        {
+          "index": 402,
+          "page": 12,
+          "texte": "les conditions et selon les modalités prévues par les lois et règlements en vigueur."
+        },
+        {
+          "index": 403,
+          "page": 12,
+          "texte": "La cession ou transmission de ces actions s’opère, à l’égard de la Société et des tiers, par un virement de"
+        },
+        {
+          "index": 404,
+          "page": 12,
+          "texte": "compte à compte effectué sur la production d’un ordre de mouvement signé du cédant ou de son"
+        },
+        {
+          "index": 405,
+          "page": 12,
+          "texte": "mandataire. L’ordre de mouvement est enregistré le jour même de sa réception sur un registre coté et"
+        },
+        {
+          "index": 406,
+          "page": 12,
+          "texte": "paraphé, tenu chronologiquement, dit « registre des mouvements »."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 407,
+          "page": 12,
+          "texte": "+ Lorsqu’il est prévu de soumettre la cession à des restrictions (inaliénabilité, préemption,"
+        },
+        {
+          "index": 408,
+          "page": 12,
+          "texte": "agrément), ajouter :"
+        },
+        {
+          "index": 409,
+          "page": 12,
+          "texte": "Pour les besoins des présents statuts :"
+        },
+        {
+          "index": 410,
+          "page": 12,
+          "texte": "(i) le terme « transfert » désigne toute opération, à titre onéreux ou gratuit, entraînant le transfert,"
+        },
+        {
+          "index": 411,
+          "page": 12,
+          "texte": "immédiat ou à terme, de la pleine propriété, de la nue-propriété, de l’usufruit ou de la jouissance de titres,"
+        },
+        {
+          "index": 412,
+          "page": 12,
+          "texte": "sous quelque forme que ce soit et notamment, sans que cette énumération soit limitative, toute vente,"
+        },
+        {
+          "index": 413,
+          "page": 12,
+          "texte": "cession, adjudication, nantissement, apport en société, apport partiel d’actif, fusion, scission, prêt, prêt de"
+        },
+        {
+          "index": 414,
+          "page": 12,
+          "texte": "consommation, échange, portage, démembrement de propriété, transmission universelle de patrimoine,"
+        },
+        {
+          "index": 415,
+          "page": 12,
+          "texte": "transmission par suite de dissolution de communauté entre époux, donation, échange ou partage,"
+        },
+        {
+          "index": 416,
+          "page": 12,
+          "texte": "transmission à cause de mort, par constitution fiduciaire et toute cession ou renonciation individuelle à, ou"
+        },
+        {
+          "index": 417,
+          "page": 12,
+          "texte": "suppression d’un, droit préférentiel de souscription ou d’attribution d’un titre et la constitution de toute"
+        },
+        {
+          "index": 418,
+          "page": 12,
+          "texte": "sûreté, privilège, gage, nantissement, servitudes, hypothèque, promesse de vente ou d’achat, option ou"
+        },
+        {
+          "index": 419,
+          "page": 12,
+          "texte": "droit de préemption ; le terme transférer étant interprété en conséquence ;"
+        },
+        {
+          "index": 420,
+          "page": 12,
+          "texte": "(ii) le terme « titre » désigne (i) toute action de la Société ou tout autre titre donnant ou pouvant donner"
+        },
+        {
+          "index": 421,
+          "page": 12,
+          "texte": "accès, directement ou indirectement, immédiatement ou à terme, à une quotité du capital social et/ou des"
+        },
+        {
+          "index": 427,
+          "page": 13,
+          "texte": "droits de vote de la Société ; (ii) tout droit d’attribution, de souscription à une augmentation du capital de"
+        },
+        {
+          "index": 428,
+          "page": 13,
+          "texte": "la Société ; et (iii) tout démembrement des actions de la Société et tous autres titres qui se substitueraient"
+        },
+        {
+          "index": 429,
+          "page": 13,
+          "texte": "auxdites actions à la suite de toute opération de fusion, scission, apport, transformation de la Société en"
+        },
+        {
+          "index": 430,
+          "page": 13,
+          "texte": "une société d’une autre forme, changement de la valeur nominale des titres, échange, regroupement ou"
+        },
+        {
+          "index": 431,
+          "page": 13,
+          "texte": "division de titres."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 432,
+          "page": 13,
+          "texte": "+ Si l’inaliénabilité des actions est souhaitée, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 15,
+      "paragraphes": [
+        {
+          "index": 433,
+          "page": 13,
+          "texte": "Article 15 - . Inaliénabilité"
+        },
+        {
+          "index": 434,
+          "page": 13,
+          "texte": "Sauf lorsque la Société ne comporte qu’un seul associé, les titres sont inaliénables pendant une durée de"
+        },
+        {
+          "index": 435,
+          "page": 13,
+          "texte": ".....(10 ans maximum) à compter de la date de .....(leur acquisition/leur souscription/l’immatriculation de la"
+        },
+        {
+          "index": 436,
+          "page": 13,
+          "texte": "Société)."
+        }
+      ],
+      "article_numero_imprime": 15
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 437,
+          "page": 13,
+          "texte": "+ En présence d’une clause d’exclusion ou de changement de contrôle, ajouter :"
+        },
+        {
+          "index": 438,
+          "page": 13,
+          "texte": "Par exception, l’inaliénabilité temporaire visée ci-dessus ne s’appliquera pas en cas .....(d’exclusion d’un"
+        },
+        {
+          "index": 439,
+          "page": 13,
+          "texte": "associé/de modification du contrôle d’une société associée dont il résulterait l’exclusion de cette dernière)."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 440,
+          "page": 13,
+          "texte": "+ S’il est envisagé de prévoir des exceptions à l’inaliénabilité, ajouter :"
+        },
+        {
+          "index": 441,
+          "page": 13,
+          "texte": "Par exception à ce qui précède, ne seront pas soumis à inaliénabilité :"
+        },
+        {
+          "index": 442,
+          "page": 13,
+          "texte": ".....(à compléter)"
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 443,
+          "page": 13,
+          "texte": "+  En présence d’une clause de préemption et/ou d’un agrément, ajouter :"
+        },
+        {
+          "index": 444,
+          "page": 13,
+          "texte": "A l’expiration de la période d’inaliénabilité, les titres seront librement transmissibles sous réserve du"
+        },
+        {
+          "index": 445,
+          "page": 13,
+          "texte": "respect des stipulations ci-après."
+        },
+        {
+          "index": 446,
+          "page": 13,
+          "texte": "Tout transfert effectué en violation de la clause d’inaliénabilité est nul."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 447,
+          "page": 13,
+          "texte": "+ Si un droit de préemption est souhaité, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 16,
+      "paragraphes": [
+        {
+          "index": 448,
+          "page": 13,
+          "texte": "Article 16 - . Droit de préemption"
+        },
+        {
+          "index": 449,
+          "page": 13,
+          "texte": "1. Sauf lorsque la Société ne comporte qu’un seul associé, tout transfert de titres est soumis au respect du"
+        },
+        {
+          "index": 450,
+          "page": 13,
+          "texte": "droit de préemption conféré aux associés dans les conditions définies au présent article."
+        },
+        {
+          "index": 451,
+          "page": 13,
+          "texte": "2. En cas de projet de transfert de tout ou partie de ses titres, l’associé cédant devra adresser à la Société et"
+        },
+        {
+          "index": 452,
+          "page": 13,
+          "texte": "à chacun des associés, par lettre recommandée avec demande d’avis de réception, une notification de"
+        },
+        {
+          "index": 453,
+          "page": 13,
+          "texte": "transfert indiquant :"
+        },
+        {
+          "index": 454,
+          "page": 13,
+          "texte": "• le nombre de titres dont le transfert est envisagé ;"
+        },
+        {
+          "index": 455,
+          "page": 13,
+          "texte": "• l’identité de l’acquéreur :"
+        },
+        {
+          "index": 461,
+          "page": 14,
+          "texte": "o s’il s’agit d’une personne physique : prénom, nom et adresse ; ou"
+        },
+        {
+          "index": 462,
+          "page": 14,
+          "texte": "o s’il s’agit d’une personne morale : dénomination sociale, forme, siège social, numéro"
+        },
+        {
+          "index": 463,
+          "page": 14,
+          "texte": "RCS, identité des dirigeants, identité de la ou des personnes ou entités la contrôlant"
+        },
+        {
+          "index": 464,
+          "page": 14,
+          "texte": "directement et de façon ultime ;"
+        },
+        {
+          "index": 465,
+          "page": 14,
+          "texte": "• la nature du transfert envisagé ;"
+        },
+        {
+          "index": 466,
+          "page": 14,
+          "texte": "• le prix (ainsi que les conditions de paiement y afférant) ou, dans l’hypothèse où le transfert"
+        },
+        {
+          "index": 467,
+          "page": 14,
+          "texte": "envisagé ne serait pas une vente, une estimation de bonne foi du prix offert dans le cadre du"
+        },
+        {
+          "index": 468,
+          "page": 14,
+          "texte": "transfert envisagé ;"
+        }
+      ],
+      "article_numero_imprime": 16
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 469,
+          "page": 14,
+          "texte": "+  Si une clause d'agrément est prévue dans les statuts, ajouter :"
+        },
+        {
+          "index": 470,
+          "page": 14,
+          "texte": "• une demande expresse d'agrément du tiers envisagé."
+        },
+        {
+          "index": 471,
+          "page": 14,
+          "texte": "La notification de transfert constituera une offre irrévocable et inconditionnelle de l’associé cédant aux"
+        },
+        {
+          "index": 472,
+          "page": 14,
+          "texte": "associés non cédants de leur vendre la totalité, et la totalité seulement, des titres transférés aux conditions"
+        },
+        {
+          "index": 473,
+          "page": 14,
+          "texte": "figurant dans la notification de transfert."
+        },
+        {
+          "index": 474,
+          "page": 14,
+          "texte": "La date de réception de cette notification fait courir un délai de quatre (4) mois, à l’expiration duquel, si"
+        },
+        {
+          "index": 475,
+          "page": 14,
+          "texte": "les droits de préemption n’ont pas été exercés en totalité sur les titres dont le transfert est envisagé,"
+        },
+        {
+          "index": 476,
+          "page": 14,
+          "texte": "l’associé cédant pourra réaliser librement ledit transfert aux conditions indiquées dans la notification de"
+        },
+        {
+          "index": 477,
+          "page": 14,
+          "texte": "transfert."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 478,
+          "page": 14,
+          "texte": "+ Si une clause d’agrément est prévue dans les statuts, ajouter :"
+        },
+        {
+          "index": 479,
+          "page": 14,
+          "texte": "L’associé cédant devra, toutefois, suivre la procédure d’agrément prévue à l’article .....(numéro de l’article"
+        },
+        {
+          "index": 480,
+          "page": 14,
+          "texte": "des statuts prévoyant la clause d’agrément) des statuts."
+        },
+        {
+          "index": 481,
+          "page": 14,
+          "texte": "3. Chaque associé non cédant bénéficie d’un droit de préemption exerçable par notification adressée au"
+        },
+        {
+          "index": 482,
+          "page": 14,
+          "texte": "Président au plus tard dans le délai de trois (3) mois de la date de réception de la notification de transfert"
+        },
+        {
+          "index": 483,
+          "page": 14,
+          "texte": "visée au paragraphe 2 ci-dessus. Cette notification est effectuée par lettre recommandée avec demande"
+        },
+        {
+          "index": 484,
+          "page": 14,
+          "texte": "d’accusé de réception indiquant le nombre de titres de l’associé cédant que l’associé non cédant concerné"
+        },
+        {
+          "index": 485,
+          "page": 14,
+          "texte": "souhaite acquérir. A défaut pour un associé non cédant d’avoir valablement exercé son droit de"
+        },
+        {
+          "index": 486,
+          "page": 14,
+          "texte": "préemption avant l’expiration du délai de trois (3) mois susvisé, cet associé non cédant sera réputé avoir"
+        },
+        {
+          "index": 487,
+          "page": 14,
+          "texte": "irrévocablement renoncé à l’exercice de son droit de préemption en relation avec le transfert concerné."
+        },
+        {
+          "index": 488,
+          "page": 14,
+          "texte": "4 A l’expiration du délai de trois (3) mois visé au paragraphe 3 ci-dessus et avant celle du délai visé au 2"
+        },
+        {
+          "index": 489,
+          "page": 14,
+          "texte": "ci-dessus, le Président notifie à l’associé cédant par lettre recommandée avec demande d’accusé de"
+        },
+        {
+          "index": 490,
+          "page": 14,
+          "texte": "réception, les résultats de la procédure de préemption."
+        },
+        {
+          "index": 491,
+          "page": 14,
+          "texte": "Lorsque les droits de préemption sont supérieurs au nombre de titres dont le transfert est projeté, lesdits"
+        },
+        {
+          "index": 492,
+          "page": 14,
+          "texte": "titres sont répartis par le Président entre les associés qui ont notifié leur demande de préemption au prorata"
+        },
+        {
+          "index": 493,
+          "page": 14,
+          "texte": "de leur participation au capital de la Société et dans la limite de leurs demandes."
+        },
+        {
+          "index": 494,
+          "page": 14,
+          "texte": "Lorsque les droits de préemption exercés sont inférieurs au nombre de titres dont le transfert est projeté,"
+        },
+        {
+          "index": 495,
+          "page": 14,
+          "texte": "les droits de préemption sont réputés n’avoir jamais été exercés et l’associé cédant est libre de réaliser"
+        },
+        {
+          "index": 496,
+          "page": 14,
+          "texte": "l’opération au profit du cessionnaire mentionné dans sa notification de transfert et aux conditions ainsi"
+        },
+        {
+          "index": 497,
+          "page": 14,
+          "texte": "notifiées."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 498,
+          "page": 14,
+          "texte": "+ Si une clause d'agrément est prévue dans les statuts, ajouter :"
+        },
+        {
+          "index": 504,
+          "page": 15,
+          "texte": "L’associé cédant devra, toutefois, suivre la procédure d’agrément prévue à l’article .....(numéro de l’article"
+        },
+        {
+          "index": 505,
+          "page": 15,
+          "texte": "des statuts prévoyant la clause d’agrément) des statuts."
+        },
+        {
+          "index": 506,
+          "page": 15,
+          "texte": "5. En cas d’exercice valable par un ou plusieurs associés cédants de leur droit de préemption, le transfert"
+        },
+        {
+          "index": 507,
+          "page": 15,
+          "texte": "doit intervenir dans le délai d’un mois (1) mois à compter de la date d’expiration du délai de trois (3) mois"
+        },
+        {
+          "index": 508,
+          "page": 15,
+          "texte": "visé au paragraphe 3 ci-dessus contre paiement du prix mentionné dans la notification de transfert de"
+        },
+        {
+          "index": 509,
+          "page": 15,
+          "texte": "l’associé cédant."
+        },
+        {
+          "index": 510,
+          "page": 15,
+          "texte": "6. Tout transfert effectué en violation de la clause de préemption est nul."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 511,
+          "page": 15,
+          "texte": "+  S'il est envisagé de prévoir des exceptions au droit de préemption, ajouter :"
+        },
+        {
+          "index": 512,
+          "page": 15,
+          "texte": "7. Par exception à ce qui précède, ne seront pas soumis à préemption :"
+        },
+        {
+          "index": 513,
+          "page": 15,
+          "texte": ".....(à compléter)."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 514,
+          "page": 15,
+          "texte": "+ Si l’agrément des cessions d’actions est souhaité, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 17,
+      "paragraphes": [
+        {
+          "index": 515,
+          "page": 15,
+          "texte": "Article 17 - . Agrément"
+        },
+        {
+          "index": 516,
+          "page": 15,
+          "texte": "17.1. Principe"
+        },
+        {
+          "index": 517,
+          "page": 15,
+          "texte": "Sauf lorsque la Société ne comporte qu’un seul associé, tout transfert de titres sera soumis à l’agrément de"
+        },
+        {
+          "index": 518,
+          "page": 15,
+          "texte": "la collectivité des associés."
+        },
+        {
+          "index": 519,
+          "page": 15,
+          "texte": "17.2. Procédure"
+        },
+        {
+          "index": 520,
+          "page": 15,
+          "texte": "1. L’associé cédant doit notifier le transfert projeté à la Société, par lettre recommandée avec demande"
+        },
+        {
+          "index": 521,
+          "page": 15,
+          "texte": "d’accusé de réception, en indiquant l’identité du bénéficiaire du transfert (prénom et nom et domicile ou"
+        },
+        {
+          "index": 522,
+          "page": 15,
+          "texte": "dénomination sociale et siège social), le nombre des titres dont le transfert est envisagé et le prix offert ou,"
+        },
+        {
+          "index": 523,
+          "page": 15,
+          "texte": "dans l’hypothèse où le transfert envisagé ne serait pas une vente pure et simple, une estimation de bonne"
+        },
+        {
+          "index": 524,
+          "page": 15,
+          "texte": "foi du prix offert pour les titres transmis."
+        }
+      ],
+      "article_numero_imprime": 17
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 525,
+          "page": 15,
+          "texte": "+ Si une clause de préemption est prévue dans les statuts, ajouter :"
+        },
+        {
+          "index": 526,
+          "page": 15,
+          "texte": "Si le projet de transfert est soumis au droit de préemption visé à l'article .....(numéro de l'article des statuts"
+        },
+        {
+          "index": 527,
+          "page": 15,
+          "texte": "prévoyant la clause de préemption), cette notification devra être réalisée dans le cadre de la notification de"
+        },
+        {
+          "index": 528,
+          "page": 15,
+          "texte": "transfert visée au paragraphe 2 dudit article."
+        },
+        {
+          "index": 529,
+          "page": 15,
+          "texte": "2. La décision d’acceptation ou de refus d’agrément est prise par la collectivité des associés."
+        },
+        {
+          "index": 530,
+          "page": 15,
+          "texte": "Cette décision doit être notifiée à l’associé cédant par la Société, par lettre recommandée avec demande"
+        },
+        {
+          "index": 531,
+          "page": 15,
+          "texte": "d’accusé de réception, dans un délai de deux (2) mois à compter de la date de la notification de demande"
+        },
+        {
+          "index": 532,
+          "page": 15,
+          "texte": "d’agrément, étant précisé qu’à défaut de réponse dans ce délai, l’agrément sera réputé refusé."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 538,
+          "page": 16,
+          "texte": "› Si les statuts ne comportent pas de clause de préemption, indiquer :"
+        },
+        {
+          "index": 539,
+          "page": 16,
+          "texte": "3. En cas d’agrément du transfert, les titres de l’associé cédant pourront être transférés au cessionnaire"
+        },
+        {
+          "index": 540,
+          "page": 16,
+          "texte": "initial selon les conditions et modalités indiquées dans la notification visée au paragraphe 1 ci-dessus."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 542,
+          "page": 16,
+          "texte": "› Si les statuts comportent une clause de préemption, remplacer par :"
+        },
+        {
+          "index": 543,
+          "page": 16,
+          "texte": "3. En cas d’agrément du transfert, les titres de l’associé cédant pourront être transférés au cessionnaire"
+        },
+        {
+          "index": 544,
+          "page": 16,
+          "texte": "initial selon les conditions et modalités indiquées dans la notification visée au paragraphe 1 ci-dessus, sous"
+        },
+        {
+          "index": 545,
+          "page": 16,
+          "texte": "réserve du non-exercice du droit de préemption prévu à l’article .....(numéro de l’article des statuts"
+        },
+        {
+          "index": 546,
+          "page": 16,
+          "texte": "prévoyant la clause de préemption)."
+        },
+        {
+          "index": 547,
+          "page": 16,
+          "texte": "Ce transfert devra intervenir dans un délai d’un (1) mois à compter de la date de la décision d’agrément. A"
+        },
+        {
+          "index": 548,
+          "page": 16,
+          "texte": "défaut, un nouvel agrément sera nécessaire."
+        },
+        {
+          "index": 549,
+          "page": 16,
+          "texte": "4. En cas de refus d’agrément, l’associé cédant disposera de .....(nombre) jours à compter de la date de la"
+        },
+        {
+          "index": 550,
+          "page": 16,
+          "texte": "notification de la décision de refus d’agrément pour faire connaître à la Société, par lettre recommandée"
+        },
+        {
+          "index": 551,
+          "page": 16,
+          "texte": "avec demande d’accusé de réception, sa décision de renoncer ou non au transfert envisagé."
+        },
+        {
+          "index": 552,
+          "page": 16,
+          "texte": "Dans l’hypothèse où l’associé cédant n’aurait pas expressément renoncé au transfert envisagé dans le délai"
+        },
+        {
+          "index": 553,
+          "page": 16,
+          "texte": "de .....(nombre) jours susvisé, le Président sera tenu, dans le délai de trois (3) mois à compter de la date de"
+        },
+        {
+          "index": 554,
+          "page": 16,
+          "texte": "la notification de la décision de refus d’agrément, de faire acquérir les titres par un ou plusieurs associés."
+        },
+        {
+          "index": 555,
+          "page": 16,
+          "texte": "A cette fin, la Société devra notifier aux autres associés, individuellement et par lettre recommandée avec"
+        },
+        {
+          "index": 556,
+          "page": 16,
+          "texte": "demande d’accusé de réception, le nombre de titres de l’associé cédant dont le transfert est envisagé. Les"
+        },
+        {
+          "index": 557,
+          "page": 16,
+          "texte": "associés disposeront alors d’un délai de .....(nombre) jours pour se porter acquéreurs desdits titres. En cas"
+        },
+        {
+          "index": 558,
+          "page": 16,
+          "texte": "de demandes excédant le nombre de titres offerts, il sera procédé par le Président à une répartition des"
+        },
+        {
+          "index": 559,
+          "page": 16,
+          "texte": "titres entre lesdits demandeurs proportionnellement à leur part dans le capital social et dans la limite de"
+        },
+        {
+          "index": 560,
+          "page": 16,
+          "texte": "leurs demandes. Dans l’hypothèse où, à l’expiration du délai de .....(nombre) jours susvisé, les titres de"
+        },
+        {
+          "index": 561,
+          "page": 16,
+          "texte": "l’associé cédant n’auraient pas été cédés en intégralité aux autres associés, le Président pourra proposer les"
+        },
+        {
+          "index": 562,
+          "page": 16,
+          "texte": "titres de l’associé cédant à un ou plusieurs acquéreurs de son choix."
+        },
+        {
+          "index": 563,
+          "page": 16,
+          "texte": "Le Président pourra également décider, avec le consentement de l’associé cédant, de faire racheter ses"
+        },
+        {
+          "index": 564,
+          "page": 16,
+          "texte": "titres par la Société en vue d’une réduction du capital."
+        },
+        {
+          "index": 565,
+          "page": 16,
+          "texte": "L’identité du ou des acquéreurs, associés ou tiers, ou l’offre d’achat par la Société ainsi que le prix offert"
+        },
+        {
+          "index": 566,
+          "page": 16,
+          "texte": "seront notifiés à l’associé cédant."
+        },
+        {
+          "index": 567,
+          "page": 16,
+          "texte": "A défaut d’accord sur le prix de rachat, celui-ci sera fixé conformément aux dispositions de l’article 1843-"
+        },
+        {
+          "index": 568,
+          "page": 16,
+          "texte": "4 du Code civil"
+        },
+        {
+          "index": 569,
+          "page": 16,
+          "texte": "Dans l’hypothèse où, à l’expiration du délai de trois (3) mois précité, les titres de l’associé cédant ne"
+        },
+        {
+          "index": 570,
+          "page": 16,
+          "texte": "seraient pas transférés, selon le cas, à un ou plusieurs associés, tiers ou à la Société, l’agrément sera"
+        },
+        {
+          "index": 571,
+          "page": 16,
+          "texte": "considéré comme donné et lesdits titres pourront être transférés par l’associé cédant selon les conditions et"
+        },
+        {
+          "index": 572,
+          "page": 16,
+          "texte": "modalités indiquées dans la notification de l’associé cédant visée au paragraphe 1 ci-dessus. Toutefois, à"
+        },
+        {
+          "index": 573,
+          "page": 16,
+          "texte": "la demande de la Société, ce délai pourra être prolongé par voie de décision de justice, l’associé cédant et"
+        },
+        {
+          "index": 574,
+          "page": 16,
+          "texte": "le cessionnaire dûment appelés."
+        },
+        {
+          "index": 580,
+          "page": 17,
+          "texte": "L’associé cédant peut à tout moment renoncer au transfert de ses titres."
+        },
+        {
+          "index": 581,
+          "page": 17,
+          "texte": "17.3. Sanction"
+        },
+        {
+          "index": 582,
+          "page": 17,
+          "texte": "Tout transfert effectué en violation de la clause d’agrément est nul."
+        },
+        {
+          "index": 583,
+          "page": 17,
+          "texte": "17.4. Nantissement"
+        },
+        {
+          "index": 584,
+          "page": 17,
+          "texte": "Si la collectivité des associés a donné son consentement à un projet de nantissement de titres dans les"
+        },
+        {
+          "index": 585,
+          "page": 17,
+          "texte": "conditions prévues ci-dessus, ce consentement emportera agrément du cessionnaire en cas de réalisation"
+        },
+        {
+          "index": 586,
+          "page": 17,
+          "texte": "forcée des actions nanties, à moins que la Société ne préfère, après la cession, racheter sans délai les"
+        },
+        {
+          "index": 587,
+          "page": 17,
+          "texte": "actions en vue de réduire son capital."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 588,
+          "page": 17,
+          "texte": "+  S’il est envisagé de prévoir des exceptions à l’agrément, ajouter :"
+        },
+        {
+          "index": 589,
+          "page": 17,
+          "texte": "17.5. Exceptions"
+        },
+        {
+          "index": 590,
+          "page": 17,
+          "texte": "Par exception à ce qui précède, ne seront pas soumis à agrément :"
+        },
+        {
+          "index": 591,
+          "page": 17,
+          "texte": ".....(à compléter)."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 18,
+      "paragraphes": [
+        {
+          "index": 592,
+          "page": 17,
+          "texte": "Article 18 - . Location d’actions"
+        }
+      ],
+      "article_numero_imprime": 18
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 593,
+          "page": 17,
+          "texte": "› Si la location des actions est interdite, indiquer :"
+        },
+        {
+          "index": 594,
+          "page": 17,
+          "texte": "La location d’actions est interdite."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 596,
+          "page": 17,
+          "texte": "› Si la location des actions est autorisée, remplacer par :"
+        },
+        {
+          "index": 597,
+          "page": 17,
+          "texte": "Les actions de la Société peuvent être données à bail, au sens des dispositions de l’article 1709 du Code"
+        },
+        {
+          "index": 598,
+          "page": 17,
+          "texte": "civil, au profit d’une personne physique dans les conditions prévues par les articles L239-1 et suivants du"
+        },
+        {
+          "index": 599,
+          "page": 17,
+          "texte": "Code de commerce."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 600,
+          "page": 17,
+          "texte": "+ En présence d'une clause d'agrément, ajouter :"
+        },
+        {
+          "index": 601,
+          "page": 17,
+          "texte": "Toute location d'actions doit être soumise à l'agrément des associés dans les conditions prévues à l'article"
+        },
+        {
+          "index": 602,
+          "page": 17,
+          "texte": ".....(numéro de l'article des statuts prévoyant la clause d'agrément) ci-avant."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 603,
+          "page": 17,
+          "texte": "+ Si une clause de changement de contrôle est souhaitée, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 19,
+      "paragraphes": [
+        {
+          "index": 609,
+          "page": 18,
+          "texte": "Article 18 - . Modification dans le contrôle d’une société associée"
+        },
+        {
+          "index": 610,
+          "page": 18,
+          "texte": "1. En cas de modification du contrôle, au sens de l’article L233-3 du Code de commerce, d’une société"
+        },
+        {
+          "index": 611,
+          "page": 18,
+          "texte": "associée, celle-ci doit en informer le Président de la Société par lettre recommandée avec demande"
+        },
+        {
+          "index": 612,
+          "page": 18,
+          "texte": "d’accusé de réception dans un délai de .....(nombre) jours à compter de la date de survenance du"
+        },
+        {
+          "index": 613,
+          "page": 18,
+          "texte": "changement du contrôle. Cette notification doit indiquer la date du changement du contrôle et l’identité de"
+        },
+        {
+          "index": 614,
+          "page": 18,
+          "texte": "la ou des nouvelle(s) personne(s) exerçant ce contrôle."
+        },
+        {
+          "index": 615,
+          "page": 18,
+          "texte": "A défaut pour la société associée concernée de procéder à cette notification, celle-ci pourra faire l’objet"
+        },
+        {
+          "index": 616,
+          "page": 18,
+          "texte": "d’une mesure d’exclusion dans les conditions et selon les modalités prévues à l’article  .....(numéro de"
+        },
+        {
+          "index": 617,
+          "page": 18,
+          "texte": "l’article prévoyant la clause d’exclusion) des présents statuts."
+        },
+        {
+          "index": 618,
+          "page": 18,
+          "texte": "2. Dans un délai de .....(nombre) jours à compter de la date de réception de la notification de changement"
+        },
+        {
+          "index": 619,
+          "page": 18,
+          "texte": "de contrôle visée au paragraphe 1 ci-dessus, la Société peut mettre en œuvre la procédure d’exclusion et"
+        },
+        {
+          "index": 620,
+          "page": 18,
+          "texte": "de suspension des droits non pécuniaires de la société associée ayant fait l’objet du changement de"
+        },
+        {
+          "index": 621,
+          "page": 18,
+          "texte": "contrôle considéré, telle que prévue à l’article .....(numéro de l’article prévoyant la clause d’exclusion) ci-"
+        },
+        {
+          "index": 622,
+          "page": 18,
+          "texte": "après. Si cette procédure n’est pas engagée dans le délai susvisé, la Société sera réputée avoir agréé le"
+        },
+        {
+          "index": 623,
+          "page": 18,
+          "texte": "changement de contrôle considéré."
+        },
+        {
+          "index": 624,
+          "page": 18,
+          "texte": "3. Les dispositions du présent article s’appliquent à la société associée qui a acquis cette qualité à la suite"
+        },
+        {
+          "index": 625,
+          "page": 18,
+          "texte": "d’une fusion, d’une scission ou d’une dissolution."
+        }
+      ],
+      "article_numero_imprime": 18
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 626,
+          "page": 18,
+          "texte": "+ Si une clause d'exclusion est souhaitée, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 20,
+      "paragraphes": [
+        {
+          "index": 627,
+          "page": 18,
+          "texte": "Article 19 - . Exclusion"
+        },
+        {
+          "index": 628,
+          "page": 18,
+          "texte": "1. Est exclu de plein droit tout associé faisant l’objet d’une procédure de dissolution, de redressement ou"
+        },
+        {
+          "index": 629,
+          "page": 18,
+          "texte": "de liquidation judiciaire."
+        },
+        {
+          "index": 630,
+          "page": 18,
+          "texte": "Par ailleurs, l’exclusion d’un associé peut être prononcée dans les cas suivants :"
+        },
+        {
+          "index": 631,
+          "page": 18,
+          "texte": "• changement de contrôle d’une société associée ;"
+        },
+        {
+          "index": 632,
+          "page": 18,
+          "texte": "• violation des statuts ;"
+        },
+        {
+          "index": 633,
+          "page": 18,
+          "texte": "• faits ou actes de nature à porter une atteinte grave aux intérêts ou à l’image de marque de la"
+        },
+        {
+          "index": 634,
+          "page": 18,
+          "texte": "Société ;"
+        },
+        {
+          "index": 635,
+          "page": 18,
+          "texte": "• exercice d’une activité concurrente de celle de la Société ;"
+        },
+        {
+          "index": 636,
+          "page": 18,
+          "texte": "• révocation d’un associé de ses fonctions de mandataire social ;"
+        },
+        {
+          "index": 637,
+          "page": 18,
+          "texte": "• .....(autres motifs)."
+        },
+        {
+          "index": 638,
+          "page": 18,
+          "texte": "2. L’exclusion d’un associé est décidée par l’assemblée générale des associés statuant dans les conditions"
+        },
+        {
+          "index": 639,
+          "page": 18,
+          "texte": "prévues à l'article .....(27.5/27.6) des statuts. L'associé dont l'exclusion est envisagée participe au vote et"
+        },
+        {
+          "index": 640,
+          "page": 18,
+          "texte": "ses actions sont prises en compte pour le calcul du quorum et de la majorité. .....(par exemple, des deux"
+        },
+        {
+          "index": 641,
+          "page": 18,
+          "texte": "tiers) des membres présents ou représentés."
+        },
+        {
+          "index": 642,
+          "page": 18,
+          "texte": "3. La décision d’exclusion ne peut intervenir que sous réserve du respect des formalités préalables"
+        },
+        {
+          "index": 643,
+          "page": 18,
+          "texte": "suivantes :"
+        },
+        {
+          "index": 649,
+          "page": 19,
+          "texte": "• notification adressée par le Président à l’associé concerné et les autres associés informant ces"
+        },
+        {
+          "index": 650,
+          "page": 19,
+          "texte": "derniers de la mesure d’exclusion envisagée ;"
+        },
+        {
+          "index": 651,
+          "page": 19,
+          "texte": "Cette notification doit être adressée par lettre recommandée avec demande d’avis de réception, au plus"
+        },
+        {
+          "index": 652,
+          "page": 19,
+          "texte": "tard dans un délai de quinze (15) jours avant la date prévue pour la réunion de l’assemblée générale des"
+        },
+        {
+          "index": 653,
+          "page": 19,
+          "texte": "associés appelée à se prononcer sur ladite mesure d’exclusion. Elle doit contenir les motifs de l’exclusion"
+        },
+        {
+          "index": 654,
+          "page": 19,
+          "texte": "envisagée et être accompagnée de toutes pièces justificatives utiles."
+        },
+        {
+          "index": 655,
+          "page": 19,
+          "texte": "• lors de l’assemblée générale appelée à statuer sur la mesure d’exclusion, l’associé dont l’exclusion"
+        },
+        {
+          "index": 656,
+          "page": 19,
+          "texte": "est demandée peut être assisté de son conseil et requérir, à ses frais, la présence d’un"
+        },
+        {
+          "index": 657,
+          "page": 19,
+          "texte": ".....(huissier/commissaire) de justice."
+        },
+        {
+          "index": 658,
+          "page": 19,
+          "texte": "4. En cas d’exclusion, l’associé exclu doit, dans un délai de .....(nombre) jours à compter de la date du"
+        },
+        {
+          "index": 659,
+          "page": 19,
+          "texte": "prononcé de son exclusion, céder la totalité de ses actions aux autres associés au prorata de leur"
+        },
+        {
+          "index": 660,
+          "page": 19,
+          "texte": "participation au capital."
+        }
+      ],
+      "article_numero_imprime": 19
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 661,
+          "page": 19,
+          "texte": "+  En présence d’une clause de préemption, ajouter :"
+        },
+        {
+          "index": 662,
+          "page": 19,
+          "texte": "La cession susvisée ne sera pas soumise à la procédure de préemption prévue à l’article .....(numéro de"
+        },
+        {
+          "index": 663,
+          "page": 19,
+          "texte": "l’article prévoyant la clause de préemption)."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 664,
+          "page": 19,
+          "texte": "+ En présence d’une clause d’agrément, ajouter :"
+        },
+        {
+          "index": 665,
+          "page": 19,
+          "texte": "La cession susvisée ne sera pas soumise à la procédure d’agrément prévue à l’article .....(numéro de"
+        },
+        {
+          "index": 666,
+          "page": 19,
+          "texte": "l’article prévoyant la clause d’agrément)."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 667,
+          "page": 19,
+          "texte": "+ En présence d’une clause de préemption et d’une clause d’agrément, ajouter :"
+        },
+        {
+          "index": 668,
+          "page": 19,
+          "texte": "La cession susvisée ne sera pas soumise à la procédure de préemption prévue à l’article .....(numéro de"
+        },
+        {
+          "index": 669,
+          "page": 19,
+          "texte": "l’article prévoyant la clause de préemption) et à la procédure d’agrément prévue à l’article .....(numéro de"
+        },
+        {
+          "index": 670,
+          "page": 19,
+          "texte": "l’article prévoyant la clause d’agrément)."
+        },
+        {
+          "index": 671,
+          "page": 19,
+          "texte": "Le prix de rachat des actions est ainsi déterminé : .....(à compléter). A défaut d’accord sur le prix de"
+        },
+        {
+          "index": 672,
+          "page": 19,
+          "texte": "rachat, celui-ci est fixé par un expert désigné conformément aux dispositions de l’article 1843-4 du Code"
+        },
+        {
+          "index": 673,
+          "page": 19,
+          "texte": "civil. Cet expert est tenu de respecter les règles de détermination du prix de rachat énoncées ci-dessus."
+        },
+        {
+          "index": 674,
+          "page": 19,
+          "texte": "La cession doit faire l’objet d’une mention sur le registre des mouvements de titres de la Société."
+        },
+        {
+          "index": 675,
+          "page": 19,
+          "texte": "A compter du prononcé de la décision d’exclusion, les droits non pécuniaires attachés aux titres de"
+        },
+        {
+          "index": 676,
+          "page": 19,
+          "texte": "l’associé exclu seront automatiquement suspendus."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 677,
+          "page": 19,
+          "texte": "+ Si des apports en compte courant sont possible, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 21,
+      "paragraphes": [
+        {
+          "index": 678,
+          "page": 19,
+          "texte": "Article 20 - Comptes courants"
+        },
+        {
+          "index": 679,
+          "page": 19,
+          "texte": "Outre les apports, les associés, pourront verser ou laisser à disposition de la société toutes sommes dont"
+        },
+        {
+          "index": 680,
+          "page": 19,
+          "texte": "cette dernière pourrait avoir besoin. Ces sommes sont inscrites au crédit d'un compte ouvert au nom de"
+        },
+        {
+          "index": 681,
+          "page": 19,
+          "texte": "l'associé concerné."
+        },
+        {
+          "index": 687,
+          "page": 20,
+          "texte": "Les comptes courants ne doivent jamais être débiteurs."
+        },
+        {
+          "index": 688,
+          "page": 20,
+          "texte": "La société a la faculté d'en rembourser tout ou partie, après avis donné par écrit un mois à l'avance, sauf"
+        },
+        {
+          "index": 689,
+          "page": 20,
+          "texte": "stipulation contraire."
+        },
+        {
+          "index": 690,
+          "page": 20,
+          "texte": "Les modalités de ces prêts sont arrêtées par accord entre le Président et l'associé intéressé."
+        }
+      ],
+      "article_numero_imprime": 20
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 691,
+          "page": 20,
+          "texte": "III. - GOUVERNANCE DE LA SOCIÉTÉ"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 22,
+      "paragraphes": [
+        {
+          "index": 692,
+          "page": 20,
+          "texte": "Article 21 - . Président"
+        },
+        {
+          "index": 693,
+          "page": 20,
+          "texte": "1. La Société est dirigée par un Président, personne physique ou morale, associé ou non de la Société."
+        },
+        {
+          "index": 694,
+          "page": 20,
+          "texte": "Lorsqu’une personne morale exerce les fonctions de Président, ses dirigeants sont soumis aux mêmes"
+        },
+        {
+          "index": 695,
+          "page": 20,
+          "texte": "conditions et obligations et encourent les mêmes responsabilités civiles et pénales que s’ils étaient"
+        },
+        {
+          "index": 696,
+          "page": 20,
+          "texte": "Président en leur nom propre, sans préjudice de la responsabilité solidaire de la personne morale qu’ils"
+        },
+        {
+          "index": 697,
+          "page": 20,
+          "texte": "dirigent."
+        },
+        {
+          "index": 698,
+          "page": 20,
+          "texte": "En cours de vie sociale, le Président est désigné par la collectivité des associés."
+        },
+        {
+          "index": 699,
+          "page": 20,
+          "texte": "2. La durée des fonctions de Président est .....(indéterminée/de ... (durée)."
+        },
+        {
+          "index": 700,
+          "page": 20,
+          "texte": "Le mandat du Président est .....(non renouvelable/renouvelable sans limitation)."
+        },
+        {
+          "index": 701,
+          "page": 20,
+          "texte": "En cas de décès, de démission ou de révocation du Président de la Société, il est pourvu à son"
+        },
+        {
+          "index": 702,
+          "page": 20,
+          "texte": "remplacement dans les plus brefs délais. Le Président remplaçant est nommé par la collectivité des"
+        },
+        {
+          "index": 703,
+          "page": 20,
+          "texte": "associés."
+        },
+        {
+          "index": 704,
+          "page": 20,
+          "texte": "Les fonctions de Président prennent fin par l’arrivée du terme prévu lors de sa nomination, par la"
+        },
+        {
+          "index": 705,
+          "page": 20,
+          "texte": "démission, par la révocation, ou par l’ouverture à son encontre d’une procédure de redressement judiciaire"
+        },
+        {
+          "index": 706,
+          "page": 20,
+          "texte": "ou de liquidation judiciaire."
+        },
+        {
+          "index": 707,
+          "page": 20,
+          "texte": "La révocation du Président peut être prononcée à tout moment par la collectivité des associés."
+        }
+      ],
+      "article_numero_imprime": 21
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 708,
+          "page": 20,
+          "texte": "+ Si une révocation pour justes motifs est envisagée, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 709,
+          "page": 20,
+          "texte": "› Si les motifs ne sont pas précisés, indiquer :"
+        },
+        {
+          "index": 710,
+          "page": 20,
+          "texte": "La révocation doit être prononcée pour de justes motifs."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 712,
+          "page": 20,
+          "texte": "› Si les motifs sont précisés, remplacer par :"
+        },
+        {
+          "index": 713,
+          "page": 20,
+          "texte": "La révocation ne peut être prononcée que pour les motifs suivants : .....(préciser les motifs de révocation"
+        },
+        {
+          "index": 714,
+          "page": 20,
+          "texte": "possibles)."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 720,
+          "page": 21,
+          "texte": "+ Si un délai de préavis est envisagé, ajouter :"
+        },
+        {
+          "index": 721,
+          "page": 21,
+          "texte": "La révocation est assortie d’un délai de préavis de .....(nombre) jours, qui commence à courir lors de la"
+        },
+        {
+          "index": 722,
+          "page": 21,
+          "texte": "première présentation de la lettre recommandée avec accusé de réception notifiant la révocation."
+        },
+        {
+          "index": 723,
+          "page": 21,
+          "texte": "3. La rémunération du Président est fixée par la collectivité des associés. Elle peut être"
+        },
+        {
+          "index": 724,
+          "page": 21,
+          "texte": ".....(fixe/proportionnelle/fixe et proportionnelle). Le Président pourra obtenir le remboursement, sur"
+        },
+        {
+          "index": 725,
+          "page": 21,
+          "texte": "justificatif, des dépenses effectuées dans le cadre de sa mission pour le compte de la Société."
+        },
+        {
+          "index": 726,
+          "page": 21,
+          "texte": "4. Le Président représente la Société à l’égard des tiers. Il est investi des pouvoirs les plus étendus pour"
+        },
+        {
+          "index": 727,
+          "page": 21,
+          "texte": "agir en toutes circonstances au nom de la Société dans les limites de l’objet social, sous réserve des"
+        },
+        {
+          "index": 728,
+          "page": 21,
+          "texte": "pouvoirs expressément attribués par la loi et les statuts à .....(la collectivité des associés/la collectivité des"
+        },
+        {
+          "index": 729,
+          "page": 21,
+          "texte": "associés et au Comité de Direction)."
+        },
+        {
+          "index": 730,
+          "page": 21,
+          "texte": "Dans ses rapports avec les tiers, La Société est engagée même par les décisions et actes du Président qui"
+        },
+        {
+          "index": 731,
+          "page": 21,
+          "texte": "ne relèvent pas de l’objet social, à moins qu’elle ne prouve que le tiers savait que l’acte dépassait cet objet"
+        },
+        {
+          "index": 732,
+          "page": 21,
+          "texte": "ou qu’il ne pouvait l’ignorer compte tenu des circonstances, étant exclu que la seule publication des statuts"
+        },
+        {
+          "index": 733,
+          "page": 21,
+          "texte": "suffise à constituer cette preuve."
+        },
+        {
+          "index": 734,
+          "page": 21,
+          "texte": "Dans les rapports avec les associés, le Président peut faire tous actes de gestion dans l’intérêt de la"
+        },
+        {
+          "index": 735,
+          "page": 21,
+          "texte": "Société."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 736,
+          "page": 21,
+          "texte": "+ En cas de limitation de pouvoirs statutaires, ajouter :"
+        },
+        {
+          "index": 737,
+          "page": 21,
+          "texte": "Toutefois, le Président ne peut prendre les décisions suivantes sans avoir obtenu au préalable l'autorisation"
+        },
+        {
+          "index": 738,
+          "page": 21,
+          "texte": ".....(de la collectivité des associés/du Comité de Direction) :"
+        },
+        {
+          "index": 739,
+          "page": 21,
+          "texte": ".....(énumérer la ou les décisions relevant de la compétence du Président mais soumises à l'autorisation"
+        },
+        {
+          "index": 740,
+          "page": 21,
+          "texte": "préalable des associés ou du Comité de Direction)."
+        },
+        {
+          "index": 741,
+          "page": 21,
+          "texte": "Le Président est autorisé à consentir des subdélégations ou substitutions de pouvoirs pour une ou plusieurs"
+        },
+        {
+          "index": 742,
+          "page": 21,
+          "texte": "opérations ou catégories d’opérations déterminées. Ces délégations subsistent lorsqu’il vient à cesser ses"
+        },
+        {
+          "index": 743,
+          "page": 21,
+          "texte": "fonctions à moins que son successeur ne les révoque."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 23,
+      "paragraphes": [
+        {
+          "index": 744,
+          "page": 21,
+          "texte": "Article 22 - . Directeurs Généraux - Directeurs Généraux Délégués"
+        },
+        {
+          "index": 745,
+          "page": 21,
+          "texte": "1. Les associés peuvent nommer, dans les mêmes conditions que le Président, un ou plusieurs Directeurs"
+        },
+        {
+          "index": 746,
+          "page": 21,
+          "texte": "Généraux et/ou Directeurs Généraux Délégués, personnes physiques ou morales, ayant à titre habituel le"
+        },
+        {
+          "index": 747,
+          "page": 21,
+          "texte": "pouvoir d’engager la Société. Le Directeur Général ou le Directeur Général Délégué peut ou non être"
+        },
+        {
+          "index": 748,
+          "page": 21,
+          "texte": "associé ou, s’il s’agit d’une personne physique, salarié de la Société."
+        },
+        {
+          "index": 749,
+          "page": 21,
+          "texte": "Lorsqu’une personne morale est nommée Directeur Général ou Directeur Général Délégué, son ou ses"
+        },
+        {
+          "index": 750,
+          "page": 21,
+          "texte": "représentants permanents sont soumis aux mêmes conditions et obligations et encourent les mêmes"
+        },
+        {
+          "index": 751,
+          "page": 21,
+          "texte": "responsabilités civiles ou pénales que s’ils étaient Directeur Général ou Directeur Général Délégué en leur"
+        },
+        {
+          "index": 752,
+          "page": 21,
+          "texte": "nom propre, sans préjudice de la responsabilité solidaire de la personne morale représentée."
+        },
+        {
+          "index": 753,
+          "page": 21,
+          "texte": "2. La durée des fonctions de Directeur Général ou de Directeur Général Délégué est fixée par la décision"
+        },
+        {
+          "index": 754,
+          "page": 21,
+          "texte": "qui les nomme."
+        },
+        {
+          "index": 760,
+          "page": 22,
+          "texte": "3. La rémunération du Directeur Général ou du Directeur Général Délégué est fixée par la collectivité des"
+        },
+        {
+          "index": 761,
+          "page": 22,
+          "texte": "associés. Le Directeur Général ou le Directeur Général Délégué pourra obtenir le remboursement, sur"
+        },
+        {
+          "index": 762,
+          "page": 22,
+          "texte": "justificatif, des dépenses effectuées dans le cadre de sa mission pour le compte de la Société."
+        },
+        {
+          "index": 763,
+          "page": 22,
+          "texte": "4. Les fonctions de Directeur Général ou de Directeur Général Délégué prennent fin dans les mêmes"
+        },
+        {
+          "index": 764,
+          "page": 22,
+          "texte": "conditions que celles du Président. En cas de décès, démission ou empêchement du Président, le Directeur"
+        },
+        {
+          "index": 765,
+          "page": 22,
+          "texte": "Général ou le Directeur Général Délégué en fonction conserve ses fonctions et attributions."
+        },
+        {
+          "index": 766,
+          "page": 22,
+          "texte": "5. Le Directeur Général ou le Directeur Général Délégué dispose, à l’égard des tiers, des mêmes pouvoirs"
+        },
+        {
+          "index": 767,
+          "page": 22,
+          "texte": "que le Président et est soumis aux mêmes limitations de pouvoirs que ce dernier."
+        }
+      ],
+      "article_numero_imprime": 22
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 768,
+          "page": 22,
+          "texte": "+ Si un Comité de Direction est souhaité, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 24,
+      "paragraphes": [
+        {
+          "index": 769,
+          "page": 22,
+          "texte": "Article 23 - . Comité de direction"
+        },
+        {
+          "index": 770,
+          "page": 22,
+          "texte": "1. La Société comprend un Comité de Direction composé d’au minimum .....(nombre) membres, associés"
+        },
+        {
+          "index": 771,
+          "page": 22,
+          "texte": "ou non, dont le Président. Lorsqu’une personne morale est désignée membre du Comité de Direction, elle"
+        },
+        {
+          "index": 772,
+          "page": 22,
+          "texte": "doit désigner un représentant au sein du Comité de Direction."
+        },
+        {
+          "index": 773,
+          "page": 22,
+          "texte": "Les membres du Comité de Direction sont désignés par la collectivité des associés."
+        },
+        {
+          "index": 774,
+          "page": 22,
+          "texte": "La désignation, comme la révocation d’un membre du Comité de Direction, interviennent dans les mêmes"
+        },
+        {
+          "index": 775,
+          "page": 22,
+          "texte": "conditions que celles prévues pour le Président."
+        },
+        {
+          "index": 776,
+          "page": 22,
+          "texte": "Les membres du Comité de Direction sont nommés pour une durée .....(indéterminée/de ...),"
+        },
+        {
+          "index": 777,
+          "page": 22,
+          "texte": ".....(renouvelable/non renouvelable) et leurs fonctions prennent fin dans les mêmes conditions que celles"
+        },
+        {
+          "index": 778,
+          "page": 22,
+          "texte": "fixées pour le Président."
+        },
+        {
+          "index": 779,
+          "page": 22,
+          "texte": "2. Le Comité de Direction se réunit sur convocation du Président ou de .....(nombre) de ses membres."
+        },
+        {
+          "index": 780,
+          "page": 22,
+          "texte": "Les convocations, faites à l’initiative du Président, ont lieu par tous moyens, même verbalement. Les"
+        },
+        {
+          "index": 781,
+          "page": 22,
+          "texte": "convocations faites à l’initiative des membres du Comité de Direction sont obligatoirement faites par lettre"
+        },
+        {
+          "index": 782,
+          "page": 22,
+          "texte": "recommandée avec demande d’avis de réception, quinze (15) jours au moins à l’avance."
+        },
+        {
+          "index": 783,
+          "page": 22,
+          "texte": "Le Comité de Direction est convoqué et tient séance au siège social ou à tout autre endroit que désigne la"
+        },
+        {
+          "index": 784,
+          "page": 22,
+          "texte": "convocation. Il est présidé par le Président et, si ce dernier n’est pas présent, par l’un des membres du"
+        },
+        {
+          "index": 785,
+          "page": 22,
+          "texte": "Comité de Direction désigné à la majorité simple des membres du Comité de Direction présents."
+        },
+        {
+          "index": 786,
+          "page": 22,
+          "texte": "La présence de la moitié au moins des membres du Comité de Direction est nécessaire pour la validité des"
+        },
+        {
+          "index": 787,
+          "page": 22,
+          "texte": "délibérations."
+        },
+        {
+          "index": 788,
+          "page": 22,
+          "texte": "Le vote par procuration est admis."
+        },
+        {
+          "index": 789,
+          "page": 22,
+          "texte": "Les délibérations sont prises à la majorité des membres du Comité de Direction présents ou représentés."
+        }
+      ],
+      "article_numero_imprime": 23
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 790,
+          "page": 22,
+          "texte": "+ Si le Président dispose d’une voix prépondérante, ajouter :"
+        },
+        {
+          "index": 791,
+          "page": 22,
+          "texte": "La voix du Président est prépondérante."
+        },
+        {
+          "index": 797,
+          "page": 23,
+          "texte": "Le Directeur Général ou le Directeur Général Délégué peut assister aux réunions du Comité de Direction"
+        },
+        {
+          "index": 798,
+          "page": 23,
+          "texte": "et participer aux débats mais, s’il n’est pas membre du Comité de Direction, sans voix délibérative."
+        },
+        {
+          "index": 799,
+          "page": 23,
+          "texte": "Les décisions du Comité de Direction pourront être adoptées au moyen de la signature d’un acte sous"
+        },
+        {
+          "index": 800,
+          "page": 23,
+          "texte": "seing privé si tous les membres du Comité de Direction ou leurs mandataires signent l’acte."
+        },
+        {
+          "index": 801,
+          "page": 23,
+          "texte": "Les décisions du Comité de Direction peuvent également être prises par conférence téléphonique,"
+        },
+        {
+          "index": 802,
+          "page": 23,
+          "texte": "visioconférence ou tout autre moyen de communication à distance. Les décisions du Comité de Direction"
+        },
+        {
+          "index": 803,
+          "page": 23,
+          "texte": "seront ensuite matérialisées par un procès-verbal. La signature par télécopie ou par tout procédé"
+        },
+        {
+          "index": 804,
+          "page": 23,
+          "texte": "électronique de ce procès-verbal sera autorisée et devra être suivie d’une signature en original de tous les"
+        },
+        {
+          "index": 805,
+          "page": 23,
+          "texte": "membres du Comité de Direction dans les deux (2) mois qui suivent les prises de décision."
+        },
+        {
+          "index": 806,
+          "page": 23,
+          "texte": "Sont réputés présents, pour le calcul du quorum et de la majorité, les membres du Comité de Direction qui"
+        },
+        {
+          "index": 807,
+          "page": 23,
+          "texte": "participent à la réunion par des moyens de conférence téléphonique ou de visioconférence ou tout autre"
+        },
+        {
+          "index": 808,
+          "page": 23,
+          "texte": "moyen de communication à distance."
+        },
+        {
+          "index": 809,
+          "page": 23,
+          "texte": "3. Les fonctions des membres du Comité de direction ne sont pas rémunérées. Toutefois, toutes les"
+        },
+        {
+          "index": 810,
+          "page": 23,
+          "texte": "dépenses encourues par un membre du Comité de Direction dans l’exercice de ses fonctions seront"
+        },
+        {
+          "index": 811,
+          "page": 23,
+          "texte": "remboursées par la Société au vu de justificatifs."
+        },
+        {
+          "index": 812,
+          "page": 23,
+          "texte": "4. Le Président et, le cas échéant, les autres dirigeants de la Société doivent obtenir l’autorisation expresse"
+        },
+        {
+          "index": 813,
+          "page": 23,
+          "texte": "et préalable du Comité Direction pour prendre les décisions énumérées à l’article 21-4 ci-dessus."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 25,
+      "paragraphes": [
+        {
+          "index": 814,
+          "page": 23,
+          "texte": "Article 24 - . Conventions réglementées"
+        },
+        {
+          "index": 815,
+          "page": 23,
+          "texte": "Le Président doit aviser le commissaire aux comptes, s’il en existe un, des conventions intervenues"
+        },
+        {
+          "index": 816,
+          "page": 23,
+          "texte": "directement ou par personne interposée entre la Société et lui-même, l’un de ses dirigeants, ou l’un de ses"
+        },
+        {
+          "index": 817,
+          "page": 23,
+          "texte": "associés disposant d’une fraction des droits de vote supérieure à 10 % ou, s’il s’agit d’une société"
+        },
+        {
+          "index": 818,
+          "page": 23,
+          "texte": "associée, la société la contrôlant au sens de l’article L233-3 du Code de commerce."
+        },
+        {
+          "index": 819,
+          "page": 23,
+          "texte": "Le commissaire aux comptes ou, s’il n’en a pas été désigné ou qu’il en a été désigné un chargé d’un audit"
+        },
+        {
+          "index": 820,
+          "page": 23,
+          "texte": "légal allégé relevant de la NEP 911, le Président établit un rapport sur les conventions conclues au cours"
+        },
+        {
+          "index": 821,
+          "page": 23,
+          "texte": "de l’exercice écoulé. Les associés statuent chaque année sur ce rapport lors de l’assemblée générale"
+        },
+        {
+          "index": 822,
+          "page": 23,
+          "texte": "d’approbation des comptes, selon les modalités prévues par les statuts."
+        },
+        {
+          "index": 823,
+          "page": 23,
+          "texte": "Par exception, si la Société vient à ne comprendre qu’un seul associé, il sera seulement fait mention au"
+        },
+        {
+          "index": 824,
+          "page": 23,
+          "texte": "registre des décisions des conventions intervenues directement ou par personnes interposées entre la"
+        },
+        {
+          "index": 825,
+          "page": 23,
+          "texte": "Société et son dirigeant, son associé unique ou, s’il s’agit d’une société associée, la société la contrôlant au"
+        },
+        {
+          "index": 826,
+          "page": 23,
+          "texte": "sens de l’article L233-3 du Code de commerce."
+        },
+        {
+          "index": 827,
+          "page": 23,
+          "texte": "Les conventions portant sur des opérations courantes et conclues à des conditions normales ne donnent pas"
+        },
+        {
+          "index": 828,
+          "page": 23,
+          "texte": "lieu à l’établissement de ce rapport ni à une approbation par la collectivité des associés."
+        },
+        {
+          "index": 829,
+          "page": 23,
+          "texte": "Les interdictions prévues à l’article L225-43 du Code de commerce s’appliquent au Président et aux autres"
+        },
+        {
+          "index": 830,
+          "page": 23,
+          "texte": "dirigeants de la Société."
+        }
+      ],
+      "article_numero_imprime": 24
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 831,
+          "page": 23,
+          "texte": "IV. - CONTRÔLE DES COMPTES DE LA SOCIÉTÉ"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 26,
+      "paragraphes": [
+        {
+          "index": 837,
+          "page": 24,
+          "texte": "Article 25- . Commissaires aux comptes"
+        }
+      ],
+      "article_numero_imprime": 25
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 838,
+          "page": 24,
+          "texte": "› En cas de désignation d’un commissaire aux comptes uniquement en application du régime légal,"
+        },
+        {
+          "index": 839,
+          "page": 24,
+          "texte": "indiquer :"
+        },
+        {
+          "index": 840,
+          "page": 24,
+          "texte": "La collectivité des associés est tenue de désigner, dans les conditions prévues à l’article 27 des présents"
+        },
+        {
+          "index": 841,
+          "page": 24,
+          "texte": "statuts, un ou plusieurs commissaires aux comptes ayant notamment pour mission d’assurer le contrôle des"
+        },
+        {
+          "index": 842,
+          "page": 24,
+          "texte": "comptes sociaux de la Société, dès lors qu’une telle nomination s’avère obligatoire en vertu des"
+        },
+        {
+          "index": 843,
+          "page": 24,
+          "texte": "dispositions légales et réglementaires."
+        },
+        {
+          "index": 844,
+          "page": 24,
+          "texte": "En outre, la Société sera tenue de désigner un commissaire aux comptes pour trois (3) exercices si un ou"
+        },
+        {
+          "index": 845,
+          "page": 24,
+          "texte": "plusieurs associés représentant au moins le tiers (1/3) du capital lui en font la demande."
+        },
+        {
+          "index": 846,
+          "page": 24,
+          "texte": "En toute hypothèse, la nomination d’un commissaire aux comptes peut être demandée en justice par un ou"
+        },
+        {
+          "index": 847,
+          "page": 24,
+          "texte": "plusieurs associés représentant au moins le dixième (10e) du capital social de la Société."
+        },
+        {
+          "index": 848,
+          "page": 24,
+          "texte": "Si la Société ne relève d’aucun des cas de désignation obligatoire prévus par la loi, la collectivité des"
+        },
+        {
+          "index": 849,
+          "page": 24,
+          "texte": "associés dispose toujours de la faculté de désigner, sur une base volontaire, un ou plusieurs commissaires"
+        },
+        {
+          "index": 850,
+          "page": 24,
+          "texte": "aux comptes dans les conditions prévues à l’article 27 des présents statuts."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 852,
+          "page": 24,
+          "texte": "› Si les statuts imposent la désignation d’un commissaire aux comptes dans tous les cas, remplacer"
+        },
+        {
+          "index": 853,
+          "page": 24,
+          "texte": "par :"
+        },
+        {
+          "index": 854,
+          "page": 24,
+          "texte": "Nonobstant toute disposition légale ou réglementaire qui dispenserait la Société de le faire, la collectivité"
+        },
+        {
+          "index": 855,
+          "page": 24,
+          "texte": "des associés désigne un ou plusieurs commissaires aux comptes dans les conditions prévues à l’article 27"
+        },
+        {
+          "index": 856,
+          "page": 24,
+          "texte": "des présents statuts."
+        }
+      ]
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 857,
+          "page": 24,
+          "texte": "V. - COLLECTIVITÉS DES ASSOCIÉS"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 27,
+      "paragraphes": [
+        {
+          "index": 858,
+          "page": 24,
+          "texte": "Article 26 -2. Domaine réservé à la collectivité des associés"
+        },
+        {
+          "index": 859,
+          "page": 24,
+          "texte": "Les décisions suivantes sont obligatoirement prises collectivement par la collectivité des associés :"
+        },
+        {
+          "index": 860,
+          "page": 24,
+          "texte": "• nomination, révocation du Président, modification et ratification de la rémunération attachée à"
+        },
+        {
+          "index": 861,
+          "page": 24,
+          "texte": "l’exercice de son mandat ;"
+        },
+        {
+          "index": 862,
+          "page": 24,
+          "texte": "• nomination, renouvellement ou révocation des commissaires aux comptes le cas échéant ;"
+        },
+        {
+          "index": 863,
+          "page": 24,
+          "texte": "• approbation des comptes, affectation des résultats, distribution, en cours d’exercice, de réserves"
+        },
+        {
+          "index": 864,
+          "page": 24,
+          "texte": "ou d’acomptes sur dividendes ;"
+        },
+        {
+          "index": 865,
+          "page": 24,
+          "texte": "• augmentation, réduction ou amortissement du capital social sous quelques formes que ce soit ;"
+        },
+        {
+          "index": 871,
+          "page": 25,
+          "texte": "• émission de toute valeur mobilière, pouvant donner accès immédiatement ou à terme au capital ou"
+        },
+        {
+          "index": 872,
+          "page": 25,
+          "texte": "aux droits de vote de la Société ;"
+        },
+        {
+          "index": 873,
+          "page": 25,
+          "texte": "• fusion, scission, apport partiel d’actif soumis au régime des scissions, confusion de patrimoine et,"
+        },
+        {
+          "index": 874,
+          "page": 25,
+          "texte": "d’une manière générale, toutes opérations emportant la transmission universelle du patrimoine de"
+        },
+        {
+          "index": 875,
+          "page": 25,
+          "texte": "la Société ;"
+        },
+        {
+          "index": 876,
+          "page": 25,
+          "texte": "• adhésion à tout groupement ou autre entité, pouvant entraîner la responsabilité solidaire et"
+        },
+        {
+          "index": 877,
+          "page": 25,
+          "texte": "indéfinie de la Société ;"
+        },
+        {
+          "index": 878,
+          "page": 25,
+          "texte": "• transformation de la Société en une société d’une autre forme ;"
+        },
+        {
+          "index": 879,
+          "page": 25,
+          "texte": "• prorogation de la durée de la Société ;"
+        },
+        {
+          "index": 880,
+          "page": 25,
+          "texte": "• dissolution de la Société, nomination du liquidateur : détermination de ses pouvoirs et de sa"
+        },
+        {
+          "index": 881,
+          "page": 25,
+          "texte": "rémunération ;"
+        },
+        {
+          "index": 882,
+          "page": 25,
+          "texte": "• toute modification statutaire, étant précisé que la décision de transfert du siège social peut, si"
+        },
+        {
+          "index": 883,
+          "page": 25,
+          "texte": "l’article 4 des présents statuts le prévoit, être prise par le Président."
+        }
+      ],
+      "article_numero_imprime": 26
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 884,
+          "page": 25,
+          "texte": "+ Si une clause d’agrément est prévue par les statuts, ajouter :"
+        },
+        {
+          "index": 885,
+          "page": 25,
+          "texte": "• agrément des transferts de titres ;"
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 886,
+          "page": 25,
+          "texte": "+ Si une clause d’exclusion est prévue par les statuts, ajouter :"
+        },
+        {
+          "index": 887,
+          "page": 25,
+          "texte": "• exclusion d’un associé et suspension de ses droits de vote ;"
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 888,
+          "page": 25,
+          "texte": "+ Si un Comité de Direction est institué, ajouter :"
+        },
+        {
+          "index": 889,
+          "page": 25,
+          "texte": "• nomination et révocation des membres du Comité de Direction ;"
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 890,
+          "page": 25,
+          "texte": "+ Le cas échéant, ajouter d’autres opérations que les associés souhaitent soumettre à leur"
+        },
+        {
+          "index": 891,
+          "page": 25,
+          "texte": "approbation :"
+        },
+        {
+          "index": 892,
+          "page": 25,
+          "texte": "• .....(à compléter)  ;"
+        },
+        {
+          "index": 893,
+          "page": 25,
+          "texte": "• transfert ou acquisition de tout actif de plus de NOMBRE Euros appartenant à la Société ;"
+        },
+        {
+          "index": 894,
+          "page": 25,
+          "texte": "• tout investissement ou dépense de plus de (NOMBRE) Euros pour un même projet ;"
+        },
+        {
+          "index": 895,
+          "page": 25,
+          "texte": "• toute décision requérant l’unanimité des associés en application de la loi."
+        },
+        {
+          "index": 896,
+          "page": 25,
+          "texte": "Sauf stipulations spécifiques contraires et expresses des présents statuts, toutes les décisions autres que"
+        },
+        {
+          "index": 897,
+          "page": 25,
+          "texte": "celles énumérées par le présent article relèvent de la compétence du Président."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 28,
+      "paragraphes": [
+        {
+          "index": 898,
+          "page": 25,
+          "texte": "Article 27 - . Modalités des décisions collectives des associés"
+        },
+        {
+          "index": 904,
+          "page": 26,
+          "texte": "1. Les décisions collectives des associés seront adoptées, au choix du Président, en assemblée générale ou"
+        },
+        {
+          "index": 905,
+          "page": 26,
+          "texte": "par correspondance. Sous réserve des dispositions légales, les décisions collectives des associés peuvent"
+        },
+        {
+          "index": 906,
+          "page": 26,
+          "texte": "également résulter du consentement unanime de tous les associés exprimé dans un acte écrit. Lorsque la"
+        },
+        {
+          "index": 907,
+          "page": 26,
+          "texte": "décision est exprimée dans un acte en dehors de toute assemblée, l’acte devra être signé par l’ensemble"
+        },
+        {
+          "index": 908,
+          "page": 26,
+          "texte": "des associés et il en sera fait mention dans le registre des procès-verbaux des décisions des associés."
+        },
+        {
+          "index": 909,
+          "page": 26,
+          "texte": "Tous moyens de communication, en ce compris la télécopie, la conférence téléphonique ou la"
+        },
+        {
+          "index": 910,
+          "page": 26,
+          "texte": "visioconférence, peuvent être utilisés pour l’expression des décisions."
+        },
+        {
+          "index": 911,
+          "page": 26,
+          "texte": "2. L’assemblée est convoquée par le Président agissant (i) sur sa propre initiative ou (ii) à la demande d’un"
+        },
+        {
+          "index": 912,
+          "page": 26,
+          "texte": "associé représentant au moins .....(pourcentage minimum) du capital et des droits de vote de la Société"
+        },
+        {
+          "index": 913,
+          "page": 26,
+          "texte": "(auquel cas le Président sera tenu de déférer à une telle demande)."
+        },
+        {
+          "index": 914,
+          "page": 26,
+          "texte": "L’assemblée est réunie en France ou à l’étranger si l’intérêt de la Société l’exige, à l’endroit indiqué dans"
+        },
+        {
+          "index": 915,
+          "page": 26,
+          "texte": "la convocation. La convocation est faite par tous moyens .....(délai de convocation) avant la date de"
+        },
+        {
+          "index": 916,
+          "page": 26,
+          "texte": "réunion. Elle comporte l’indication de l’ordre du jour, de l’heure et du lieu de la réunion. La convocation"
+        },
+        {
+          "index": 917,
+          "page": 26,
+          "texte": "est accompagnée de tous documents nécessaires à l’information des associés."
+        },
+        {
+          "index": 918,
+          "page": 26,
+          "texte": "Nonobstant les dispositions qui précèdent, au cas où tous les associés sont présents ou représentés,"
+        },
+        {
+          "index": 919,
+          "page": 26,
+          "texte": "l’assemblée est valablement tenue même en cas de convocation orale et sans délai. Dans ce cas, les"
+        },
+        {
+          "index": 920,
+          "page": 26,
+          "texte": "associés peuvent convenir de recevoir l’intégralité des documents relatifs à l’ordre du jour au plus tard le"
+        },
+        {
+          "index": 921,
+          "page": 26,
+          "texte": "jour de ladite assemblée."
+        },
+        {
+          "index": 922,
+          "page": 26,
+          "texte": "L’assemblée ne délibère valablement sur première convocation que si les associés présents ou représentés"
+        },
+        {
+          "index": 923,
+          "page": 26,
+          "texte": "possèdent au moins la moitié des actions ayant le droit de vote (y compris par correspondance, conférence"
+        },
+        {
+          "index": 924,
+          "page": 26,
+          "texte": "téléphonique ou visioconférence). Sur seconde convocation sur le même ordre du jour, l’assemblée"
+        },
+        {
+          "index": 925,
+          "page": 26,
+          "texte": "délibère valablement sans condition de quorum."
+        },
+        {
+          "index": 926,
+          "page": 26,
+          "texte": "Chaque associé a le droit de participer à toute décision soit directement, soit par l’intermédiaire d’un"
+        },
+        {
+          "index": 927,
+          "page": 26,
+          "texte": "mandataire désigné à cet effet."
+        },
+        {
+          "index": 928,
+          "page": 26,
+          "texte": "L’assemblée est présidée par le Président de la Société. A défaut, elle élit son Président. L’assemblée"
+        },
+        {
+          "index": 929,
+          "page": 26,
+          "texte": "désigne un secrétaire qui peut être choisi en dehors des associés."
+        },
+        {
+          "index": 930,
+          "page": 26,
+          "texte": "A chaque assemblée est tenue une feuille de présence et il est dressé un procès-verbal de la réunion qui est"
+        },
+        {
+          "index": 931,
+          "page": 26,
+          "texte": "signé par le Président de séance et le secrétaire."
+        },
+        {
+          "index": 932,
+          "page": 26,
+          "texte": "3. En cas de consultation écrite, le texte des résolutions ainsi que les documents nécessaires à"
+        },
+        {
+          "index": 933,
+          "page": 26,
+          "texte": "l’information des associés sont adressés à chacun par tous moyens. Les associés disposent d’un délai"
+        },
+        {
+          "index": 934,
+          "page": 26,
+          "texte": "minimal de .....(nombre) jours à compter de la réception des projets de résolutions pour émettre leur vote"
+        },
+        {
+          "index": 935,
+          "page": 26,
+          "texte": "par tous moyens. L’associé n’ayant pas répondu dans le délai de .....(nombre) jours à compter de la"
+        },
+        {
+          "index": 936,
+          "page": 26,
+          "texte": "réception des projets de résolutions est considéré comme ayant .....(rejeté/approuvé) ces résolutions."
+        },
+        {
+          "index": 937,
+          "page": 26,
+          "texte": "Le résultat de la consultation écrite est consigné dans un procès-verbal établi et signé par le Président. Ce"
+        },
+        {
+          "index": 938,
+          "page": 26,
+          "texte": "procès-verbal mentionne la réponse de chaque associé."
+        },
+        {
+          "index": 939,
+          "page": 26,
+          "texte": "4. Les procès-verbaux des décisions collectives sont établis et signés sur des registres tenus conformément"
+        },
+        {
+          "index": 940,
+          "page": 26,
+          "texte": "aux dispositions légales en vigueur. Les copies ou extraits des délibérations des associés sont valablement"
+        },
+        {
+          "index": 946,
+          "page": 27,
+          "texte": "certifiés conformes par le Président. Au cours de la liquidation de la Société, leur certification est"
+        },
+        {
+          "index": 947,
+          "page": 27,
+          "texte": "valablement faite par le liquidateur."
+        },
+        {
+          "index": 948,
+          "page": 27,
+          "texte": "5 - Les décisions collectives des associés sont prises à la majorité des voix dont disposent les associés"
+        },
+        {
+          "index": 949,
+          "page": 27,
+          "texte": "présents ou représentés hormis celles soumises à l’accord unanime des associés en vertu de dispositions"
+        },
+        {
+          "index": 950,
+          "page": 27,
+          "texte": "légales particulières et celles visées à l’article 27-6 ci-dessous. Il est précisé, en tant que de besoin, que les"
+        },
+        {
+          "index": 951,
+          "page": 27,
+          "texte": "décisions devant être adoptées à l’unanimité du fait de la loi, mais dont la loi prévoit la possibilité pour les"
+        },
+        {
+          "index": 952,
+          "page": 27,
+          "texte": "statuts d’y déroger, seront également adoptées valablement à la majorité des voix dont disposent les"
+        },
+        {
+          "index": 953,
+          "page": 27,
+          "texte": "associés présents ou représentés."
+        },
+        {
+          "index": 954,
+          "page": 27,
+          "texte": "6 - Par exception aux stipulations de l’article 27-5 ci-dessus, les décisions collectives énumérées ci-après"
+        },
+        {
+          "index": 955,
+          "page": 27,
+          "texte": "doivent être adoptées à .....(l’unanimité/la majorité renforcée des….(majorité)) des voix dont disposent les"
+        },
+        {
+          "index": 956,
+          "page": 27,
+          "texte": "associés présents ou représentés :"
+        },
+        {
+          "index": 957,
+          "page": 27,
+          "texte": "Lister ci-dessous les opérations concernées :"
+        },
+        {
+          "index": 958,
+          "page": 27,
+          "texte": "• .....(à compléter)  ;"
+        },
+        {
+          "index": 959,
+          "page": 27,
+          "texte": "Si la Société vient à ne comporter qu’un associé, ce dernier exercera les pouvoirs dévolus aux associés"
+        },
+        {
+          "index": 960,
+          "page": 27,
+          "texte": "lorsque les présents statuts prévoient une prise de décision collective."
+        },
+        {
+          "index": 961,
+          "page": 27,
+          "texte": "Les décisions de l’associé unique sont constatées par un procès-verbal établi par l’associé unique. Elles"
+        },
+        {
+          "index": 962,
+          "page": 27,
+          "texte": "sont consignées dans un registre coté et paraphé."
+        }
+      ],
+      "article_numero_imprime": 27
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 29,
+      "paragraphes": [
+        {
+          "index": 963,
+          "page": 27,
+          "texte": "Article 28 - . Droit de communication des associés"
+        },
+        {
+          "index": 964,
+          "page": 27,
+          "texte": "Tout associé a le droit d’obtenir communication des documents nécessaires pour se prononcer sur la"
+        },
+        {
+          "index": 965,
+          "page": 27,
+          "texte": "gestion et la marche de la Société, dans les conditions fixées par la loi et les dispositions réglementaires."
+        }
+      ],
+      "article_numero_imprime": 28
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 966,
+          "page": 27,
+          "texte": "+ En présence d’actions de préférence, ajouter le cas échéant :"
+        },
+        {
+          "index": 967,
+          "page": 27,
+          "texte": "Les titulaires d’Actions de Préférence ont par ailleurs le droit d’obtenir communication des documents et"
+        },
+        {
+          "index": 968,
+          "page": 27,
+          "texte": "informations suivants : .....(énumérer la liste des documents/informations concernés et la périodicité de"
+        },
+        {
+          "index": 969,
+          "page": 27,
+          "texte": "communication)."
+        }
+      ]
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 970,
+          "page": 27,
+          "texte": "VI. - EXERCICE SOCIAL - COMPTES ANNUELS - AFFECTATION ET RÉPARTITION DES"
+        },
+        {
+          "index": 971,
+          "page": 27,
+          "texte": "BÉNÉFICES - PAIEMENT DES DIVIDENDES"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 30,
+      "paragraphes": [
+        {
+          "index": 972,
+          "page": 27,
+          "texte": "Article 29 - . Exercice social"
+        }
+      ],
+      "article_numero_imprime": 29
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 973,
+          "page": 27,
+          "texte": "› Si l’exercice social coïncide avec l’année civile, indiquer :"
+        },
+        {
+          "index": 974,
+          "page": 27,
+          "texte": "L’exercice social commence le 1er janvier et se termine le 31 décembre de chaque année."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 981,
+          "page": 28,
+          "texte": "› Si l’exercice social ne coïncide pas avec l’année civile, remplacer par :"
+        },
+        {
+          "index": 982,
+          "page": 28,
+          "texte": "L’exercice social commence le .....(jour) de chaque année et se termine le .....(jour) de l’année suivante."
+        },
+        {
+          "index": 983,
+          "page": 28,
+          "texte": "Par exception, le premier exercice social sera clos au .....(date de clôture du premier exercice social)."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 31,
+      "paragraphes": [
+        {
+          "index": 984,
+          "page": 28,
+          "texte": "Article 30 - . Comptes annuels"
+        },
+        {
+          "index": 985,
+          "page": 28,
+          "texte": "Le Président établit les comptes annuels de l’exercice, conformément aux dispositions législatives et"
+        },
+        {
+          "index": 986,
+          "page": 28,
+          "texte": "réglementaires en vigueur."
+        }
+      ],
+      "article_numero_imprime": 30
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 987,
+          "page": 28,
+          "texte": "› En cas d'établissement du rapport de gestion uniquement si la loi l'impose, indiquer :"
+        },
+        {
+          "index": 988,
+          "page": 28,
+          "texte": "Le Président n’établit le rapport de gestion visé à l’article L232-1, I du Code de commerce que si la"
+        },
+        {
+          "index": 989,
+          "page": 28,
+          "texte": "Société est tenue d’établir ce rapport en vertu des dispositions légales et réglementaires."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 990,
+          "page": 28,
+          "texte": "+ Si l’établissement d’un rapport d’activité est souhaité en cas de dispense d’établissement du"
+        },
+        {
+          "index": 991,
+          "page": 28,
+          "texte": "rapport de gestion, ajouter :"
+        },
+        {
+          "index": 992,
+          "page": 28,
+          "texte": "Lorsque lesdites dispositions dispensent la Société d’établir le rapport de gestion précité, le Président"
+        },
+        {
+          "index": 993,
+          "page": 28,
+          "texte": "demeure tenu d’établir, chaque année, un rapport d’activité dans lequel il rend compte des éléments"
+        },
+        {
+          "index": 994,
+          "page": 28,
+          "texte": "suivants :"
+        },
+        {
+          "index": 995,
+          "page": 28,
+          "texte": ".....(à compléter) ."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 997,
+          "page": 28,
+          "texte": "› Si les statuts imposent l'établissement d'un rapport de gestion dans tous les cas (c'est-à-dire y"
+        },
+        {
+          "index": 998,
+          "page": 28,
+          "texte": "compris si la Société bénéficie d'une dispense d'établir le rapport de gestion), remplacer par :"
+        },
+        {
+          "index": 999,
+          "page": 28,
+          "texte": "Nonobstant toute disposition légale ou réglementaire qui dispenserait la Société d’établir le rapport de"
+        },
+        {
+          "index": 1000,
+          "page": 28,
+          "texte": "gestion visé à l’article L232-1, I du Code de commerce, le Président est tenu d’établir ce rapport."
+        },
+        {
+          "index": 1001,
+          "page": 28,
+          "texte": "Dans les .....(six/sept/huit/neuf) mois de la clôture de l’exercice, les associés doivent statuer par décision"
+        },
+        {
+          "index": 1002,
+          "page": 28,
+          "texte": "collective sur les comptes annuels, au vu du .....(rapport de gestion, le cas échéant,/rapport de gestion ou, à"
+        },
+        {
+          "index": 1003,
+          "page": 28,
+          "texte": "défaut, du rapport d’activité,/rapport de gestion) et des rapports du ou des commissaires aux comptes si la"
+        },
+        {
+          "index": 1004,
+          "page": 28,
+          "texte": "Société en est dotée."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 32,
+      "paragraphes": [
+        {
+          "index": 1005,
+          "page": 28,
+          "texte": "Article 31 - . Affectation et répartition des bénéfices"
+        },
+        {
+          "index": 1006,
+          "page": 28,
+          "texte": "Si les comptes de l’exercice approuvés par la collectivité des associés font apparaître un bénéfice"
+        },
+        {
+          "index": 1007,
+          "page": 28,
+          "texte": "distribuable, tel qu’il est défini par la loi, la collectivité des associés décide de l’inscrire à un ou plusieurs"
+        },
+        {
+          "index": 1008,
+          "page": 28,
+          "texte": "postes de réserves dont elle règle l’affectation ou l’emploi, de le reporter à nouveau ou de le distribuer."
+        }
+      ],
+      "article_numero_imprime": 31
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1014,
+          "page": 29,
+          "texte": "+ En présence d’actions de préférence, ajouter le cas échéant :"
+        },
+        {
+          "index": 1015,
+          "page": 29,
+          "texte": "Ce principe s’applique sous réserve des droits spécifiques attachés aux Actions de Préférence."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1016,
+          "page": 29,
+          "texte": "+ S’il est prévu de stipuler un « premier dividende », ajouter :"
+        },
+        {
+          "index": 1017,
+          "page": 29,
+          "texte": "Nonobstant les stipulations qui précèdent et en cas de bénéfice distribuable, il sera prélevé sur ce bénéfice"
+        },
+        {
+          "index": 1018,
+          "page": 29,
+          "texte": "les sommes nécessaires pour distribuer aux associés un premier dividende non cumulatif égal à"
+        },
+        {
+          "index": 1019,
+          "page": 29,
+          "texte": ".....(pourcentage) % du montant libéré et non remboursé des actions, conformément aux dispositions de"
+        },
+        {
+          "index": 1020,
+          "page": 29,
+          "texte": "l’article L232-16 du Code de commerce. Les réserves .....(ne seront pas/seront) prises en compte pour le"
+        },
+        {
+          "index": 1021,
+          "page": 29,
+          "texte": "calcul de ce premier dividende."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1022,
+          "page": 29,
+          "texte": "+ S’il est prévu de stipuler un « dividende majoré », ajouter :"
+        },
+        {
+          "index": 1023,
+          "page": 29,
+          "texte": "Nonobstant les stipulations qui précèdent et conformément aux dispositions de l’article L232-14 du Code"
+        },
+        {
+          "index": 1024,
+          "page": 29,
+          "texte": "de commerce, tout associé justifiant, à la clôture de l’exercice, d’une inscription nominative depuis deux"
+        },
+        {
+          "index": 1025,
+          "page": 29,
+          "texte": "(2) ans au moins et du maintien de celle-ci à la date de mise en paiement du dividende pourra bénéficier"
+        },
+        {
+          "index": 1026,
+          "page": 29,
+          "texte": "d’une majoration du dividende dans la limite de dix pour cent (10 %). Son taux est fixé par la collectivité"
+        },
+        {
+          "index": 1027,
+          "page": 29,
+          "texte": "des associés. La même majoration peut être attribuée, dans les mêmes conditions, en cas de distribution"
+        },
+        {
+          "index": 1028,
+          "page": 29,
+          "texte": "d’actions gratuites."
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 33,
+      "paragraphes": [
+        {
+          "index": 1029,
+          "page": 29,
+          "texte": "Article 32 - . Paiement des dividendes - Acomptes"
+        },
+        {
+          "index": 1030,
+          "page": 29,
+          "texte": "Lorsqu’un bilan établi au cours ou à la fin de l’exercice et certifié par un commissaire aux comptes fait"
+        },
+        {
+          "index": 1031,
+          "page": 29,
+          "texte": "apparaître que la Société, depuis la clôture de l’exercice précédent, après constitution des amortissements"
+        },
+        {
+          "index": 1032,
+          "page": 29,
+          "texte": "et provisions nécessaires et déduction faite s’il y a lieu des pertes antérieures ainsi que des sommes à"
+        },
+        {
+          "index": 1033,
+          "page": 29,
+          "texte": "porter en réserve, en application de la loi ou des statuts, a réalisé un bénéfice, il peut être distribué des"
+        },
+        {
+          "index": 1034,
+          "page": 29,
+          "texte": "acomptes sur dividende avant l’approbation des comptes de l’exercice. Le montant de ces acomptes ne"
+        },
+        {
+          "index": 1035,
+          "page": 29,
+          "texte": "peut excéder le montant du bénéfice ainsi défini."
+        },
+        {
+          "index": 1036,
+          "page": 29,
+          "texte": "Les modalités de mise en paiement des dividendes sont fixées par la collectivité des associés ou, à défaut,"
+        },
+        {
+          "index": 1037,
+          "page": 29,
+          "texte": "par le Président."
+        }
+      ],
+      "article_numero_imprime": 32
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1038,
+          "page": 29,
+          "texte": "+ S’il est prévu de donner la possibilité à la société de payer les dividendes en actions, ajouter :"
+        },
+        {
+          "index": 1039,
+          "page": 29,
+          "texte": "La collectivité des associés peut décider d’accorder à chaque associé, pour tout ou partie du dividende mis"
+        },
+        {
+          "index": 1040,
+          "page": 29,
+          "texte": "en distribution ou des acomptes sur dividendes, une option entre le paiement du dividende en numéraire"
+        },
+        {
+          "index": 1041,
+          "page": 29,
+          "texte": "ou en actions."
+        }
+      ]
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1042,
+          "page": 29,
+          "texte": "VII. - TRANSFORMATION - DISSOLUTION - LIQUIDATION"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 34,
+      "paragraphes": [
+        {
+          "index": 1043,
+          "page": 29,
+          "texte": "Article 33 - . Transformation"
+        },
+        {
+          "index": 1044,
+          "page": 29,
+          "texte": "La Société peut se transformer en société d’une autre forme dans les conditions prévues par la loi."
+        }
+      ],
+      "article_numero_imprime": 33
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 35,
+      "paragraphes": [
+        {
+          "index": 1050,
+          "page": 30,
+          "texte": "Article 34 - . Capitaux propres devenus inférieurs à la moitié du capital social"
+        },
+        {
+          "index": 1051,
+          "page": 30,
+          "texte": "Si, du fait des pertes constatées dans les documents comptables, les capitaux propres de la Société"
+        },
+        {
+          "index": 1052,
+          "page": 30,
+          "texte": "deviennent inférieurs à la moitié du capital social, le Président est tenu, dans les quatre (4) mois qui"
+        },
+        {
+          "index": 1053,
+          "page": 30,
+          "texte": "suivent l’approbation des comptes ayant constaté ces pertes, de convoquer la collectivité des associés à"
+        },
+        {
+          "index": 1054,
+          "page": 30,
+          "texte": "l’effet de décider s’il y a lieu à dissolution anticipée de la Société."
+        },
+        {
+          "index": 1055,
+          "page": 30,
+          "texte": "Si la dissolution n’est pas prononcée, la Société est tenue, au plus tard à la clôture du deuxième (2e)"
+        },
+        {
+          "index": 1056,
+          "page": 30,
+          "texte": "exercice suivant celui au cours duquel la constatation des pertes est intervenue, de réduire son capital d’un"
+        },
+        {
+          "index": 1057,
+          "page": 30,
+          "texte": "montant au moins égal à celui des pertes qui n’ont pu être imputées sur les réserves si, dans ce délai, les"
+        },
+        {
+          "index": 1058,
+          "page": 30,
+          "texte": "capitaux propres n’ont pas été reconstitués à concurrence d’une valeur au moins égale à la moitié du"
+        },
+        {
+          "index": 1059,
+          "page": 30,
+          "texte": "capital social."
+        }
+      ],
+      "article_numero_imprime": 34
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 36,
+      "paragraphes": [
+        {
+          "index": 1060,
+          "page": 30,
+          "texte": "Article 35 - . Dissolution anticipée - Prorogation"
+        },
+        {
+          "index": 1061,
+          "page": 30,
+          "texte": "La collectivité des associés peut, à toute époque, prononcer la dissolution anticipée de la Société."
+        },
+        {
+          "index": 1062,
+          "page": 30,
+          "texte": "Un an au moins avant la date d’expiration de la durée de la Société, le Président doit provoquer une"
+        },
+        {
+          "index": 1063,
+          "page": 30,
+          "texte": "réunion de la collectivité des associés à l’effet de décider si la Société doit être prorogée."
+        }
+      ],
+      "article_numero_imprime": 35
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 37,
+      "paragraphes": [
+        {
+          "index": 1064,
+          "page": 30,
+          "texte": "Article 36 - . Dissolution - Liquidation"
+        },
+        {
+          "index": 1065,
+          "page": 30,
+          "texte": "1. A l’expiration de la Société ou en cas de dissolution anticipée, la collectivité des associés règle le mode"
+        },
+        {
+          "index": 1066,
+          "page": 30,
+          "texte": "de liquidation."
+        },
+        {
+          "index": 1067,
+          "page": 30,
+          "texte": "2. Un ou plusieurs liquidateurs sont alors nommés par la collectivité des associés."
+        },
+        {
+          "index": 1068,
+          "page": 30,
+          "texte": "3. En fin de liquidation, les associés sont réunis pour statuer sur le compte définitif, sur le quitus de la"
+        },
+        {
+          "index": 1069,
+          "page": 30,
+          "texte": "gestion des liquidateurs, la décharge de leur mandat et pour constater la clôture de la liquidation."
+        },
+        {
+          "index": 1070,
+          "page": 30,
+          "texte": "4. Le partage des capitaux propres subsistant après remboursement du nominal des actions est effectué"
+        },
+        {
+          "index": 1071,
+          "page": 30,
+          "texte": "entre les associés dans les mêmes proportions que leur participation au capital social."
+        }
+      ],
+      "article_numero_imprime": 36
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1072,
+          "page": 30,
+          "texte": "+ En présence d’actions de préférence, ajouter le cas échéant :"
+        },
+        {
+          "index": 1073,
+          "page": 30,
+          "texte": "Ce principe s’applique sous réserve des droits spécifiques attachés aux Actions de Préférence."
+        }
+      ]
+    },
+    {
+      "type": "titre_partie",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1074,
+          "page": 30,
+          "texte": "VIII. - DIVERS"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 38,
+      "paragraphes": [
+        {
+          "index": 1075,
+          "page": 30,
+          "texte": "Article 37 - . Contestations"
+        },
+        {
+          "index": 1081,
+          "page": 31,
+          "texte": "Toutes contestations et tous litiges relatifs à l’interprétation ou à l’exécution des présents statuts ou, plus"
+        },
+        {
+          "index": 1082,
+          "page": 31,
+          "texte": "généralement, relatifs aux affaires sociales, pendant la durée de la Société ou lors de sa liquidation,"
+        },
+        {
+          "index": 1083,
+          "page": 31,
+          "texte": "survenant soit entre les associés et la Société ou ses dirigeants, soit entre la Société et ses dirigeants, soit"
+        },
+        {
+          "index": 1084,
+          "page": 31,
+          "texte": "entre les associés eux-mêmes, seront soumis à la compétence exclusive du tribunal de commerce dans le"
+        },
+        {
+          "index": 1085,
+          "page": 31,
+          "texte": "ressort duquel est situé le siège social de la Société."
+        }
+      ],
+      "article_numero_imprime": 37
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 39,
+      "paragraphes": [
+        {
+          "index": 1086,
+          "page": 31,
+          "texte": "Article 38 - . Nomination du premier président"
+        },
+        {
+          "index": 1087,
+          "page": 31,
+          "texte": "Est désigné comme premier Président de la Société pour une durée de .....(indiquer la durée) :"
+        }
+      ],
+      "article_numero_imprime": 38
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1088,
+          "page": 31,
+          "texte": "› En cas de président personne physique, indiquer :"
+        },
+        {
+          "index": 1089,
+          "page": 31,
+          "texte": ".....(prénom)"
+        },
+        {
+          "index": 1090,
+          "page": 31,
+          "texte": ".....(nom), demeurant .....(adresse)."
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1092,
+          "page": 31,
+          "texte": "› En cas de Président personne morale, remplacer par :"
+        },
+        {
+          "index": 1093,
+          "page": 31,
+          "texte": ".....(dénomination sociale), .....(forme) au capital de .....(capital) euros, ayant son siège social .....(siège"
+        },
+        {
+          "index": 1094,
+          "page": 31,
+          "texte": "social), immatriculée au Registre du commerce et des sociétés de .....(RCS) sous le numéro .....(numéro"
+        },
+        {
+          "index": 1095,
+          "page": 31,
+          "texte": "SIREN), ayant pour représentant permanent .....(prénom) .....(nom), demeurant .....(adresse)."
+        },
+        {
+          "index": 1096,
+          "page": 31,
+          "texte": "Le Président ainsi nommé intervenant aux présentes déclare, en ce qui le concerne, qu’il accepte sa"
+        },
+        {
+          "index": 1097,
+          "page": 31,
+          "texte": "nomination et qu’il n’existe aucune incompatibilité ni interdiction l’empêchant d’accepter et d’exercer la"
+        },
+        {
+          "index": 1098,
+          "page": 31,
+          "texte": "mission qui vient de lui être confiée."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1099,
+          "page": 31,
+          "texte": "+ En cas de nomination d’un directeur général, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 40,
+      "paragraphes": [
+        {
+          "index": 1100,
+          "page": 31,
+          "texte": "Article 39 - . Nomination du premier Directeur Général"
+        },
+        {
+          "index": 1101,
+          "page": 31,
+          "texte": "Est désigné comme premier Directeur Général de la Société pour une durée de .....(indiquer la durée) :"
+        }
+      ],
+      "article_numero_imprime": 39
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1102,
+          "page": 31,
+          "texte": "› En cas de Directeur Général personne physique, indiquer :"
+        },
+        {
+          "index": 1103,
+          "page": 31,
+          "texte": ".....(prénom) .....(nom), demeurant .....(adresse) ;"
+        }
+      ]
+    },
+    {
+      "type": "variante",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1105,
+          "page": 31,
+          "texte": "› En cas de Directeur Général personne morale, remplacer par :"
+        },
+        {
+          "index": 1106,
+          "page": 31,
+          "texte": ".....(dénomination sociale), .....(forme) au capital de .....(capital) euros, ayant son siège social .....(siège"
+        },
+        {
+          "index": 1107,
+          "page": 31,
+          "texte": "social), immatriculée au Registre du commerce et des sociétés de .....(RCS) sous le numéro .....(numéro"
+        },
+        {
+          "index": 1108,
+          "page": 31,
+          "texte": "SIREN), ayant pour représentant permanent .....(prénom) .....(nom), demeurant .....(adresse)."
+        },
+        {
+          "index": 1114,
+          "page": 32,
+          "texte": "Le Directeur Général ainsi nommé intervenant aux présentes déclare, en ce qui le concerne, qu’il accepte"
+        },
+        {
+          "index": 1115,
+          "page": 32,
+          "texte": "sa nomination et qu’il n’existe aucune incompatibilité ni interdiction l’empêchant d’accepter et d’exercer"
+        },
+        {
+          "index": 1116,
+          "page": 32,
+          "texte": "la mission qui vient de lui être confiée."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1117,
+          "page": 32,
+          "texte": "+ Si un Comité de Direction est institué, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 41,
+      "paragraphes": [
+        {
+          "index": 1118,
+          "page": 32,
+          "texte": "Article 40 - . Nomination des premiers membres du Comité de Direction"
+        },
+        {
+          "index": 1119,
+          "page": 32,
+          "texte": "Sont désignés comme premiers membres du Comité de Direction pour une durée de .....(indiquer la"
+        },
+        {
+          "index": 1120,
+          "page": 32,
+          "texte": "durée) :"
+        }
+      ],
+      "article_numero_imprime": 40
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1121,
+          "page": 32,
+          "texte": "+ En cas de membre personne physique, ajouter (à répéter pour chaque membre personne"
+        },
+        {
+          "index": 1122,
+          "page": 32,
+          "texte": "physique) :"
+        },
+        {
+          "index": 1123,
+          "page": 32,
+          "texte": ".....(prénom) .....(nom), demeurant .....(adresse) ;"
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1124,
+          "page": 32,
+          "texte": "+ En cas de membre personne morale, ajouter (à répéter pour chaque membre personne morale) :"
+        },
+        {
+          "index": 1125,
+          "page": 32,
+          "texte": ".....(dénomination sociale), .....(forme) au capital de .....(capital) euros, ayant son siège social .....(siège"
+        },
+        {
+          "index": 1126,
+          "page": 32,
+          "texte": "social), immatriculée au Registre du commerce et des sociétés de .....(RCS) sous le numéro .....(numéro"
+        },
+        {
+          "index": 1127,
+          "page": 32,
+          "texte": "SIREN), ayant pour représentant permanent .....(prénom) .....(nom), demeurant .....(adresse)."
+        },
+        {
+          "index": 1128,
+          "page": 32,
+          "texte": "Chacun des membres du Comité de Direction ainsi nommés intervenant aux présentes déclare, en ce qui le"
+        },
+        {
+          "index": 1129,
+          "page": 32,
+          "texte": "concerne, qu’il accepte sa nomination et qu’il n’existe aucune incompatibilité ni interdiction l’empêchant"
+        },
+        {
+          "index": 1130,
+          "page": 32,
+          "texte": "d’accepter et d’exercer la mission qui vient de lui être confiée."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1131,
+          "page": 32,
+          "texte": "+ En cas de nomination de commissaire(s) aux comptes, ajouter :"
+        }
+      ]
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 42,
+      "paragraphes": [
+        {
+          "index": 1132,
+          "page": 32,
+          "texte": "Article 41 - . Nomination des premiers commissaires aux comptes"
+        },
+        {
+          "index": 1133,
+          "page": 32,
+          "texte": "Sont désignés comme premiers commissaires aux comptes de la Société pour une durée de .....(3 ou 6,"
+        },
+        {
+          "index": 1134,
+          "page": 32,
+          "texte": "selon le cas) exercices, qui se terminera à l’issue de la réunion de la collectivité des associés qui sera"
+        },
+        {
+          "index": 1135,
+          "page": 32,
+          "texte": "appelée à délibérer sur les comptes de l’exercice clos le .....(date) :"
+        },
+        {
+          "index": 1136,
+          "page": 32,
+          "texte": "• .....(identité et adresse ou dénomination sociale et siège social du commissaire aux comptes),"
+        },
+        {
+          "index": 1137,
+          "page": 32,
+          "texte": "titulaire ;"
+        },
+        {
+          "index": 1138,
+          "page": 32,
+          "texte": "• .....(identité et adresse ou dénomination sociale et siège social du commissaire aux comptes),"
+        },
+        {
+          "index": 1139,
+          "page": 32,
+          "texte": "suppléant"
+        },
+        {
+          "index": 1140,
+          "page": 32,
+          "texte": "Chacun des commissaires aux comptes ainsi nommés a accepté par avance lesdites fonctions et a déclaré,"
+        },
+        {
+          "index": 1141,
+          "page": 32,
+          "texte": "pour ce qui le concerne, n’être atteint d’aucune incompatibilité ni interdiction susceptible d’empêcher sa"
+        },
+        {
+          "index": 1142,
+          "page": 32,
+          "texte": "nomination."
+        }
+      ],
+      "article_numero_imprime": 41
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 43,
+      "paragraphes": [
+        {
+          "index": 1143,
+          "page": 32,
+          "texte": "Article 42 - . Reprise des engagements accomplis pour le compte de la Société"
+        },
+        {
+          "index": 1149,
+          "page": 33,
+          "texte": "Conformément à la loi, la Société ne jouira de la personnalité morale qu’à compter du jour de son"
+        },
+        {
+          "index": 1150,
+          "page": 33,
+          "texte": "immatriculation au Registre du commerce et des sociétés."
+        },
+        {
+          "index": 1151,
+          "page": 33,
+          "texte": "Cependant, il a été accompli dès avant la signature des présents statuts, pour le compte de la Société en"
+        },
+        {
+          "index": 1152,
+          "page": 33,
+          "texte": "formation, des actes énoncés dans un état annexé aux présents statuts, indiquant pour chacun d’eux"
+        },
+        {
+          "index": 1153,
+          "page": 33,
+          "texte": "l’engagement qui en résulterait pour la Société."
+        },
+        {
+          "index": 1154,
+          "page": 33,
+          "texte": "La signature des présents statuts vaudra reprise par la Société de ces engagements qui seront réputés avoir"
+        },
+        {
+          "index": 1155,
+          "page": 33,
+          "texte": "été souscrits par elle dès l’origine, et ce, dès qu’elle aura été immatriculée au Registre du commerce et des"
+        },
+        {
+          "index": 1156,
+          "page": 33,
+          "texte": "sociétés."
+        }
+      ],
+      "article_numero_imprime": 42
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 44,
+      "paragraphes": [
+        {
+          "index": 1157,
+          "page": 33,
+          "texte": "Article 43 - . Mandat pour accomplir des actes pour le compte de la Société après la signature des"
+        },
+        {
+          "index": 1158,
+          "page": 33,
+          "texte": "statuts et avant l’immatriculation de la Société au Registre du commerce et des sociétés"
+        },
+        {
+          "index": 1159,
+          "page": 33,
+          "texte": "En attendant l’accomplissement de la formalité d’immatriculation de la Société au Registre du commerce"
+        },
+        {
+          "index": 1160,
+          "page": 33,
+          "texte": "et des sociétés, la collectivité des associés donne mandat à .....(identité ou dénomination sociale de"
+        },
+        {
+          "index": 1161,
+          "page": 33,
+          "texte": "l’associé) ou à toute personne qui s’y substituera, à l’effet de passer et conclure au nom et pour le compte"
+        },
+        {
+          "index": 1162,
+          "page": 33,
+          "texte": "de la Société, les engagements qui sont décrits et dont les modalités sont précisées dans un état annexé aux"
+        },
+        {
+          "index": 1163,
+          "page": 33,
+          "texte": "présents statuts."
+        },
+        {
+          "index": 1164,
+          "page": 33,
+          "texte": "Du seul fait de l’immatriculation de la Société au Registre du commerce et des sociétés, les engagements"
+        },
+        {
+          "index": 1165,
+          "page": 33,
+          "texte": "pris en application de ce mandat et résultant de ces actes seront repris, rétroactivement, dès leur naissance"
+        },
+        {
+          "index": 1166,
+          "page": 33,
+          "texte": "et de plein droit, par la Société. Toutefois, les engagements pris en vertu d’un mandat trop imprécis"
+        },
+        {
+          "index": 1167,
+          "page": 33,
+          "texte": "devront être ratifiés postérieurement à l’immatriculation de la Société par la collectivité des associés."
+        }
+      ],
+      "article_numero_imprime": 43
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 45,
+      "paragraphes": [
+        {
+          "index": 1168,
+          "page": 33,
+          "texte": "Article 44 - . Pouvoirs - Publicité"
+        },
+        {
+          "index": 1169,
+          "page": 33,
+          "texte": "Tous pouvoirs sont conférés au porteur d’un original ou d’une copie des présentes à l’effet d’accomplir les"
+        },
+        {
+          "index": 1170,
+          "page": 33,
+          "texte": "formalités de publicité, de dépôt et autres nécessaires pour parvenir à l’immatriculation de la Société au"
+        },
+        {
+          "index": 1171,
+          "page": 33,
+          "texte": "Registre du commerce et des sociétés et au Registre national des entreprises."
+        }
+      ],
+      "article_numero_imprime": 44
+    },
+    {
+      "type": "titre_article",
+      "article_numero": 46,
+      "paragraphes": [
+        {
+          "index": 1172,
+          "page": 33,
+          "texte": "Article 45 - . Annexes"
+        },
+        {
+          "index": 1173,
+          "page": 33,
+          "texte": "Sont annexés aux statuts :"
+        },
+        {
+          "index": 1174,
+          "page": 33,
+          "texte": "• le certificat du dépositaire des fonds (Annexe I) ;"
+        },
+        {
+          "index": 1175,
+          "page": 33,
+          "texte": "• l’état des actes accomplis pour le compte de la Société avant la signature des statuts (Annexe II) ;"
+        },
+        {
+          "index": 1176,
+          "page": 33,
+          "texte": "• l’état des actes accomplis pour le compte de la Société entre la signature des statuts et"
+        },
+        {
+          "index": 1177,
+          "page": 33,
+          "texte": "l’immatriculation de la Société au Registre du commerce et des sociétés (Annexe III) ;"
+        }
+      ],
+      "article_numero_imprime": 45
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1178,
+          "page": 33,
+          "texte": "+ Si un commissaire aux apports a été désigné, ajouter :"
+        },
+        {
+          "index": 1179,
+          "page": 33,
+          "texte": "• le rapport du commissaire aux apports ;"
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1185,
+          "page": 34,
+          "texte": "+ En cas de dispense d'un commissaire aux apports, ajouter :"
+        },
+        {
+          "index": 1186,
+          "page": 34,
+          "texte": "• la décision des fondateurs de ne pas recourir à la désignation d’un commissaire aux apports et les"
+        },
+        {
+          "index": 1187,
+          "page": 34,
+          "texte": "documents relatifs à la description et à l’évaluation des apports."
+        }
+      ]
+    },
+    {
+      "type": "ajout_optionnel",
+      "article_numero": null,
+      "paragraphes": [
+        {
+          "index": 1188,
+          "page": 34,
+          "texte": "+ Si la dispense est fondée sur les dispositions de l’article L225-8-1 du Code de commerce, ajouter :"
+        },
+        {
+          "index": 1189,
+          "page": 34,
+          "texte": "• l’attestation précisant qu’aucune circonstance nouvelle n’est venue modifier l’évaluation."
+        },
+        {
+          "index": 1190,
+          "page": 34,
+          "texte": "Fait à .....(lieu), le .....(date)"
+        },
+        {
+          "index": 1191,
+          "page": 34,
+          "texte": "en .....(nombre) exemplaires"
+        },
+        {
+          "index": 1192,
+          "page": 34,
+          "texte": "Signature"
+        },
+        {
+          "index": 1193,
+          "page": 34,
+          "texte": "Le Président (et, le cas échéant, le Directeur Général), devra faire précéder sa signature de la mention"
+        },
+        {
+          "index": 1194,
+          "page": 34,
+          "texte": "manuscrite « Bon pour acceptation des fonctions de Président (ou, le cas échéant, de Directeur Général) »."
+        },
+        {
+          "index": 1195,
+          "page": 34,
+          "texte": "Annexe I"
+        },
+        {
+          "index": 1196,
+          "page": 34,
+          "texte": "Certificat du dépositaire des fonds"
+        },
+        {
+          "index": 1197,
+          "page": 34,
+          "texte": ".....(à insérer)"
+        },
+        {
+          "index": 1198,
+          "page": 34,
+          "texte": "Annexe II"
+        },
+        {
+          "index": 1199,
+          "page": 34,
+          "texte": "État des actes accomplis pour le compte de la Société avant la signature des statuts"
+        },
+        {
+          "index": 1200,
+          "page": 34,
+          "texte": "• ouverture d’un compte bancaire pour le dépôt des fonds constituant le capital social ;"
+        },
+        {
+          "index": 1201,
+          "page": 34,
+          "texte": "• .....(autres : attestation de mise à disposition des locaux pour l’établissement du siège social,"
+        },
+        {
+          "index": 1202,
+          "page": 34,
+          "texte": "contrats divers, etc.) ;"
+        },
+        {
+          "index": 1203,
+          "page": 34,
+          "texte": "• toutes opérations entrant dans le cadre de la gestion courante de la Société jusqu’à la signature des"
+        },
+        {
+          "index": 1204,
+          "page": 34,
+          "texte": "statuts."
+        },
+        {
+          "index": 1205,
+          "page": 34,
+          "texte": "Conformément à la loi, le présent état a été porté à la connaissance des associés préalablement à la"
+        },
+        {
+          "index": 1206,
+          "page": 34,
+          "texte": "signature des statuts auxquels il est annexé et permettra la reprise automatique des actes susmentionnés"
+        },
+        {
+          "index": 1207,
+          "page": 34,
+          "texte": "par la Société au moment de son immatriculation au Registre du commerce et des sociétés."
+        },
+        {
+          "index": 1208,
+          "page": 34,
+          "texte": "Annexe III"
+        },
+        {
+          "index": 1209,
+          "page": 34,
+          "texte": "État des actes accomplis pour le compte de la Société entre la signature des statuts et"
+        },
+        {
+          "index": 1210,
+          "page": 34,
+          "texte": "l’immatriculation de la Société au Registre du commerce et des sociétés"
+        },
+        {
+          "index": 1216,
+          "page": 35,
+          "texte": "Mandat est expressément donné à .....(identité ou dénomination sociale de l’associé), avec faculté de"
+        },
+        {
+          "index": 1217,
+          "page": 35,
+          "texte": "délégation et de substitution, à l’effet de prendre pour le compte de la Société jusqu’à son immatriculation"
+        },
+        {
+          "index": 1218,
+          "page": 35,
+          "texte": "au Registre du commerce et des Sociétés les engagements suivants :"
+        },
+        {
+          "index": 1219,
+          "page": 35,
+          "texte": "• entreprendre, poursuivre et accomplir entièrement toute démarche nécessaire à la poursuite et à"
+        },
+        {
+          "index": 1220,
+          "page": 35,
+          "texte": "l’accomplissement des formalités d’inscription de la Société au Registre du commerce et des"
+        },
+        {
+          "index": 1221,
+          "page": 35,
+          "texte": "sociétés et à la déclaration d’existence de la Société auprès des diverses administrations ;"
+        },
+        {
+          "index": 1222,
+          "page": 35,
+          "texte": "• .....(autres : contrats divers, etc.) ;"
+        },
+        {
+          "index": 1223,
+          "page": 35,
+          "texte": "• toutes opérations entrant dans le cadre de la gestion courante de la Société jusqu’à son"
+        },
+        {
+          "index": 1224,
+          "page": 35,
+          "texte": "immatriculation ;"
+        },
+        {
+          "index": 1225,
+          "page": 35,
+          "texte": "• signer tout contrat entrant dans l’objet social de la Société ou nécessaire au démarrage et au bon"
+        },
+        {
+          "index": 1226,
+          "page": 35,
+          "texte": "fonctionnement de la Société."
+        },
+        {
+          "index": 1227,
+          "page": 35,
+          "texte": "Le présent état constitue un mandat donné par les associés de la Société à .....(identité ou dénomination"
+        },
+        {
+          "index": 1228,
+          "page": 35,
+          "texte": "sociale de l’associé) de procéder à la signature des actes et à la réalisation des opérations susvisées, dans"
+        },
+        {
+          "index": 1229,
+          "page": 35,
+          "texte": "les conditions prévues par l’article R210-6, alinéa 3 du Code de commerce."
+        },
+        {
+          "index": 1230,
+          "page": 35,
+          "texte": "Annexe IV"
+        },
+        {
+          "index": 1231,
+          "page": 35,
+          "texte": ".....(à compléter le cas échéant)"
+        }
+      ]
+    }
+  ]
+}

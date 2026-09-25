@@ -5,7 +5,9 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 
-DocumentType = Literal["entrepreneur_idea", "other"]
+# Valeurs étendues au Groupe 5 (documents générés par 1.1.13 / 1.1.4) — miroir du
+# CHECK constraint ck_documents_document_type, seule source de vérité côté Python.
+DocumentType = Literal["entrepreneur_idea", "other", "pacte_fondateurs", "statuts"]
 DocumentVisibility = Literal["private", "project_members"]
 DocumentProcessingStatus = Literal["uploaded", "queued", "processing", "ready", "failed"]
 

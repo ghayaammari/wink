@@ -91,6 +91,54 @@ sector_insurance_structuration:
     max_retries: 3
     temperature: 0
 
+
+# Garde-fou légal sur le texte libre saisi par l'utilisateur dans une clause du
+# pacte de fondateurs (service 1.1.13, Groupe 5) — décision actée avec
+# l'utilisateur : appel LLM (Groq), pas une approche uniquement déterministe.
+# Voir agents/contract_agent/legal_clause_guardrail_service.py.
+contract_agent:
+  legal_clause_guardrail:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    # 0, comme legal_text_structuration : un contrôle de conformité doit être
+    # reproductible (le même texte ne doit pas être tantôt autorisé, tantôt
+    # bloqué d'un appel à l'autre), pas une évaluation créative.
+    temperature: 0
+
+  # Garde-fou juridique des STATUTS SAS (service 1.1.4, niveau B, 24/09/2026)
+  # — voir agents/contract_agent/statuts_clause_guardrail_service.py. Un appel
+  # par section, seulement sur les champs `controle_juridique` du clausier.
+  # 0 : contrôle de conformité reproductible, comme legal_clause_guardrail.
+  statuts_clause_guardrail:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0
+
+  # Explication en langage clair d'une clause, contextualisée aux valeurs
+  # saisies (service 1.1.15) — voir agents/contract_agent/clause_explanation_service.py.
+  clause_explanation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    # 0.3, contrairement au garde-fou ci-dessus (0) : ceci est une
+    # reformulation pédagogique en langage clair, pas une classification
+    # déterministe — une petite variabilité de phrasé est acceptable ici,
+    # voir la distinction actée dans clause_explanation_service.py.
+    temperature: 0.3
+
+  # Explication d'un ARTICLE facultatif entier des statuts (écran de choix des
+  # facultatifs, service 1.1.4/1.1.15, étape 4 de la refonte, 24/09/2026) —
+  # voir agents/contract_agent/article_explanation_service.py. Généré en
+  # batch puis relu par un humain avant affichage : 0.3 comme
+  # clause_explanation (reformulation pédagogique, pas une classification).
+  article_explanation:
+    provider: groq
+    model: openai/gpt-oss-120b
+    max_retries: 3
+    temperature: 0.3
+
 rgpd_text_structuration:
   relevance_filter:
     provider: groq

@@ -1,0 +1,126 @@
+{
+  "source": "raw_notice_explicative.json (573 paragraphes) vs segmented_modele_principal.json",
+  "methode": "paragraphe absent (par inclusion normalisee) du modele principal deja seede",
+  "avertissement": "Liste de CANDIDATS, pas un corpus valide -- relecture humaine obligatoire avant tout embedding, memes garanties que legal_texts.statut_contenu='valide_humain'.",
+  "stats": {
+    "paragraphes_notice_total": 463,
+    "deja_couverts_par_le_modele": 395,
+    "candidats_hors_modele": 15,
+    "dont_confiance_haute": 4
+  },
+  "candidats": [
+    {
+      "article_numero": null,
+      "index_notice": 2,
+      "texte": "L'établissement d'un pacte d'associés un acte important pouvant avoir des conséquences juridiques, fiscales et sociales. Le présent modèle est mis à la disposition de l'utilisateur à titre informatif par Bpifrance Création et en aucun cas ne se substitue aux conseils ou accompagnement par les professionnels du droit. Ainsi l'utilisateur porte l’entière responsabilité quant à l'usage qui en sera fait.",
+      "mots_cles_detectes": [
+        "conseil"
+      ],
+      "confiance_pedagogique": "haute"
+    },
+    {
+      "article_numero": null,
+      "index_notice": 4,
+      "texte": "(dénomination sociale), société SAS au capital de ((montant) € ayant son siège social à (lieu), immatriculée au Registre du commerce et des sociétés de (lieu d'immatriculation) sous le numéro  (numéro Siren), représentée par (prénom), (nom), en sa qualité de (qualité),",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": null,
+      "index_notice": 10,
+      "texte": "(dénomination sociale), (forme) au capital de (montant) €, ayant son siège social à (adresse), immatriculée au Registre du commerce et des sociétés de (lieu d'immatriculation) sous le numéro (numéro Siren), représentée par (prénom) (nom), en sa qualité de (qualité),",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": null,
+      "index_notice": 66,
+      "texte": "Pendant une durée de (durée) à compter de la date du présent pacte, chacun des membres des Associés Fondateurs et des Associés Investisseurs s'engage à ne pas modifier sa participation dans la Société telle qu'indiquée dans le préambule, exception faite des Cessions Libres.",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 6,
+      "index_notice": 275,
+      "texte": "De convention expresse entre les Parties, les Associés Investisseurs bénéficieront d'un droit de retrait en cas de survenance de l'un des événements suivants : (préciser les cas de déclenchement du droit de retrait tels que la non-réalisation d'objectifs de chiffre d'affaires ou de résultats.)",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 7,
+      "index_notice": 323,
+      "texte": "Les Parties s'engagent à faire le nécessaire, concernant la Société, pour que, (i) sous réserve des contraintes légales et réglementaires, (ii) des obligations de la Société envers tout établissement de crédit au regard des concours financiers consentis, (iii) des besoins prévisionnels de trésorerie pour les 12 mois à venir liés au respect des termes du plan d'affaires ou de tout budget adopté conformément au Pacte, (l'intégralité/au moins X %) de la trésorerie disponible soit distribuée aux Associés sous forme de dividendes ou autrement (y compris par la distribution d'acomptes sur dividendes dès que possible), sauf décision collective contraire des Associés prise dans les conditions fixées par les statuts de la Société.",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 8,
+      "index_notice": 337,
+      "texte": "-  engagements financiers d'un montant supérieur à (montant) €, sauf au profit de filiales de la Société ;",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 8,
+      "index_notice": 338,
+      "texte": "-  conclusion, modification ou résiliation d'accords ou de contrats engageant la Société pour un montant supérieur à (montant) €, et auxquels il ne peut être mis fin sans indemnité ou pénalité ou qu'avec un préavis supérieur à (nombre) mois ;",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": null,
+      "index_notice": 358,
+      "texte": "« Sans préjudice du droit de veto des Associés Investisseurs visé à l'article ci-dessus, les décisions du  (Conseil d'administration/Comité stratégique/Comité de direction) sont adoptées à la majorité (à compléter, le cas échéant, pour définir une majorité renforcée) des membres présents ou représentés, à l'exception des décisions énumérées ci-après, qui sont adoptées à la majorité (à compléter pour définir une majorité spécifique aux décisions ci-après) des membres présents ou représentés : (à compléter) ».",
+      "mots_cles_detectes": [
+        "conseil"
+      ],
+      "confiance_pedagogique": "haute"
+    },
+    {
+      "article_numero": 9,
+      "index_notice": 383,
+      "texte": "Chaque Associé s’interdit, tant qu’il détiendra directement ou indirectement des Titres, ou exercera des fonctions au sein de la Société et/ou de ses Filiales, et pour une durée de douze (12) mois et au-delà :",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 9,
+      "index_notice": 391,
+      "texte": "9.4.2\tChaque Associé Fondateur s’interdit, tant qu’il détiendra directement ou indirectement des Titres, ou exercera des fonctions au sein de la Société et/ou de ses Filiales, et pour une durée de douze (12) mois au-delà, de déposer ou protéger de quelque façon que ce soit, en son nom, directement, ou indirectement par personne interposée, tout Droit de Propriété Intellectuelle nécessaire à l’activité exercée par la Société ou les Filiales, le cas échéant.",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 9,
+      "index_notice": 408,
+      "texte": "(i)\tla démission (ou l’abandon de poste) intervenant préalablement au (Nombre) anniversaire de la date des présentes, sauf (a) avec l’accord préalable et écrit du conseil d'administration/du Comité de direction/Comité Stratégique",
+      "mots_cles_detectes": [
+        "conseil"
+      ],
+      "confiance_pedagogique": "haute"
+    },
+    {
+      "article_numero": 9,
+      "index_notice": 416,
+      "texte": "Si les Bénéficiaires souhaitent bénéficier de la Promesse de Vente de l’Associé Sortant, ils devront le lui notifier par lettre recommandée avec avis de réception dans le délai de trois (3) mois à compter de la Date de Départ de l’Associé Sortant ou, selon le cas, la date de survenance du Motif Fautif ou Non Fautif.",
+      "mots_cles_detectes": [
+        "recommand"
+      ],
+      "confiance_pedagogique": "haute"
+    },
+    {
+      "article_numero": 9,
+      "index_notice": 437,
+      "texte": "Chaque promettant de la Promesse de Vente reconnait expressément que, conformément aux dispositions de l’article 1124 du Code civil, son consentement n’est pas susceptible de révocation. En conséquence, la cession des Titres concernés étant parfaite dès l’expression de la volonté d’un Bénéficiaire matérialisée par une notification d’exercice, toute action ou intervention de l’Associé Sortant à compter de la date des présentes sera sans effet, et chaque Bénéficiaire pourra demander l’exécution forcée du transfert de propriété des Titres concernés suivant les modalités précisées au présent Article 8.5.2. et conformément à l’article 1124 du Code civil précité.",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    },
+    {
+      "article_numero": 10,
+      "index_notice": 466,
+      "texte": "10.2.1.\tLe Pacte entre en vigueur à compter de la Date de Réalisation pour une durée de nombre (chiffre) années à compter de cette date. Au terme de cette première période de nombre (Chiffre) années, le Pacte sera renouvelable pour des périodes successives de quatre (4) années. A l'occasion de chaque renouvellement, y compris du premier d’entre eux, toute Partie pourra dénoncer le Pacte, pour ce qui la concerne, en notifiant sa décision au moins six (6) mois à l'avance aux autres Parties et à la Société.",
+      "mots_cles_detectes": [],
+      "confiance_pedagogique": "a_verifier"
+    }
+  ]
+}

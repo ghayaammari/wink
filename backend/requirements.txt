@@ -42,7 +42,7 @@ pyyaml>=6.0.2                    # lecture de agents/config/llm_config.yaml
 openai>=1.0.0    # backend/chercheur/services/llm_client.py
 httpx>=0.28.0    # backend/chercheur/services/research_extraction_service.py
 pypdf>=5.0.0     # backend/chercheur/services/research_extraction_service.py
-reportlab>=4.2.0  # generation PDF -- rapport de conformite telechargeable (compliance_report_service.py), seule lib d'ecriture PDF du projet (pypdf/pdf2image ci-dessus ne font que lire)
+reportlab>=4.2.5  # generation PDF -- compliance_report_service.py + rendu des documents finaux (pdf_rendering_service.py)
 
 # --- Agent conformité à raisonnement autonome (agents/compliance_agent/) ---
 langgraph>=0.2.60               # graphe ReAct (agent <-> tools) + reponse structuree finale, boucle de raisonnement du copilot
@@ -57,5 +57,9 @@ trafilatura>=1.12.2             # extraction du contenu principal d'une page (ti
 beautifulsoup4>=4.12.3          # extraction des liens <a href> pour le crawling borné (discover_links)
 lxml>=5.3.0                     # parseur utilisé par BeautifulSoup, plus rapide et plus tolérant que html.parser
 fonttools>=4.55.0                # requis par pypdf (extraction PDF, voir web_fetch.py::_extract_pdf_text) pour décoder pleinement l'encodage de certaines polices CFF Type1 embarquées — sans lui, avertissements "fontTools is required..." et extraction potentiellement dégradée en silence
+# --- Extraction de documents source (backend/shared/knowledge_base/scripts/extract_pacte_fondateurs_raw.py) ---
+python-docx>=1.1.2              # lecture .docx (paragraphes + tableaux), service 1.1.13 (pacte de fondateurs)
+
+# --- Génération des pitch decks (backend/entrepreneur/services/pitch_deck_*) ---
 python-pptx>=1.0.2    # backend/entrepreneur/services/pitch_deck_renderer_service.py (service 6.6.2)
 Pillow>=10.0.0         # backend/entrepreneur/services/pitch_deck_assets.py (validation du logo du pitch deck)

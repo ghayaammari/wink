@@ -19,7 +19,18 @@ interface DashboardLayoutProps {
 // colonne centrée par défaut (pensée pour des formulaires d'onboarding en une
 // colonne) — voir le commentaire sur FULL_WIDTH_ROUTES ci-dessous pour la
 // dette technique assumée ici.
-const FULL_WIDTH_ROUTES = ["/entrepreneur/plan-action", "/entrepreneur/copilot"]
+const FULL_WIDTH_ROUTES = [
+  "/entrepreneur/plan-action",
+  // Service 1.1.13 — deux volets synchronisés (copilot + document), a besoin
+  // de toute la largeur pour la même raison que le graphe de plan-action.
+  "/entrepreneur/mon-projet/pacte-fondateurs",
+  "/entrepreneur/mon-projet/pacte-fondateurs-v2",
+  // Service 1.1.4 — même mise en page 2 volets que le pacte ci-dessus
+  // (StatutsSasPage.tsx), même besoin de largeur.
+  "/entrepreneur/mon-projet/statuts",
+  // Service 6.6.2 — le Copilot doit aussi utiliser toute la largeur.
+  "/entrepreneur/copilot",
+]
 
 /**
  * Template de base du dashboard, commun aux 3 acteurs — élément de route

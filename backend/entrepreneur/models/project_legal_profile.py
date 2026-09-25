@@ -14,8 +14,9 @@ voir Groupe5_doc.md). Ajout d'`objet_social`/`duree_societe`/
 """
 import uuid
 from datetime import date, datetime
+from decimal import Decimal
 
-from sqlalchemy import CheckConstraint, Date, DateTime, ForeignKey, Integer, String, Text, func, text
+from sqlalchemy import CheckConstraint, Date, DateTime, ForeignKey, Integer, Numeric, String, Text, func, text
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -55,6 +56,27 @@ class ProjectLegalProfile(Base):
     objet_social: Mapped[str | None] = mapped_column(Text, nullable=True)
     duree_societe: Mapped[int | None] = mapped_column(Integer, nullable=True)
     date_signature_statuts: Mapped[date | None] = mapped_column(Date, nullable=True)
+    # AJOUT (migration f5a7c9e1d3b2, service 1.1.4 statuts SAS -- catégorie B2 de
+    # l'inventaire des 210 variables, historique "avant de valider" 22/09/2026).
+    # Faits juridiques de la société, volontairement PAS dans project_public_profiles
+    # (table de vitrine/matching : public_summary est un pitch modifiable, ces textes
+    # sont des engagements statutaires imprimés dans les statuts -- même analyse que
+    # Groupe5_doc.md pour objet_social/duree_societe).
+    raison_d_etre: Mapped[str | None] = mapped_column(Text, nullable=True)
+    objectifs_ess: Mapped[str | None] = mapped_column(Text, nullable=True)
+    sigle: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    lieu_signature_statuts: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    # AJOUT (migration 507ed2995d84, service 1.1.13) -- 4 faits fixes du
+    # projet consommés par le Préambule du pacte de fondateurs, absents
+    # jusqu'ici. Distinct des colonnes homonymes sur `project_associates`
+    # (`capital_social`/`lieu_immatriculation`) : celles-ci décrivent LE
+    # PROJET lui-même, celles de `project_associates` décrivent un associé
+    # qui est une personne morale -- même nom, table différente, ne pas
+    # confondre en code review.
+    capital_social: Mapped[Decimal | None] = mapped_column(Numeric(14, 2), nullable=True)
+    lieu_immatriculation: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    nombre_actions: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    valeur_nominale: Mapped[Decimal | None] = mapped_column(Numeric(10, 2), nullable=True)
     # Rempli uniquement par upload manuel de l'utilisateur (service 1.1.9/Parcours),
     # jamais par un job automatique — voir "Schemas grp 4". Pas de ondelete ici :
     # un document ne doit pas disparaître silencieusement de ce profil.

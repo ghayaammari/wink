@@ -1,0 +1,53 @@
+{
+  "source_file": "modele_sas",
+  "renvois": [
+    {
+      "page": 23,
+      "index": 813,
+      "texte": "et préalable du Comité Direction pour prendre les décisions énumérées à l’article 21-4 ci-dessus.",
+      "numero_imprime_trouve": 21,
+      "numero_corrige_attendu": 22,
+      "statut": "A_CORRIGER"
+    },
+    {
+      "page": 24,
+      "index": 840,
+      "texte": "La collectivité des associés est tenue de désigner, dans les conditions prévues à l’article 27 des présents",
+      "numero_imprime_trouve": 27,
+      "numero_corrige_attendu": 28,
+      "statut": "A_CORRIGER"
+    },
+    {
+      "page": 24,
+      "index": 850,
+      "texte": "aux comptes dans les conditions prévues à l’article 27 des présents statuts.",
+      "numero_imprime_trouve": 27,
+      "numero_corrige_attendu": 28,
+      "statut": "A_CORRIGER"
+    },
+    {
+      "page": 24,
+      "index": 855,
+      "texte": "des associés désigne un ou plusieurs commissaires aux comptes dans les conditions prévues à l’article 27",
+      "numero_imprime_trouve": 27,
+      "numero_corrige_attendu": 28,
+      "statut": "A_CORRIGER"
+    },
+    {
+      "page": 27,
+      "index": 950,
+      "texte": "légales particulières et celles visées à l’article 27-6 ci-dessous. Il est précisé, en tant que de besoin, que les",
+      "numero_imprime_trouve": 27,
+      "numero_corrige_attendu": 28,
+      "statut": "A_CORRIGER"
+    },
+    {
+      "page": 27,
+      "index": 954,
+      "texte": "6 - Par exception aux stipulations de l’article 27-5 ci-dessus, les décisions collectives énumérées ci-après",
+      "numero_imprime_trouve": 27,
+      "numero_corrige_attendu": 28,
+      "statut": "A_CORRIGER"
+    }
+  ]
+}
