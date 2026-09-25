@@ -16,7 +16,7 @@ psycopg[binary]>=3.2.3          # driver PostgreSQL utilisé dans backend/shared
 pgvector>=0.3.6                 # type Vector SQLAlchemy pour content_embeddings (backend/shared/knowledge_base/) — nécessite l'extension Postgres `vector` activée côté Supabase
 
 # --- Validation / schémas ---
-pydantic>=2.10.4
+pydantic>=2.9.0                 # schemas de sortie structuree (GapAnalysisResult, etc.)
 pydantic-settings>=2.7.0        # lecture typée du .env (à utiliser si on centralise la config plus tard)
 email-validator>=2.2.0          # requis par EmailStr (backend/shared/auth/schemas/auth_schemas.py)
 
@@ -34,7 +34,7 @@ google-auth>=2.36.0             # vérification des id_token envoyés par le SDK
 requests>=2.32.3                # dépendance de google.auth.transport.requests — pas installée automatiquement par google-auth
 
 # --- Extraction de document (agents/shared/document_processing/) ---
-groq>=0.13.0                    # appels VLM (vision) et LLM structuré, hébergés sur Groq
+groq>=0.13.0                    # appels VLM (vision, extraction de document) + client JSON direct pour le pipeline AIPD (agents/compliance_agent/rgpd_service.py, ancien pattern deliberement conserve)
 pdf2image>=1.17.0                # PDF -> images de page, avant envoi au VLM. Nécessite poppler-utils (dépendance système, pas pip)
 pyyaml>=6.0.2                    # lecture de agents/config/llm_config.yaml
 
@@ -42,6 +42,12 @@ pyyaml>=6.0.2                    # lecture de agents/config/llm_config.yaml
 openai>=1.0.0    # backend/chercheur/services/llm_client.py
 httpx>=0.28.0    # backend/chercheur/services/research_extraction_service.py
 pypdf>=5.0.0     # backend/chercheur/services/research_extraction_service.py
+reportlab>=4.2.5  # generation PDF -- compliance_report_service.py + rendu des documents finaux (pdf_rendering_service.py)
+
+# --- Agent conformité à raisonnement autonome (agents/compliance_agent/) ---
+langgraph>=0.2.60               # graphe ReAct (agent <-> tools) + reponse structuree finale, boucle de raisonnement du copilot
+langchain-groq>=0.2.1           # ChatGroq, modele LangChain branche sur l'API Groq
+langchain-core>=0.3.21          # types Tool/BaseMessage utilises par langgraph.prebuilt
 
 # --- Embeddings copilot (agents/ingestion/embedding_service.py) ---
 FlagEmbedding>=1.3.4            # BGE-M3 en local (Option A) — tire torch/transformers, installation lourde (plusieurs Go)
@@ -54,5 +60,6 @@ fonttools>=4.55.0                # requis par pypdf (extraction PDF, voir web_fe
 # --- Extraction de documents source (backend/shared/knowledge_base/scripts/extract_pacte_fondateurs_raw.py) ---
 python-docx>=1.1.2              # lecture .docx (paragraphes + tableaux), service 1.1.13 (pacte de fondateurs)
 
-# --- Génération PDF de documents finaux (backend/entrepreneur/services/pdf_rendering_service.py) ---
-reportlab>=4.2.5                # rendu texte -> PDF, service 1.1.13 (pacte de fondateurs) -- pur Python, sans dépendance système (contrairement à weasyprint/wkhtmltopdf), réutilisable par 1.1.4 (statuts)
+# --- Génération des pitch decks (backend/entrepreneur/services/pitch_deck_*) ---
+python-pptx>=1.0.2    # backend/entrepreneur/services/pitch_deck_renderer_service.py (service 6.6.2)
+Pillow>=10.0.0         # backend/entrepreneur/services/pitch_deck_assets.py (validation du logo du pitch deck)

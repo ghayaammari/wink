@@ -163,6 +163,18 @@ export function validateField(
   })
 }
 
+/** Bouton "Tout valider" du mode révision -- confirme en un appel tous les
+ * champs encore pending_confirmation de ce travail. Le travail bascule à
+ * validation_status="confirmed" côté backend une fois qu'il n'en reste
+ * plus aucun (voir research_work_service.confirm_all_pending_fields) --
+ * la réponse renvoie le travail à jour, pas besoin d'un reload séparé pour
+ * voir son statut changer. */
+export function confirmAllPendingFields(accessToken: string, workId: string): Promise<ResearchWork> {
+  return request<ResearchWork>(`/chercheur/travaux/${workId}/valider-tout`, accessToken, {
+    method: "PATCH",
+  })
+}
+
 export async function deleteWork(accessToken: string, workId: string): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/chercheur/travaux/${workId}`, {
     method: "DELETE",

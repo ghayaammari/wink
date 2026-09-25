@@ -30,10 +30,23 @@ from backend.entrepreneur.routes.name_availability_router import router as name_
 from backend.entrepreneur.routes.project_router import router as project_router
 from backend.entrepreneur.routes.roadmap_router import router as roadmap_router
 from backend.entrepreneur.routes.pacte_fondateur_copilot_router import router as pacte_fondateur_copilot_router
+from backend.entrepreneur.routes.rgpd_router import router as rgpd_router
+from backend.entrepreneur.routes.aipd_router import router as aipd_router
+from backend.entrepreneur.routes.ai_act_router import router as ai_act_router
+from backend.entrepreneur.routes.sector_router import router as sector_router
+from backend.entrepreneur.routes.copilot_router import router as copilot_router
+from backend.entrepreneur.routes.pitch_router import router as pitch_router
+from backend.entrepreneur.routes.certification_router import router as certification_router
+from backend.matching.routes.research_need_router import router as research_need_router
+from backend.matching.routes.chercheur_matching_router import router as chercheur_matching_router
+from backend.entrepreneur.routes.startup_offer_matching_router import router as startup_offer_matching_router
+from backend.entrepreneur.routes.investment_offer_catalogue_router import router as investment_offer_catalogue_router
 from backend.shared.auth.routes.auth_router import router as auth_router
 from backend.chercheur.routes.researcher_profile_router import router as researcher_profile_router
 from backend.chercheur.routes.research_work_router import router as research_work_router
 from backend.chercheur.routes.researcher_past_expertise_router import router as researcher_past_expertise_router
+from backend.investisseur.routes.investment_offer_router import router as investment_offer_router
+from backend.investisseur.routes.investisseur_matching_router import router as investisseur_matching_router
 from backend.investisseur.routes.investor_router import router as investor_router
 from backend.shared.knowledge_base.routes.legal_texts_validation_router import (
     router as legal_texts_validation_router,
@@ -45,6 +58,9 @@ from backend.shared.knowledge_base.routes.jal_reference_validation_router import
 from backend.shared.knowledge_base.routes.legal_announcement_guides_validation_router import (
     router as legal_announcement_guides_validation_router,
 )
+from backend.shared.knowledge_base.routes.administrative_guides_validation_router import (
+    router as administrative_guides_validation_router,
+)
 
 
 app = FastAPI(title="Wink API", version="0.1.0")
@@ -52,10 +68,19 @@ app.include_router(researcher_profile_router)
 app.include_router(research_work_router)
 app.include_router(researcher_past_expertise_router)
 app.include_router(investor_router)
+# investisseur_matching_router AVANT investment_offer_router : les deux
+# partagent le prefix "/investisseur/offres", et FastAPI teste les routes
+# dans l'ordre d'inclusion -- la route statique GET /interessantes doit
+# être vue avant la route dynamique GET /{offer_id} d'investment_offer_router,
+# sinon "interessantes" est capturé comme offer_id et échoue la validation
+# UUID (422 "Input should be a valid UUID").
+app.include_router(investisseur_matching_router)
+app.include_router(investment_offer_router)
 app.include_router(legal_texts_validation_router)
 app.include_router(sector_insurance_validation_router)
 app.include_router(jal_reference_validation_router)
 app.include_router(legal_announcement_guides_validation_router)
+app.include_router(administrative_guides_validation_router)
 
 # CORS : nécessaire dès que le frontend (React, autre origine) appelle l'API
 # depuis un navigateur. Liste lue depuis l'env, avec un défaut de dev
@@ -84,6 +109,17 @@ app.include_router(document_generation_router)
 app.include_router(document_vault_router)
 app.include_router(roadmap_router)
 app.include_router(pacte_fondateur_copilot_router)
+app.include_router(rgpd_router)
+app.include_router(aipd_router)
+app.include_router(ai_act_router)
+app.include_router(sector_router)
+app.include_router(copilot_router)
+app.include_router(pitch_router)
+app.include_router(certification_router)
+app.include_router(research_need_router)
+app.include_router(chercheur_matching_router)
+app.include_router(startup_offer_matching_router)
+app.include_router(investment_offer_catalogue_router)
 app.include_router(name_availability_router)
 app.include_router(legal_announcement_router)
 

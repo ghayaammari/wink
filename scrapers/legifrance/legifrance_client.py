@@ -54,8 +54,31 @@ from html import unescape
 
 import requests
 
-_TOKEN_URL = "https://oauth.piste.gouv.fr/api/oauth/token"
-_API_BASE = "https://api.piste.gouv.fr/dila/legifrance/lf-engine-app"
+# PISTE a 2 environnements sur des DOMAINES DIFFERENTS (pas juste une variable
+# d'URL) — une application/des cles creees en sandbox echouent en production
+# et inversement ("invalid_client", constate en pratique le 16/09/2026 avec
+# une cle sandbox appelee contre les hotes production ci-dessous). Verifie
+# via la page officielle "PISTE URL decommissioning" (migration effective du
+# 30/09/2023, domaines confirmes) :
+#   production : oauth.piste.gouv.fr        / api.piste.gouv.fr
+#   sandbox    : sandbox-oauth.piste.gouv.fr / sandbox-api.piste.gouv.fr
+# LEGIFRANCE_ENV bascule les deux en une fois plutot que 2 variables separees
+# (elles vont toujours ensemble, jamais token prod + API sandbox ou l'inverse).
+_LEGIFRANCE_ENV = os.environ.get("LEGIFRANCE_ENV", "sandbox").strip().lower()
+
+if _LEGIFRANCE_ENV == "production":
+    _TOKEN_URL = "https://oauth.piste.gouv.fr/api/oauth/token"
+    _API_BASE = "https://api.piste.gouv.fr/dila/legifrance/lf-engine-app"
+elif _LEGIFRANCE_ENV == "sandbox":
+    _TOKEN_URL = "https://sandbox-oauth.piste.gouv.fr/api/oauth/token"
+    _API_BASE = "https://sandbox-api.piste.gouv.fr/dila/legifrance/lf-engine-app"
+else:
+    # ValueError, pas LegifranceApiError : cette classe est definie plus bas
+    # dans ce module, une erreur de config au chargement du module ne peut
+    # pas encore la referencer (leve avant sa definition).
+    raise ValueError(
+        f"LEGIFRANCE_ENV='{_LEGIFRANCE_ENV}' invalide — attendu 'sandbox' ou 'production'."
+    )
 
 _token: str | None = None
 _token_expires_at: float = 0.0
@@ -63,7 +86,7 @@ _token_expires_at: float = 0.0
 # Cache en mémoire process du texte entier par legifrance_source_id — évite de
 # retélécharger 51 Mo à chaque bloc quand plusieurs blocs partagent le même
 # texte source (9 blocs pour le seul Code de commerce, voir docstring module).
-_text_cache: dict[str, dict] = {}
+_text_cache: dict[tuple[str, str], dict] = {}
 
 
 class LegifranceApiError(Exception):
@@ -110,10 +133,37 @@ def _post(path: str, body: dict) -> dict:
     return response.json()
 
 
-def _fetch_text(legifrance_source_id: str, *, date: str | None = None) -> dict:
-    """Récupère le texte entier (code/loi) via consult/legiPart, mis en cache
-    par legifrance_source_id — voir docstring du module : un identifiant de
-    section n'est pas accepté en entrée, seul le texte entier l'est.
+# CORRECTIF du 17/09/2026 — consult/legiPart est reserve au fonds LEGI (les
+# Codes) : un textId LEGITEXT d'une Loi (fonds LODA, ex: Loi n78-17) s'y fait
+# rejeter en 403 meme s'il est du bon type LEGITEXT (les deux fonds partagent
+# ce prefixe d'id mais pas le meme endpoint de consultation). Cause reelle du
+# 403 constate sur la collecte RGPD le 17/09/2026 - au debut attribue a tort a
+# un mauvais id (JORFTEXT au lieu de LEGITEXT, corrige separement), alors que
+# l'id LEGITEXT correct echouait aussi pour cette veritable raison. Voir
+# fetch_articles_in_text(fonds=...) plus bas.
+_ENDPOINT_PAR_FONDS = {
+    "LEGI": "consult/legiPart",
+    "LODA": "consult/lawDecree",
+}
+
+
+def _fetch_text(legifrance_source_id: str, *, date: str | None = None, fonds: str = "LEGI") -> dict:
+    """Récupère le texte entier (code ou loi/décret selon `fonds`), mis en
+    cache par (fonds, legifrance_source_id) — voir docstring du module : un
+    identifiant de section n'est pas accepté en entrée, seul le texte entier
+    l'est.
+
+    `fonds` choisit l'endpoint PISTE : "LEGI" (défaut, Codes) -> consult/
+    legiPart, "LODA" (Lois/Ordonnances/Décrets/Arrêtés) -> consult/lawDecree.
+    Le corps de requête est identique dans les deux cas ({"textId", "date"}).
+
+    Forme de la réponse de consult/lawDecree (racine avec `articles`/`sections`
+    directement, comme consult/legiPart) : PAS ENCORE vérifiée par un vrai
+    appel au moment de l'écriture (17/09/2026) — seul consult/legiPart l'a été
+    (test du 10/09/2026, Code de commerce). Si `fetch_articles_in_text(...,
+    fonds="LODA")` renvoie une liste vide de façon suspecte, vérifier ici en
+    premier : la réponse est peut-être enveloppée différemment (ex: sous une
+    clé `text` ou `article` plutôt qu'à la racine).
 
     `date` par défaut = aujourd'hui, jamais omis : un premier essai sans date
     a échoué avec une erreur 500 côté serveur PISTE (message générique,
@@ -121,12 +171,17 @@ def _fetch_text(legifrance_source_id: str, *, date: str | None = None) -> dict:
     consult/legiPart prévoit ce champ, et on veut de toute façon la version en
     vigueur aujourd'hui (cohérent avec le filtre etat="VIGUEUR" plus bas).
     """
-    if legifrance_source_id in _text_cache:
-        return _text_cache[legifrance_source_id]
+    cache_key = (fonds, legifrance_source_id)
+    if cache_key in _text_cache:
+        return _text_cache[cache_key]
+
+    endpoint = _ENDPOINT_PAR_FONDS.get(fonds)
+    if endpoint is None:
+        raise LegifranceApiError(f"fonds '{fonds}' inconnu — attendu 'LEGI' ou 'LODA'.")
 
     body = {"textId": legifrance_source_id, "date": date or date_type.today().isoformat()}
-    payload = _post("consult/legiPart", body)
-    _text_cache[legifrance_source_id] = payload
+    payload = _post(endpoint, body)
+    _text_cache[cache_key] = payload
     return payload
 
 
@@ -145,8 +200,27 @@ def _find_section(node: dict, section_id: str) -> dict | None:
     return None
 
 
+_EPOCH_UTC = datetime(1970, 1, 1, tzinfo=timezone.utc)
+
+
+def _millis_to_date(millis: float) -> date_type:
+    """Convertit un timestamp en millisecondes en date, sans passer par
+
+    `datetime.fromtimestamp()` — CORRECTIF du 18/09/2026 : cette fonction
+    plante avec `OSError: [Errno 22] Invalid argument` sous Windows pour tout
+    timestamp negatif (date antérieure au 01/01/1970), constaté en pratique
+    sur un article de la Constitution du 4 octobre 1958 (dateDebut négatif).
+    `EPOCH_UTC + timedelta(...)` fonctionne pour n'importe quelle date, sur
+    toute plateforme — les textes juridiques français remontent bien avant
+    1970 (cette Constitution en est un exemple direct), donc les timestamps
+    négatifs ne sont pas un cas rare à ignorer.
+    """
+    return (_EPOCH_UTC + timedelta(milliseconds=millis)).date()
+
+
 def _parse_legifrance_date(value) -> date_type | None:
     """Légifrance renvoie ses dates en millisecondes depuis 1970 (ex: dateDebut
+
     = 969494400000), pas en texte lisible — vu en pratique sur un vrai appel
     (erreur `cannot cast type bigint to date` avant cette conversion). Gère
     aussi une chaîne ISO par prudence, au cas où un autre champ l'utilise.
@@ -169,8 +243,10 @@ def _parse_legifrance_date(value) -> date_type | None:
     if isinstance(value, str) and value.isdigit():
         value = int(value)
     if isinstance(value, (int, float)):
-        return (datetime(1970, 1, 1, tzinfo=timezone.utc) + timedelta(milliseconds=value)).date()
+        return _millis_to_date(value)
     if isinstance(value, str):
+        if value.lstrip("-").isdigit():
+            return _millis_to_date(int(value))
         try:
             return date_type.fromisoformat(value[:10])
         except ValueError:
@@ -243,18 +319,20 @@ def _collect_articles(node: dict) -> list[dict]:
 
 
 def fetch_articles_in_block(
-    legifrance_source_id: str, legifrance_section_id: str, *, date: str | None = None
+    legifrance_source_id: str, legifrance_section_id: str, *, date: str | None = None, fonds: str = "LEGI"
 ) -> list[dict]:
     """Récupère tous les articles en vigueur d'un bloc. Le texte source entier
-    n'est téléchargé qu'une fois par legifrance_source_id (cache), même si
-    plusieurs blocs y font référence — voir _fetch_text().
+    n'est téléchargé qu'une fois par (fonds, legifrance_source_id) (cache),
+    même si plusieurs blocs y font référence — voir _fetch_text(). `fonds`
+    par défaut "LEGI" (Codes) : tous les appelants actuels de cette fonction
+    (blocs_formes_juridiques.py) portent sur des Codes.
     """
     if not legifrance_source_id or not legifrance_section_id:
         raise LegifranceApiError(
             "legifrance_source_id / legifrance_section_id vide — complète "
             "blocs_formes_juridiques.py avant de lancer la collecte."
         )
-    texte = _fetch_text(legifrance_source_id, date=date)
+    texte = _fetch_text(legifrance_source_id, date=date, fonds=fonds)
     section = _find_section(texte, legifrance_section_id)
     if section is None:
         raise LegifranceApiError(
@@ -303,3 +381,67 @@ def fetch_single_article_by_id(legifrance_article_id: str, *, date: str | None =
         "texte_brut": strip_html(texte_html),
         "date_effet": _parse_legifrance_date(article.get("dateDebut")),
     }
+
+
+def fetch_article_by_id(legiarti_id: str, *, date: str | None = None) -> dict:
+    """Récupère UN article précis via `consult/getArticle`, par son identifiant
+    LEGIARTI — endpoint distinct de `fetch_articles_in_block()` ci-dessus.
+
+    Nécessaire pour le RGPD (bloc `articles_rgpd.py`) : les articles utiles de
+    la Loi n°78-17 (30, 36, 37) ne sont PAS regroupés dans une même section
+    contiguë de l'arborescence légale (contrairement à SAS/SASU dans le Code
+    de commerce) — même situation que les articles CGI de la micro-entreprise,
+    déjà identifiée comme cas à part dans blocs_formes_juridiques.py. Plutôt
+    que de forcer un identifiant de section qui n'existe pas, on récupère ces
+    articles un par un par leur LEGIARTI.
+
+    `id` renvoyé par `consult/getArticle` VÉRIFIÉ documentairement (voir
+    docstring du module) mais PAS ENCORE testé par un vrai appel — contrairement
+    à `consult/legiPart`, validé le 10/09/2026. La forme de la réponse
+    (`payload["article"]` avec les mêmes champs `content`/`num`/`etat`/
+    `dateDebut` que dans `consult/legiPart`) est une hypothèse basée sur le
+    schéma officiel PISTE, à confirmer au premier appel réel une fois le
+    compte PISTE débloqué — voir TODO dans articles_rgpd.py.
+    """
+    payload = _post("consult/getArticle", {"id": legiarti_id})
+    article = payload.get("article", payload)
+    if article.get("etat") not in (None, "VIGUEUR"):
+        raise LegifranceApiError(
+            f"Article '{legiarti_id}' n'est pas en vigueur (etat={article.get('etat')}) — "
+            "à vérifier manuellement, ne devrait pas arriver pour un article cité par la CNIL."
+        )
+    return {
+        "article_numero": article.get("num"),
+        "texte_brut": strip_html(article.get("content") or ""),
+        "date_effet": _parse_legifrance_date(article.get("dateDebut")),
+    }
+
+
+def fetch_articles_by_ids(legiarti_ids: list[str], *, date: str | None = None) -> list[dict]:
+    """Enchaîne fetch_article_by_id() pour une liste d'identifiants — un appel
+    réseau par article (pas de mise en cache de texte entier possible ici,
+    contrairement à fetch_articles_in_block(), puisqu'il n'y a pas de texte
+    source commun à télécharger une fois)."""
+    return [fetch_article_by_id(legiarti_id, date=date) for legiarti_id in legiarti_ids]
+
+
+def fetch_articles_in_text(legifrance_source_id: str, *, date: str | None = None, fonds: str = "LEGI") -> list[dict]:
+    """Récupère TOUS les articles en vigueur d'un texte entier, sans viser une
+    section précise — variante de fetch_articles_in_block() qui saute l'étape
+    _find_section() et collecte directement depuis la racine du texte renvoyé
+    par _fetch_text().
+
+    Cas d'usage : une source où on veut "tout ce qui est utile au copilot",
+    pas un périmètre pré-découpé par bloc (contrairement au Code de commerce,
+    où seuls 2-3 chapitres sur des dizaines concernent Wink) — la Loi n°78-17
+    est un texte de taille bien plus réduite et entièrement centré sur la
+    protection des données, donc le collecter en entier est raisonnable, pas
+    un abus du même ordre que collecter tout le Code de commerce (51 Mo,
+    7334 articles, vu lors du test du 10/09/2026 avec un textId sans section).
+
+    `fonds` : "LEGI" (défaut, Codes) ou "LODA" (Lois/Ordonnances/Décrets/
+    Arrêtés) — la Loi n°78-17 est du fonds LODA, voir texte_loi_rgpd.py et le
+    correctif du 17/09/2026 dans _fetch_text().
+    """
+    texte = _fetch_text(legifrance_source_id, date=date, fonds=fonds)
+    return _collect_articles(texte)

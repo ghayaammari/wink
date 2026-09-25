@@ -43,8 +43,20 @@ class ResearcherFieldValue(Base):
     field_name: Mapped[str] = mapped_column(String(100), nullable=False)
     field_value: Mapped[str] = mapped_column(Text, nullable=False)
 
-    source: Mapped[str] = mapped_column(String(20), nullable=False)
-    validation_status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="pending_confirmation")
+    # VARCHAR(30), pas 20 : "extracted_from_papers" (une des 4 valeurs du
+    # CHECK ci-dessous) fait 21 caracteres -- String(20) faisait echouer
+    # (StringDataRightTruncation) TOUTE insertion avec cette source, donc
+    # TOUTE extraction HAL/OpenAlex reelle (constate le 22/09/2026 sur un
+    # premier test d'extraction). Largeur corrigee avec marge plutot que
+    # pile 21, pour ne pas re-egratigner la limite si une 5e source, plus
+    # longue, s'ajoute un jour.
+    source: Mapped[str] = mapped_column(String(30), nullable=False)
+    # VARCHAR(30) par precaution, meme si "pending_confirmation" (21... verifie :
+    # 20 caracteres) tient tout juste dans du VARCHAR(20) aujourd'hui -- aucune
+    # marge, la meme categorie de bug que source ci-dessus guette au premier
+    # statut plus long ajoute au CHECK. Corrige en meme temps que source
+    # puisque ce fichier est deja modifie pour cette raison.
+    validation_status: Mapped[str] = mapped_column(String(30), nullable=False, server_default="pending_confirmation")
 
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(

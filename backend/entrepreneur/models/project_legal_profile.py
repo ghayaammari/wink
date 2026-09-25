@@ -50,7 +50,7 @@ class ProjectLegalProfile(Base):
     # NOT NULL une fois la société immatriculée (contrainte applicative : la
     # désignation intervenant au dépôt, avant immatriculation e13→e16).
     legal_representative_associate_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("project_associates.id"), nullable=True
+        UUID(as_uuid=True), ForeignKey("project_associates.id", ondelete="SET NULL"), nullable=True
     )
     # Faits uniques par projet, produits par 1.1.4, consommés aussi par 1.1.5.
     objet_social: Mapped[str | None] = mapped_column(Text, nullable=True)

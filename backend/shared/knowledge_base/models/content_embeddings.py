@@ -62,9 +62,15 @@ class ContentEmbeddings(Base):
     # avant de composer une réponse. Liste fermée (voir CheckConstraint ck_content_embeddings_domaine
     # ci-dessous) : les valeurs du schéma I1 (dbe, annonce_legale, statuts, pre_depot, rejet,
     # tarifs, pacte_fondateurs) + "roadmap" (Groupe 1) + "forme_juridique"/"statuts_societe"
-    # (service 1.1.1, Phase 3 — mêmes valeurs que legal_texts.domaine_reglementaire).
-    # Toute nouvelle source (contract_clauses_library...) devra ajouter sa valeur ici ET dans
-    # la contrainte — sinon l'insertion échoue au lieu de laisser passer une valeur incohérente.
+    # (service 1.1.1, Phase 3) + "assurance_sectorielle" (service 1.1.10) + "rgpd" (service 3.3.1,
+    # migration d3a9f21c6b48) + "ai_act" (service 3.3.12, migration e2c4a6b8d0f1) +
+    # "secteur_fintech"/"secteur_healthtech" (service 3.3.6, diagnostic d'ecart sectoriel,
+    # migration h5c7d9e1f3a5).
+    # CORRECTIF du 19/09/2026 : ce commentaire et la CheckConstraint ci-dessous n'avaient pas ete
+    # mis a jour lors de l'ajout de 'rgpd' par d3a9f21c6b48 — la contrainte reelle en base l'acceptait
+    # deja, seul ce fichier etait desynchronise (dette non bloquante, mais trompeuse a la lecture).
+    # Toute nouvelle source devra ajouter sa valeur ici ET dans la contrainte ET dans une migration —
+    # sinon l'insertion echoue en base, ou (comme ici) le fichier ment sur l'etat reel du schema.
     domaine: Mapped[str] = mapped_column(String(50), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, server_default=func.now())
 
@@ -85,7 +91,7 @@ class ContentEmbeddings(Base):
         CheckConstraint(
             "domaine IN ('dbe', 'annonce_legale', 'statuts', 'pre_depot', 'rejet', "
             "'tarifs', 'pacte_fondateurs', 'roadmap', 'forme_juridique', 'statuts_societe', "
-            "'assurance_sectorielle')",
+            "'assurance_sectorielle', 'rgpd', 'ai_act', 'secteur_fintech', 'secteur_healthtech')",
             name="ck_content_embeddings_domaine",
         ),
     )

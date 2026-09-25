@@ -3,6 +3,7 @@ import { ApiError } from "../../shared/api/authApi"
 import { useAuth } from "../../shared/context/AuthContext"
 import { getMyResearcherProfile } from "../api/researcherProfileApi"
 import {
+  confirmAllPendingFields,
   depositWork,
   deleteWork,
   listMyWorks,
@@ -260,6 +261,21 @@ export default function ResearchWorksPage() {
     }
   }
 
+  // "Tout valider" (mode révision) -- confirme tous les champs pending d'un
+  // travail en un appel ; la réponse contient déjà le travail à jour
+  // (validation_status potentiellement passé à "confirmed"), rechargée dans
+  // works pour que la card reflète le nouveau statut sans recharger toute
+  // la liste à l'aveugle.
+  async function handleConfirmAll(workId: string) {
+    if (!accessToken) return
+    try {
+      const updated = await confirmAllPendingFields(accessToken, workId)
+      setWorks((prev) => (prev ? prev.map((w) => (w.id === workId ? updated : w)) : prev))
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "La validation groupée a échoué.")
+    }
+  }
+
   async function handleDeleteWork(workId: string) {
     if (!accessToken) return
     try {
@@ -317,6 +333,7 @@ export default function ResearchWorksPage() {
             key={work.id}
             work={work}
             onValidate={handleValidate}
+            onConfirmAll={handleConfirmAll}
             onDelete={handleDeleteWork}
             onReload={() => loadWorks().catch(() => {})}
           />
@@ -329,11 +346,12 @@ export default function ResearchWorksPage() {
 interface WorkCardProps {
   work: ResearchWork
   onValidate: (fieldValueId: string, action: ValidateAction, newValue?: string) => void
+  onConfirmAll: (workId: string) => Promise<void>
   onDelete: (workId: string) => void
   onReload: () => void
 }
 
-function WorkCard({ work, onValidate, onDelete, onReload }: WorkCardProps) {
+function WorkCard({ work, onValidate, onConfirmAll, onDelete, onReload }: WorkCardProps) {
   const [isOpen, setIsOpen] = useState(false)
   const pendingCount = work.generated_field_values.filter(
     (f) => f.validation_status === "pending_confirmation",
@@ -370,7 +388,13 @@ function WorkCard({ work, onValidate, onDelete, onReload }: WorkCardProps) {
 
       {isOpen && (
         <div className="border-t border-gray-100 p-4">
-          <WorkDetails work={work} onValidate={onValidate} onDelete={onDelete} onReload={onReload} />
+          <WorkDetails
+            work={work}
+            onValidate={onValidate}
+            onConfirmAll={onConfirmAll}
+            onDelete={onDelete}
+            onReload={onReload}
+          />
         </div>
       )}
     </section>
@@ -380,13 +404,28 @@ function WorkCard({ work, onValidate, onDelete, onReload }: WorkCardProps) {
 interface WorkDetailsProps {
   work: ResearchWork
   onValidate: (fieldValueId: string, action: ValidateAction, newValue?: string) => void
+  onConfirmAll: (workId: string) => Promise<void>
   onDelete: (workId: string) => void
   onReload: () => void
 }
 
-function WorkDetails({ work, onValidate, onDelete, onReload }: WorkDetailsProps) {
+function WorkDetails({ work, onValidate, onConfirmAll, onDelete, onReload }: WorkDetailsProps) {
   const [mode, setMode] = useState<"closed" | "review" | "edit">("closed")
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isConfirmingAll, setIsConfirmingAll] = useState(false)
+
+  async function handleConfirmAllClick() {
+    setIsConfirmingAll(true)
+    try {
+      await onConfirmAll(work.id)
+      // Plus rien à valider une fois l'appel terminé -- retour à la vue
+      // normale plutôt que de laisser le mode "review" affiché sur une
+      // liste de champs devenue vide.
+      setMode("closed")
+    } finally {
+      setIsConfirmingAll(false)
+    }
+  }
 
   function handleDeleteClick() {
     // Confirmation native simple — suffisant pour une action destructrice
@@ -425,9 +464,25 @@ function WorkDetails({ work, onValidate, onDelete, onReload }: WorkDetailsProps)
         </span>
         <div className="flex items-center gap-3">
           {mode !== "closed" ? (
-            <button type="button" onClick={() => setMode("closed")} className="text-xs font-medium text-indigo-600">
-              Terminer
-            </button>
+            <>
+              {/* Uniquement en mode révision, tant qu'il reste des champs à
+                  trancher -- confirme tout d'un coup plutôt que Confirmer
+                  champ par champ (voir handleConfirmAllClick, qui referme
+                  le mode révision une fois terminé). */}
+              {mode === "review" && pendingFieldsCount > 0 && (
+                <button
+                  type="button"
+                  onClick={handleConfirmAllClick}
+                  disabled={isConfirmingAll}
+                  className="text-xs font-medium text-green-700 disabled:opacity-50"
+                >
+                  {isConfirmingAll ? "Validation..." : `Tout valider (${pendingFieldsCount})`}
+                </button>
+              )}
+              <button type="button" onClick={() => setMode("closed")} className="text-xs font-medium text-indigo-600">
+                Terminer
+              </button>
+            </>
           ) : (
             <>
               {/* Visible seulement s'il y a des champs en attente — mène au

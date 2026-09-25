@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import LegalTextsValidationPage from "./admin/pages/LegalTextsValidationPage"
 import SectorInsuranceValidationPage from "./admin/pages/SectorInsuranceValidationPage"
+import AdministrativeGuidesValidationPage from "./admin/pages/AdministrativeGuidesValidationPage"
 import { getMyResearcherProfile, type ResearcherProfileRead } from "./chercheur/api/researcherProfileApi"
 import ResearcherOnboardingPage from "./chercheur/pages/ResearcherOnboardingPage"
 import ResearcherProfileDetailsPage from "./chercheur/pages/ResearcherProfileDetailsPage"
@@ -13,6 +14,15 @@ import DocumentVaultPage from "./entrepreneur/pages/DocumentVaultPage"
 import MyProjectLayout from "./entrepreneur/pages/MyProjectLayout"
 import MyProjectPage from "./entrepreneur/pages/MyProjectPage"
 import PacteFondateursV2Page from "./entrepreneur/pages/PacteFondateursV2Page"
+import CompliancePlanPage from "./entrepreneur/pages/CompliancePlanPage"
+import CertificationSecnumcloudPage from "./entrepreneur/pages/CertificationSecnumcloudPage"
+import CopilotPage from "./entrepreneur/pages/CopilotPage"
+import PitchDeckPage from "./entrepreneur/pages/PitchDeckPage"
+import CopilotSidebarConversations from "./entrepreneur/components/copilot/CopilotSidebarConversations"
+import RgpdDiagnosticPage from "./entrepreneur/pages/RgpdDiagnosticPage"
+import AipdAnalysisPage from "./entrepreneur/pages/AipdAnalysisPage"
+import AiActDiagnosticPage from "./entrepreneur/pages/AiActDiagnosticPage"
+import SectorDiagnosticPage from "./entrepreneur/pages/SectorDiagnosticPage"
 import PlanActionPage from "./entrepreneur/pages/PlanActionPage"
 import ProjectGeneralInfoPage from "./entrepreneur/pages/ProjectGeneralInfoPage"
 import ProjectLegalInfoPage from "./entrepreneur/pages/ProjectLegalInfoPage"
@@ -21,6 +31,13 @@ import StatutsSasPage from "./entrepreneur/pages/StatutsSasPage"
 import TeamCapitalPage from "./entrepreneur/pages/TeamCapitalPage"
 import DirigeantsPage from "./entrepreneur/pages/DirigeantsPage"
 import LegalAnnouncementPage from "./entrepreneur/pages/LegalAnnouncementPage"
+import ResearchNeedsPage from "./entrepreneur/pages/ResearchNeedsPage"
+import RecommandationsInteressantesPage from "./entrepreneur/pages/RecommandationsInteressantesPage"
+import InvestmentOpportunitiesPage from "./entrepreneur/pages/InvestmentOpportunitiesPage"
+import InterestingOffersPage from "./entrepreneur/pages/InterestingOffersPage"
+import InvestmentOffersPage from "./investisseur/pages/InvestmentOffersPage"
+import InvestmentOfferDetailPage from "./investisseur/pages/InvestmentOfferDetailPage"
+import InterestingStartupsPage from "./investisseur/pages/InterestingStartupsPage"
 import { getMyInvestorProfile, type InvestorProfileRead } from "./investisseur/api/investorProfileApi"
 import InvestorOnboardingPage from "./investisseur/pages/InvestorOnboardingPage"
 import InvestorProfilePage from "./investisseur/pages/InvestorProfilePage"
@@ -82,6 +99,75 @@ const ICON_CHECKLIST = (
 // pas par état de projet (voir Sidebar.tsx, aucune autre entrée ne dépend
 // d'un état métier). "Mon profil" et la déconnexion sont gérés par Sidebar
 // elle-même, pas listés ici.
+// Icone "bouclier" -- nav "Conformite" cote entrepreneur (2e plan d'action,
+// EPIC-03). Distincte de ICON_CHECKLIST (roadmap EPIC-01) : conformite
+// reglementaire, pas une checklist de creation.
+const ICON_SHIELD = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M9 12.75 11.25 15 15 9.75M12 3c-2.755 0-5.455.232-8.083.678-.795.134-1.417.79-1.417 1.615V9.75c0 5.19 3.045 9.673 7.5 11.75 4.455-2.077 7.5-6.56 7.5-11.75V5.293c0-.825-.622-1.48-1.417-1.615A48.09 48.09 0 0 0 12 3Z"
+  />
+)
+
+// Icone "bulle de chat" -- nav "Copilot" cote entrepreneur (entree de
+// premier niveau comme Plan d'action/Conformite, pas un widget flottant a
+// part, voir CopilotPage.tsx).
+const ICON_CHAT = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.5-1.185A8.959 8.959 0 0 1 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
+  />
+)
+
+// Icone "graphique de presentation" -- nav "Pitch deck" cote entrepreneur
+// (service 6.6.2, EPIC-06/I5).
+const ICON_PITCH = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M3.75 5.25h16.5M3.75 5.25v10.5a1.5 1.5 0 0 0 1.5 1.5h4.5m-6-12h16.5m0 0v10.5a1.5 1.5 0 0 1-1.5 1.5h-4.5m-6 0-1.5 3.75m7.5-3.75 1.5 3.75m-9 0h10.5M9 12.75l2.25-2.25 2.25 1.5 3-3"
+  />
+)
+
+// Icone "loupe" -- nav "Recherche" cote entrepreneur (service 7.7.1, depot de
+// besoin scientifique / expertise, base du matching Startup <-> Chercheur,
+// EPIC-07). Distincte de ICON_CHECKLIST/ICON_SHIELD : espace de matching, pas
+// une checklist ni de la conformite.
+const ICON_SEARCH = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+  />
+)
+
+// Icone "porte-documents ouvert" -- nav "Mes offres" cote investisseur
+// (offres de financement deposees, matching Offre -> Startup, miroir de
+// ICON_SEARCH cote entrepreneur). Reutilise ICON_BRIEFCASE serait ambigu
+// (deja utilisee pour "Mes expertises" chercheur, semantique differente) --
+// icone dediee "tag prix / offre" pour rester distincte.
+const ICON_OFFERS = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H4.5a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h17.25c.621 0 1.125-.504 1.125-1.125v-2.25c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v2.25c0 .621.504 1.125 1.125 1.125Z"
+  />
+)
+
+// Icone "tendance haussiere" -- nav "Investissement" cote entrepreneur
+// (service EPIC-06 6.6.1, feed de matching Startup -> Offres, sens inverse
+// de ICON_OFFERS cote investisseur). Distincte de ICON_SEARCH (matching
+// chercheur) : espace de matching investissement, pas de recherche.
+const ICON_INVESTMENT = (
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+  />
+)
+
 const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
   {
     to: "/entrepreneur/mon-projet",
@@ -108,6 +194,32 @@ const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
     ],
   },
   { to: "/entrepreneur/plan-action", label: "Plan d'action", icon: ICON_CHECKLIST },
+  { to: "/entrepreneur/conformite", label: "Conformite", icon: ICON_SHIELD },
+  {
+    to: "/entrepreneur/recherche",
+    label: "Recherche",
+    icon: ICON_SEARCH,
+    children: [
+      { to: "/entrepreneur/recherche", label: "Mes besoins" },
+      { to: "/entrepreneur/recherche/interessantes", label: "Recommandations intéressantes" },
+    ],
+  },
+  {
+    to: "/entrepreneur/investissement",
+    label: "Investissement",
+    icon: ICON_INVESTMENT,
+    children: [
+      { to: "/entrepreneur/investissement", label: "Offres" },
+      { to: "/entrepreneur/investissement/interessantes", label: "Offres intéressantes" },
+    ],
+  },
+  {
+    to: "/entrepreneur/copilot",
+    label: "Copilot",
+    icon: ICON_CHAT,
+    renderChildren: () => <CopilotSidebarConversations />,
+  },
+  { to: "/entrepreneur/pitch-deck", label: "Pitch deck", icon: ICON_PITCH },
 ]
 
 // Navigation métier du chercheur — "Mes travaux" (service 0.0.2/0.0.3 :
@@ -122,11 +234,23 @@ const CHERCHEUR_NAV_ITEMS: SidebarNavItem[] = [
   { to: "/chercheur/expertises", label: "Mes expertises", icon: ICON_BRIEFCASE },
 ]
 
-// Investisseur : parcours linéaire (thèse, email de contact, organisation),
-// pas de page métier séparée type "Mes travaux" — tout tient dans le profil
-// (voir InvestorProfilePage, accessible via profileTo="/investisseur/profile"),
-// donc pas d'item de nav métier supplémentaire pour l'instant.
-const EMPTY_NAV_ITEMS: SidebarNavItem[] = []
+// Investisseur : "Mes offres" (service matching Offre -> Startup, miroir de
+// "Recherche" cote entrepreneur) -- offres de financement deposees et,
+// sous-section, les startups marquees "interessantes" toutes offres
+// confondues (voir InterestingStartupsPage). Le profil (these, email de
+// contact, organisation) reste fusionne avec "Mon profil"
+// (profileTo="/investisseur/profile"), pas d'entree separee ici.
+const INVESTISSEUR_NAV_ITEMS: SidebarNavItem[] = [
+  {
+    to: "/investisseur/offres",
+    label: "Mes offres",
+    icon: ICON_OFFERS,
+    children: [
+      { to: "/investisseur/offres", label: "Mes offres" },
+      { to: "/investisseur/offres/interessantes", label: "Startups intéressantes" },
+    ],
+  },
+]
 
 type PostLoginDestination = "loading" | "auth_error" | Role
 
@@ -204,6 +328,14 @@ function AdminSectorInsuranceRoute() {
   return <SectorInsuranceValidationPage />
 }
 
+function AdminAdministrativeGuidesRoute() {
+  const { isAuthenticated } = useAuth()
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+  return <AdministrativeGuidesValidationPage />
+}
+
 /** Garde d'accès pour /chercheur/onboarding — même pattern que OnboardingRoute
  * ci-dessus (vérifie juste l'authentification, pas la complétion : on est
  * justement en train de la compléter ici). */
@@ -237,6 +369,7 @@ function EntrepreneurDashboardRoute() {
       roleLabel="Entrepreneur"
       navItems={ENTREPRENEUR_NAV_ITEMS}
       profileTo="/entrepreneur/profile"
+      showCopilot
     />
   )
 }
@@ -307,7 +440,7 @@ function InvestisseurDashboardRoute() {
   if (state === "incomplete") {
     return <Navigate to="/investisseur/onboarding" replace />
   }
-  return <DashboardLayout roleLabel="Investisseur" navItems={EMPTY_NAV_ITEMS} profileTo="/investisseur/profile" />
+  return <DashboardLayout roleLabel="Investisseur" navItems={INVESTISSEUR_NAV_ITEMS} profileTo="/investisseur/profile" />
 }
 
 export default function App() {
@@ -320,6 +453,7 @@ export default function App() {
       <Route path="/onboarding" element={<OnboardingRoute />} />
       <Route path="/admin/legal-texts" element={<AdminRoute />} />
       <Route path="/admin/sector-insurance" element={<AdminSectorInsuranceRoute />} />
+      <Route path="/admin/administrative-guides" element={<AdminAdministrativeGuidesRoute />} />
       <Route path="/chercheur/onboarding" element={<ChercheurOnboardingRoute />} />
       <Route path="/investisseur/onboarding" element={<InvestisseurOnboardingRoute />} />
 
@@ -349,6 +483,18 @@ export default function App() {
             /projects/me (voir ce fichier) — son besoin diffère (vérifier
             project_type, pas charger fieldValues). */}
         <Route path="plan-action" element={<PlanActionPage />} />
+        <Route path="conformite" element={<CompliancePlanPage />} />
+        <Route path="recherche" element={<ResearchNeedsPage />} />
+        <Route path="recherche/interessantes" element={<RecommandationsInteressantesPage />} />
+        <Route path="investissement" element={<InvestmentOpportunitiesPage />} />
+        <Route path="investissement/interessantes" element={<InterestingOffersPage />} />
+        <Route path="conformite/rgpd" element={<RgpdDiagnosticPage />} />
+        <Route path="conformite/aipd" element={<AipdAnalysisPage />} />
+        <Route path="conformite/ai-act" element={<AiActDiagnosticPage />} />
+        <Route path="conformite/secteur" element={<SectorDiagnosticPage />} />
+        <Route path="conformite/certification-secnumcloud" element={<CertificationSecnumcloudPage />} />
+        <Route path="copilot" element={<CopilotPage />} />
+        <Route path="pitch-deck" element={<PitchDeckPage />} />
         <Route path="profile" element={<ProfilePage />} />
       </Route>
 
@@ -362,6 +508,9 @@ export default function App() {
       <Route path="/investisseur" element={<InvestisseurDashboardRoute />}>
         <Route index element={<Navigate to="profile" replace />} />
         <Route path="profile" element={<InvestorProfilePage />} />
+        <Route path="offres" element={<InvestmentOffersPage />} />
+        <Route path="offres/interessantes" element={<InterestingStartupsPage />} />
+        <Route path="offres/:offerId" element={<InvestmentOfferDetailPage />} />
       </Route>
 
       <Route path="/" element={<HomeRoute />} />

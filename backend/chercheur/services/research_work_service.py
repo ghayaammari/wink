@@ -101,6 +101,29 @@ def list_works_with_pending_fields(db: Session, user: User) -> list[ResearchWork
     return works
 
 
+def _maybe_confirm_work(db: Session, work: ResearchWork) -> None:
+    """Dérive research_works.validation_status une fois qu'il n'y a plus
+    aucun champ pending_confirmation pour ce travail -- ce statut global
+    était jusqu'ici manuel (ResearchWorkValidationUpdate), donc un travail
+    extrait_hal_openalex restait indéfiniment "pending_confirmation" même
+    une fois tous ses champs traités (voir TODO laissé dans
+    research_extraction_service.py). Un champ rejeté n'empêche pas la
+    confirmation du travail : "traité" ne veut pas dire "chaque champ
+    accepté", juste qu'il ne reste plus rien à trancher.
+
+    Ne redescend jamais un travail déjà "confirmed" ou "rejected" vers
+    pending -- appelé seulement après une action qui fait strictement
+    diminuer le nombre de pending (confirm/reject/edit), jamais après un
+    ajout de nouveau champ pending."""
+    if work.validation_status != "pending_confirmation":
+        return
+    remaining = researcher_field_value_service.list_pending_for_entity(
+        db, entity_type="research_work", entity_id=work.id
+    )
+    if not remaining:
+        work.validation_status = "confirmed"
+
+
 def validate_field(
     db: Session, user: User, field_value_id: uuid.UUID, action: str, new_value: str | None = None
 ) -> ResearcherFieldValue:
@@ -109,8 +132,9 @@ def validate_field(
         raise FieldValueNotFoundError(f"researcher_field_value {field_value_id} introuvable")
 
     if field_value.entity_type == "research_work":
-        get_owned_work(db, user, field_value.entity_id)
+        work = get_owned_work(db, user, field_value.entity_id)
     else:
+        work = None
         profile = researcher_profile_service.get_by_user_id(db, user.id)
         if field_value.entity_id != profile.id:
             raise ForbiddenError("Ce champ ne t'appartient pas.")
@@ -121,8 +145,36 @@ def validate_field(
         result = researcher_field_value_service.reject_value(db, field_value_id)
     else:  # "edit"
         result = researcher_field_value_service.edit_value(db, field_value_id, new_value)
+
+    if work is not None:
+        _maybe_confirm_work(db, work)
+
     db.commit()
     return result
+
+
+def confirm_all_pending_fields(db: Session, user: User, work_id: uuid.UUID) -> ResearchWork:
+    """Bouton "Tout valider" -- confirme d'un coup chaque champ encore
+    pending_confirmation de ce travail (mêmes règles qu'un confirm un par
+    un, via researcher_field_value_service.confirm_value : matérialisation,
+    supersede de l'ancienne valeur confirmée pour les champs à valeur
+    unique). Ne rejette jamais rien -- un chercheur qui veut rejeter un
+    champ précis continue de le faire individuellement, "Tout valider" ne
+    fait que confirmer ce qui reste."""
+    work = get_owned_work(db, user, work_id)
+    pending = researcher_field_value_service.list_pending_for_entity(
+        db, entity_type="research_work", entity_id=work.id
+    )
+    for field_value in pending:
+        researcher_field_value_service.confirm_value(db, field_value.id)
+
+    _maybe_confirm_work(db, work)
+    db.commit()
+    db.refresh(work)
+    work.generated_field_values = researcher_field_value_service.list_all_for_entity(
+        db, entity_type="research_work", entity_id=work.id
+    )
+    return work
 def delete_work(db: Session, user: User, work_id: uuid.UUID) -> None:
     """Supprime le travail ET ses champs extraits associés. researcher_field_values
     n'a pas de vraie FK vers research_works (mécanisme polymorphe, entity_type/

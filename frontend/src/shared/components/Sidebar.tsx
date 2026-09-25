@@ -19,6 +19,14 @@ export interface SidebarNavItem {
    * pour rester minimaliste : le groupe s'ouvre quand on y est, se referme
    * quand on le quitte. */
   children?: SidebarNavChild[]
+  /** Alternative a `children` pour un contenu deroulant dynamique (pas une
+   * liste fixe de routes) -- ex: l'historique des conversations du copilot
+   * (voir CopilotSidebarConversations.tsx), qui depend de donnees chargees
+   * a l'execution, pas de routes connues a l'avance. Mutuellement exclusif
+   * avec `children` : si les deux sont fournis, `renderChildren` gagne.
+   * Sidebar.tsx reste generique (partage par les 3 acteurs) : il ne connait
+   * rien du copilot, juste un slot de rendu. */
+  renderChildren?: () => ReactNode
 }
 
 interface SidebarProps {
@@ -111,20 +119,22 @@ export default function Sidebar({ roleLabel, navItems, profileTo }: SidebarProps
         {navItems.length > 0 && (
           <nav className="flex flex-col gap-1">
             {navItems.map((item) => {
-              const isGroupOpen = Boolean(item.children) && location.pathname.startsWith(item.to)
+              const isGroupOpen = Boolean(item.children ?? item.renderChildren) && location.pathname.startsWith(item.to)
               return (
                 <div key={item.to} className="flex flex-col gap-1">
                   <NavLink to={item.to} className={linkClass}>
                     <NavIcon>{item.icon}</NavIcon>
                     <span className="flex-1">{item.label}</span>
-                    {item.children && (
+                    {(item.children ?? item.renderChildren) && (
                       <NavIcon className={`h-4 w-4 transition-transform ${isGroupOpen ? "rotate-90" : ""}`}>
                         {ICON_CHEVRON}
                       </NavIcon>
                     )}
                   </NavLink>
 
-                  {item.children && isGroupOpen && (
+                  {isGroupOpen && item.renderChildren && item.renderChildren()}
+
+                  {isGroupOpen && !item.renderChildren && item.children && (
                     <div className="ml-4 flex flex-col gap-0.5 border-l border-gray-100 pl-4">
                       {item.children.map((child) => (
                         <NavLink key={child.to} to={child.to} className={childLinkClass}>
