@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ApiError } from "../../shared/api/authApi"
-import { useAuth } from "../../shared/context/AuthContext"
-import { downloadAiActReport } from "../api/aiActApi"
-import { sendCopilotMessage, type DomaineRedirection, type RapportDomaine } from "../api/copilotApi"
-import { getMyProject } from "../api/projectApi"
-import { downloadRgpdReport } from "../api/rgpdApi"
-import { downloadFintechGapAnalysisReport, downloadHealthtechGapAnalysisReport } from "../api/sectorApi"
-import { useCopilot, type CopilotDisplayMessage } from "../context/CopilotContext"
+import type { DomaineRedirection, RapportDomaine } from "../api/copilotApi"
+import { useCopilotChat } from "../hooks/useCopilotChat"
 
 const DOMAINE_ROUTES: Record<DomaineRedirection, string> = {
   rgpd: "/entrepreneur/conformite/rgpd",
@@ -19,13 +13,6 @@ const DOMAINE_LABELS: Record<DomaineRedirection, string> = {
   rgpd: "Ouvrir le diagnostic RGPD",
   "ai-act": "Ouvrir le diagnostic AI Act",
   secteur: "Ouvrir la conformité sectorielle",
-}
-
-const RAPPORT_DOWNLOADERS: Record<RapportDomaine, (accessToken: string, projectId: string) => Promise<void>> = {
-  rgpd: downloadRgpdReport,
-  "ai-act": downloadAiActReport,
-  healthtech: downloadHealthtechGapAnalysisReport,
-  fintech: downloadFintechGapAnalysisReport,
 }
 
 const RAPPORT_LABELS: Record<RapportDomaine, string> = {
@@ -60,6 +47,21 @@ function ICON_CHECK() {
   )
 }
 
+function ICON_SPARKLE({ className = "h-3.5 w-3.5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" className={className}>
+      <path d="M10 2.5l1.6 4.3 4.4 1.6-4.4 1.6L10 14.3l-1.6-4.3-4.4-1.6 4.4-1.6L10 2.5z" />
+      <path d="M16 13l.7 1.8L18.5 15.5l-1.8.7L16 18l-.7-1.8-1.8-.7 1.8-.7L16 13z" opacity="0.7" />
+    </svg>
+  )
+}
+
+const SUGGESTIONS_COPILOT = [
+  "Quelle forme juridique choisir pour notre startup ?",
+  "Quelles données personnelles collectons-nous et faut-il un DPO ?",
+  "Des chercheurs recommandés sur mon dernier besoin déposé ?",
+]
+
 /**
  * Copilot conformité — entrée de premier niveau dans la sidebar
  * entrepreneur, au même titre que "Plan d'action" ou "Conformité" (voir
@@ -82,72 +84,30 @@ function ICON_CHECK() {
  * copilotApi.ts::sendCopilotMessage) avant d'envoyer la version modifiée.
  */
 export default function CopilotPage() {
-  const { accessToken } = useAuth()
   const navigate = useNavigate()
-  const { messages, appendMessage, setMessages, ensureActiveConversation, refreshConversations } = useCopilot()
-  const [projectId, setProjectId] = useState<string | null>(null)
-  const [draft, setDraft] = useState("")
-  const [isSending, setIsSending] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const {
+    projectId,
+    messages,
+    draft,
+    setDraft,
+    isSending,
+    error,
+    envoyerConversation,
+    handleSend,
+    downloadingDomaine,
+    downloadError,
+    handleDownloadRapport,
+    downloadingDocumentRef,
+    handleDownloadDocument,
+  } = useCopilotChat()
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editDraft, setEditDraft] = useState("")
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
-  const [downloadingDomaine, setDownloadingDomaine] = useState<RapportDomaine | null>(null)
-  const [downloadError, setDownloadError] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!accessToken || projectId) return
-    getMyProject(accessToken)
-      .then((project) => setProjectId(project?.id ?? null))
-      .catch(() => setError("Impossible de charger ton projet."))
-  }, [accessToken, projectId])
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" })
   }, [messages, isSending])
-
-  // Coeur partage par l'envoi normal et l'edition+renvoi : `historiqueLocal`
-  // est ce qu'on affiche immediatement (optimiste), `tronquerA` dit au
-  // backend jusqu'ou garder l'historique deja persiste avant d'y ajouter ce
-  // nouveau message (voir sendCopilotMessage).
-  async function envoyerConversation(historiqueLocal: CopilotDisplayMessage[], contenu: string, tronquerA?: number) {
-    if (!accessToken || !projectId || isSending) return
-    setMessages([...historiqueLocal, { role: "user", content: contenu }])
-    setIsSending(true)
-    setError(null)
-
-    try {
-      const conversationId = await ensureActiveConversation()
-      if (!conversationId) throw new Error("Aucune conversation active.")
-      const result = await sendCopilotMessage(accessToken, projectId, conversationId, contenu, tronquerA)
-      appendMessage({
-        role: "assistant",
-        content: result.reponse,
-        rediriger_vers: result.rediriger_vers,
-        ancrage_verifie: result.ancrage_verifie,
-      })
-      // Le premier message peut avoir donne son titre a la conversation
-      // cote backend (voir _generer_titre) -- rafraichit la liste partagee
-      // (Sidebar) pour qu'elle ne reste pas bloquee sur "Nouvelle conversation".
-      await refreshConversations()
-    } catch (err) {
-      setError(
-        err instanceof ApiError
-          ? "Le copilot n'a pas pu répondre, réessaie dans quelques instants."
-          : "Une erreur est survenue.",
-      )
-    } finally {
-      setIsSending(false)
-    }
-  }
-
-  async function handleSend() {
-    const content = draft.trim()
-    if (!content) return
-    setDraft("")
-    await envoyerConversation(messages, content)
-  }
 
   async function handleEditResend(index: number) {
     const content = editDraft.trim()
@@ -173,31 +133,49 @@ export default function CopilotPage() {
     navigate(`${DOMAINE_ROUTES[domaine]}?from=copilot`)
   }
 
-  async function handleDownloadRapport(domaine: RapportDomaine) {
-    if (!accessToken || !projectId || downloadingDomaine) return
-    setDownloadingDomaine(domaine)
-    setDownloadError(null)
-    try {
-      await RAPPORT_DOWNLOADERS[domaine](accessToken, projectId)
-    } catch {
-      setDownloadError("Le téléchargement du rapport a échoué, réessaie dans quelques instants.")
-    } finally {
-      setDownloadingDomaine(null)
-    }
-  }
-
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col gap-4">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold text-gray-900">Copilot conformité</h1>
-        <p className="text-sm text-gray-500">
-          Pose tes questions sur le RGPD, l'AI Act ou la conformité sectorielle — le copilot peut aussi te rediriger
-          vers le bon diagnostic.
-        </p>
+    <div className="flex h-[calc(100vh_-_4rem)] flex-col gap-4">
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+          <ICON_SPARKLE className="h-5 w-5" />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <h1 className="text-xl font-semibold text-gray-900">Copilot</h1>
+          <p className="text-sm text-gray-500">
+            Création d'entreprise (statuts, immatriculation, forme juridique...) ou conformité (RGPD, AI Act,
+            secteurs réglementés) — le copilot peut aussi te rediriger vers le bon diagnostic.
+          </p>
+        </div>
       </div>
 
       <div className="flex flex-1 flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
         <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
+          {messages.length === 0 ? (
+            <div className="flex h-full flex-col items-center justify-center gap-3 text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-wink-50 text-wink-600">
+                <ICON_SPARKLE className="h-6 w-6" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-medium text-gray-700">Comment puis-je t'aider ?</p>
+                <p className="text-xs text-gray-400">
+                  Création d'entreprise ou conformité (RGPD, AI Act, secteurs réglementés) — pose une question ou
+                  décris ta situation.
+                </p>
+              </div>
+              <div className="mt-2 flex flex-wrap justify-center gap-2">
+                {SUGGESTIONS_COPILOT.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => setDraft(suggestion)}
+                    className="rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-wink-300 hover:bg-wink-50 hover:text-wink-700"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
           <div className="flex flex-col gap-3">
             {messages.map((message, index) => {
               const isUser = message.role === "user"
@@ -205,7 +183,7 @@ export default function CopilotPage() {
 
               if (isUser && isEditing) {
                 return (
-                  <div key={index} className="ml-auto flex w-[80%] flex-col gap-2 rounded-lg bg-indigo-50 p-2">
+                  <div key={index} className="ml-auto flex w-[80%] flex-col gap-2 rounded-lg bg-wink-50 p-2">
                     <textarea
                       value={editDraft}
                       onChange={(e) => setEditDraft(e.target.value)}
@@ -218,7 +196,7 @@ export default function CopilotPage() {
                       }}
                       autoFocus
                       rows={2}
-                      className="w-full resize-none rounded-md border border-indigo-200 bg-white p-2 text-sm focus:border-indigo-400 focus:outline-none"
+                      className="w-full resize-none rounded-md border border-wink-200 bg-white p-2 text-sm focus:border-wink-400 focus:outline-none"
                     />
                     <div className="flex justify-end gap-2">
                       <button
@@ -232,7 +210,7 @@ export default function CopilotPage() {
                         type="button"
                         onClick={() => handleEditResend(index)}
                         disabled={!editDraft.trim() || isSending}
-                        className="rounded-md bg-indigo-600 px-2 py-1 text-xs font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                        className="rounded-md bg-wink-600 px-2 py-1 text-xs font-medium text-white hover:bg-wink-700 disabled:opacity-50"
                       >
                         Renvoyer
                       </button>
@@ -242,13 +220,16 @@ export default function CopilotPage() {
               }
 
               return (
-                <div
-                  key={index}
-                  className={`group flex max-w-[80%] flex-col gap-1 ${isUser ? "ml-auto items-end" : "mr-auto items-start"}`}
-                >
+                <div key={index} className={`group flex max-w-[85%] gap-2 ${isUser ? "ml-auto flex-row-reverse" : "mr-auto"}`}>
+                  {!isUser && (
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wink-600 text-white">
+                      <ICON_SPARKLE className="h-3.5 w-3.5" />
+                    </div>
+                  )}
+                <div className={`flex flex-col gap-1 ${isUser ? "items-end" : "items-start"}`}>
                   <div
                     className={`flex flex-col gap-2 rounded-lg px-3 py-2 text-sm ${
-                      isUser ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-800"
+                      isUser ? "bg-wink-600 text-white" : "bg-gray-100 text-gray-800"
                     }`}
                   >
                     <p className="whitespace-pre-wrap">{message.content}</p>
@@ -256,7 +237,7 @@ export default function CopilotPage() {
                       <button
                         type="button"
                         onClick={() => handleRedirection(message.rediriger_vers as DomaineRedirection)}
-                        className="w-fit rounded-md bg-white px-3 py-1.5 text-xs font-medium text-indigo-700 shadow-sm transition hover:bg-indigo-50"
+                        className="w-fit rounded-md bg-white px-3 py-1.5 text-xs font-medium text-wink-700 shadow-sm transition hover:bg-wink-50"
                       >
                         {DOMAINE_LABELS[message.rediriger_vers]} →
                       </button>
@@ -266,11 +247,23 @@ export default function CopilotPage() {
                         type="button"
                         onClick={() => handleDownloadRapport(message.rapport_disponible as RapportDomaine)}
                         disabled={downloadingDomaine === message.rapport_disponible}
-                        className="w-fit rounded-md bg-white px-3 py-1.5 text-xs font-medium text-indigo-700 shadow-sm transition hover:bg-indigo-50 disabled:opacity-50"
+                        className="w-fit rounded-md bg-white px-3 py-1.5 text-xs font-medium text-wink-700 shadow-sm transition hover:bg-wink-50 disabled:opacity-50"
                       >
                         {downloadingDomaine === message.rapport_disponible
                           ? "Génération du rapport..."
                           : RAPPORT_LABELS[message.rapport_disponible]}
+                      </button>
+                    )}
+                    {message.document_ref && message.titre_document && (
+                      <button
+                        type="button"
+                        onClick={() => handleDownloadDocument(message.document_ref!, message.titre_document!)}
+                        disabled={downloadingDocumentRef === message.document_ref}
+                        className="w-fit rounded-md bg-white px-3 py-1.5 text-xs font-medium text-wink-700 shadow-sm transition hover:bg-wink-50 disabled:opacity-50"
+                      >
+                        {downloadingDocumentRef === message.document_ref
+                          ? "Génération du document..."
+                          : `Télécharger "${message.titre_document}" (PDF)`}
                       </button>
                     )}
                   </div>
@@ -309,37 +302,52 @@ export default function CopilotPage() {
                     </div>
                   )}
                 </div>
+                </div>
               )
             })}
-            {isSending && <p className="text-xs text-gray-400">Le copilot réfléchit...</p>}
+            {isSending && (
+              <div className="mr-auto flex max-w-[85%] items-center gap-2">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wink-600 text-white">
+                  <ICON_SPARKLE className="h-3.5 w-3.5" />
+                </div>
+                <div className="flex items-center gap-1 rounded-lg bg-gray-100 px-3 py-2.5">
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-gray-400 [animation-delay:-0.3s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-gray-400 [animation-delay:-0.15s]" />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-gray-400" />
+                </div>
+              </div>
+            )}
           </div>
+          )}
         </div>
 
         {(error || downloadError) && <p className="px-4 pb-2 text-xs text-red-600">{error ?? downloadError}</p>}
 
-        <div className="flex items-center gap-2 border-t border-gray-200 p-3">
-          <input
-            type="text"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault()
-                handleSend()
-              }
-            }}
-            disabled={isSending || !projectId}
-            placeholder="Pose ta question..."
-            className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none disabled:opacity-50"
-          />
-          <button
-            type="button"
-            onClick={handleSend}
-            disabled={isSending || !draft.trim() || !projectId}
-            className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:opacity-50"
-          >
-            Envoyer
-          </button>
+        <div className="border-t border-gray-200 p-3">
+          <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-2 py-1.5 shadow-sm transition focus-within:border-wink-300 focus-within:ring-2 focus-within:ring-wink-100">
+            <input
+              type="text"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault()
+                  handleSend()
+                }
+              }}
+              disabled={isSending || !projectId}
+              placeholder="Pose ta question..."
+              className="flex-1 bg-transparent px-2 py-1.5 text-sm focus:outline-none disabled:opacity-50"
+            />
+            <button
+              type="button"
+              onClick={handleSend}
+              disabled={isSending || !draft.trim() || !projectId}
+              className="rounded-full bg-wink-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-wink-700 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Envoyer
+            </button>
+          </div>
         </div>
       </div>
     </div>

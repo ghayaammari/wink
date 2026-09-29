@@ -53,6 +53,8 @@ agents inclus) ne laissait de trace des outils utilises nulle part.
 from __future__ import annotations
 
 import logging
+import re
+import time
 from typing import Callable, Literal, TypedDict, TypeVar
 
 from pydantic import BaseModel
@@ -112,10 +114,29 @@ def _get_pool() -> GroqKeyPool:
 
 
 def _is_rate_limit_error(exc: Exception) -> bool:
-    if getattr(exc, "status_code", None) == 429:
-        return True
-    response = getattr(exc, "response", None)
-    return getattr(response, "status_code", None) == 429
+    """Detecte un 429 Groq, y compris si l'exception d'origine a ete
+
+    enveloppee en chemin (LangGraph/LangChain) et a perdu son attribut
+    status_code direct -- CORRECTIF du 26/09/2026, observe sur le
+    diagnostic RGPD (5 champs -> beaucoup de recherches -> plus de chance
+    de tomber sur un 429) : un cooldown+rotation qui ne se declenche pas
+    a cause d'un attribut manquant est pire qu'inutile, ca fait echouer
+    tout le diagnostic (502) au lieu de juste changer de cle. On remonte
+    la chaine __cause__/__context__ et on retombe sur le texte de
+    l'exception en dernier recours (Groq inclut toujours "429" ou
+    "rate_limit" dans son message d'erreur)."""
+    seen: set[int] = set()
+    current: BaseException | None = exc
+    while current is not None and id(current) not in seen:
+        seen.add(id(current))
+        if getattr(current, "status_code", None) == 429:
+            return True
+        response = getattr(current, "response", None)
+        if getattr(response, "status_code", None) == 429:
+            return True
+        current = current.__cause__ or current.__context__
+    message = str(exc).lower()
+    return "429" in message or "rate_limit" in message or "too many requests" in message
 
 
 # CORRECTIF du 22/09/2026 -- constate en pratique sur compliance_agent_secnumcloud,
@@ -132,6 +153,35 @@ _TOOL_USE_ERROR_MAX_ATTEMPTS = 3
 
 def _is_tool_use_error(exc: Exception) -> bool:
     return "tool_use_failed" in str(exc)
+
+
+# CORRECTIF du 27/09/2026 -- constate en pratique : un 429 Groq sur le TPM
+# (tokens/minute) est un plafond PAR ORGANISATION, pas par cle (voir le
+# message d'erreur lui-meme : "in organization org_xxx ... TPM: Limit 8000").
+# La rotation de cles (key_pool.py) ne sert donc a RIEN contre ce cas precis
+# -- les 3 cles partagent le meme compteur, épuiser les 3 en cooldown prend
+# une fraction de seconde et n'attend jamais que le quota se libere. Or Groq
+# indique lui-meme le delai exact avant que ca reparte ("Please try again in
+# 6.7575s") : on l'exploite au lieu de l'ignorer et d'echouer tout de suite
+# en 502. Regex tolerante (le nombre de decimales n'est pas garanti stable).
+_RETRY_AFTER_RE = re.compile(r"try again in ([\d.]+)s", re.IGNORECASE)
+
+# Plafond de securite : si Groq annonce un delai plus long que ca, on
+# n'attend pas (une requete HTTP qui bloque 30+ secondes degraderait plus
+# l'experience qu'un 502 rapide avec un message d'erreur clair) -- l'appelant
+# retombe alors sur le comportement actuel (ReactAgentError immediat).
+_RETRY_AFTER_MAX_S = 12.0
+
+
+def _extract_retry_after_seconds(exc: Exception) -> float | None:
+    match = _RETRY_AFTER_RE.search(str(exc))
+    if not match:
+        return None
+    try:
+        delai = float(match.group(1))
+    except ValueError:
+        return None
+    return delai if delai <= _RETRY_AFTER_MAX_S else None
 
 
 def _invoke_agent(agent, messages: list[ConversationMessage], recursion_limit: int):
@@ -202,51 +252,73 @@ def _invoke_with_rotation(
     -- False par defaut pour ne rien changer aux 5 sous-agents existants.
     """
     pool = _get_pool()
-    last_error: Exception | None = None
     llm_class = _ChatGroqJsonSchemaOutput if use_json_schema_output else ChatGroq
 
-    for _ in range(pool.size):
-        api_key = pool.acquire()
-        # CORRECTIF du 22/09/2026 -- max_retries=0 explicite, indispensable
-        # pour que la rotation de cles (pool.cooldown ci-dessous) serve a
-        # quelque chose : sans ça, le client Groq absorbe lui-meme chaque 429
-        # avec SA PROPRE attente (backoff croissant, jusqu'a 45-46s constate
-        # en pratique) sur la MEME cle, avant meme qu'une exception ne
-        # remonte jusqu'ici -- la rotation vers une autre cle du pool n'etait
-        # alors jamais declenchee, meme avec plusieurs cles configurees
-        # (constate le 22/09/2026 : le meme blocage de plusieurs minutes est
-        # revenu a l'identique juste apres l'ajout de GROQ_API_KEY_2/_3).
-        # Avec max_retries=0, un 429 remonte immediatement en exception, geree
-        # par notre propre boucle (cooldown 60s de la cle + cle suivante du
-        # pool) -- beaucoup plus rapide des qu'au moins une autre cle est
-        # disponible. Le "max_retries" de llm_config.yaml n'est pas utilise
-        # ici (dette technique deja documentee) : il resterait de toute facon
-        # en conflit avec ce choix si on le branchait tel quel.
-        llm = llm_class(model=model, temperature=temperature, api_key=api_key, max_retries=0)
-        agent = create_react_agent(
-            model=llm,
-            tools=tools,
-            prompt=system_prompt,
-            response_format=response_format,
+    # CORRECTIF du 27/09/2026 -- un cycle complet sur les `pool.size` cles,
+    # puis, SEULEMENT si le dernier echec est un 429 pour lequel Groq a
+    # indique un delai court (voir _extract_retry_after_seconds), UN second
+    # cycle apres avoir attendu ce delai. Necessaire pour un 429 de type TPM
+    # par ORGANISATION (voir _extract_retry_after_seconds) : la rotation de
+    # cles elle-meme ne resout jamais ce cas (meme compteur partage par les 3
+    # cles), seul le temps le fait. Borne a 2 cycles max (jamais de boucle
+    # infinie) : si le second cycle echoue aussi, c'est que le quota reste
+    # sature au-dela du delai annonce (ou pour une autre raison), inutile de
+    # continuer a retenter dans le meme appel HTTP.
+    for cycle in range(2):
+        last_error: Exception | None = None
+        for _ in range(pool.size):
+            api_key = pool.acquire()
+            # CORRECTIF du 22/09/2026 -- max_retries=0 explicite, indispensable
+            # pour que la rotation de cles (pool.cooldown ci-dessous) serve a
+            # quelque chose : sans ça, le client Groq absorbe lui-meme chaque 429
+            # avec SA PROPRE attente (backoff croissant, jusqu'a 45-46s constate
+            # en pratique) sur la MEME cle, avant meme qu'une exception ne
+            # remonte jusqu'ici -- la rotation vers une autre cle du pool n'etait
+            # alors jamais declenchee, meme avec plusieurs cles configurees
+            # (constate le 22/09/2026 : le meme blocage de plusieurs minutes est
+            # revenu a l'identique juste apres l'ajout de GROQ_API_KEY_2/_3).
+            # Avec max_retries=0, un 429 remonte immediatement en exception, geree
+            # par notre propre boucle (cooldown 60s de la cle + cle suivante du
+            # pool) -- beaucoup plus rapide des qu'au moins une autre cle est
+            # disponible. Le "max_retries" de llm_config.yaml n'est pas utilise
+            # ici (dette technique deja documentee) : il resterait de toute facon
+            # en conflit avec ce choix si on le branchait tel quel.
+            llm = llm_class(model=model, temperature=temperature, api_key=api_key, max_retries=0)
+            agent = create_react_agent(
+                model=llm,
+                tools=tools,
+                prompt=system_prompt,
+                response_format=response_format,
+            )
+            try:
+                state = _invoke_agent(agent, messages, recursion_limit)
+            except Exception as exc:
+                if _is_rate_limit_error(exc):
+                    pool.cooldown(api_key)
+                    last_error = exc
+                    continue
+                raise ReactAgentError(f"Echec de l'appel a l'agent (Groq/LangGraph) : {exc}") from exc
+
+            _log_tool_calls(state.get("messages", []))
+            structured = state.get("structured_response")
+            if structured is None:
+                raise ReactAgentError("L'agent n'a pas produit de reponse structuree (structured_response absent).")
+            return structured
+
+        # Cycle epuise (3 cles, toutes en 429) -- si Groq a indique un delai
+        # court, on l'attend puis on retente UNE fois (cycle suivant). Sinon
+        # (delai absent/trop long, ou deja au second cycle), on abandonne.
+        retry_after = _extract_retry_after_seconds(last_error) if last_error is not None else None
+        if cycle == 0 and retry_after is not None:
+            logger.warning(
+                "Toutes les cles Groq en cooldown (429 TPM organisation) -- attente de %.1fs conseillee par Groq avant de retenter.",
+                retry_after,
+            )
+            time.sleep(retry_after + 0.5)
+            continue
+        raise ReactAgentError(
+            f"Toutes les cles Groq disponibles ({pool.size}) sont en cooldown (429 repete) : {last_error}"
         )
-        try:
-            state = _invoke_agent(agent, messages, recursion_limit)
-        except Exception as exc:
-            if _is_rate_limit_error(exc):
-                pool.cooldown(api_key)
-                last_error = exc
-                continue
-            raise ReactAgentError(f"Echec de l'appel a l'agent (Groq/LangGraph) : {exc}") from exc
-
-        _log_tool_calls(state.get("messages", []))
-        structured = state.get("structured_response")
-        if structured is None:
-            raise ReactAgentError("L'agent n'a pas produit de reponse structuree (structured_response absent).")
-        return structured
-
-    raise ReactAgentError(
-        f"Toutes les cles Groq disponibles ({pool.size}) sont en cooldown (429 repete) : {last_error}"
-    )
 
 
 def run_react_agent(

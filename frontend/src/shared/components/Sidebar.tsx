@@ -68,6 +68,15 @@ function NavIcon({ children, className = "h-5 w-5" }: { children: ReactNode; cla
   )
 }
 
+function ICON_WINK({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" className={className}>
+      <path d="M10 2.5l1.6 4.3 4.4 1.6-4.4 1.6L10 14.3l-1.6-4.3-4.4-1.6 4.4-1.6L10 2.5z" />
+      <path d="M16 13l.7 1.8L18.5 15.5l-1.8.7L16 18l-.7-1.8-1.8-.7 1.8-.7L16 13z" opacity="0.7" />
+    </svg>
+  )
+}
+
 /**
  * Sidebar partagée par les 3 acteurs — template de base du dashboard
  * post-onboarding (voir DashboardLayout.tsx pour le shell complet). "Mon
@@ -100,20 +109,25 @@ export default function Sidebar({ roleLabel, navItems, profileTo }: SidebarProps
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${
-      isActive ? "bg-indigo-50 text-indigo-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+      isActive ? "bg-wink-50 text-wink-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
     }`
 
   const childLinkClass = ({ isActive }: { isActive: boolean }) =>
     `rounded-lg px-3 py-1.5 text-sm transition ${
-      isActive ? "bg-indigo-50 font-medium text-indigo-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+      isActive ? "bg-wink-50 font-medium text-wink-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
     }`
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col justify-between border-r border-gray-200 bg-white px-3 py-6">
       <div className="flex flex-col gap-6">
-        <div className="px-3">
-          <p className="text-lg font-semibold text-gray-900">Wink</p>
-          <p className="text-xs text-gray-400">{roleLabel}</p>
+        <div className="flex items-center gap-2 px-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+            <ICON_WINK className="h-4 w-4" />
+          </div>
+          <div>
+            <p className="text-lg font-semibold text-gray-900">Wink</p>
+            <p className="text-xs text-gray-400">{roleLabel}</p>
+          </div>
         </div>
 
         {navItems.length > 0 && (

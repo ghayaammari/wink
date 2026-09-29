@@ -29,6 +29,19 @@ class CopilotMessage(BaseModel):
     # conversation, sans avoir a rejouer l'agent.
     rediriger_vers: DomaineRedirection | None = None
     rapport_disponible: RapportDomaine | None = None
+    # Document libre genere par l'agent lui-meme a la demande de l'entrepreneur
+    # ("fais-moi un rapport", "genere-moi une analyse") -- distinct de
+    # rapport_disponible (les 4 rapports fixes de diagnostic, poses en LOCAL
+    # par le frontend via addAssistantMessage, jamais par l'agent). Ici les 2
+    # champs sont poses ensemble par le backend (voir copilot_service.py) :
+    # titre_document vient de CopilotResponse.titre_document (voir
+    # agents/orchestrator/copilot_agent_service.py), document_ref est un jeton
+    # genere a la persistance, unique dans la conversation -- pas l'index du
+    # message dans le tableau (fragile : decale par une troncature/edition,
+    # voir CopilotMessageRequest.tronquer_a), le jeton reste attache au bon
+    # message quoi qu'il arrive au reste de l'historique.
+    titre_document: str | None = None
+    document_ref: str | None = None
     ancrage_verifie: bool | None = None
 
 
@@ -49,6 +62,12 @@ class CopilotMessageRequest(BaseModel):
 class CopilotMessageResponse(BaseModel):
     reponse: str
     rediriger_vers: DomaineRedirection | None = None
+    # Voir CopilotMessage.titre_document/document_ref -- memes champs, sur la
+    # reponse immediate cette fois (pas seulement l'historique persiste), pour
+    # que le frontend propose le bouton de telechargement des ce tour-ci sans
+    # devoir recharger toute la conversation.
+    titre_document: str | None = None
+    document_ref: str | None = None
     # None = aucune verification effectuee (reponse generale sans recherche
     # dans le corpus, rien a verifier) ou verification indisponible (echec
     # non bloquant, voir grounding_verification_service.py) -- distinct de

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b4a6b"/>
+    </marker>
+    <marker id="arrowDashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6b8c"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="560" fill="#ffffff"/>
+
+  <!-- Annex box: Context & Hooks -->
+  <rect x="20" y="70" width="180" height="50" rx="8" fill="#eaf1fb" stroke="#8fa8d1" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="110" y="90" text-anchor="middle" font-size="13" fill="#2c3e5c">CONTEXT &amp; HOOKS</text>
+  <text x="110" y="107" text-anchor="middle" font-size="13" fill="#2c3e5c">ENTREPRENEUR</text>
+
+  <!-- Annex box: AuthContext -->
+  <rect x="20" y="200" width="180" height="50" rx="8" fill="#eaf1fb" stroke="#8fa8d1" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="110" y="220" text-anchor="middle" font-size="13" fill="#2c3e5c">AUTHCONTEXT</text>
+  <text x="110" y="237" text-anchor="middle" font-size="13" fill="#2c3e5c">(partagé)</text>
+
+  <!-- Row 1: Pages -->
+  <rect x="240" y="30" width="200" height="80" rx="10" fill="#bcd4f0" stroke="#5b83b8" stroke-width="1.5"/>
+  <text x="340" y="75" text-anchor="middle" font-size="16" font-weight="bold" fill="#1b2a44">PAGES ENTREPRENEUR</text>
+
+  <rect x="460" y="30" width="200" height="80" rx="10" fill="#bcd4f0" stroke="#5b83b8" stroke-width="1.5"/>
+  <text x="560" y="75" text-anchor="middle" font-size="16" font-weight="bold" fill="#1b2a44">PAGES CHERCHEUR</text>
+
+  <rect x="680" y="30" width="200" height="80" rx="10" fill="#bcd4f0" stroke="#5b83b8" stroke-width="1.5"/>
+  <text x="780" y="75" text-anchor="middle" font-size="16" font-weight="bold" fill="#1b2a44">PAGES INVESTISSEUR</text>
+
+  <!-- Dotted arrows: annex -> pages / clients api -->
+  <path d="M 200 95 L 240 70" fill="none" stroke="#5b6b8c" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowDashed)"/>
+  <text x="212" y="80" font-size="12" fill="#3b4a6b" font-style="italic">état</text>
+
+  <path d="M 200 225 L 240 260" fill="none" stroke="#5b6b8c" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowDashed)"/>
+  <text x="205" y="245" font-size="12" fill="#3b4a6b" font-style="italic">jeton</text>
+
+  <!-- Arrows: pages -> clients api -->
+  <line x1="340" y1="110" x2="340" y2="255" stroke="#3b4a6b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="350" y="185" font-size="13" fill="#1b2a44" font-style="italic">appelle</text>
+
+  <line x1="560" y1="110" x2="560" y2="255" stroke="#3b4a6b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="780" y1="110" x2="780" y2="255" stroke="#3b4a6b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Row 2: Clients API -->
+  <rect x="240" y="260" width="640" height="80" rx="10" fill="#5b83b8" stroke="#2f4a72" stroke-width="1.5"/>
+  <text x="560" y="306" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">CLIENTS API (un fichier par domaine métier)</text>
+
+  <!-- Arrow: clients api -> backend -->
+  <line x1="560" y1="340" x2="560" y2="450" stroke="#3b4a6b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="570" y="400" font-size="13" fill="#1b2a44" font-style="italic">requête HTTP</text>
+
+  <!-- Row 3: Backend -->
+  <rect x="240" y="455" width="640" height="80" rx="10" fill="#5b3b8c" stroke="#3a2560" stroke-width="1.5"/>
+  <text x="560" y="501" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">BACKEND FASTAPI</text>
+
+</svg>

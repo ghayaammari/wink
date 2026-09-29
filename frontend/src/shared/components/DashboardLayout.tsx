@@ -1,4 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom"
+import CopilotFloatingBubble from "../../entrepreneur/components/copilot/CopilotFloatingBubble"
 import { CopilotProvider } from "../../entrepreneur/context/CopilotContext"
 import Sidebar, { type SidebarNavItem } from "./Sidebar"
 
@@ -40,13 +41,22 @@ const FULL_WIDTH_ROUTES = ["/entrepreneur/plan-action", "/entrepreneur/copilot"]
  * chacune des ~15 pages existantes ; s'il faut un jour plus d'une exception,
  * remplacer par une métadonnée de route (`handle` + `useMatches()`) plutôt
  * que d'allonger cette liste au cas par cas.
+ *
+ * CORRECTIF du 26/09/2026 : conteneur racine passé de `min-h-screen` a
+ * `h-screen overflow-hidden`. Avec `min-h-screen`, des que le contenu d'une
+ * page depassait la hauteur de l'ecran, c'est TOUTE la fenetre qui scrollait
+ * (le `overflow-y-auto` de <main> ne servait a rien, sa hauteur n'etant
+ * jamais bornee) -- et la Sidebar (h-screen mais ni sticky ni fixed)
+ * scrollait avec, laissant seulement son bas ("Mon profil"/"Se deconnecter")
+ * visible. Desormais le conteneur racine est borne a la hauteur de l'ecran :
+ * seul <main> scrolle en interne, la Sidebar reste fixe.
  */
 export default function DashboardLayout({ roleLabel, navItems, profileTo, showCopilot = false }: DashboardLayoutProps) {
   const { pathname } = useLocation()
   const isFullWidth = FULL_WIDTH_ROUTES.includes(pathname)
 
   const content = (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       <Sidebar roleLabel={roleLabel} navItems={navItems} profileTo={profileTo} />
       <main className="flex-1 overflow-y-auto px-6 py-8">
         <div className={isFullWidth ? "" : "mx-auto max-w-3xl"}>
@@ -56,10 +66,20 @@ export default function DashboardLayout({ roleLabel, navItems, profileTo, showCo
     </div>
   )
 
-  // CopilotProvider doit englober <Outlet/> : CopilotPage.tsx (l'entrée
-  // "Copilot" de la sidebar, voir App.tsx) ET les pages de diagnostic
-  // (bouton "Terminer") partagent le meme historique de conversation via
-  // useCopilot() -- voir CopilotContext.tsx. N'enveloppe rien pour
-  // chercheur/investisseur (showCopilot=false), pas de contexte inutile.
-  return showCopilot ? <CopilotProvider>{content}</CopilotProvider> : content
+  // CopilotProvider doit englober <Outlet/> ET la bulle flottante :
+  // CopilotPage.tsx (l'entrée "Copilot" de la sidebar, voir App.tsx), les
+  // pages de diagnostic (bouton "Terminer") et CopilotFloatingBubble.tsx
+  // partagent le meme historique de conversation via useCopilot() -- voir
+  // CopilotContext.tsx. La bulle est rendue a cote de <Outlet/> (pas dans
+  // Sidebar.tsx) pour rester au-dessus de TOUTE page entrepreneur, y
+  // compris en FULL_WIDTH_ROUTES. N'enveloppe rien pour chercheur/
+  // investisseur (showCopilot=false), pas de contexte ni de bulle inutiles.
+  return showCopilot ? (
+    <CopilotProvider>
+      {content}
+      <CopilotFloatingBubble />
+    </CopilotProvider>
+  ) : (
+    content
+  )
 }

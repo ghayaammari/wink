@@ -15,7 +15,7 @@ export type CopilotDisplayMessage = CopilotMessage
 export const MESSAGE_ACCUEIL: CopilotDisplayMessage = {
   role: "assistant",
   content:
-    "Bonjour, je suis le copilot conformité de Wink. Pose-moi une question sur le RGPD, l'AI Act, ou la conformité sectorielle (HealthTech/FinTech) — je peux aussi te rediriger directement vers le bon diagnostic si tu veux le lancer.",
+    "Bonjour, je suis le copilot de Wink. Pose-moi une question sur la création de ton entreprise (statuts, immatriculation, forme juridique...), ta conformité (RGPD, AI Act, secteurs réglementés) ou l'état de tes recommandations de matching — je peux aussi te rediriger directement vers le bon diagnostic si tu veux le lancer.",
 }
 
 interface CopilotContextValue {

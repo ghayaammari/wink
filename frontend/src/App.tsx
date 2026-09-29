@@ -127,10 +127,13 @@ const ICON_PITCH = (
   />
 )
 
-// Icone "loupe" -- nav "Recherche" cote entrepreneur (service 7.7.1, depot de
-// besoin scientifique / expertise, base du matching Startup <-> Chercheur,
-// EPIC-07). Distincte de ICON_CHECKLIST/ICON_SHIELD : espace de matching, pas
-// une checklist ni de la conformite.
+// Icone "loupe" -- nav "Besoins scientifiques" cote entrepreneur (service
+// 7.7.1, depot de besoin scientifique / expertise, base du matching Startup
+// <-> Chercheur, EPIC-07). Renommee le 27/09/2026 (etait "Recherche",
+// confondu avec une fonction de recherche/moteur -- le nom decrit
+// maintenant l'action de l'entrepreneur, pas le mecanisme). Distincte de
+// ICON_CHECKLIST/ICON_SHIELD : espace de matching, pas une checklist ni de
+// la conformite.
 const ICON_SEARCH = (
   <path
     strokeLinecap="round"
@@ -181,7 +184,7 @@ const ENTREPRENEUR_NAV_ITEMS: SidebarNavItem[] = [
   { to: "/entrepreneur/conformite", label: "Conformite", icon: ICON_SHIELD },
   {
     to: "/entrepreneur/recherche",
-    label: "Recherche",
+    label: "Besoins scientifiques",
     icon: ICON_SEARCH,
     children: [
       { to: "/entrepreneur/recherche", label: "Mes besoins" },
@@ -219,7 +222,7 @@ const CHERCHEUR_NAV_ITEMS: SidebarNavItem[] = [
 ]
 
 // Investisseur : "Mes offres" (service matching Offre -> Startup, miroir de
-// "Recherche" cote entrepreneur) -- offres de financement deposees et,
+// "Besoins scientifiques" cote entrepreneur) -- offres de financement deposees et,
 // sous-section, les startups marquees "interessantes" toutes offres
 // confondues (voir InterestingStartupsPage). Le profil (these, email de
 // contact, organisation) reste fusionne avec "Mon profil"

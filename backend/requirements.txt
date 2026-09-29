@@ -48,6 +48,7 @@ reportlab>=4.2.0  # generation PDF -- rapport de conformite telechargeable (comp
 langgraph>=0.2.60               # graphe ReAct (agent <-> tools) + reponse structuree finale, boucle de raisonnement du copilot
 langchain-groq>=0.2.1           # ChatGroq, modele LangChain branche sur l'API Groq
 langchain-core>=0.3.21          # types Tool/BaseMessage utilises par langgraph.prebuilt
+langsmith>=0.1.147                # tracing des agents LangGraph (LANGSMITH_TRACING=true) + evaluation retrieval (Client.evaluate)
 
 # --- Embeddings copilot (agents/ingestion/embedding_service.py) ---
 FlagEmbedding>=1.3.4            # BGE-M3 en local (Option A) — tire torch/transformers, installation lourde (plusieurs Go)

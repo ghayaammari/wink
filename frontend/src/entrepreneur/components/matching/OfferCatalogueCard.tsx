@@ -30,7 +30,7 @@ export default function OfferCatalogueCard({ offer }: OfferCatalogueCardProps) {
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") setExpanded((v) => !v)
       }}
-      className="flex cursor-pointer flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-gray-300"
+      className="flex cursor-pointer flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-wink-300 hover:shadow-md"
     >
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-sm font-semibold text-gray-900">{offer.titre}</span>

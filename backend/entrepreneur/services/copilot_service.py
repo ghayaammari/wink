@@ -1,13 +1,27 @@
 """Logique metier du copilot entrepreneur -- conversations (creer/lister/lire)
 
 et envoi de message dans une conversation. Construit LES 4 jeux de tools
-(compliance_agent, administrative_agent, matching_copilot, matching_
-investisseur_copilot) et les passe tous les 4 a l'agent conversationnel
-(agents/orchestrator/copilot_agent_service.py) qui route lui-meme vers le
-bon domaine (voir sa docstring) -- un seul des 4 jeux sert reellement par
-appel, mais construire les 4 ici reste bon marche (pas d'appel LLM, juste
-des fermetures sur la DB). Puis verification d'ancrage independante avant
-de persister le tour complet dans la conversation.
+(compliance_agent, administrative_agent, matching_chercheur, matching_offres)
+et les passe tous les 4 a l'agent conversationnel (agents/orchestrator/
+copilot_agent_service.py) qui route lui-meme vers le bon domaine (voir sa
+docstring) -- un seul des 4 jeux sert reellement par appel, mais les
+construire tous ici reste bon marche (pas d'appel LLM, juste des fermetures
+sur la DB). Puis verification d'ancrage independante avant de persister le
+tour complet dans la conversation.
+
+CORRECTIF du 26/09/2026 : les 2 tools de lecture sur le matching (offres
+recommandees, chercheurs recommandes) ne sont plus dans le toolset
+"conformite" (etat intermediaire du 25/09/2026 v3) -- chacun a maintenant
+son propre domaine dans l'orchestrateur ("matching_chercheur",
+"matching_offres"), meme pattern de delegation que "reglementaire". Les
+tools eux-memes n'ont pas bouge : ils vivent toujours DANS les fichiers de
+tools des agents de matching concernes (chercheur_matching_tools_service.py,
+startup_offer_matching_tools_service.py), pas dans compliance_agent_tools_
+service.py -- respect de l'architecture par domaine (voir Wink_architecture_
+fichiers.md), inchange depuis le 25/09/2026 v3. Les 3 agents de CALCUL du
+matching (agents/matching_agent/) restent eux completement independants du
+copilot -- aucune delegation dans ce sens-la, seuls leurs RESULTATS deja
+persistes sont lus ici, jamais un nouveau calcul.
 
 Revient sur la decision V1 "pas de persistance, le frontend renvoie tout
 l'historique a chaque appel" -- demande explicite du 20/09/2026 : plusieurs
@@ -15,7 +29,7 @@ conversations nommees par projet, listees dans une barre laterale (voir
 ProjectCopilotConversation pour le choix JSONB plutot qu'une table
 `copilot_messages`).
 """
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from sqlalchemy.orm import Session
 
@@ -29,11 +43,13 @@ from backend.entrepreneur.schemas.copilot_schemas import (
     CopilotMessageResponse,
 )
 from backend.entrepreneur.services.administrative_agent_tools_service import build_administrative_agent_tools
-from backend.matching.services.matching_copilot_tools_service import build_matching_copilot_tools
-from backend.matching.services.matching_investisseur_copilot_tools_service import (
-    build_matching_investisseur_copilot_tools,
-)
 from backend.entrepreneur.services.compliance_agent_tools_service import build_compliance_agent_tools
+from backend.entrepreneur.services.startup_offer_matching_tools_service import (
+    build_voir_resultat_matching_offres_tool,
+)
+from backend.matching.services.chercheur_matching_tools_service import (
+    build_voir_resultat_matching_chercheur_tool,
+)
 from backend.entrepreneur.services.project_service import get_owned_project
 from backend.shared.models.user import User
 
@@ -53,7 +69,7 @@ class CopilotConversationNotFoundError(CopilotConversationError):
     pass
 
 
-def _get_owned_conversation(
+def get_owned_conversation(
     db: Session, user: User, project_id: UUID, conversation_id: UUID
 ) -> ProjectCopilotConversation:
     """Meme garde que get_owned_project, un niveau plus bas : verifie que la
@@ -100,7 +116,7 @@ def list_conversations(db: Session, user: User, project_id: UUID) -> list[Copilo
 
 
 def get_conversation(db: Session, user: User, project_id: UUID, conversation_id: UUID) -> CopilotConversationDetail:
-    conversation = _get_owned_conversation(db, user, project_id, conversation_id)
+    conversation = get_owned_conversation(db, user, project_id, conversation_id)
     return CopilotConversationDetail.model_validate(conversation)
 
 
@@ -146,7 +162,7 @@ def send_message(
     reponse obtenue, pas avant), pour ne jamais laisser une conversation
     avec un message utilisateur sans reponse.
     """
-    conversation = _get_owned_conversation(db, user, project_id, conversation_id)
+    conversation = get_owned_conversation(db, user, project_id, conversation_id)
 
     messages_persistes = conversation.messages if tronquer_a is None else conversation.messages[:tronquer_a]
     historique: list[CopilotMessage] = [CopilotMessage(**m) for m in messages_persistes]
@@ -161,22 +177,34 @@ def send_message(
     tools_reglementaire = build_administrative_agent_tools(
         db, user, project_id, seen_source_ids=[], seen_chunks=seen_chunks
     )
-    tools_matching = build_matching_copilot_tools(db, user, project_id)
-    tools_matching_investisseur = build_matching_investisseur_copilot_tools(db, user, project_id)
+    # Chacun un seul tool de lecture -- voir docstring de module (CORRECTIF
+    # du 26/09/2026) pour pourquoi ce ne sont plus 2 tools ajoutes au
+    # toolset "conformite".
+    tools_matching_chercheur = [build_voir_resultat_matching_chercheur_tool(db, project_id)]
+    tools_matching_offres = [build_voir_resultat_matching_offres_tool(db, project_id)]
     result = answer_message(
         conversation_pour_agent,
         tools_conformite,
         tools_reglementaire,
-        tools_matching,
-        tools_matching_investisseur,
+        tools_matching_chercheur,
+        tools_matching_offres,
     )
     verification = verifier_reponse(result.reponse, seen_chunks)
+
+    # Jeton unique genere UNIQUEMENT quand l'agent a produit un document (voir
+    # CopilotResponse.titre_document) -- jamais pour une reponse normale, pour
+    # ne pas polluer les vieux messages persistes avec un champ inutile a
+    # chaque tour. Adresse ce message precis independamment de sa position
+    # dans le tableau (voir docstring de CopilotMessage.document_ref).
+    document_ref = uuid4().hex if result.titre_document else None
 
     nouveau_message_utilisateur = CopilotMessage(role="user", content=content)
     nouveau_message_assistant = CopilotMessage(
         role="assistant",
         content=result.reponse,
         rediriger_vers=result.rediriger_vers,
+        titre_document=result.titre_document,
+        document_ref=document_ref,
         ancrage_verifie=verification.ancre if verification is not None else None,
     )
     conversation.messages = [
@@ -192,5 +220,25 @@ def send_message(
     return CopilotMessageResponse(
         reponse=result.reponse,
         rediriger_vers=result.rediriger_vers,
+        titre_document=result.titre_document,
+        document_ref=document_ref,
         ancrage_verifie=nouveau_message_assistant.ancrage_verifie,
     )
+
+
+def get_message_document(
+    db: Session, user: User, project_id: UUID, conversation_id: UUID, document_ref: str
+) -> tuple[str, str]:
+    """Retrouve le message assistant portant ce `document_ref` dans la
+
+    conversation et renvoie (titre_document, content) -- consomme par
+    copilot_document_report_service.py pour construire le PDF. Cherche par
+    jeton, jamais par position dans le tableau : une troncature/edition
+    (tronquer_a) peut avoir change les index depuis la generation du
+    document, jamais son propre jeton.
+    """
+    conversation = get_owned_conversation(db, user, project_id, conversation_id)
+    for message in conversation.messages:
+        if message.get("document_ref") == document_ref:
+            return message["titre_document"], message["content"]
+    raise CopilotConversationNotFoundError("Document introuvable pour cette conversation.")

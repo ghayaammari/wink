@@ -9,6 +9,19 @@ import { getFintechGapAnalysisScore, getHealthtechGapAnalysisScore, getSectorDet
 import { getSecnumcloudScore } from "../api/certificationApi"
 import ProjectSectionCard from "../components/ProjectSectionCard"
 
+function ICON_SHIELD_HEADER({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className={className}>
+      <path
+        d="M10 2.5l6 2.2v4.4c0 4-2.5 7-6 8.4-3.5-1.4-6-4.4-6-8.4V4.7l6-2.2z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M7.5 10l1.8 1.8 3.2-3.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 type LoadState = "loading" | "ready" | "error"
 
 /**
@@ -103,9 +116,14 @@ export default function CompliancePlanPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold text-gray-900">Conformité</h1>
-        <p className="text-sm text-gray-500">Diagnostics et obligations réglementaires applicables à ton projet.</p>
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+          <ICON_SHIELD_HEADER />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <h1 className="text-xl font-semibold text-gray-900">Conformité</h1>
+          <p className="text-sm text-gray-500">Diagnostics et obligations réglementaires applicables à ton projet.</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

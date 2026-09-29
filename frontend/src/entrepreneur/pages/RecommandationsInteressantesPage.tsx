@@ -15,7 +15,8 @@ type LoadState = "loading" | "ready" | "no_project" | "error"
 
 /**
  * "Recommandations intéressantes" — sous-section du sidebar sous
- * "Recherche" (demande du 22/09/2026) : vue transversale de toutes les
+ * "Besoins scientifiques" (demande du 22/09/2026, entrée renommee le
+ * 27/09/2026 -- etait "Recherche") : vue transversale de toutes les
  * recommandations de chercheurs marquées "intéressé" par l'entrepreneur, à
  * travers tous ses besoins déposés (ResearchNeedsPage reste la vue par
  * besoin). Retirer une étoile ici la fait disparaître de la liste
@@ -93,8 +94,8 @@ export default function RecommandationsInteressantesPage() {
 
       {recommandations.length === 0 ? (
         <p className="text-sm text-gray-500">
-          Aucune recommandation marquée pour l'instant — clique sur l'étoile d'une recommandation depuis "Recherche"
-          pour la retrouver ici.
+          Aucune recommandation marquée pour l'instant — clique sur l'étoile d'une recommandation depuis "Besoins
+          scientifiques" pour la retrouver ici.
         </p>
       ) : (
         <ul className="flex flex-col gap-3">

@@ -8,7 +8,7 @@ const NIVEAU_LABELS: Record<string, string> = {
 }
 
 const NIVEAU_STYLES: Record<string, string> = {
-  fort: "bg-green-50 text-green-700",
+  fort: "bg-wink-50 text-wink-700",
   moyen: "bg-amber-50 text-amber-700",
   faible: "bg-gray-100 text-gray-600",
 }
@@ -54,7 +54,7 @@ export default function ChercheurMatchCard({
 
   return (
     <li
-      className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-gray-300"
+      className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:border-wink-300 hover:shadow-md"
     >
       <div
         role="button"

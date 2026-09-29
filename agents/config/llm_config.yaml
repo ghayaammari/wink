@@ -48,6 +48,24 @@ embedding:
   mode: dense
 
 
+# Reranking des chunks deja recuperes par search_similar_chunks (jamais un
+# nouvel appel de recherche) -- ajoute suite a l'evaluation Recall@8/MRR du
+# retrieval (voir claude/Wink_rag_retrieval_eval_baseline.md cote Projet) :
+# le recall n'etait pas le probleme, le rang du bon chunk sur les domaines a
+# articles semantiquement proches (forme_juridique en particulier) l'etait.
+# bge-reranker-v2-m3 : multilingue, coherent avec l'embedding BGE-M3 deja
+# utilise, meme librairie FlagEmbedding (aucune nouvelle dependance).
+reranking:
+  enabled: false  # CORRECTIF du 26/09/2026 -- desactive a la demande (voir
+  # aussi rerank_indices ci-dessous, docstring) : le chargement du modele
+  # local (~15-20s la premiere fois) s'ajoutait au budget de temps/appels
+  # du diagnostic RGPD, deja tendu (voir rgpd_service.py). Remettre a true
+  # pour reactiver le reordonnancement des chunks (voir
+  # claude/Wink_rag_retrieval_eval_baseline.md pour le gain de MRR mesure).
+  provider: local
+  model: BAAI/bge-reranker-v2-m3
+
+
 # Structuration des articles de loi collectés depuis Légifrance (service 1.1.1,
 # Groupe 2) — 2 appels distincts par article, voir
 # agents/ingestion/legal_text_structuring_service.py. Modèle repris de
@@ -194,27 +212,6 @@ copilot_orchestrator:
 administrative_agent:
   # Agent reglementaire (EPIC-01) -- meme moteur/raisonnement de temperature
   # que copilot_orchestrator.conversation (reponse conversationnelle libre).
-  conversation:
-    provider: groq
-    model: openai/gpt-oss-120b
-    max_retries: 3
-    temperature: 0.2
-
-matching_copilot:
-  # Volet conversationnel du matching chercheur (lecture seule, voir
-  # matching_copilot_tools_service.py) -- meme raisonnement de temperature
-  # que copilot_orchestrator.conversation.
-  conversation:
-    provider: groq
-    model: openai/gpt-oss-120b
-    max_retries: 3
-    temperature: 0.2
-
-matching_investisseur_copilot:
-  # Volet conversationnel du sens Investisseur -> Startup (lecture seule,
-  # voir matching_investisseur_copilot_tools_service.py) -- sens inverse de
-  # matching_copilot ci-dessus. Meme raisonnement de temperature que
-  # copilot_orchestrator.conversation.
   conversation:
     provider: groq
     model: openai/gpt-oss-120b

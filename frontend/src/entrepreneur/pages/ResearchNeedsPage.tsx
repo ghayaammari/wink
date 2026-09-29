@@ -17,10 +17,21 @@ import {
   type TypeBesoin,
 } from "../api/researchNeedApi"
 
+function ICON_SEARCH_HEADER({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className={className}>
+      <circle cx="8.5" cy="8.5" r="5.5" />
+      <path d="m17 17-4-4" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 type LoadState = "loading" | "ready" | "no_project" | "error"
 
 /**
- * Page "Recherche" côté entrepreneur (service 7.7.1) — dépôt d'un besoin
+ * Page "Besoins scientifiques" côté entrepreneur (renommee le 27/09/2026,
+ * etait "Recherche" -- confondu avec une fonction de recherche/moteur).
+ * Service 7.7.1 : dépôt d'un besoin
  * scientifique (problème à résoudre ou expertise recherchée), liste des
  * besoins déjà déposés, et déclenchement du matching_agent (service 7.7.2,
  * agents/matching_agent/chercheur_matching_service.py) par besoin.
@@ -103,7 +114,7 @@ export default function ResearchNeedsPage() {
   if (state === "no_project") {
     return (
       <div className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold text-gray-900">Recherche</h1>
+        <h1 className="text-xl font-semibold text-gray-900">Besoins scientifiques</h1>
         <p className="text-sm text-gray-500">Termine d'abord l'onboarding pour accéder à cette section.</p>
       </div>
     )
@@ -112,17 +123,22 @@ export default function ResearchNeedsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-semibold text-gray-900">Recherche</h1>
-          <p className="text-sm text-gray-500">
-            Dépose un problème que ta startup doit résoudre, ou une expertise dont elle a besoin — puis lance le
-            matching pour voir quels chercheurs de la plateforme sont pertinents.
-          </p>
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+            <ICON_SEARCH_HEADER />
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <h1 className="text-xl font-semibold text-gray-900">Besoins scientifiques</h1>
+            <p className="text-sm text-gray-500">
+              Dépose un problème que ta startup doit résoudre, ou une expertise dont elle a besoin — puis lance le
+              matching pour voir quels chercheurs de la plateforme sont pertinents.
+            </p>
+          </div>
         </div>
         <button
           type="button"
           onClick={() => setShowForm((v) => !v)}
-          className="shrink-0 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+          className="shrink-0 rounded-lg bg-wink-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-wink-700"
         >
           {showForm ? "Annuler" : "Déposer un besoin"}
         </button>
@@ -186,7 +202,7 @@ export default function ResearchNeedsPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="self-start rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+            className="self-start rounded-lg bg-wink-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-wink-700 disabled:opacity-50"
           >
             {submitting ? "Dépôt en cours..." : "Déposer"}
           </button>
@@ -305,7 +321,7 @@ function NeedCard({ need, projectId, accessToken, onToggleStatut }: NeedCardProp
             type="button"
             onClick={handleLancerMatching}
             disabled={matching}
-            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50"
+            className="rounded-lg bg-wink-600 px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50"
           >
             {matching ? "Matching en cours..." : match ? "Relancer le matching" : "Lancer le matching"}
           </button>

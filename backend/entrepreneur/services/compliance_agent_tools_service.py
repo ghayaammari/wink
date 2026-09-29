@@ -21,6 +21,7 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 
 from agents.ingestion.embedding_service import embed_texts
+from agents.shared.reranking.reranking_service import rerank_indices
 from backend.entrepreneur.services.ai_act_data_profile_service import (
     get_or_create_profile as get_or_create_ai_act_profile,
 )
@@ -160,6 +161,15 @@ def _build_rechercher_corpus_reglementaire(
         logger.info("compliance_agent -- tool rechercher_corpus_reglementaire(domaine=%r, requete=%r)", domaine, requete)
         embedding = embed_texts([requete])[0]
         chunks = search_similar_chunks(db, domaine=domaine, query_embedding=embedding, top_k=_TOP_K_CHUNKS)
+
+        # Reranking (voir claude/Wink_rag_retrieval_eval_baseline.md) : reordonne
+        # les memes _TOP_K_CHUNKS candidats deja recuperes par similarite cosinus,
+        # ne change ni leur nombre ni le recall -- corrige seulement le rang du
+        # bon chunk sur les domaines a articles semantiquement proches.
+        if chunks:
+            ordre = rerank_indices(requete, [chunk.chunk_texte for chunk in chunks])
+            chunks = [chunks[i] for i in ordre]
+
         seen_source_ids.extend(chunk.source_id for chunk in chunks)
         resultat = [
             {"source_id": chunk.source_id, "texte": _tronquer_chunk(chunk.chunk_texte)} for chunk in chunks

@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Palette de marque "Wink" -- vert pastel, un seul endroit a ajuster si la
+   teinte doit changer plus tard (voir Sidebar.tsx, CopilotPage.tsx, et les
+   pages Conformite/Recherche/Investissement/Pitch deck qui l'utilisent via
+   les classes bg-wink-*, text-wink-* et border-wink-*, generees automatiquement
+   par Tailwind v4 a partir de ces tokens -- jamais de hex code en dur dans
+   les composants). */
+@theme {
+  --color-wink-50: #eefaf3;
+  --color-wink-100: #d6f2e2;
+  --color-wink-200: #aee4c6;
+  --color-wink-300: #7dd1a5;
+  --color-wink-400: #52ba87;
+  --color-wink-500: #359e6d;
+  --color-wink-600: #278058;
+  --color-wink-700: #216749;
+  --color-wink-800: #1d523c;
+  --color-wink-900: #194432;
+}
+
 body {
   margin: 0;
 }

@@ -54,6 +54,8 @@ from backend.chercheur.models.research_work import ResearchWork
 from backend.chercheur.models.researcher_field_value import ResearcherFieldValue
 from backend.chercheur.models.researcher_past_expertise import ResearcherPastExpertise
 from backend.chercheur.models.researcher_profile import ResearcherProfile
+from backend.matching.models.research_need import ResearchNeed
+from backend.matching.models.research_need_match import ResearchNeedMatch
 from backend.shared.models.user import User
 
 _CONFIRMED = "confirmed"
@@ -214,6 +216,56 @@ def _build_lire_travail_detail(db: Session) -> Callable[[str], dict]:
         }
 
     return lire_travail_detail
+
+
+def build_voir_resultat_matching_chercheur_tool(db: Session, project_id: UUID) -> Callable[[], dict]:
+    """Ferme voir_resultat_matching_chercheur sur (db, project_id) -- a
+
+    l'usage exclusif du copilot conversationnel (voir copilot_service.py),
+    jamais de match_chercheurs lui-meme (build_matching_agent_tools
+    ci-dessous), qui n'a aucun usage pour un resultat precedent pendant son
+    propre calcul one-shot declenche par le bouton "Lancer le matching"."""
+
+    def voir_resultat_matching_chercheur() -> dict:
+        """Besoins deja declares par ce projet et, pour chacun, le resultat
+
+        DEJA CALCULE du matching avec des chercheurs (synthese, chercheurs
+        recommandes avec rang, niveau de pertinence, EXPLICATION du match,
+        et s'ils sont deja marques "interesse"). Ne calcule RIEN -- un
+        besoin sans matching associe a une liste de recommandations vide.
+        """
+        needs = db.query(ResearchNeed).filter(ResearchNeed.project_id == project_id).all()
+        matches_par_besoin = {
+            m.research_need_id: m
+            for m in db.query(ResearchNeedMatch)
+            .filter(ResearchNeedMatch.research_need_id.in_([n.id for n in needs]))
+            .all()
+        }
+        return {
+            "besoins": [
+                {
+                    "id": str(n.id),
+                    "type_besoin": n.type_besoin,
+                    "titre": n.titre,
+                    "description": n.description,
+                    "statut": n.statut,
+                    "synthese": matches_par_besoin[n.id].synthese if n.id in matches_par_besoin else None,
+                    "recommandations": [
+                        {
+                            "nom": rec.get("nom"),
+                            "rang": rec.get("rang"),
+                            "niveau_pertinence": rec.get("niveau_pertinence"),
+                            "explication": rec.get("explication"),
+                            "interesse": rec.get("interesse", False),
+                        }
+                        for rec in (matches_par_besoin[n.id].matches if n.id in matches_par_besoin else [])
+                    ],
+                }
+                for n in needs
+            ]
+        }
+
+    return voir_resultat_matching_chercheur
 
 
 def build_matching_agent_tools(db: Session, seen_researcher_ids: list[str]) -> list[Callable]:

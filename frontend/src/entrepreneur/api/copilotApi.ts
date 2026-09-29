@@ -30,12 +30,22 @@ export interface CopilotMessage {
   content: string
   rediriger_vers?: DomaineRedirection | null
   rapport_disponible?: RapportDomaine | null
+  // Document libre genere par l'agent a la demande de l'entrepreneur ("fais-
+  // moi un rapport") -- distinct de rapport_disponible (les 4 rapports fixes
+  // de diagnostic, poses en local par CopilotContext.tsx::addAssistantMessage,
+  // jamais par l'agent). document_ref adresse ce message precis pour le
+  // telechargement (voir copilotApi.ts::downloadCopilotDocument), pas sa
+  // position dans le tableau -- stable meme apres une edition/troncature.
+  titre_document?: string | null
+  document_ref?: string | null
   ancrage_verifie?: boolean | null
 }
 
 export interface CopilotMessageResponse {
   reponse: string
   rediriger_vers: DomaineRedirection | null
+  titre_document: string | null
+  document_ref: string | null
   // null = pas de verification effectuee (reponse generale sans recherche
   // dans le corpus) OU verification indisponible -- distinct de false
   // (verification faite, affirmations non etayees trouvees). Voir
@@ -118,4 +128,42 @@ export function sendCopilotMessage(
       body: JSON.stringify({ content, tronquer_a: tronquerA ?? null }),
     },
   )
+}
+
+/**
+ * Telecharge en PDF un document libre genere par le copilot pendant cette
+ * conversation (voir CopilotMessage.document_ref) -- meme pattern blob que
+ * downloadRgpdReport (rgpdApi.ts), mais adresse par jeton de message plutot
+ * que par domaine fixe : chaque document a son propre nom de fichier, tire
+ * de son titre plutot que d'un nom generique.
+ */
+export async function downloadCopilotDocument(
+  accessToken: string,
+  projectId: string,
+  conversationId: string,
+  documentRef: string,
+  titreDocument: string,
+): Promise<void> {
+  const response = await fetch(
+    `${API_BASE_URL}/projects/${projectId}/copilot/conversations/${conversationId}/documents/${documentRef}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } },
+  )
+  if (!response.ok) {
+    throw new ApiError(response.status, response.statusText)
+  }
+  const blob = await response.blob()
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement("a")
+  link.href = url
+  const nomFichier = titreDocument
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+  link.download = `${nomFichier || "document-copilot"}.pdf`
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  URL.revokeObjectURL(url)
 }

@@ -8,7 +8,7 @@ Wink_architecture_fichiers.md.
 import logging
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlalchemy.orm import Session
 
 from agents.orchestrator.copilot_agent_service import CopilotAgentError
@@ -18,11 +18,13 @@ from backend.entrepreneur.schemas.copilot_schemas import (
     CopilotMessageRequest,
     CopilotMessageResponse,
 )
+from backend.entrepreneur.services.copilot_document_report_service import build_copilot_document_pdf
 from backend.entrepreneur.services.copilot_service import (
     CopilotConversationError,
     CopilotConversationNotFoundError,
     create_conversation,
     get_conversation,
+    get_message_document,
     list_conversations,
     send_message,
 )
@@ -109,3 +111,31 @@ def envoyer_message_copilot(
         return send_message(db, current_user, project_id, conversation_id, body.content, body.tronquer_a)
     except (ProjectError, CopilotConversationError, CopilotAgentError) as exc:
         raise _handle_copilot_error(exc)
+
+
+@router.get("/{project_id}/copilot/conversations/{conversation_id}/documents/{document_ref}")
+def telecharger_document_copilot(
+    project_id: UUID,
+    conversation_id: UUID,
+    document_ref: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Response:
+    """Telecharge en PDF un document libre genere par le copilot en
+
+    conversation (voir CopilotResponse.titre_document) -- distinct des routes
+    /rgpd/report, /ai-act/report... (rapports fixes de diagnostic) : ici
+    `document_ref` adresse un message precis de CETTE conversation, pas un
+    domaine entier.
+    """
+    try:
+        titre, contenu = get_message_document(db, current_user, project_id, conversation_id, document_ref)
+    except (ProjectError, CopilotConversationError) as exc:
+        raise _handle_copilot_error(exc)
+
+    pdf_bytes = build_copilot_document_pdf(titre=titre, contenu=contenu)
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'attachment; filename="document-copilot.pdf"'},
+    )

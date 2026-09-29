@@ -25,6 +25,7 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
+from backend.entrepreneur.services.project_offer_match_service import get_result as get_offer_match_result
 from backend.investisseur.models.investment_offer import InvestmentOffer
 from backend.investisseur.models.investor_profile import InvestorProfile
 
@@ -99,6 +100,42 @@ def _build_lire_offre_detail(db: Session) -> Callable[[str], dict]:
         }
 
     return lire_offre_detail
+
+
+def build_voir_resultat_matching_offres_tool(db: Session, project_id: UUID) -> Callable[[], dict]:
+    """Ferme voir_resultat_matching_offres sur (db, project_id) -- a l'usage
+
+    exclusif du copilot conversationnel (voir copilot_service.py), jamais
+    du matching_agent_startup lui-meme (build_startup_offer_matching_tools
+    ci-dessous), qui n'a aucun usage pour un resultat precedent pendant son
+    propre calcul one-shot declenche par le bouton "Visualiser les offres".
+    """
+
+    def voir_resultat_matching_offres() -> dict:
+        """Resultat DEJA CALCULE du matching avec les offres d'investissement
+
+        pour ce projet (synthese, offres recommandees avec rang, niveau de
+        pertinence, EXPLICATION du match, et si deja marquee "interessante").
+        Ne calcule RIEN -- liste vide si aucun matching n'a encore ete lance.
+        """
+        row = get_offer_match_result(db, project_id)
+        if row is None:
+            return {"synthese": None, "recommandations": []}
+        return {
+            "synthese": row.synthese,
+            "recommandations": [
+                {
+                    "offer_id": m.get("offer_id"),
+                    "rang": m.get("rang"),
+                    "niveau_pertinence": m.get("niveau_pertinence"),
+                    "explication": m.get("explication"),
+                    "interesse": m.get("interesse", False),
+                }
+                for m in row.matches
+            ],
+        }
+
+    return voir_resultat_matching_offres
 
 
 def build_startup_offer_matching_tools(db: Session, seen_offer_ids: list[str]) -> list[Callable]:

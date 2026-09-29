@@ -26,6 +26,7 @@ fermes sur une Session cote backend (voir compliance_agent_tools_service.py)
 et injectes ici ; les chunks de generate_aipd_document/verification sont
 deja recuperes par l'appelant (aipd_analysis_service.py).
 """
+import functools
 import json
 import os
 import time
@@ -85,6 +86,77 @@ class AipdAnalysisResult(BaseModel):
     contenu: str
 
 
+# CORRECTIF du 26/09/2026 -- 15 (valeur standard des autres agents, voir
+# ai_act_service.py/administrative_agent_service.py) s'est revele trop bas
+# pour ce diagnostic specifiquement : le questionnaire RGPD a 5 questions
+# INDEPENDANTES (donnees sensibles, mineurs, profilage, sous-traitants,
+# transfert hors UE), et un profil qui les declenche toutes force l'agent a
+# faire une recherche dans le corpus par sujet -- chaque
+# rechercher_corpus_reglementaire() consomme ~2 pas du graphe LangGraph
+# (appel modele + appel outil), donc 5-6 sujets suffisent a depasser 15 pas
+# avant que l'agent ait pu conclure (GraphRecursionError -> 502 pour
+# l'entrepreneur). Aucun autre diagnostic du projet n'a autant de questions
+# independantes a la fois -- ce n'est pas une regle generale a repercuter
+# partout, juste ce service qui a besoin de plus de marge.
+_RGPD_RECURSION_LIMIT = 30
+
+# CORRECTIF du 26/09/2026 -- constate en pratique : meme avec des consignes
+# explicites dans le prompt ("recherche chaque sujet une seule fois"),
+# le modele reformule et relance des recherches sur des sujets deja
+# couverts (ex: "registre des traitements article 30 rgpd" puis
+# "registre des traitements obligations RGPD" quelques appels plus tard) --
+# une instruction textuelle ne suffit pas a garantir ce comportement, donc
+# on l'impose au niveau code plutot que de compter sur le prompt seul
+# (celui-ci reste utile pour la QUALITE des recherches, juste pas pour en
+# borner le NOMBRE). _MAX_RECHERCHES_CORPUS plafonne le nombre d'appels a
+# rechercher_corpus_reglementaire pour CE diagnostic uniquement (5 sujets
+# theoriques + marge) ; au-dela, l'outil renvoie un message qui pousse
+# l'agent a conclure avec ce qu'il a deja, plutot que de continuer a
+# consommer le budget de pas du graphe (et le quota Groq) sans fin.
+_MAX_RECHERCHES_CORPUS = 8
+
+
+def _plafonner_recherches(tools: list[Callable]) -> list[Callable]:
+    """Remplace, dans `tools`, le tool rechercher_corpus_reglementaire par une
+
+    version qui compte ses propres appels et refuse au-dela de
+    _MAX_RECHERCHES_CORPUS (voir CORRECTIF ci-dessus) -- garde le meme nom
+    et la meme docstring (via functools.wraps) pour que le schema d'outil
+    expose au modele reste identique. Local a generate_rgpd_obligations :
+    ne touche pas compliance_agent_tools_service.py, qui reste responsable
+    de la recherche elle-meme, pas de sa frequence d'appel.
+
+    `_faire_wrapper` isole la fermeture sur `outil` dans son propre appel de
+    fonction -- necessaire pour eviter le piege classique des fermetures
+    Python dans une boucle (toutes partageraient sinon la meme variable
+    `outil`, celle de la DERNIERE iteration)."""
+    compteur = {"n": 0}
+
+    def _faire_wrapper(outil: Callable) -> Callable:
+        @functools.wraps(outil)
+        def wrapper(domaine: str, requete: str):
+            if compteur["n"] >= _MAX_RECHERCHES_CORPUS:
+                return [
+                    {
+                        "source_id": None,
+                        "texte": (
+                            "Limite de recherches atteinte pour ce diagnostic. "
+                            "Conclus maintenant avec les elements deja recuperes, "
+                            "ne recherche plus rien."
+                        ),
+                    }
+                ]
+            compteur["n"] += 1
+            return outil(domaine, requete)
+
+        return wrapper
+
+    return [
+        _faire_wrapper(outil) if getattr(outil, "__name__", None) == "rechercher_corpus_reglementaire" else outil
+        for outil in tools
+    ]
+
+
 def generate_rgpd_obligations(tools: list[Callable]) -> ObligationsResult:
     """Diagnostic RGPD (service 3.3.1) : l'agent lit le profil de traitement
 
@@ -97,6 +169,7 @@ def generate_rgpd_obligations(tools: list[Callable]) -> ObligationsResult:
     """
     config = get_llm_config()["compliance_agent_rgpd"]["diagnostic"]
     system_prompt = get_prompts()["compliance_agent_rgpd"]["system"]
+    tools = _plafonner_recherches(tools)
 
     try:
         return run_react_agent(
@@ -106,7 +179,7 @@ def generate_rgpd_obligations(tools: list[Callable]) -> ObligationsResult:
             tools=tools,
             response_format=ObligationsResult,
             task_message="Etablis le diagnostic RGPD (obligations applicables) pour ce projet.",
-            recursion_limit=15,
+            recursion_limit=_RGPD_RECURSION_LIMIT,
         )
     except ReactAgentError as exc:
         raise RgpdAgentError(str(exc)) from exc

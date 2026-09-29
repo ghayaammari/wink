@@ -13,6 +13,15 @@ import {
 } from "../api/pitchApi"
 import { getMyProject } from "../api/projectApi"
 
+function ICON_PITCH_HEADER({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className={className}>
+      <rect x="3" y="4" width="14" height="10" rx="1.5" />
+      <path d="M7 17h6M10 14v3" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 // Champs du formulaire -- meme liste que ProjectPitchProfilePatch, avec leur
 // libelle affiche. L'equipe et le nom/pitch en une ligne ne sont PAS
 // redemandes ici : relus depuis "Mon projet" / "Equipe & capital" au moment
@@ -146,12 +155,17 @@ export default function PitchDeckPage() {
 
   return (
     <div className="flex flex-col gap-6 pb-10">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold text-gray-900">Pitch deck</h1>
-        <p className="text-sm text-gray-500">
-          Renseigne les grandes lignes de ta startup — le nom, le pitch en une ligne, le logo et l'equipe sont deja
-          repris de "Mon projet". Le copilot genere ensuite les 11 diapositives.
-        </p>
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+          <ICON_PITCH_HEADER />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <h1 className="text-xl font-semibold text-gray-900">Pitch deck</h1>
+          <p className="text-sm text-gray-500">
+            Renseigne les grandes lignes de ta startup — le nom, le pitch en une ligne, le logo et l'equipe sont
+            deja repris de "Mon projet". Le copilot genere ensuite les 11 diapositives.
+          </p>
+        </div>
       </div>
 
       {error && <p className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">{error}</p>}
@@ -165,7 +179,7 @@ export default function PitchDeckPage() {
               onChange={(e) => handleChamp(cle, e.target.value)}
               placeholder={placeholder}
               rows={3}
-              className="resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-indigo-400 focus:outline-none"
+              className="resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-wink-400 focus:outline-none"
             />
           </label>
         ))}
@@ -184,7 +198,7 @@ export default function PitchDeckPage() {
           type="button"
           onClick={handleGenerate}
           disabled={isGenerating || !projectId}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:opacity-50"
+          className="rounded-lg bg-wink-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-wink-700 disabled:opacity-50"
         >
           {isGenerating ? "Generation..." : deck ? "Regenerer le pitch deck" : "Generer le pitch deck"}
         </button>
@@ -193,7 +207,7 @@ export default function PitchDeckPage() {
             type="button"
             onClick={handleDownload}
             disabled={isDownloading}
-            className="rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-700 transition hover:bg-indigo-100 disabled:opacity-50"
+            className="rounded-lg border border-wink-200 bg-wink-50 px-4 py-2 text-sm font-medium text-wink-700 transition hover:bg-wink-100 disabled:opacity-50"
           >
             {isDownloading ? "Preparation du fichier..." : "Telecharger en PPTX"}
           </button>
@@ -218,7 +232,7 @@ export default function PitchDeckPage() {
               <div className="mt-2 flex flex-wrap gap-4">
                 {deck.slides.traction.metrics.map((m, i) => (
                   <div key={i} className="text-sm">
-                    <span className="font-semibold text-indigo-700">{m.value}</span>{" "}
+                    <span className="font-semibold text-wink-700">{m.value}</span>{" "}
                     <span className="text-gray-500">{m.label}</span>
                   </div>
                 ))}
@@ -248,7 +262,7 @@ export default function PitchDeckPage() {
           <SlideBullets title={deck.slides.roadmap.title} bullets={deck.slides.roadmap.bullets} />
           <div className="rounded-lg border border-gray-200 bg-white p-4">
             <h3 className="text-sm font-semibold text-gray-900">{deck.slides.cta.title}</h3>
-            <p className="mt-1 text-sm font-medium text-indigo-700">{deck.slides.cta.ask_summary}</p>
+            <p className="mt-1 text-sm font-medium text-wink-700">{deck.slides.cta.ask_summary}</p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600">
               {deck.slides.cta.bullets.map((b, i) => (
                 <li key={i}>{b}</li>

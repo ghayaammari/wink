@@ -14,6 +14,15 @@ import {
   type ProjectOfferMatchRead,
 } from "../api/offerMatchingApi"
 
+function ICON_TREND_HEADER({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className={className}>
+      <path d="M2.5 15 8 9.5l3 3 5.5-5.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.5 6.5h3.5V10" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 type LoadState = "loading" | "ready" | "no_project" | "error"
 
 /**
@@ -95,9 +104,14 @@ export default function InvestmentOpportunitiesPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-semibold text-gray-900">Investissement</h1>
-        <p className="text-sm text-gray-500">Parcours les offres d'investissement disponibles, puis lance le matching pour ton projet.</p>
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+          <ICON_TREND_HEADER />
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <h1 className="text-xl font-semibold text-gray-900">Investissement</h1>
+          <p className="text-sm text-gray-500">Parcours les offres d'investissement disponibles, puis lance le matching pour ton projet.</p>
+        </div>
       </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}
@@ -122,7 +136,7 @@ export default function InvestmentOpportunitiesPage() {
               type="button"
               onClick={handleLancerMatching}
               disabled={lancementEnCours}
-              className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-50"
+              className="rounded-lg bg-wink-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-wink-700 disabled:opacity-50"
             >
               {lancementEnCours ? "Analyse en cours…" : matching ? "Relancer le matching" : "Faire le matching"}
             </button>

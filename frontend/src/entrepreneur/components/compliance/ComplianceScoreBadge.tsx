@@ -24,7 +24,7 @@ export default function ComplianceScoreBadge({ score, totalObligations }: Compli
       <span className="whitespace-nowrap text-sm font-medium text-gray-700">Score de conformité</span>
       <div className="h-2 flex-1 max-w-[10rem] overflow-hidden rounded-full bg-gray-200">
         <div
-          className="h-full rounded-full bg-indigo-600 transition-[width]"
+          className="h-full rounded-full bg-wink-600 transition-[width]"
           style={{ width: `${score}%` }}
         />
       </div>

@@ -24,18 +24,18 @@ export default function ProjectSectionCard({ to, title, description, pendingCoun
   return (
     <Link
       to={to}
-      className="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-5 transition hover:border-indigo-300 hover:shadow-sm"
+      className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-wink-300 hover:shadow-md"
     >
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
         <div className="flex items-center gap-1.5">
           {scorePercent !== undefined && scorePercent !== null && (
-            <span className="flex h-5 items-center justify-center rounded-full bg-indigo-50 px-2 text-xs font-semibold text-indigo-700">
+            <span className="flex h-5 items-center justify-center rounded-full bg-wink-50 px-2 text-xs font-semibold text-wink-700">
               {scorePercent}%
             </span>
           )}
           {pendingCount > 0 && (
-            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-indigo-600 px-1.5 text-xs font-medium text-white">
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-wink-600 px-1.5 text-xs font-medium text-white">
               {pendingCount}
             </span>
           )}

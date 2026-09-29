@@ -63,6 +63,49 @@ const QUESTIONS: { field: ProfileField; texte: string }[] = [
   },
 ]
 
+function ICON_QUESTIONNAIRE({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 4.5h6a1.5 1.5 0 011.5 1.5v1H7.5v-1A1.5 1.5 0 019 4.5z" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6 7h12a1 1 0 011 1v10.5a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 015 18.5V8a1 1 0 011-1z"
+      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 11.5h6M9 14.5h6M9 17.5h3.5" />
+    </svg>
+  )
+}
+
+function ICON_CHEVRON_DOWN({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+    </svg>
+  )
+}
+
+function ICON_CHECK({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  )
+}
+
+function ICON_SHIELD_HEADER({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"
+      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 12l1.8 1.8L14.5 10" />
+    </svg>
+  )
+}
+
 /**
  * Détail du service 3.3.1 (diagnostic RGPD) — carte ouverte depuis
  * CompliancePlanPage. Deux blocs : le questionnaire tri-état
@@ -70,6 +113,12 @@ const QUESTIONS: { field: ProfileField; texte: string }[] = [
  * champ) et la liste des obligations (project_rgpd_obligations), recalculée
  * uniquement via le bouton "Recalculer mes obligations" — jamais
  * automatiquement après une réponse, voir docstring de rgpd_router.py.
+ *
+ * Questionnaire replié par défaut (accordéon) : ajouté le 26/09/2026 pour ne
+ * pas noyer l'entrepreneur sous 5 questions dès l'arrivée sur la page —
+ * conserve exactement la même logique de sauvegarde (un clic = un PATCH),
+ * seul l'affichage change (pas de nouvel état serveur, juste `isQuestionnaireOpen`
+ * en local).
  */
 export default function RgpdDiagnosticPage() {
   const { accessToken } = useAuth()
@@ -90,6 +139,7 @@ export default function RgpdDiagnosticPage() {
   const [savingField, setSavingField] = useState<ProfileField | null>(null)
   const [isRecalculating, setIsRecalculating] = useState(false)
   const [recalcError, setRecalcError] = useState<string | null>(null)
+  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false)
 
   useEffect(() => {
     async function load() {
@@ -184,70 +234,122 @@ export default function RgpdDiagnosticPage() {
   // d'analyse d'impact) plutot qu'une liste plate sans distinction.
   const obligationsStandard = obligations.filter((o) => !o.lie_a_aipd)
   const obligationsAipd = obligations.filter((o) => o.lie_a_aipd)
+  const nombreReponses = QUESTIONS.filter(({ field }) => profile[field] !== null).length
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-semibold text-gray-900">Diagnostic RGPD</h1>
-          <p className="text-sm text-gray-500">
-            Réponds aux questions ci-dessous, puis recalcule tes obligations. Certaines obligations de base
-            s'appliquent même si tu ne réponds à aucune question — voir la liste plus bas.
-          </p>
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+            <ICON_SHIELD_HEADER className="h-4 w-4" />
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <h1 className="text-xl font-semibold text-gray-900">Diagnostic RGPD</h1>
+            <p className="text-sm text-gray-500">
+              Réponds aux questions ci-dessous, puis recalcule tes obligations. Certaines obligations de base
+              s'appliquent même si tu ne réponds à aucune question — voir la liste plus bas.
+            </p>
+          </div>
         </div>
         {arriveDepuisCopilot && (
           <button
             type="button"
             onClick={handleTerminer}
-            className="rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700 transition hover:bg-indigo-100"
+            className="rounded-lg border border-wink-200 bg-wink-50 px-3 py-2 text-sm font-medium text-wink-700 transition hover:bg-wink-100"
           >
             Terminer et revenir au copilot
           </button>
         )}
       </div>
 
-      <div className="flex flex-col gap-3">
-        {QUESTIONS.map(({ field, texte }) => (
-          <div key={field} className="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4">
-            <p className="text-sm text-gray-800">{texte}</p>
-            <div className="flex gap-2">
-              {(
-                [
-                  { label: "Oui", value: true as boolean | null },
-                  { label: "Non", value: false as boolean | null },
-                  { label: "Pas encore répondu", value: null as boolean | null },
-                ] satisfies { label: string; value: boolean | null }[]
-              ).map((option) => {
-                const isActive = profile[field] === option.value
-                return (
-                  <button
-                    key={option.label}
-                    type="button"
-                    disabled={savingField === field}
-                    onClick={() => handleAnswer(field, option.value)}
-                    className={`rounded-md px-3 py-1.5 text-xs font-medium transition disabled:opacity-50 ${
-                      isActive
-                        ? "bg-indigo-600 text-white"
-                        : "border border-gray-200 text-gray-600 hover:border-gray-300"
-                    }`}
-                  >
-                    {option.label}
-                  </button>
-                )
-              })}
+      <div className="flex flex-col">
+        <button
+          type="button"
+          onClick={() => setIsQuestionnaireOpen((open) => !open)}
+          aria-expanded={isQuestionnaireOpen}
+          className="flex w-full items-center justify-between rounded-xl border border-wink-200 bg-wink-50 px-4 py-3 text-left transition hover:bg-wink-100"
+        >
+          <span className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-wink-600 text-white">
+              <ICON_QUESTIONNAIRE className="h-4 w-4" />
+            </span>
+            <span className="flex flex-col">
+              <span className="text-sm font-semibold text-wink-800">Questionnaire</span>
+              <span className="text-xs text-wink-600">
+                {nombreReponses}/{QUESTIONS.length} question{QUESTIONS.length > 1 ? "s" : ""} répondue
+                {nombreReponses > 1 ? "s" : ""}
+              </span>
+            </span>
+          </span>
+          <ICON_CHEVRON_DOWN
+            className={`h-5 w-5 shrink-0 text-wink-600 transition-transform duration-200 ${
+              isQuestionnaireOpen ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+
+        <div
+          className={`grid transition-all duration-300 ease-in-out ${
+            isQuestionnaireOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="flex flex-col gap-3">
+              {QUESTIONS.map(({ field, texte }, index) => (
+                <div
+                  key={field}
+                  className="flex flex-col gap-3 rounded-xl border border-gray-200 border-l-4 border-l-wink-300 bg-white p-4 transition hover:border-wink-200 hover:border-l-wink-400"
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wink-50 text-xs font-semibold text-wink-700">
+                      {index + 1}
+                    </span>
+                    <p className="min-w-0 flex-1 text-sm text-gray-800">{texte}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 pl-9">
+                    {(
+                      [
+                        { label: "Oui", value: true as boolean | null },
+                        { label: "Non", value: false as boolean | null },
+                        { label: "Pas encore répondu", value: null as boolean | null },
+                      ] satisfies { label: string; value: boolean | null }[]
+                    ).map((option) => {
+                      const isActive = profile[field] === option.value
+                      return (
+                        <button
+                          key={option.label}
+                          type="button"
+                          disabled={savingField === field}
+                          onClick={() => handleAnswer(field, option.value)}
+                          className={`rounded-full px-3 py-1.5 text-xs font-medium transition disabled:opacity-50 ${
+                            isActive
+                              ? "bg-wink-600 text-white shadow-sm"
+                              : "border border-gray-200 text-gray-600 hover:border-wink-300 hover:text-wink-700"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
       </div>
 
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-base font-semibold text-gray-900">Tes obligations</h2>
+          <h2 className="flex items-center gap-2 text-base font-semibold text-gray-900">
+            <span className="h-2 w-2 rounded-full bg-wink-500" />
+            Tes obligations
+          </h2>
           <button
             type="button"
             onClick={handleRecalculer}
             disabled={isRecalculating}
-            className="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:opacity-50"
+            className="rounded-lg bg-wink-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-wink-700 disabled:opacity-50"
           >
             {isRecalculating ? "Calcul en cours..." : "Recalculer mes obligations"}
           </button>
@@ -287,6 +389,12 @@ export default function RgpdDiagnosticPage() {
  * Une ligne d'obligation (checkbox + nom + description) — factorisé pour
  * être utilisé identiquement dans la liste standard et le bloc AIPD, sans
  * dupliquer le JSX (voir RgpdDiagnosticPage ci-dessus).
+ *
+ * Coché = carte + texte en vert, plus de barré (line-through) : changé le
+ * 26/09/2026, le barré donnait une impression de "supprimé" plutôt que
+ * "fait". La checkbox native est remplacée par un bouton rond custom pour
+ * pouvoir styler précisément l'état coché (cercle plein + coche), impossible
+ * avec l'apparence par défaut d'un <input type="checkbox">.
  */
 function ObligationItem({
   obligation,
@@ -295,23 +403,35 @@ function ObligationItem({
   obligation: ProjectRgpdObligationRead
   onToggle: (obligation: ProjectRgpdObligationRead) => void
 }) {
+  const isFait = obligation.statut === "fait"
   return (
-    <li className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-4">
-      <input
-        type="checkbox"
-        checked={obligation.statut === "fait"}
-        onChange={() => onToggle(obligation)}
-        className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-      />
+    <li
+      className={`flex items-start gap-3 rounded-xl border border-l-4 p-4 transition ${
+        isFait
+          ? "border-wink-200 border-l-wink-500 bg-wink-50"
+          : "border-gray-200 border-l-gray-200 bg-white hover:border-l-wink-300"
+      }`}
+    >
+      <button
+        type="button"
+        role="checkbox"
+        aria-checked={isFait}
+        onClick={() => onToggle(obligation)}
+        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${
+          isFait
+            ? "border-wink-600 bg-wink-600 text-white"
+            : "border-gray-300 bg-white text-transparent hover:border-wink-400"
+        }`}
+      >
+        <ICON_CHECK className="h-3 w-3" />
+      </button>
       <div className="flex flex-col gap-1">
-        <span
-          className={`text-sm font-medium ${
-            obligation.statut === "fait" ? "text-gray-400 line-through" : "text-gray-900"
-          }`}
-        >
+        <span className={`text-sm font-medium transition ${isFait ? "text-wink-700" : "text-gray-900"}`}>
           {obligation.nom}
         </span>
-        <span className="text-xs text-gray-500">{obligation.description}</span>
+        <span className={`text-xs transition ${isFait ? "text-wink-600" : "text-gray-500"}`}>
+          {obligation.description}
+        </span>
       </div>
     </li>
   )
@@ -332,6 +452,10 @@ function ObligationItem({
  * maintenant ajouterait de la structure pour une donnee qui n'existe pas
  * encore (voir discussion du 18/09/2026, meme principe que la decision de
  * ne pas afficher de cards desactivees "a venir" sur CompliancePlanPage).
+ *
+ * Même changement que ObligationItem le 26/09/2026 (plus de line-through,
+ * bouton rond custom) mais palette ambre conservée : cette carte reste
+ * volontairement distincte visuellement des obligations standard.
  */
 function AipdObligationItem({
   obligation,
@@ -340,22 +464,26 @@ function AipdObligationItem({
   obligation: ProjectRgpdObligationRead
   onToggle: (obligation: ProjectRgpdObligationRead) => void
 }) {
+  const isFait = obligation.statut === "fait"
   return (
-    <li className="flex flex-col gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4">
+    <li className="flex flex-col gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
       <div className="flex items-start gap-3">
-        <input
-          type="checkbox"
-          checked={obligation.statut === "fait"}
-          onChange={() => onToggle(obligation)}
-          className="mt-1 h-4 w-4 shrink-0 rounded border-amber-300 text-amber-600 focus:ring-amber-500"
-        />
+        <button
+          type="button"
+          role="checkbox"
+          aria-checked={isFait}
+          onClick={() => onToggle(obligation)}
+          className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${
+            isFait
+              ? "border-amber-600 bg-amber-600 text-white"
+              : "border-amber-300 bg-white text-transparent hover:border-amber-400"
+          }`}
+        >
+          <ICON_CHECK className="h-3 w-3" />
+        </button>
         <div className="flex flex-col gap-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span
-              className={`text-sm font-medium ${
-                obligation.statut === "fait" ? "text-amber-400 line-through" : "text-amber-900"
-              }`}
-            >
+            <span className={`text-sm font-medium ${isFait ? "text-amber-700" : "text-amber-900"}`}>
               {obligation.nom}
             </span>
             <span className="rounded-full bg-amber-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900">
